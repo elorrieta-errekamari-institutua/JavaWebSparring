@@ -6,7 +6,7 @@ public interface ICrudable<P> {
 
 	P getByid(int id) throws Exception;
 
-	List<P> getByAll();
+	List<P> getAll() throws Exception;
 
 	P delete(int id) throws Exception;
 
