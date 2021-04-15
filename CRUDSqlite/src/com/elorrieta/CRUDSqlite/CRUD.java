@@ -48,18 +48,18 @@ public class CRUD {
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
-			System.out.printf("Creada la tabla %s", nombreTabla);
+			System.out.printf("Creada la tabla %s%n", nombreTabla);
 		} else {
 			System.out.println("Error de conexion");
 		}
 
 	}
 
-	private void crearUsuario(String nombre, String pass, String email, String telefono) {
+	private void crearUsuario(String tabla, String nombre, String pass, String email, String telefono) {
 		if (conn != null) {
-			String sql = "INSERT INTO Usuario " + " (\n" + " nombre, \n " + " pass, \n " + " email, \n "
-					+ " telefono \n " + ") \n" + "VALUES " + "(" + nombre + ", " + pass + ", " + email + ", " + telefono
-					+ ")" + ");";
+			String sql = "INSERT INTO " + tabla + " (\n" + " nombre, \n " + " pass, \n " + " email, \n "
+					+ " telefono \n " + ") \n" + "VALUES " + "('" + nombre + "', '" + pass + "', '" + email + "', '"
+					+ telefono + "')" + ";";
 
 			try {
 				Statement stmt = conn.createStatement();
@@ -67,7 +67,7 @@ public class CRUD {
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
-			System.out.printf("Creada el usuario %s", nombre);
+			System.out.printf("Creado el usuario %s%n", nombre);
 		} else {
 			System.out.println("Error de conexion");
 		}
@@ -77,7 +77,7 @@ public class CRUD {
 		CRUD crud = new CRUD();
 		crud.connect();
 		crud.createTable("usuario");
-		crud.crearUsuario("Test", "1234", "", "");
+		crud.crearUsuario("usuario", "TestNull", "1234", null, null);
 		conn.close();
 
 	}
