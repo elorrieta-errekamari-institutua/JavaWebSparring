@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 import modelo.ConnectionManager;
 
-public class DAOConnectionManager implements ConnectionManager {
+public class DAOConnectionManager implements ConnectionManager, AutoCloseable {
 
 	Connection conn = null;
 
