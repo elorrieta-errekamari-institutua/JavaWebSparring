@@ -115,13 +115,17 @@ public class DAOUsuario implements IDAOUsuario {
 		usuario = getByid(id);
 		if (usuario.getId() != 0) {
 			conn = connectionManager.open();
-			String sql = "UPDATE usuarios " + "SET  nombre = " + pojoModifciar.getNombre() + "     pass = "
-					+ pojoModifciar.getPassword() + "WHERE id=" + id;
+			String sql = "UPDATE usuarios\n" + "SET  nombre = '" + pojoModifciar.getNombre() + "',\n     pass = '"
+					+ pojoModifciar.getPassword() + "'\nWHERE\n     id=" + id;
 			Statement stmt = conn.createStatement();
 			stmt.execute(sql);
 		} else {
 			System.err.println("El usuario que se quiere actualizar no existe");
 		}
+
+		// Cerrar conexion
+		connectionManager.close();
+
 		return getByid(id);
 	}
 

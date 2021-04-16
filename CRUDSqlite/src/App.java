@@ -26,8 +26,12 @@ public class App {
 			System.out.println(usuario.toString());
 
 			// Actualizar usuario con objeto usuario
-			usuario.setId(3);
-			usuario = daoUsuario.update(usuario);
+			Usuario usuarioModificado = new Usuario();
+			usuarioModificado.setId(3);
+			usuarioModificado.setNombre("Test cambio");
+			usuarioModificado.setPassword("4321");
+			usuario = daoUsuario.update(usuarioModificado);
+			System.out.println(usuario.toString());
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
