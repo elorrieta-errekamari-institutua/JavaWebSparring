@@ -33,6 +33,13 @@ public class App {
 			usuario = daoUsuario.update(usuarioModificado);
 			System.out.println(usuario.toString());
 
+			// Crear usuario nuevo con objeto usuario
+			Usuario usuarioNuevo = new Usuario();
+			usuarioNuevo.setNombre("Test insert");
+			usuarioNuevo.setPassword("4321");
+			int nuevoID = daoUsuario.insert(usuarioNuevo);
+			System.out.printf("El id del nuevo usuario es %d", nuevoID);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

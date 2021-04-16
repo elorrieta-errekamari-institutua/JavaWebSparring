@@ -77,6 +77,12 @@ public class DAOUsuario implements IDAOUsuario {
 		return lista;
 	}
 
+	/**
+	 * Borra un usuario tras buscarlo por id
+	 * 
+	 * @param id La id del usuario que se quiere borrar
+	 * @return El usuario borrado.
+	 */
 	@Override
 	public Usuario delete(int id) throws Exception {
 		// Conectar
@@ -102,19 +108,24 @@ public class DAOUsuario implements IDAOUsuario {
 		return usuario;
 	}
 
+	/**
+	 * Actualiza un usuario con los datos de del POJO que recibe por parametro
+	 * 
+	 * @param El usuario al que se quiere actualizar
+	 * @return El usuario actualizado.
+	 */
 	@Override
 	public Usuario update(Usuario pojoModifciar) throws Exception {
 		// Conectar
 		DAOConnectionManager connectionManager = new DAOConnectionManager();
 		Connection conn = null;
 		conn = connectionManager.open();
-		int id = pojoModifciar.getId();
 
 		// Actualizar usuario
+		int id = pojoModifciar.getId();
 		Usuario usuario = null;
 		usuario = getByid(id);
 		if (usuario.getId() != 0) {
-			conn = connectionManager.open();
 			String sql = "UPDATE usuarios\n" + "SET  nombre = '" + pojoModifciar.getNombre() + "',\n     pass = '"
 					+ pojoModifciar.getPassword() + "'\nWHERE\n     id=" + id;
 			Statement stmt = conn.createStatement();
@@ -131,8 +142,32 @@ public class DAOUsuario implements IDAOUsuario {
 
 	@Override
 	public int insert(Usuario pojoNuevo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int ultimaId = 0;
+		// Conectar
+		DAOConnectionManager connectionManager = new DAOConnectionManager();
+		Connection conn = null;
+		conn = connectionManager.open();
+
+		// Insertar nuevo usuario
+		String sql = "INSERT INTO usuarios (nombre,pass) VALUES( '" + pojoNuevo.getNombre() + "', '"
+				+ pojoNuevo.getPassword() + "');";
+		Statement stmt = conn.createStatement();
+		stmt.execute(sql);
+		connectionManager.close();
+
+		// Obtener Id del nuevo usuario
+		conn = connectionManager.open();
+		sql = "SELECT MAX(id) FROM usuarios";
+		stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		if (rs.next()) {
+			ultimaId = rs.getInt("MAX(id)");
+		}
+		if (ultimaId == 0) {
+			System.out.println("No se ha podido obtener la ultima ID");
+		}
+		connectionManager.close();
+		return ultimaId;
 	}
 
 	@Override
