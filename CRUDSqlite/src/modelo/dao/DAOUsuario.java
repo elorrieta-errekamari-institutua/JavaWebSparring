@@ -18,29 +18,28 @@ public class DAOUsuario implements IDAOUsuario {
 	 */
 	@Override
 	public Usuario getByid(int id) throws Exception {
-		// Conectar
-		DAOConnectionManager connectionManager = new DAOConnectionManager();
-		Connection conn = null;
-		conn = connectionManager.open();
-
-		// Obtener resultado
 		Usuario usuario = new Usuario();
 		String sql = "SELECT * from usuarios WHERE id=" + id;
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql);
 
-		// Fetch data
-		if (rs.next()) {
-			usuario.setId(rs.getInt("id"));
-			usuario.setNombre(rs.getString("nombre"));
-			usuario.setPassword(rs.getString("pass"));
-		}
+		// Obtener resultado
+		try ( // Inicializar resultados con autoclosable
+				DAOConnectionManager connectionManager = new DAOConnectionManager();
+				Connection conn = connectionManager.open();
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);) {
+			// Fetch data
+			if (rs.next()) {
+				usuario.setId(rs.getInt("id"));
+				usuario.setNombre(rs.getString("nombre"));
+				usuario.setPassword(rs.getString("pass"));
+			}
 
-		else {
-			System.out.println("No existe el usuario");
+			else {
+				System.out.println("No existe el usuario");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		// Cerrar conexion
-		connectionManager.close();
 
 		return usuario;
 	}
@@ -67,6 +66,8 @@ public class DAOUsuario implements IDAOUsuario {
 				usuario.setPassword(rs.getString("pass"));
 				lista.add(usuario);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return lista;
 	}
