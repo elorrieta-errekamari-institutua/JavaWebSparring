@@ -21,24 +21,70 @@ public class DAOUsuario implements IDAOUsuario {
 	@Override
 	public Usuario getByid(int id) throws Exception {
 		Usuario usuario = new Usuario();
-		String sql = "SELECT * from usuarios WHERE id=" + id;
+		String sql = "SELECT * from usuarios WHERE id= ? ";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);) {
-			// Fetch data
-			if (rs.next()) {
-				usuario.setId(rs.getInt("id"));
-				usuario.setNombre(rs.getString("nombre"));
-				usuario.setPassword(rs.getString("pass"));
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, id);
+			try (ResultSet rs = stmt.executeQuery();) {
+				// Fetch data
+				if (rs.next()) {
+					usuario.setId(rs.getInt("id"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setPassword(rs.getString("pass"));
+				}
+
+				else {
+					System.out.println("No existe el usuario");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-			else {
-				System.out.println("No existe el usuario");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return usuario;
+	}
+
+	/**
+	 * Devuelve un objeto de tipo usuario
+	 * 
+	 * @param nombre El nombre del usuario que se quiere recuperar
+	 * @return POJO Usuario
+	 */
+	@Override
+	public Usuario getByName(String nombre) throws Exception {
+		Usuario usuario = new Usuario();
+		String sql = "SELECT * from usuarios WHERE nombre = ? ";
+
+		// Obtener resultado
+		try ( // Inicializar resultados con autoclosable
+				DAOConnectionManager connectionManager = new DAOConnectionManager();
+				Connection conn = connectionManager.open();
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setString(1, nombre);
+			try (ResultSet rs = stmt.executeQuery();) {
+				// Fetch data
+				if (rs.next()) {
+					usuario.setId(rs.getInt("id"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setPassword(rs.getString("pass"));
+				}
+
+				else {
+					System.out.println("No existe el usuario");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,8 +104,8 @@ public class DAOUsuario implements IDAOUsuario {
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);) {
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
@@ -84,16 +130,17 @@ public class DAOUsuario implements IDAOUsuario {
 	public Usuario delete(int id) {
 		Usuario usuario = null;
 
-		String sql = "DELETE from usuarios WHERE id=" + id;
+		String sql = "DELETE from usuarios WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmt = conn.createStatement();) {
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
 				// Borrar usuario
-				stmt.execute(sql);
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
 			} else {
 				System.err.println("El usuario que se quiere borrar no existe");
 			}
@@ -114,17 +161,21 @@ public class DAOUsuario implements IDAOUsuario {
 	public Usuario update(Usuario pojoModificar) {
 		int id = pojoModificar.getId();
 		Usuario usuario = null;
+		String nuevoNombre = pojoModificar.getNombre();
+		String nuevoPassword = pojoModificar.getPassword();
 
-		String sql = "UPDATE usuarios\n" + "SET  nombre = '" + pojoModificar.getNombre() + "',\n     pass = '"
-				+ pojoModificar.getPassword() + "'\nWHERE\n     id=" + id;
+		String sql = "UPDATE usuarios SET  nombre = ? , pass = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmt = conn.createStatement();) {
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
 				// Actualizar usuario
-				stmt.execute(sql);
+				stmt.setString(1, nuevoNombre);
+				stmt.setString(2, nuevoPassword);
+				stmt.setInt(3, id);
+				stmt.executeUpdate();
 				usuario = getByid(id);
 			} else {
 				System.err.println("El usuario que se quiere actualizar no existe");

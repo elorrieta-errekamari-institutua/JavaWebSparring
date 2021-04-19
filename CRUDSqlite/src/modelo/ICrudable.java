@@ -15,6 +15,15 @@ public interface ICrudable<P> {
 
 	/**
 	 * 
+	 * 
+	 * @param id El nombre del objeto a devolver
+	 * @return Objeto con el nombre elegido
+	 * @throws Exception
+	 */
+	P getByName(String nombre) throws Exception;
+
+	/**
+	 * 
 	 * @return Lista con todos los registros de la DB como objetos
 	 * @throws Exception
 	 */

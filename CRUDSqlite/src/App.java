@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.dao.DAOUsuario;
 import modelo.pojo.Usuario;
 
@@ -7,28 +10,33 @@ public class App {
 		System.out.println("Listado usuarios");
 		try {
 			DAOUsuario daoUsuario = new DAOUsuario();
-//			// Obtener usuario por ID
-//			Usuario usuario = daoUsuario.getByid(4);
-//			System.out.println(usuario);
-//
-//			// Obetener todos los usuarios
-//			List<Usuario> lista = new ArrayList<>();
-//			lista = daoUsuario.getAll();
-//			for (Usuario usuarioLista : lista) {
-//				System.out.println(usuarioLista);
-//			}
-//
-//			// Borrar usuario por ID
-//			usuario = daoUsuario.delete(4);
-//			System.out.println(usuario);
-//
-//			// Actualizar usuario con objeto usuario
-//			Usuario usuarioModificado = new Usuario();
-//			usuarioModificado.setId(3);
-//			usuarioModificado.setNombre("Test cambio");
-//			usuarioModificado.setPassword("321");
-//			usuario = daoUsuario.update(usuarioModificado);
-//			System.out.println(usuario);
+			Usuario usuario = new Usuario();
+			// Obtener usuario por ID
+			usuario = daoUsuario.getByid(6);
+			System.out.println(usuario);
+
+			// Obtener usuario por nombre
+			usuario = daoUsuario.getByName("Test cambio");
+			System.out.println(usuario);
+
+			// Obtener todos los usuarios
+			List<Usuario> lista = new ArrayList<>();
+			lista = daoUsuario.getAll();
+			for (Usuario usuarioLista : lista) {
+				System.out.println(usuarioLista);
+			}
+
+			// Borrar usuario por ID
+			usuario = daoUsuario.delete(5);
+			System.out.println(usuario);
+
+			// Actualizar usuario con objeto usuario
+			Usuario usuarioModificado = new Usuario();
+			usuarioModificado.setId(3);
+			usuarioModificado.setNombre("Test cambio");
+			usuarioModificado.setPassword("321");
+			usuario = daoUsuario.update(usuarioModificado);
+			System.out.println(usuario);
 
 			// Crear usuario nuevo con objeto usuario
 			Usuario usuarioNuevo = new Usuario();
