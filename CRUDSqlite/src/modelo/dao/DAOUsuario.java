@@ -1,7 +1,9 @@
 package modelo.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,31 +143,35 @@ public class DAOUsuario implements IDAOUsuario {
 	 */
 	@Override
 	public int insert(Usuario pojoNuevo) {
-		int ultimaId = 0;
-		String sqlInsert = "INSERT INTO usuarios (nombre,pass) VALUES( '" + pojoNuevo.getNombre() + "', '"
-				+ pojoNuevo.getPassword() + "');";
-		String sqlComprobarSiExiste = "SELECT id FROM usuarios WHERE nombre='" + pojoNuevo.getNombre() + "';";
-		String sqlIdUsuarioCreado = "SELECT MAX(id) FROM usuarios";
+
+		int columnasAfectadas, ultimaId = 0;
+		String sqlInsert = "INSERT INTO usuarios (nombre,pass) VALUES(?, ?);";
+
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmtExiste = conn.createStatement();
-				ResultSet rsExiste = stmtExiste.executeQuery(sqlComprobarSiExiste);
-				Statement stmtId = conn.createStatement();
-				ResultSet rsIdUsuario = stmtId.executeQuery(sqlIdUsuarioCreado);
-				Statement stmtInsert = conn.createStatement();) {
-			// Sino existe usuario con ese nombre
-			if (!rsExiste.next()) {
-				// Insertar nuevo usuario
-				stmtInsert.execute(sqlInsert);
-				if (rsIdUsuario.next()) {
-					ultimaId = rsIdUsuario.getInt("MAX(id)");
+				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
+			stmtInsert.setString(1, pojoNuevo.getNombre());
+			stmtInsert.setString(2, pojoNuevo.getPassword());
+			columnasAfectadas = stmtInsert.executeUpdate();
+			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
+				// Si se ha insertado el usuario
+				if (columnasAfectadas > 0) {
+					// Obterner linea de la base de datos
+					ultimaId = rs.getInt(1);
+
+				} else {
+					System.err.println("No se ha podido insertar el usuario");
 				}
-			} else {
-				System.err.println("El nombre de usuario esta ocupado");
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 		return ultimaId;
@@ -180,19 +186,33 @@ public class DAOUsuario implements IDAOUsuario {
 	 */
 	@Override
 	public Usuario login(String nombre, String password) {
+
 		Usuario usuario = new Usuario();
-		String sql = "SELECT id FROM usuarios WHERE nombre='" + nombre + "' AND pass='" + password + "';";
+		String sql = "SELECT id FROM usuarios WHERE nombre = ? AND pass = ?;";
+		int id = 0;
 
 		try ( // Inicializar resultados con autoclosable
 				DAOConnectionManager connectionManager = new DAOConnectionManager();
 				Connection conn = connectionManager.open();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);) {
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-			int id = rs.getInt("id");
-			if (id > 0) {
-				usuario = getByid(id);
+			stmt.setString(1, nombre);
+			stmt.setString(2, password);
+
+			try (ResultSet rs = stmt.executeQuery();) {
+				if (rs.next()) {
+					id = rs.getInt("id");
+					if (id > 0) {
+						usuario = getByid(id);
+					} else {
+						System.out.println("El usuario no existe");
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
