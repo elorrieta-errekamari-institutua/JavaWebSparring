@@ -4,38 +4,59 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>My first JSP page</title>
+<title>Login</title>
+<style type="text/css">
+	body {
+		background-color: slategrey;
+	}
+	.center {
+		text-align: center;
+	}
+	.right {
+		float: right;
+	}
+	.red {
+		color: red;
+	}
+	.central {
+		width: 19em;
+		margin: auto;
+		padding: 10px;
+	}
+	ul {
+		list-style-type: none;
+	}
+	li {
+		padding: 3px;
+	}
+</style>
 </head>
 <%
 int count = 0;
 %>
 <body>
-	<h1>Suma de numeros</h1>
-	
-	
-	<p style="color:red">${mensaje}</p>
-	
-	<form method="post" action="login">
-		<p>
-			Numero 1 <input type="text" name="nombre">
-		</p>
-		<p>
-			Numero 2 <input type="password" name="password">
-		</p>
+	<h1 class="center">Login</h1>
 
-		<input type="submit" value="Submit">
-	</form>
 
-	<form method="POST" action="suma.jsp">
-		<p>
-			Numero 1 <input type="text" name="numero1">
-		</p>
-		<p>
-			Numero 2 <input type="text" name="numero2">
-		</p>
+	<p class="center red">${mensaje}</p>
 
-		<input type="submit" value="Submit">
-	</form>
+	<div class="central">
+		<form method="post" action="login">
+			<ul>
+				<li>
+					<label>Nombre: </label>
+					<input class="right"  type="text" name="nombre">
+				</li>
+				<li>
+					<label>Contrase&ntilde;a</label>
+					<input class="right" type="password" name="password">
+				</li>
+				<li>
+					<input type="submit" value="Submit">
+				</li>
+			</ul>
+		</form>
+	</div>
 
 </body>
 </html>

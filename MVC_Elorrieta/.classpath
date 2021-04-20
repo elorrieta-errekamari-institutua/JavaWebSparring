@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/desarrolloJava/git/JavaWebSparring/MVC_Elorrieta/src/main/webapp/WEB-INF/sqlite-jdbc-3.34.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
