@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.modelo.CRUD;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -33,6 +35,9 @@ public class LoginServlet extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 		String password = request.getParameter("password");
+
+		CRUD conn = new CRUD();
+		conn.connect();
 
 		if (nombre.isEmpty())
 			throw new IOException("El nombre esta vacio");
