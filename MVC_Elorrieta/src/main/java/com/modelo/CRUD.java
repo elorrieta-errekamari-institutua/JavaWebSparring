@@ -25,7 +25,7 @@ public class CRUD {
 
 		try {
 			// Parametros de la base de datos
-			String url = "jdbc:sqlite::db/app.db";
+			String url = "jdbc:sqlite:db/app.db";
 			// Crear conexion a la base de datos
 			conn = DriverManager.getConnection(url);
 

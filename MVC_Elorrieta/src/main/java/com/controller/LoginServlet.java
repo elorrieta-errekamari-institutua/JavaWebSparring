@@ -37,6 +37,12 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		CRUD conn = new CRUD();
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		conn.connect();
 
 		if (nombre.isEmpty())
