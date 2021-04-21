@@ -17,20 +17,22 @@
 		<form method="post" action="login">
 			<ul>
 				<li>
-					<div class="right">
+					<div class="linea">
 						<label for="nombre">Nombre:</label>
-						<input  type="text" name="nombre" id="right" size="10">
+						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre">
 					</div>
 				</li>
 				<li>
-					<div class="right">
+					<div class="linea">
 						<label for="pass">Contrase&ntilde;a:</label>
-						<input class="right" type="password" name="pass" id="pass" size="10">
+						<input class="right" type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
 					</div>
 				</li>
 				<li>
-					<input type="submit" value="Entrar">
-					<a class="right" href="registro.jsp">Registrarse</a>
+					<div class="linea">
+						<input type="submit" value="Entrar">
+						<a href="registro.jsp">Registrarse</a>
+					</div>
 				</li>
 			</ul>
 		</form>

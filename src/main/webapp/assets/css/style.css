@@ -8,8 +8,10 @@ body {
 	text-align: center;
 }
 
-.right {
-	float: right;
+.linea {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .red {
@@ -28,6 +30,6 @@ ul {
 	list-style-type: none;
 }
 
-li {
-	padding: 3px;
+li * {
+	margin: 3px;
 }
