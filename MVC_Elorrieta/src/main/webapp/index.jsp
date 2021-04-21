@@ -18,9 +18,11 @@
 	.red {
 		color: red;
 	}
-	.central {
-		width: 19em;
-		margin: auto;
+	.centralBox {
+		display: inline-block;
+		position: absolute;
+     	left: 50%;
+     	transform: translateX(-50%);
 		padding: 10px;
 	}
 	ul {
@@ -40,7 +42,7 @@ int count = 0;
 
 	<p class="center red">${mensaje}</p>
 
-	<div class="central">
+	<div class="centralBox">
 		<form method="post" action="login">
 			<ul>
 				<li>
@@ -48,11 +50,12 @@ int count = 0;
 					<input class="right"  type="text" name="nombre">
 				</li>
 				<li>
-					<label>Contrase&ntilde;a</label>
+					<label>Contrase&ntilde;a: </label>
 					<input class="right" type="password" name="password">
 				</li>
 				<li>
 					<input type="submit" value="Submit">
+					<a class="right" href="">Registrarse</a>
 				</li>
 			</ul>
 		</form>
