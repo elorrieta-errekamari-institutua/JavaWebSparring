@@ -12,11 +12,13 @@ public class DAOConectionManagerTest {
 
 	@Test
 	public void testGetConnection() {
-		DAOConectionManager cm = new DAOConectionManager();
-		try (Connection conn = cm.open();) {
-			assertNotNull(conn);
+
+		DAOConectionManager cm = DAOConectionManager.getInstance();
+		try (Connection conn = cm.open(); Connection connGet = cm.getConnection();) {
+			assertTrue("Conexion recuperada", connGet.isValid(0));
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 			fail("La conexion ha fallado");
 		}
 
@@ -24,12 +26,28 @@ public class DAOConectionManagerTest {
 
 	@Test
 	public void testClose() {
-		assertTrue(1 > 0);
+
+		DAOConectionManager cm = DAOConectionManager.getInstance();
+		try (Connection conn = cm.open();) {
+			assertNotNull(conn);
+			conn.close();
+			assertTrue("Conexion cerrada", cm.getConnection().isClosed());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			fail("La conexion ha fallado");
+		}
 	}
 
 	@Test
 	public void testOpen() {
-		assertTrue(1 > 0);
+		DAOConectionManager cm = DAOConectionManager.getInstance();
+		try (Connection conn = cm.open();) {
+			assertTrue("Conexion abierta", conn.isValid(0));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			fail("La conexion ha fallado");
+		}
 	}
 
 }

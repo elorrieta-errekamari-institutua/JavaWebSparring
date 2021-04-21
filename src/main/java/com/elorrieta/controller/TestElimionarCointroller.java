@@ -39,7 +39,7 @@ public class TestElimionarCointroller extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		DAOConectionManager connManager = new DAOConectionManager();
+		DAOConectionManager connManager = DAOConectionManager.getInstance();
 		try (Connection conn = connManager.open();) {
 			System.out.println("Conectado");
 		} catch (Exception e) {
