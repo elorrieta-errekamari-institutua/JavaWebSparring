@@ -1,0 +1,33 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: slategrey;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+.red {
+	color: red;
+}
+
+.centralBox {
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 10px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	padding: 3px;
+}
