@@ -11,7 +11,7 @@
 	<h1 class="center">Login</h1>
 
 
-	<p class="center red">${mensaje}</p>
+	<p class="center red">${nombre}</p>
 
 	<div class="centralBox">
 		<form method="post" action="login">

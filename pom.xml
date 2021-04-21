@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>javaweb</name>
-	<url>http://localhost:8080/javaweb/</url>
+	<url>http://localhost:8080/</url>
 
 	<!-- variables comunes para todo el POM -->
 	<properties>
