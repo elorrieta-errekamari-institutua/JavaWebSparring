@@ -233,7 +233,7 @@ public class DAOUsuario implements IDAOUsuario {
 	 */
 	public POJOUsuario login(String nombre, String password) {
 
-		POJOUsuario usuario = new POJOUsuario();
+		POJOUsuario usuario = null;
 		String sql = "SELECT id FROM usuarios WHERE nombre = ? AND pass = ?;";
 		int id = 0;
 
@@ -248,10 +248,8 @@ public class DAOUsuario implements IDAOUsuario {
 				if (rs.next()) {
 					id = rs.getInt("id");
 					if (id > 0) {
+						usuario = new POJOUsuario();
 						usuario = getByid(id);
-					} else {
-						usuario = null;
-						System.out.println("El usuario no existe");
 					}
 				}
 
