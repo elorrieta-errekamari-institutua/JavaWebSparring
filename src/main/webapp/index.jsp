@@ -10,20 +10,20 @@
 </head>
 <body>
 	<ul class="topnav">
-	<p style="color:orange">${usuarioLogeado }</p>
 		<li><a class="active" href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
 		<c:if test="${ usuarioLogeado != null }">
-			${usuarioLogeado.nombre}
+			<li class="right"><a href="logout">Cerrar Sesion</a></li>
 		</c:if>
 		<c:if test="${ usuarioLogeado == null }">
 			<li class="right"><a href="login.jsp">Entrar</a></li>
+			<li class="right"><a href="registro.jsp">Registrate</a></li>
 		</c:if>
 		
-		<li class="right"><a href="registro.jsp">Registrate</a></li>
 	</ul>
 
 	<h1 class="center">Portada</h1>
+	<p style="color:orange">${usuarioLogeado}</p>
 	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
 

@@ -16,10 +16,8 @@
 	</ul>
 	<h1 class="center">Registro</h1>
 
-	<p class="center red">${nombre}</p>
-
 	<div class="centralBox">
-		<form method="post" action="login">
+		<form method="post" action="registro">
 			<ul>
 				<li>
 					<div class="linea">
@@ -46,6 +44,12 @@
 					</div>
 				</li>
 				<li>
+					<div class="linea">
+						<label for="img">Avatar:</label>
+						<input type="file" name="image" id="img" accept=".jpg, .jpeg, .bmp, .gif, .png"onchange="ValidateImg(this);">
+					</div>
+				</li>
+				<li>
 					<br>
 					<div class="linea">
 						<input type="submit" value="Entrar">
@@ -55,6 +59,30 @@
 			</ul>
 		</form>
 	</div>
-
+	
+	<script type="text/javascript">
+	var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];    
+	function ValidateImg(oInput) {
+		if (oInput.type == "file") {
+			var sFileName = oInput.value;
+			if (sFileName.length > 0) {
+				var blnValid = false;
+				for (var j = 0; j < _validFileExtensions.length; j++) {
+					var sCurExtension = _validFileExtensions[j];
+					if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+						blnValid = true;
+						break;
+					}
+				}
+				if (!blnValid) {
+					alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+					oInput.value = "";
+					return false;
+				}
+			}
+		}
+	    return true;
+	}
+</script>
 </body>
 </html>
