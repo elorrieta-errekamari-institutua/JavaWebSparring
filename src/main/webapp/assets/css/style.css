@@ -8,34 +8,61 @@ body {
 	text-align: center;
 }
 
-.linea {
-	display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .red {
 	color: red;
 }
 
+/* posicionar los elementos de un div a los lados*/
+.linea {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+/* alinear un div al centro */
 .centralBox {
 	display: inline-block;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	padding: 10px;
 }
 
 ul {
 	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+}
+
+form {
+	padding: 10px;
 	background-color: #333;
+	border-radius: 5px;
 }
 
 form li * {
 	margin: 3px;
+}
+
+label {
+	color: #ddd;
+}
+
+form a:link, form a:visited {
+	color: #4CAF50;
+}
+
+form a:hover {
+	color: #439a47;
+}
+
+input[type=text], input[type=password] {
+	border-radius: 5px;
+}
+
+/* estilos para la barra de navegacion*/
+ul.topnav {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
 ul.topnav li {
@@ -43,20 +70,27 @@ ul.topnav li {
 }
 
 ul.topnav li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+	display: block;
+	color: #ddd;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
-ul.topnav li a:hover:not(.active) {background-color: #111;}
+ul.topnav li a:hover:not(.active) {
+	background-color: #111;
+}
 
-ul.topnav li a.active {background-color: #4CAF50;}
+ul.topnav li a.active {
+	background-color: #4CAF50;
+}
 
-ul.topnav li.right {float: right;}
+ul.topnav li.right {
+	float: right;
+}
 
 @media screen and (max-width: 600px) {
-  ul.topnav li.right, 
-  ul.topnav li {float: none;}
+	ul.topnav li.right, ul.topnav li {
+		float: none;
+	}
 }
