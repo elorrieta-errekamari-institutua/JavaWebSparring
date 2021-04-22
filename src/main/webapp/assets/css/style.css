@@ -12,6 +12,10 @@ body {
 	color: red;
 }
 
+.green {
+	color: green;
+}
+
 /* posicionar los elementos de un div a los lados*/
 .linea {
 	display: flex;

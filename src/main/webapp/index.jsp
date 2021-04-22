@@ -16,7 +16,7 @@
 	</ul>
 
 	<h1 class="center">Portada</h1>
-
+	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
 
 </body>

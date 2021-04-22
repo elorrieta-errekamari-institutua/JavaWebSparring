@@ -1,7 +1,6 @@
 package com.elorrieta.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.elorrieta.modelo.dao.DAOConectionManager;
+import com.elorrieta.modelo.dao.DAOUsuario;
+import com.elorrieta.modelo.pojo.POJOUsuario;
 
 /**
  * Servlet implementation class TestElimionarCointroller
@@ -33,24 +33,34 @@ public class TestElimionarCointroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String nombre2 = "";
+		POJOUsuario pojoUsuario = new POJOUsuario();
+		DAOUsuario usuarioDB = new DAOUsuario();
 		try {
-			Class.forName("org.sqlite.JDBC");
+
+			pojoUsuario = usuarioDB.getByid(1);
+			nombre2 = pojoUsuario.getNombre();
+
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		DAOConectionManager connManager = DAOConectionManager.getInstance();
-		try (Connection conn = connManager.open();) {
-			System.out.println("Conectado");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		String nombre = request.getParameter("nombre");
+		String pass = request.getParameter("pass");
+		pojoUsuario = usuarioDB.login(nombre, pass);
+		if (pojoUsuario.getId() >= 0) {
+			request.setAttribute("mensaje", pojoUsuario.getNombre() + " esta logeado");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 
-		request.setAttribute("nombre", nombre + " ha pasado pore el servlet");
+		} else {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.setAttribute("nombre", nombre + " ha pasado pore el servlet y " + nombre2 + " de la DB");
 
 	}
 

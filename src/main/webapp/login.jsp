@@ -20,6 +20,7 @@
 
 	<p class="center red">${nombre}</p>
 
+
 	<div class="centralBox">
 		<form method="post" action="login">
 			<ul>

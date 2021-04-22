@@ -22,12 +22,11 @@ public class DAOUsuario implements IDAOUsuario {
 	@Override
 	public POJOUsuario getByid(int id) throws Exception {
 		POJOUsuario usuario = new POJOUsuario();
-		String sql = "SELECT * from usuarios WHERE id= ? ";
+		String sql = "SELECT * from usuarios WHERE id= ? ;";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -36,6 +35,7 @@ public class DAOUsuario implements IDAOUsuario {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
 					usuario.setpass(rs.getString("pass"));
+					usuario.setEmail("email");
 				}
 
 				else {
@@ -66,8 +66,7 @@ public class DAOUsuario implements IDAOUsuario {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -103,8 +102,7 @@ public class DAOUsuario implements IDAOUsuario {
 		List<POJOUsuario> lista = new ArrayList<>();
 		String sql = "SELECT * from usuarios";
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -134,8 +132,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String sql = "DELETE from usuarios WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
@@ -167,8 +164,7 @@ public class DAOUsuario implements IDAOUsuario {
 
 		String sql = "UPDATE usuarios SET  nombre = ? , pass = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
@@ -200,8 +196,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String sqlInsert = "INSERT INTO usuarios (nombre,pass) VALUES(?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			stmtInsert.setString(2, pojoNuevo.getpass());
@@ -243,8 +238,7 @@ public class DAOUsuario implements IDAOUsuario {
 		int id = 0;
 
 		try ( // Inicializar resultados con autoclosable
-				DAOConectionManager connectionManager = DAOConectionManager.getInstance();
-				Connection conn = connectionManager.open();
+				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 
 			stmt.setString(1, nombre);
@@ -256,6 +250,7 @@ public class DAOUsuario implements IDAOUsuario {
 					if (id > 0) {
 						usuario = getByid(id);
 					} else {
+						usuario = null;
 						System.out.println("El usuario no existe");
 					}
 				}

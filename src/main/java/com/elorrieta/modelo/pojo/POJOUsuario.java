@@ -14,7 +14,7 @@ public class POJOUsuario {
 	 */
 	public POJOUsuario() {
 		super();
-		this.id = 0;
+		this.id = -1;
 		this.nombre = "";
 		this.pass = "";
 		this.email = "";
