@@ -16,7 +16,6 @@
 	</ul>
 	<h1 class="center">Registro</h1>
 
-
 	<p class="center red">${nombre}</p>
 
 	<div class="centralBox">
@@ -24,7 +23,7 @@
 			<ul>
 				<li>
 					<div class="linea">
-						<label for="nombre">Nombre:</label>
+						<label for="nombre">Nombre de usuario:</label>
 						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
 					</div>
 				</li>

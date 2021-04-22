@@ -17,17 +17,13 @@
 
 	<h1 class="center">Login</h1>
 
-
-	<p class="center red">${nombre}</p>
-
-
 	<div class="centralBox">
 		<form method="post" action="login">
 			<ul>
 				<li>
 					<div class="linea">
-						<label for="nombre">Nombre:</label>
-						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
+						<label for="nombre">Nombre de usuario:</label>
+						<input  type="text" value="${nombre}" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
 					</div>
 				</li>
 				<li>

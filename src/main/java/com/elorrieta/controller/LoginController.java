@@ -12,10 +12,10 @@ import com.elorrieta.modelo.dao.DAOUsuario;
 import com.elorrieta.modelo.pojo.POJOUsuario;
 
 /**
- * Servlet implementation class TestElimionarCointroller
+ * Servlet implementation class LoginController
  */
 @WebServlet("/login")
-public class TestElimionarCointroller extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,22 +33,9 @@ public class TestElimionarCointroller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nombre2 = "";
 		POJOUsuario pojoUsuario = new POJOUsuario();
 		DAOUsuario usuarioDB = new DAOUsuario();
-		try {
-
-			pojoUsuario = usuarioDB.getByid(1);
-			nombre2 = pojoUsuario.getNombre();
-
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
 		pojoUsuario = usuarioDB.login(nombre, pass);
@@ -57,10 +44,9 @@ public class TestElimionarCointroller extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		} else {
+			request.setAttribute("nombre", nombre);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-
-		request.setAttribute("nombre", nombre + " ha pasado pore el servlet y " + nombre2 + " de la DB");
 
 	}
 
