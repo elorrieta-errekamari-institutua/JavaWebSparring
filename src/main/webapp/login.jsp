@@ -26,16 +26,21 @@
 				<li>
 					<div class="linea">
 						<label for="nombre">Nombre:</label>
-						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre">
+						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
 					</div>
 				</li>
 				<li>
 					<div class="linea">
 						<label for="pass">Contrase&ntilde;a:</label>
-						<input class="right" type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
+						<input type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
 					</div>
 				</li>
 				<li>
+					<label for="save">Mantener abierta la sesion</label>
+					<input type="checkbox" name="save" id="save">
+				</li>
+				<li>
+					<br>
 					<div class="linea">
 						<input type="submit" value="Entrar">
 						<a href="registro.jsp">Registrarse</a>

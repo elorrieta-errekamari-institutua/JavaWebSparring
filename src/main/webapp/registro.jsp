@@ -25,7 +25,7 @@
 				<li>
 					<div class="linea">
 						<label for="nombre">Nombre:</label>
-						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre">
+						<input  type="text" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
 					</div>
 				</li>
 				<li>
@@ -47,6 +47,7 @@
 					</div>
 				</li>
 				<li>
+					<br>
 					<div class="linea">
 						<input type="submit" value="Entrar">
 						<a href="login.jsp">Iniciar sesion</a>

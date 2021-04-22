@@ -41,6 +41,10 @@ form li * {
 	margin: 3px;
 }
 
+label {
+	color: #ddd;
+}
+
 form a:link, form a:visited {
 	color: #4CAF50;
 }
@@ -67,7 +71,7 @@ ul.topnav li {
 
 ul.topnav li a {
 	display: block;
-	color: white;
+	color: #ddd;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
