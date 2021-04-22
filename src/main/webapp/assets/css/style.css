@@ -2,6 +2,7 @@
 
 body {
 	background-color: slategrey;
+	margin: 0px;
 }
 
 .center {
@@ -95,6 +96,26 @@ ul.topnav li a.active {
 
 ul.topnav li.right {
 	float: right;
+}
+/* Estilos menu desplegable */
+ul.topnav ul {
+	display: none;
+	position: absolute;
+	padding: 0;
+	background-color: #333;
+}
+
+ul.topnav ul li {
+	float: none;
+}
+
+ul.topnav ul a {
+	line-height: 120%;
+	padding: 10px 15px;
+}
+
+ul.topnav li:hover>ul {
+	display: block;
 }
 
 @media screen and (max-width: 600px) {

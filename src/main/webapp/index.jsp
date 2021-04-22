@@ -13,7 +13,13 @@
 		<li><a class="active" href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
 		<c:if test="${ usuarioLogeado != null }">
-			<li class="right"><a href="logout">Cerrar Sesion</a></li>
+			<li class="right"><a href="#usuario">Nombre Avatar</a>
+				<ul>
+					<li><a href="#usuario">Datos de usuario</a></li>
+					<li><a href="#historial">Historial</a></li>
+					<li><a href="logout">Salir</a></li>
+				</ul>
+			</li>
 		</c:if>
 		<c:if test="${ usuarioLogeado == null }">
 			<li class="right"><a href="login.jsp">Entrar</a></li>
