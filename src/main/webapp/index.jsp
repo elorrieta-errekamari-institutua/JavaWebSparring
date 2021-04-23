@@ -16,7 +16,7 @@
 			<li class="right"><a href="#usuario">Nombre Avatar</a>
 				<ul>
 					<li><a href="#usuario">Datos de usuario</a></li>
-					<li><a href="#historial">Historial</a></li>
+					<li><a href="historial.jsp">Historial</a></li>
 					<li><a href="logout">Salir</a></li>
 				</ul>
 			</li>
