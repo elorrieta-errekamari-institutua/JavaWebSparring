@@ -14,7 +14,6 @@
 		<li><a class="active" href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
 		<c:if test="${ usuarioLogeado != null }">
-			${usuarioLogeado.nombre"}
 			<li class="right"><a href="#usuario">Nombre Avatar</a>
 				<ul>
 					<li><a href="#usuario">Datos de usuario</a></li>
