@@ -105,6 +105,13 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>nl.geodienstencentrum.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>3.7.3-SNAPSHOT</version>
+			</plugin>
+
 		</plugins>
 
 		<resources>

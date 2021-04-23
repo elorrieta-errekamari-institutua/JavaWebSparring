@@ -31,7 +31,6 @@ public class DAOConectionManagerTest {
 			conn.close();
 			assertTrue("Conexion cerrada", conn.isClosed());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			fail("La conexion ha fallado");
 		}
 	}
@@ -43,7 +42,6 @@ public class DAOConectionManagerTest {
 			assertTrue("Conexion abierta", conn.isValid(0));
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			fail("La conexion ha fallado");
 		}
 	}

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +29,7 @@
 				<li>
 					<div class="linea">
 						<label for="pass">Contrase&ntilde;a:</label>
-						<input type="password" name="pass" value="3WiXc6G" id="pass" placeholder="Su contrase&ntilde;a">
+						<input type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
 					</div>
 				</li>
 				<li>
@@ -43,6 +43,7 @@
 						<a href="registro.jsp">Registrarse</a>
 					</div>
 				</li>
+				
 			</ul>
 		</form>
 	</div>

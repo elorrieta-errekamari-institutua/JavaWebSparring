@@ -81,7 +81,7 @@ public class POJOUsuario {
 	 * 
 	 * @return pass del usuario
 	 */
-	public String getpass() {
+	public String getPass() {
 		return pass;
 	}
 
@@ -90,7 +90,7 @@ public class POJOUsuario {
 	 * 
 	 * @param pass El nuevo pass
 	 */
-	public void setpass(String pass) {
+	public void setPass(String pass) {
 		this.pass = pass;
 	}
 

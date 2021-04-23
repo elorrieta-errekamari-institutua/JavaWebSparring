@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -10,22 +11,21 @@
 </head>
 <body>
 	<ul class="topnav">
-	<p style="color:orange">${usuarioLogeado }</p>
 		<li><a class="active" href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
 		<c:if test="${ usuarioLogeado != null }">
-			${usuarioLogeado.nombre}
+			${usuarioLogeado.nombre"}
 		</c:if>
 		<c:if test="${ usuarioLogeado == null }">
 			<li class="right"><a href="login.jsp">Entrar</a></li>
 		</c:if>
-		
+
 		<li class="right"><a href="registro.jsp">Registrate</a></li>
 	</ul>
 
 	<h1 class="center">Portada</h1>
+	<p style="color: orange">${usuarioLogeado}</p>
 	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
-
 </body>
 </html>

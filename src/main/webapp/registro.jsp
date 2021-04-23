@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 	<p class="center red">${nombre}</p>
 
 	<div class="centralBox">
-		<form method="post" action="login">
+		<form method="post" action="registro">
 			<ul>
 				<li>
 					<div class="linea">
@@ -36,7 +37,8 @@
 				<li>
 					<div class="linea">
 						<label for="pass2">Repita la contrase&ntilde;a:</label>
-						<input type="password" name="pass2" id="pass2" placeholder="Su contrase&ntilde;a">
+						<input type="password" name="pass2" id="pass2" value="<c:out value="${param.pass2}" />" placeholder="Su contrase&ntilde;a">
+						<c:if test="empty param.pass2"><p class="red">Las contraseñas no coinciden</p></c:if>
 					</div>
 				</li>
 				<li>

@@ -34,7 +34,7 @@ public class DAOUsuario implements IDAOUsuario {
 				if (rs.next()) {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
-					usuario.setpass(rs.getString("pass"));
+					usuario.setPass(rs.getString("pass"));
 					usuario.setEmail("email");
 				}
 
@@ -74,7 +74,7 @@ public class DAOUsuario implements IDAOUsuario {
 				if (rs.next()) {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
-					usuario.setpass(rs.getString("pass"));
+					usuario.setPass(rs.getString("pass"));
 				}
 
 				else {
@@ -110,7 +110,7 @@ public class DAOUsuario implements IDAOUsuario {
 				POJOUsuario usuario = new POJOUsuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNombre(rs.getString("nombre"));
-				usuario.setpass(rs.getString("pass"));
+				usuario.setPass(rs.getString("pass"));
 				lista.add(usuario);
 			}
 		} catch (Exception e) {
@@ -160,7 +160,7 @@ public class DAOUsuario implements IDAOUsuario {
 		int id = pojoModificar.getId();
 		POJOUsuario usuario = null;
 		String nuevoNombre = pojoModificar.getNombre();
-		String nuevoPassword = pojoModificar.getpass();
+		String nuevoPassword = pojoModificar.getPass();
 
 		String sql = "UPDATE usuarios SET  nombre = ? , pass = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
@@ -192,14 +192,15 @@ public class DAOUsuario implements IDAOUsuario {
 
 	public int insert(POJOUsuario pojoNuevo) {
 
-		int columnasAfectadas, ultimaId = 0;
-		String sqlInsert = "INSERT INTO usuarios (nombre,pass) VALUES(?, ?);";
+		int columnasAfectadas, ultimaId = -1;
+		String sqlInsert = "INSERT INTO usuarios (nombre, pass, email) VALUES(?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
-			stmtInsert.setString(2, pojoNuevo.getpass());
+			stmtInsert.setString(2, pojoNuevo.getPass());
+			stmtInsert.setString(3, pojoNuevo.getEmail());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario
@@ -211,7 +212,7 @@ public class DAOUsuario implements IDAOUsuario {
 					System.err.println("No se ha podido insertar el usuario");
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 
 		} catch (SQLException e) {

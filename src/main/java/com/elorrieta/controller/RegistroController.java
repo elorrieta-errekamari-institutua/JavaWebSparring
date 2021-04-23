@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.elorrieta.modelo.dao.DAOUsuario;
+import com.elorrieta.modelo.pojo.POJOUsuario;
+
 /**
  * Servlet implementation class RegistroController
  */
@@ -20,7 +23,7 @@ public class RegistroController extends HttpServlet {
 	 */
 	public RegistroController() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -29,7 +32,6 @@ public class RegistroController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -40,7 +42,22 @@ public class RegistroController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Registra un usuario en la base de datos
+		DAOUsuario usuarioDB = new DAOUsuario();
+		POJOUsuario usuario = new POJOUsuario();
+		usuario.setNombre(request.getParameter("nombre"));
+		usuario.setPass(request.getParameter("pass"));
+		usuario.setEmail(request.getParameter("email"));
+		int id = usuarioDB.insert(usuario);
+		if (id < 0) {
+			request.setAttribute("mensaje", "Nombre de usuario o email repetido");
+			request.setAttribute("registrado", false);
 
+		} else {
+			request.setAttribute("mensaje", "El " + usuario.getNombre() + " ha sido registrado");
+			request.setAttribute("nombre", usuario.getNombre());
+			request.setAttribute("registrado", true);
+		}
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 }
