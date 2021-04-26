@@ -1,8 +1,8 @@
 package com.elorrieta.modelo;
 
-import com.elorrieta.modelo.pojo.POJOUsuario;
+import com.elorrieta.modelo.pojo.Usuario;
 
-public interface IDAOUsuario extends ICRUD<POJOUsuario> {
+public interface IDAOUsuario extends ICRUD<Usuario> {
 	/***
 	 * 
 	 * @param nombre   El nombre del usuario que se va a logear
@@ -10,6 +10,6 @@ public interface IDAOUsuario extends ICRUD<POJOUsuario> {
 	 * @return Un objeto de tipo Usuario que se corresponda con el nombre y el
 	 *         password
 	 */
-	POJOUsuario login(String nombre, String password);
+	Usuario login(String nombre, String password);
 
 }

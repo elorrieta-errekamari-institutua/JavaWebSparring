@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.elorrieta.modelo.IDAOUsuario;
-import com.elorrieta.modelo.pojo.POJOUsuario;
+import com.elorrieta.modelo.pojo.Usuario;
 
 public class DAOUsuario implements IDAOUsuario {
 
@@ -17,11 +17,11 @@ public class DAOUsuario implements IDAOUsuario {
 	 * Devuelve un objeto de tipo usuario
 	 * 
 	 * @param id El id del usuario que se quiere recuperar
-	 * @return POJO POJOUsuario
+	 * @return POJO Usuario
 	 */
 	@Override
-	public POJOUsuario getByid(int id) throws Exception {
-		POJOUsuario usuario = new POJOUsuario();
+	public Usuario getByid(int id) throws Exception {
+		Usuario usuario = new Usuario();
 		String sql = "SELECT * from usuarios WHERE id= ? ;";
 
 		// Obtener resultado
@@ -57,11 +57,11 @@ public class DAOUsuario implements IDAOUsuario {
 	 * Devuelve un objeto de tipo usuario
 	 * 
 	 * @param nombre El nombre del usuario que se quiere recuperar
-	 * @return POJO POJOUsuario
+	 * @return POJO Usuario
 	 */
 	@Override
-	public POJOUsuario getByName(String nombre) throws Exception {
-		POJOUsuario usuario = new POJOUsuario();
+	public Usuario getByName(String nombre) throws Exception {
+		Usuario usuario = new Usuario();
 		String sql = "SELECT * from usuarios WHERE nombre = ? ";
 
 		// Obtener resultado
@@ -98,8 +98,8 @@ public class DAOUsuario implements IDAOUsuario {
 	 * @return Lista de Usuarios.
 	 */
 	@Override
-	public List<POJOUsuario> getAll() throws Exception {
-		List<POJOUsuario> lista = new ArrayList<>();
+	public List<Usuario> getAll() throws Exception {
+		List<Usuario> lista = new ArrayList<>();
 		String sql = "SELECT * from usuarios";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -107,7 +107,7 @@ public class DAOUsuario implements IDAOUsuario {
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
 			while (rs.next()) {
-				POJOUsuario usuario = new POJOUsuario();
+				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setPass(rs.getString("pass"));
@@ -126,8 +126,8 @@ public class DAOUsuario implements IDAOUsuario {
 	 * @return El usuario borrado.
 	 */
 	@Override
-	public POJOUsuario delete(int id) {
-		POJOUsuario usuario = null;
+	public Usuario delete(int id) {
+		Usuario usuario = null;
 
 		String sql = "DELETE from usuarios WHERE id = ?";
 
@@ -152,13 +152,13 @@ public class DAOUsuario implements IDAOUsuario {
 	/**
 	 * Actualiza un usuario con los datos de del POJO que recibe por parametro
 	 * 
-	 * @param POJOUsuario pojoModificar El usuario al que se quiere actualizar
-	 * @return POJOUsuario El usuario actualizado.
+	 * @param Usuario pojoModificar El usuario al que se quiere actualizar
+	 * @return Usuario El usuario actualizado.
 	 */
 	@Override
-	public POJOUsuario update(POJOUsuario pojoModificar) {
+	public Usuario update(Usuario pojoModificar) {
 		int id = pojoModificar.getId();
-		POJOUsuario usuario = null;
+		Usuario usuario = null;
 		String nuevoNombre = pojoModificar.getNombre();
 		String nuevoPassword = pojoModificar.getPass();
 
@@ -190,7 +190,7 @@ public class DAOUsuario implements IDAOUsuario {
 	 * @return El id del nuevo usuario.
 	 */
 
-	public int insert(POJOUsuario pojoNuevo) {
+	public int insert(Usuario pojoNuevo) {
 
 		int columnasAfectadas, ultimaId = -1;
 		String sqlInsert = "INSERT INTO usuarios (nombre, pass, email) VALUES(?, ?, ?);";
@@ -230,11 +230,11 @@ public class DAOUsuario implements IDAOUsuario {
 	 * 
 	 * @param String nombre El nombre del usuario que se quiere logear
 	 * @param String password El password del usuario que se quiere logear
-	 * @return POJOUsuario el POJO del usuario logeado
+	 * @return Usuario el POJO del usuario logeado
 	 */
-	public POJOUsuario login(String nombre, String password) {
+	public Usuario login(String nombre, String password) {
 
-		POJOUsuario usuario = null;
+		Usuario usuario = null;
 		String sql = "SELECT id FROM usuarios WHERE nombre = ? AND pass = ?;";
 		int id = 0;
 
@@ -249,7 +249,7 @@ public class DAOUsuario implements IDAOUsuario {
 				if (rs.next()) {
 					id = rs.getInt("id");
 					if (id > 0) {
-						usuario = new POJOUsuario();
+						usuario = new Usuario();
 						usuario = getByid(id);
 					}
 				}

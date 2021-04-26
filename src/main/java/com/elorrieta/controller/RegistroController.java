@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.elorrieta.modelo.dao.DAOUsuario;
-import com.elorrieta.modelo.pojo.POJOUsuario;
+import com.elorrieta.modelo.pojo.Usuario;
 
 /**
  * Servlet implementation class RegistroController
@@ -43,7 +43,7 @@ public class RegistroController extends HttpServlet {
 			throws ServletException, IOException {
 		// Registra un usuario en la base de datos
 		DAOUsuario usuarioDB = new DAOUsuario();
-		POJOUsuario usuario = new POJOUsuario();
+		Usuario usuario = new Usuario();
 		usuario.setNombre(request.getParameter("nombre"));
 		usuario.setPass(request.getParameter("pass"));
 		usuario.setEmail(request.getParameter("email"));

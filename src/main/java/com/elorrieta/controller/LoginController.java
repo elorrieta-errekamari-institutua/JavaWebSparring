@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.elorrieta.modelo.dao.DAOUsuario;
-import com.elorrieta.modelo.pojo.POJOUsuario;
+import com.elorrieta.modelo.pojo.Usuario;
 
 /**
  * Servlet implementation class LoginController
@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		POJOUsuario pojoUsuario = new POJOUsuario();
+		Usuario pojoUsuario = new Usuario();
 		DAOUsuario usuarioDB = new DAOUsuario();
 
 		String nombre = request.getParameter("nombre");

@@ -2,7 +2,7 @@ package com.elorrieta.modelo.pojo;
 
 import java.sql.Blob;
 
-public class POJOUsuario {
+public class Usuario {
 	private int id;
 	private String nombre;
 	private String pass;
@@ -12,7 +12,7 @@ public class POJOUsuario {
 	/***
 	 * Constructor Usuario
 	 */
-	public POJOUsuario() {
+	public Usuario() {
 		super();
 		this.id = -1;
 		this.nombre = "";
@@ -26,7 +26,7 @@ public class POJOUsuario {
 	 * 
 	 * @param nombre Nombre del usuario
 	 */
-	public POJOUsuario(String nombre) {
+	public Usuario(String nombre) {
 		this();
 		this.nombre = nombre;
 	}
@@ -37,7 +37,7 @@ public class POJOUsuario {
 	 * @param nombre Nombre del usuario
 	 * @param pass   pass del usuario
 	 */
-	public POJOUsuario(String nombre, String pass) {
+	public Usuario(String nombre, String pass) {
 		this();
 		this.nombre = nombre;
 		this.pass = pass;
