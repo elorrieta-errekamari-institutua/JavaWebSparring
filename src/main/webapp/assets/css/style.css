@@ -1,9 +1,16 @@
-
 @charset "ISO-8859-1";
+
+html {
+	background-color: unset;
+}
 
 body {
 	background-color: slategrey;
-	margin: 0px;
+}
+
+/* esta clase se puede añadir al navbar'menu para que sea gris tambien en movil.*/
+.bg-is-inherited {
+	background-color: inherit !important;
 }
 
 .center {

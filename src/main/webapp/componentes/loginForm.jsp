@@ -9,7 +9,7 @@
 		<li>
 			<div class="linea">
 				<label for="pass">Contrase&ntilde;a:</label>
-				<input type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
+				<input type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a" value="3WiXc6G">
 			</div>
 		</li>
 		<li>
