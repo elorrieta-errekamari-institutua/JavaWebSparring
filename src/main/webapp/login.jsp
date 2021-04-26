@@ -1,13 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Login</title>
-<link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+<jsp:include page="templates/cabecera.jsp" />
 	<ul class="topnav">
 		<li><a href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
@@ -18,35 +9,17 @@
 	<h1 class="center">Login</h1>
 
 	<div class="centralBox">
-		<form method="post" action="login">
-			<ul>
-				<li>
-					<div class="linea">
-						<label for="nombre">Nombre de usuario:</label>
-						<input  type="text" value="${nombre}" name="nombre" id="nombre" placeholder="Su nombre" autofocus>
-					</div>
-				</li>
-				<li>
-					<div class="linea">
-						<label for="pass">Contrase&ntilde;a:</label>
-						<input type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a">
-					</div>
-				</li>
-				<li>
-					<label for="save">Mantener abierta la sesion</label>
-					<input type="checkbox" name="save" id="save">
-				</li>
-				<li>
-					<br>
-					<div class="linea">
-						<input type="submit" value="Entrar">
-						<a href="registro.jsp">Registrarse</a>
-					</div>
-				</li>
-				
-			</ul>
-		</form>
+		<jsp:include page="componentes/loginForm.jsp"></jsp:include>
 	</div>
-
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Hello World
+      </h1>
+      <p class="subtitle">
+        My first website with <strong>Bulma</strong>!
+      </p>
+    </div>
+  </section>
 </body>
 </html>

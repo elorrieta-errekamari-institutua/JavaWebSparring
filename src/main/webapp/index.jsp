@@ -1,15 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Login</title>
-<link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="templates/cabecera.jsp" />
+
 	<ul class="topnav">
 		<li><a class="active" href="index.jsp">Home</a></li>
 		<li><a href="#news">News</a></li>
@@ -34,5 +26,9 @@
 	<p style="color: orange">${usuarioLogeado}</p>
 	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
+	<button class="mdc-button foo-button">
+  <div class="mdc-button__ripple"></div>
+  <span class="mdc-button__label">Button</span>
+</button>
 </body>
 </html>

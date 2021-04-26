@@ -107,11 +107,24 @@
 			</plugin>
 
 			<plugin>
-				<groupId>nl.geodienstencentrum.maven</groupId>
-				<artifactId>sass-maven-plugin</artifactId>
-				<version>3.7.3-SNAPSHOT</version>
+				<groupId>com.liferay</groupId>
+				<artifactId>com.liferay.css.builder</artifactId>
+				<version>2.0.1</version>
+				<executions>
+					<execution>
+						<id>default-build</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<docrootDirName>src/main/javaweb/assets/scss</docrootDirName>
+					<outputDirName>/assets/css</outputDirName>
+					<portalCommonPath>target/deps/com.liferay.frontend.css.common.jar</portalCommonPath>
+				</configuration>
 			</plugin>
-
 		</plugins>
 
 		<resources>
