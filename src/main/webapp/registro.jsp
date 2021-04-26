@@ -35,7 +35,7 @@
 				<li>
 					<div class="linea">
 						<label for="img">Avatar:</label>
-						<input type="file" name="image" id="img" accept=".jpg, .jpeg, .bmp, .gif, .png"onchange="ValidateImg(this);">
+						<input type="file" name="image" id="img" accept=".jpg, .jpeg, .bmp, .gif, .png" onchange="ValidateImg(this);">
 					</div>
 				</li>
 				<li>
