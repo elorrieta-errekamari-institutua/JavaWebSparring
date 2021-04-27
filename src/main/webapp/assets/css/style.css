@@ -17,20 +17,6 @@ body {
 	text-align: center;
 }
 
-.red {
-	color: red;
-}
-
-.green {
-	color: green;
-}
-
-/* posicionar los elementos de un div a los lados*/
-.linea {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
 
 /* alinear un div al centro */
 .centralBox {
@@ -39,38 +25,3 @@ body {
 	left: 50%;
 	transform: translateX(-50%);
 }
-
-ul {
-	list-style-type: none;
-}
-
-form {
-	padding: 10px;
-	background-color: #333;
-	border-radius: 5px;
-}
-
-form li * {
-	margin: 3px;
-}
-
-label {
-	color: #ddd;
-}
-
-form a:link, form a:visited {
-	color: #4CAF50;
-}
-
-form a:hover {
-	color: #439a47;
-}
-
-input[type=text], input[type=password], input[type=email] {
-	border-radius: 5px;
-}
-
-input[type=file] {
-	color: #ddd;
-}
-
