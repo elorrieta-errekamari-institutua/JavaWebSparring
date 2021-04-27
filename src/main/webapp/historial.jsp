@@ -19,9 +19,9 @@
 				<%for(int j = 0; j<noOftds; j++){%>
 					<td><%=//values.get(k)%></td>
 					<%k++;%>
-			<%}%>
+			<%}}%>
 			</tr>
-		<% //}%>
+
     </table>
 	
 <jsp:include page="templates/footer.jsp" />
