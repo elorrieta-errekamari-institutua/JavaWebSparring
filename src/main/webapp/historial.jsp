@@ -1,27 +1,42 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="templates/cabecera.jsp" />
-<jsp:include page="templates/navbar.jsp" />
+<jsp:include page="templates/loggedNavbar.jsp" />
 
-	<h1 class="center">Historial de partidas</h1>
-	
-	<%
-	//	ArrayList<Integer> values= (ArrayList) request.getAttribute("valuesarray");
-	%>
-	<table>
-    <%
-		int k=0;
-		int noOfRows=5;
-		int noOftds=4;
-		for(int i = 0; i<noOfRows; i++) {
-		//	if(k==values.size()){break;}
-	%>
-				<tr>
-				<%for(int j = 0; j<noOftds; j++){%>
-					<td><%=//values.get(k)%></td>
-					<%k++;%>
-			<%}}%>
+<div class="container">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>DNI</th>
+				<th>Telefono</th>
+				<th><abbr title="Fecha de nacimiento">Fecha</abbr></th>
+				<th>Direccion</th>
+				<th><abbr title="Codigo postal">CP</abbr></th>
+				<th>Municipio]</th>
+				<th>Provincia</th>
+				<th>ERTE</th>
+				<th><abbr title="Situacion laboral">Laboral</abbr></th>
+				<th><abbr title="Situacion administrativa">Administrativa</abbr></th>
+				<th>Titulacion</th>
 			</tr>
-
-    </table>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Nombre</th>
+				<th>DNI</th>
+				<th>Telefono</th>
+				<th><abbr title="Fecha de nacimiento">Fecha</abbr></th>
+				<th>Direccion</th>
+				<th><abbr title="Codigo postal">CP</abbr></th>
+				<th>Municipio]</th>
+				<th>Provincia</th>
+				<th>ERTE</th>
+				<th><abbr title="Situacion laboral">Laboral</abbr></th>
+				<th><abbr title="Situacion administrativa">Administrativa</abbr></th>
+				<th>Titulacion</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
 	
 <jsp:include page="templates/footer.jsp" />

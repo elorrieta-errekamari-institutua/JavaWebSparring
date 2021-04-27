@@ -1,11 +1,11 @@
 <jsp:include page="templates/cabecera.jsp" />
-<jsp:include page="templates/navbar.jsp" />
+<jsp:include page="templates/loggedNavbar.jsp" />
 
 <div class="centralBox ">
-	<form action="subir">
+	<form action="ImportarExcelController" method="post">
 		<div class="field file is-centered is-boxed has-name">
 			<label class="file-label">
-				<input class="file-input" type="file" name="resume">
+				<input class="file-input" type="file" name="file">
 				<span class="file-cta">
 					<span class="file-icon">
 						<i class="fas fa-upload"></i>
