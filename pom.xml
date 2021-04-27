@@ -73,6 +73,49 @@
 			<scope>test</scope> <!-- solo se usa para Test, cuando se crea el projecto no se usa esta libreria -->
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/SparseBitSet -->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>SparseBitSet</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.15</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>2.0.0-alpha1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>2.0.0-alpha1</version>
+		</dependency>
+
 
 
 	</dependencies>
@@ -106,25 +149,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>com.liferay</groupId>
-				<artifactId>com.liferay.css.builder</artifactId>
-				<version>2.0.1</version>
-				<executions>
-					<execution>
-						<id>default-build</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<docrootDirName>src/main/javaweb/assets/scss</docrootDirName>
-					<outputDirName>/assets/css</outputDirName>
-					<portalCommonPath>target/deps/com.liferay.frontend.css.common.jar</portalCommonPath>
-				</configuration>
-			</plugin>
+
 		</plugins>
 
 		<resources>
