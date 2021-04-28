@@ -1,7 +1,7 @@
 package com.elorrieta.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -54,14 +54,18 @@ public class ImportarExcelController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Part filePart = request.getPart("file");
-		InputStream patata = filePart.getInputStream();
+		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = filePart.getSubmittedFileName();
-		String relativeWebPath = "/scr/main/resources/excel/input/";
+		File uploadDir = new File(uploadPath);
+//		Si no existe el directorio lo creamos
+		if (!uploadDir.exists()) {
+			uploadDir.mkdirs();
+		}
 		for (Part part : request.getParts()) {
-			part.write(fileName);
+			part.write(uploadPath + fileName);
 		}
 		ParserParticipantes parseador = new ParserParticipantes();
-		ArrayList<Participante> listaParticipantes = parseador.parseFile(fileName);
+		ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
 		request.setAttribute("listaParticipantes", listaParticipantes);
 		request.getRequestDispatcher("historial.jsp").forward(request, response);
 	}
