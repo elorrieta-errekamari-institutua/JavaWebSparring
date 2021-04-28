@@ -13,6 +13,6 @@
 	<p style="color: orange">${usuarioLogeado}</p>
 	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
-	<button class="button" href="importar">Importar</button>
+	<a class="button" href="importar">Importar</a>
 	
 <jsp:include page="templates/footer.jsp" />
