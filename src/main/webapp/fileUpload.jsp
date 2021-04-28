@@ -2,7 +2,7 @@
 <jsp:include page="templates/loggedNavbar.jsp" />
 
 <div class="centralBox ">
-	<form action="ImportarExcelController" method="post">
+	<form action="importar" method="post" enctype="multipart/form-data">
 		<div class="field file is-centered is-boxed has-name">
 			<label class="file-label">
 				<input class="file-input" type="file" name="file">
