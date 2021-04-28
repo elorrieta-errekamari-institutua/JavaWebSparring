@@ -6,14 +6,14 @@
 	<table class="table is-fullwidth is-hoverable">
 		<thead>
 			<tr>
-				<th></th>
+				<th>#</th>
 				<th>Nombre</th>
 				<th>DNI</th>
 				<th>Telefono</th>
 				<th><abbr title="Fecha de nacimiento">Fecha</abbr></th>
 				<th>Direccion</th>
 				<th><abbr title="Codigo postal">CP</abbr></th>
-				<th>Municipio]</th>
+				<th>Municipio</th>
 				<th>Provincia</th>
 				<th>ERTE</th>
 				<th><abbr title="Situacion laboral">Laboral</abbr></th>
@@ -23,7 +23,7 @@
 		</thead>
 		<tfoot>
 			<tr>
-				<th></th>
+				<th>#</th>
 				<th>Nombre</th>
 				<th>DNI</th>
 				<th>Telefono</th>
