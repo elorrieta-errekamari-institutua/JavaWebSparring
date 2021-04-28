@@ -15,7 +15,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class ImportarExcelController
  */
-@WebServlet("/ImportarExcelController")
+@WebServlet("/importar")
 public class ImportarExcelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

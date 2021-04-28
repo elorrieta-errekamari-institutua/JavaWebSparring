@@ -49,7 +49,7 @@ public class DAOConectionManager implements AutoCloseable {
 	 * Cierra la conexion
 	 */
 
-	public void close() throws Exception {
+	public void close() throws Exception, InterruptedException {
 		// Cierra la conexion
 		if (conn != null) {
 			conn.close();
