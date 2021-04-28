@@ -25,7 +25,8 @@ public class ParserParticipantes {
 		path = "C:\\desarrolloJava\\eclipse-workspace\\JavaWebSparring\\src\\main\\resources\\excel\\input\\participantes.xlsx";
 
 		ArrayList<Participante> listaParticipantes = new ArrayList<Participante>();
-		try (OPCPackage pkg = OPCPackage.open(new File(path)); XSSFWorkbook wb = new XSSFWorkbook(pkg);) {
+		try (OPCPackage pkg = OPCPackage.open(new File(path));) {
+			XSSFWorkbook wb = new XSSFWorkbook(pkg);
 			DataFormatter formatter = new DataFormatter();
 			Sheet sheet1 = wb.getSheetAt(2);
 
@@ -35,7 +36,9 @@ public class ParserParticipantes {
 
 			for (Row row : sheet1) {
 				Participante participante = new Participante();
+
 				for (Cell cell : row) {
+
 					if (cell.getColumnIndex() == 0 && cell.getRowIndex() > 0) {
 						// Guarda DNI
 						String text = formatter.formatCellValue(cell);
@@ -113,8 +116,10 @@ public class ParserParticipantes {
 					}
 
 				}
+
 				listaParticipantes.add(participante);
 			}
+
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,6 +128,7 @@ public class ParserParticipantes {
 			e.printStackTrace();
 		}
 		listaParticipantes.remove(0);
+
 		return listaParticipantes;
 	}
 

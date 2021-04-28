@@ -34,7 +34,9 @@ public class ImportarExcelController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//
 		doPost(request, response);
+
 	}
 
 	/**
@@ -44,9 +46,10 @@ public class ImportarExcelController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		ParserParticipantes parseador = new ParserParticipantes();
 		ArrayList<Participante> listaParticipantes = parseador.parseFile("");
+		request.setAttribute("listaParticipantes", listaParticipantes);
+		request.getRequestDispatcher("historial.jsp").forward(request, response);
 	}
 
 }
