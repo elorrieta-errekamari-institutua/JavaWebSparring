@@ -9,10 +9,10 @@
 %>
 
 <div class="centralBox ">
-	<form action="importar" method="post" enctype="multipart/form-data">
+	<form action="importar" method="post" enctype="multipart/form-data" onreset="resetName()">
 		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">
-				<input class="file-input" type="file" name="file">
+				<input class="file-input" type="file" name="file" onchange="changeName()">
 				<span class="file-cta">
 					<span class="file-icon">
 						<i class="fas fa-upload"></i>
@@ -37,5 +37,7 @@
 		</div>
 	</form>
 </div>
+
+<script src="assets/js/fileUpload.js"></script>
 
 <jsp:include page="templates/footer.jsp" />

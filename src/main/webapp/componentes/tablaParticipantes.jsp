@@ -53,3 +53,5 @@
 		</tr>
 	</tfoot>
 </table>
+
+<script src="assets/js/initializeTable.js"></script>
