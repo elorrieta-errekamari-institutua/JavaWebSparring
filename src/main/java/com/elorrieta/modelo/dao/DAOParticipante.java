@@ -68,7 +68,7 @@ public class DAOParticipante implements IDAOParticipante {
 		int columnasAfectadas, ultimaId = -1;
 		String sqlInsert = "INSERT INTO participantes (nombre_completo, dni, telefono, fecha_de_nacimiento,"
 				+ "direccion, codigo_postal, municipio, provincia, erte, situacion_laboral, "
-				+ "situacion_administrativa, titulacion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "situacion_administrativa) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -84,7 +84,6 @@ public class DAOParticipante implements IDAOParticipante {
 			stmtInsert.setBoolean(9, pojoNuevo.isErte());
 			stmtInsert.setString(10, pojoNuevo.getSituacionLaboral());
 			stmtInsert.setString(11, pojoNuevo.getSituacionAdministrativa());
-			stmtInsert.setString(12, pojoNuevo.getTitulacion());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario

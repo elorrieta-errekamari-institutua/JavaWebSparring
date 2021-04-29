@@ -48,8 +48,9 @@ public class ImportarExcelController extends HttpServlet {
 		// TODO Auto-generated method stub
 		ParserParticipantes parseador = new ParserParticipantes();
 		ArrayList<Participante> listaParticipantes = parseador.parseFile("");
+
 		request.setAttribute("listaParticipantes", listaParticipantes);
 		request.getRequestDispatcher("historial.jsp").forward(request, response);
-	}
 
+	}
 }
