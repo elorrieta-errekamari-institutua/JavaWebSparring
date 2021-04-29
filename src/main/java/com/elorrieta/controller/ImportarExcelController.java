@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.elorrieta.file.parser.ParserParticipantes;
@@ -66,7 +67,9 @@ public class ImportarExcelController extends HttpServlet {
 		}
 		ParserParticipantes parseador = new ParserParticipantes();
 		ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
-		request.setAttribute("listaParticipantes", listaParticipantes);
+//		request.setAttribute("listaParticipantes", listaParticipantes);
+		HttpSession session = request.getSession();
+		session.setAttribute("listaParticipantes", listaParticipantes);
 		request.getRequestDispatcher("historial.jsp").forward(request, response);
 	}
 
