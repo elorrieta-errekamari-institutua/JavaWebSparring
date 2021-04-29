@@ -73,7 +73,7 @@ public class DAOParticipante implements IDAOParticipante {
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
-			stmtInsert.setString(1, pojoNuevo.getNombre());
+			stmtInsert.setString(1, pojoNuevo.getNombreCompleto());
 			stmtInsert.setString(2, pojoNuevo.getDni());
 			stmtInsert.setString(3, pojoNuevo.getTelefono());
 			stmtInsert.setDate(4, pojoNuevo.getFechaDeNacimiento());
