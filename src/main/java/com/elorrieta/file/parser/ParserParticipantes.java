@@ -22,7 +22,6 @@ public class ParserParticipantes {
 	}
 
 	public ArrayList<Participante> parseFile(String path) {
-		path = "C:\\desarrolloJava\\eclipse-workspace\\JavaWebSparring\\src\\main\\resources\\excel\\input\\participantes.xlsx";
 
 		ArrayList<Participante> listaParticipantes = new ArrayList<Participante>();
 		try (OPCPackage pkg = OPCPackage.open(new File(path));) {
