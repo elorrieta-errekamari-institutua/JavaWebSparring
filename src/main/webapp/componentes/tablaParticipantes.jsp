@@ -19,12 +19,9 @@
 	</thead>
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
-			<tr
-				<c:if test="${element.isGuardado()}">
-					class="has-background-danger"
-				</c:if>
-			>
-				<th>${index.count}</th>
+			<tr class="${ (element.guardado) ? 'has-background-danger' : 'has-background-success'  }">
+			
+				<th>${element.guardado}  ${index.count}</th>
 				<td>${element.getNombreCompleto()}</td>
 				<td>${element.getDni()}</td>
 				<td>${element.getTelefono()}</td>

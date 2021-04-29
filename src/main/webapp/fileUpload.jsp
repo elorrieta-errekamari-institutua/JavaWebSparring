@@ -10,7 +10,7 @@
 
 <div class="centralBox ">
 	<form action="importar" method="post" enctype="multipart/form-data">
-		<div class="field file is-centered is-boxed has-name">
+		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">
 				<input class="file-input" type="file" name="file">
 				<span class="file-cta">

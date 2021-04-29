@@ -10,7 +10,6 @@
 
 
 	<h1 class="center">Portada</h1>
-	<p style="color: orange">${usuarioLogeado}</p>
 	<p class="center green">${mensaje}</p>
 	<p class="center red">${nombre}</p>
 

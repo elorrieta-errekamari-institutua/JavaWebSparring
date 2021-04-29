@@ -2,6 +2,8 @@ package com.elorrieta.modelo;
 
 import java.util.List;
 
+import com.elorrieta.modelo.pojo.Participante;
+
 public interface ICRUD<P> {
 	/**
 	 * 
@@ -51,4 +53,12 @@ public interface ICRUD<P> {
 	 * @throws Exception
 	 */
 	int insert(P pojoNuevo) throws Exception;
+
+	/**
+	 * Devuelve un objeto de tipo usuario
+	 * 
+	 * @param nombre El nombre del usuario que se quiere recuperar
+	 * @return POJO Usuario
+	 */
+	Participante getByDni(String dni) throws Exception;
 }

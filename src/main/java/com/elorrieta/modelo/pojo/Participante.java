@@ -16,6 +16,7 @@ public class Participante extends Usuario {
 	private String situacionLaboral;
 	private String situacionAdministrativa;
 	private String titulacion;
+	private boolean guardado;
 
 	public Participante() {
 		super();
@@ -31,6 +32,7 @@ public class Participante extends Usuario {
 		this.situacionLaboral = "";
 		this.situacionAdministrativa = "";
 		this.titulacion = "";
+		this.guardado = false;
 	}
 
 	public Participante(String nombreCompleto, String dni, String telefono, Date fechaDeNacimiento, String direccion,
@@ -145,6 +147,14 @@ public class Participante extends Usuario {
 
 	public void setTitulacion(String titulacion) {
 		this.titulacion = titulacion;
+	}
+
+	public boolean isGuardado() {
+		return guardado;
+	}
+
+	public void setGuardado(boolean guardado) {
+		this.guardado = guardado;
 	}
 
 }

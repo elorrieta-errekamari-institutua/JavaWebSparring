@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.elorrieta.file.parser.ParserParticipantes;
+import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
 /**
@@ -54,6 +55,7 @@ public class ImportarExcelController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		DAOParticipante dao = new DAOParticipante();
 		Part filePart = request.getPart("file");
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = filePart.getSubmittedFileName();
@@ -67,7 +69,18 @@ public class ImportarExcelController extends HttpServlet {
 		}
 		ParserParticipantes parseador = new ParserParticipantes();
 		ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
-//		request.setAttribute("listaParticipantes", listaParticipantes);
+
+		for (Participante participante : listaParticipantes) {
+			try {
+				Participante participanteTemporal = dao.getByDni(participante.getDni());
+				if (participanteTemporal != null) {
+					participante.setGuardado(true);
+				}
+			} catch (Exception e) {
+				System.out.println("Error SQL");
+				e.printStackTrace();
+			}
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("listaParticipantes", listaParticipantes);
 		request.getRequestDispatcher("historial.jsp").forward(request, response);

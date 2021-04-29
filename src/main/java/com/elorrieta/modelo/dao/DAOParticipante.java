@@ -45,10 +45,46 @@ public class DAOParticipante implements IDAOParticipante {
 		return participante;
 	}
 
+	/**
+	 * Devuelve un objeto de tipo usuario
+	 * 
+	 * @param nombre El nombre del usuario que se quiere recuperar
+	 * @return POJO Usuario
+	 */
 	@Override
-	public Participante getByName(String nombre) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Participante getByDni(String dni) throws Exception {
+		Participante participante = null;
+		String sql = "SELECT * from participantes WHERE dni = ? ";
+
+		// Obtener resultado
+		try ( // Inicializar resultados con autoclosable
+				// Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setString(1, dni);
+			try (ResultSet rs = stmt.executeQuery();) {
+				// Fetch data
+
+				if (rs.next()) {
+					participante = new Participante();
+					participante.setId(rs.getInt("id"));
+					participante.setNombreCompleto(rs.getString("nombre_completo"));
+					participante.setDni(rs.getString("dni"));
+				}
+
+				else {
+					System.out.println("Mensaje que no se lee");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return participante;
 	}
 
 	@Override
@@ -110,6 +146,12 @@ public class DAOParticipante implements IDAOParticipante {
 
 	@Override
 	public List<Participante> getAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Participante getByName(String nombre) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
