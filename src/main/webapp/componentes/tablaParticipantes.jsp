@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<table class="table is-hoverable is-striped">
+<table id="table" class="table is-hoverable is-striped">
 	<thead>
 		<tr>
 			<th>#</th>
@@ -19,7 +19,11 @@
 	</thead>
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
-			<tr>
+			<tr
+				<c:if test="${element.isGuardado()}">
+					class="has-background-danger"
+				</c:if>
+			>
 				<th>${index.count}</th>
 				<td>${element.getNombreCompleto()}</td>
 				<td>${element.getDni()}</td>

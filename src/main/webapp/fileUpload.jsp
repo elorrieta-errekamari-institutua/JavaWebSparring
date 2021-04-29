@@ -1,6 +1,13 @@
 <jsp:include page="templates/cabecera.jsp" />
 <jsp:include page="templates/loggedNavbar.jsp" />
 
+
+<%
+	// limpiar atributo de session ccon la lista de participantes
+	session.removeAttribute("listaParticipantes");
+
+%>
+
 <div class="centralBox ">
 	<form action="importar" method="post" enctype="multipart/form-data">
 		<div class="field file is-centered is-boxed has-name">

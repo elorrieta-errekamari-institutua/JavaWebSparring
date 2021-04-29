@@ -9,5 +9,4 @@
 	<button class="button" onclick="emptySession()">Cancelar</button>
 </div>
 
-
 <jsp:include page="templates/footer.jsp" />
