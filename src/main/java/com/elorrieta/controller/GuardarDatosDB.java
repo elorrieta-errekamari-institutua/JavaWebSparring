@@ -52,8 +52,9 @@ public class GuardarDatosDB extends HttpServlet {
 		DAOParticipante usuarioDB = new DAOParticipante();
 		int numeroInsertados = listaParticipantes.size();
 		for (Participante participante : listaParticipantes) {
-			int id = 0;
+			int id = -1;
 			try {
+				if(!participante.isGuardado())
 				id = usuarioDB.insert(participante);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
