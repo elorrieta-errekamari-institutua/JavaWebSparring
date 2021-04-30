@@ -64,7 +64,8 @@ public class GuardarDatosDB extends HttpServlet {
 				numeroInsertados--;
 			}
 		}
-		System.out.println("Total insertados " + numeroInsertados);
+		request.setAttribute("insertados", numeroInsertados);
+		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 	}
 
 }

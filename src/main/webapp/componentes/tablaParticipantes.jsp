@@ -20,7 +20,7 @@
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
 			<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
-				<th>${(element.id > 0) ? ${element.id} : ${index.count}}</th>
+				<th>${(element.id > 0) ? element.id : index.count}</th>
 				<td>${element.nombreCompleto}</td>
 				<td>${element.dni}</td>
 				<td>${element.telefono}</td>

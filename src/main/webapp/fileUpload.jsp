@@ -9,6 +9,9 @@
 %>
 
 <div class="centralBox">
+
+	<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados} registros</p>
+
 	<form action="importar" method="post" enctype="multipart/form-data" onreset="resetName()">
 		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">
