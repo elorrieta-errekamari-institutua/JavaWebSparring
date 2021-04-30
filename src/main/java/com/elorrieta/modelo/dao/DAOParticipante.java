@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
+import java.util.ArrayList;
 
 import com.elorrieta.modelo.IDAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
@@ -145,9 +145,35 @@ public class DAOParticipante implements IDAOParticipante {
 	}
 
 	@Override
-	public List<Participante> getAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Participante> getAll() throws Exception {
+		ArrayList<Participante> lista = new ArrayList<>();
+		String sql = "SELECT * from participantes";
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();) {
+			// Obtener resultado
+			while (rs.next()) {
+				Participante participante = new Participante();
+				participante.setId(rs.getInt("id"));
+				participante.setNombreCompleto(rs.getString("nombre_completo"));
+				participante.setDni(rs.getString("dni"));
+				participante.setTelefono(rs.getString("telefono"));
+				participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+				participante.setDireccion(rs.getString("direccion"));
+				participante.setCodigoPostal(rs.getString("codigo_postal"));
+				participante.setMunicipio(rs.getString("municipio"));
+				participante.setProvincia(rs.getString("provincia"));
+				participante.setErte(rs.getBoolean("erte"));
+				participante.setSituacionLaboral(rs.getString("situacion_laboral"));
+				participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
+				lista.add(participante);
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la consulta");
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	@Override
