@@ -17,8 +17,8 @@
         Home
       </a>
 
-      <a class="navbar-item">
-        Documentation
+      <a class="navbar-item" href="participantes">
+        Participantes registrados
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
@@ -47,7 +47,7 @@
     <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          Nombre Avatar
+          ${usuarioLogeado.nombre}
         </a>
 
         <div class="navbar-dropdown is-right">

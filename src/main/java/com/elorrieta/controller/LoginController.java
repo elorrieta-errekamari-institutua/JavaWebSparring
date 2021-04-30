@@ -47,10 +47,6 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("usuarioLogeado", pojoUsuario);
 
-			// logout
-			// session.setAttribute("usuarioLogeado", null);
-			// session.invalidate();
-
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 
 		} else {

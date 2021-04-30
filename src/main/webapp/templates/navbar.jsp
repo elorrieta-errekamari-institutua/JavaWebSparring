@@ -17,10 +17,6 @@
         Home
       </a>
 
-      <a class="navbar-item">
-        Documentation
-      </a>
-
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More

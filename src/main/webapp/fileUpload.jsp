@@ -8,7 +8,7 @@
 
 %>
 
-<div class="centralBox ">
+<div class="centralBox">
 	<form action="importar" method="post" enctype="multipart/form-data" onreset="resetName()">
 		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">

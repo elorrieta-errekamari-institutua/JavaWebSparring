@@ -19,20 +19,20 @@
 	</thead>
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
-			<tr class="${ (element.guardado) ? 'has-background-danger' : 'has-background-success'  }">
+			<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
 			
-				<th>${element.guardado}  ${index.count}</th>
-				<td>${element.getNombreCompleto()}</td>
-				<td>${element.getDni()}</td>
-				<td>${element.getTelefono()}</td>
-				<td>${element.getFechaDeNacimiento()}</td>
-				<td>${element.getDireccion()}</td>
-				<td>${element.getCodigoPostal()}</td>
-				<td>${element.getMunicipio()}</td>
-				<td>${element.getProvincia()}</td>
-				<td>${element.isErte()}</td>
-				<td>${element.getSituacionLaboral()}</td>
-				<td>${element.getSituacionAdministrativa()}</td>
+				<th>${index.count}</th>
+				<td>${element.nombreCompleto}</td>
+				<td>${element.dni}</td>
+				<td>${element.telefono}</td>
+				<td>${element.fechaDeNacimiento}</td>
+				<td>${element.direccion}</td>
+				<td>${element.codigoPostal}</td>
+				<td>${element.municipio}</td>
+				<td>${element.provincia}</td>
+				<td>${element.erte}</td>
+				<td>${element.situacionLaboral}</td>
+				<td>${element.situacionAdministrativa}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -53,5 +53,3 @@
 		</tr>
 	</tfoot>
 </table>
-
-<script src="assets/js/initializeTable.js"></script>
