@@ -1,7 +1,7 @@
 <nav class="navbar is-dark block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
-      <img src="https://www.bolsadetrabajoelorrieta.com/images/logo_elorrieta_2016.png">
+      <img src="assets/img/logoapp.svg">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
