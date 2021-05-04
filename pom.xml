@@ -113,28 +113,7 @@
 			<artifactId>commons-compress</artifactId>
 			<version>1.20</version>
 		</dependency>
-		<!-- Para la puta mierda de los excel 
-		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>2.6.0</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>4.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>${poi.version}</version>
-		</dependency>
-				<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${poi.version}</version>
-		</dependency>-->
+		<!-- Para la puta mierda de los excel -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -145,13 +124,26 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.10-FINAL</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>1.7.5</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/nl.geodienstencentrum.maven/sass-maven-plugin -->
+		<dependency>
+			<groupId>nl.geodienstencentrum.maven</groupId>
+			<artifactId>sass-maven-plugin</artifactId>
+			<version>3.7.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/bulma -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>bulma</artifactId>
+			<version>0.9.2</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -179,8 +171,31 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-
-
+			<!-- Sass compiler -->
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>sass-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>update-stylesheets</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<resources>
+						<resource>
+							<!-- Set source and destination dirs -->
+							<source>
+								<directory>${project.basedir}/src/main/webapp/assets/scss</directory>
+							</source>
+							<destination>${project.basedir}/src/main/webapp/assets/sass_compiled</destination>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<resources>
