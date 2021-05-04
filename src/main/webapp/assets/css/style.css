@@ -1,29 +1,26 @@
-@charset "ISO-8859-1";
-
 html {
-	background-color: unset;
+  background-color: unset;
 }
 
 body {
-	background-color: slategrey;
+  background-color: slategrey;
 }
 
-/* esta clase se puede añadir al navbar'menu para que sea gris tambien en movil.*/
+/* esta clase se puede aÃ±adir al navbar'menu para que sea gris tambien en movil. */
 .bg-is-inherited {
-	background-color: inherit !important;
+  background-color: inherit !important;
 }
 
 .center {
-	text-align: center;
+  text-align: center;
 }
-
 
 /* alinear un div al centro */
 .centralBox {
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	padding: 1em;
-	border-radius: 0.25rem;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1em;
+  border-radius: 0.25rem;
 }
