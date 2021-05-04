@@ -83,7 +83,7 @@ public class ImportarExcelController extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("listaParticipantes", listaParticipantes);
-		request.getRequestDispatcher("historial.jsp").forward(request, response);
+		request.getRequestDispatcher("backoffice/historial.jsp").forward(request, response);
 
 	}
 

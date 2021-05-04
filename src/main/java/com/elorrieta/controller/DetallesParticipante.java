@@ -1,7 +1,6 @@
 package com.elorrieta.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +13,16 @@ import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
 /**
- * Servlet implementation class ListParticipantesController
+ * Servlet implementation class DetallesParticipante
  */
-@WebServlet("/participantes")
-public class ListParticipantesController extends HttpServlet {
+@WebServlet("/detalle")
+public class DetallesParticipante extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListParticipantesController() {
+	public DetallesParticipante() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,8 +33,23 @@ public class ListParticipantesController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Bypass a metodo post
-		doPost(request, response);
+
+		// Obtener datos de un participante a partir de la id enviada en el request
+		int id = (int) request.getAttribute("id");
+		DAOParticipante dao = new DAOParticipante();
+		Participante participante = null;
+		try {
+			participante = dao.getByid(id);
+		} catch (Exception e) {
+			System.err.println("Error recuperando participante");
+			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		if (participante != null) {
+			session.setAttribute("participante", participante);
+		}
+
+		request.getRequestDispatcher("backoffice/detalle.jsp").forward(request, response);
 	}
 
 	/**
@@ -44,22 +58,8 @@ public class ListParticipantesController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener lista con usuarios de la DB
-		DAOParticipante dao = new DAOParticipante();
-		ArrayList<Participante> listaParticipantesDB = null;
-		try {
-			listaParticipantesDB = dao.getAll();
-		} catch (Exception e) {
-			System.err.println("Problemas recuperando usuarios");
-			e.printStackTrace();
-		}
-		HttpSession session = request.getSession();
-		if (listaParticipantesDB != null) {
-			session.removeAttribute("listaParticipantes");
-			session.setAttribute("listaParticipantes", listaParticipantesDB);
-		}
 
-		request.getRequestDispatcher("backoffice/participantes.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }
