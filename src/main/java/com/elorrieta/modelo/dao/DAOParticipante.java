@@ -26,8 +26,17 @@ public class DAOParticipante implements IDAOParticipante {
 				// Fetch data
 				if (rs.next()) {
 					participante.setId(rs.getInt("id"));
-					participante.setNombre(rs.getString("nombre"));
-					participante.setDni("dni");
+					participante.setNombreCompleto(rs.getString("nombre_completo"));
+					participante.setDni(rs.getString("dni"));
+					participante.setTelefono(rs.getString("telefono"));
+					participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+					participante.setDireccion(rs.getString("direccion"));
+					participante.setCodigoPostal(rs.getString("codigo_postal"));
+					participante.setMunicipio(rs.getString("municipio"));
+					participante.setProvincia(rs.getString("provincia"));
+					participante.setErte(rs.getBoolean("erte"));
+					participante.setSituacionLaboral(rs.getString("situacion_laboral"));
+					participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
 				}
 
 				else {
@@ -70,6 +79,15 @@ public class DAOParticipante implements IDAOParticipante {
 					participante.setId(rs.getInt("id"));
 					participante.setNombreCompleto(rs.getString("nombre_completo"));
 					participante.setDni(rs.getString("dni"));
+					participante.setTelefono(rs.getString("telefono"));
+					participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+					participante.setDireccion(rs.getString("direccion"));
+					participante.setCodigoPostal(rs.getString("codigo_postal"));
+					participante.setMunicipio(rs.getString("municipio"));
+					participante.setProvincia(rs.getString("provincia"));
+					participante.setErte(rs.getBoolean("erte"));
+					participante.setSituacionLaboral(rs.getString("situacion_laboral"));
+					participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
 				}
 
 				else {

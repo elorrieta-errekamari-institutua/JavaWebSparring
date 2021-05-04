@@ -15,7 +15,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class DetallesParticipante
  */
-@WebServlet("/detalle")
+@WebServlet("/backoffice/detalle")
 public class DetallesParticipante extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class DetallesParticipante extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Obtener datos de un participante a partir de la id enviada en el request
-		int id = (int) request.getAttribute("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		DAOParticipante dao = new DAOParticipante();
 		Participante participante = null;
 		try {
@@ -49,7 +49,7 @@ public class DetallesParticipante extends HttpServlet {
 			session.setAttribute("participante", participante);
 		}
 
-		request.getRequestDispatcher("backoffice/detalle.jsp").forward(request, response);
+		request.getRequestDispatcher("detalle.jsp").forward(request, response);
 	}
 
 	/**

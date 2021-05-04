@@ -157,4 +157,13 @@ public class Participante extends Usuario {
 		this.guardado = guardado;
 	}
 
+	@Override
+	public String toString() {
+		return "Participante [nombreCompleto=" + nombreCompleto + ", dni=" + dni + ", telefono=" + telefono
+				+ ", fechaDeNacimiento=" + fechaDeNacimiento + ", direccion=" + direccion + ", codigoPostal="
+				+ codigoPostal + ", municipio=" + municipio + ", provincia=" + provincia + ", erte=" + erte
+				+ ", situacionLaboral=" + situacionLaboral + ", situacionAdministrativa=" + situacionAdministrativa
+				+ ", titulacion=" + titulacion + ", guardado=" + guardado + "]";
+	}
+
 }
