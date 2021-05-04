@@ -1,7 +1,7 @@
 <nav class="navbar is-dark block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
-      <img src="assets/img/logoapp.svg" alt="logo">
+      <img src="/javaweb/assets/img/logoapp.svg" alt="logo">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="loggedNavbar">
@@ -13,11 +13,11 @@
 
   <div id="loggedNavbar" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="index.jsp">
+      <a class="navbar-item" href="/javaweb/index.jsp">
         Home
       </a>
 
-      <a class="navbar-item" href="participantes">
+      <a class="navbar-item" href="/javaweb/participantes">
         Participantes registrados
       </a>
 
@@ -54,14 +54,14 @@
           <a class="navbar-item">
             Perfil
           </a>
-          <a class="navbar-item" href="backoffice/historial.jsp">
+          <a class="navbar-item" href="/javaweb/backoffice/historial.jsp">
             Historial
           </a>
-          <a class="navbar-item" href="backoffice/fileUpload.jsp">
+          <a class="navbar-item" href="/javaweb/backoffice/fileUpload.jsp">
             Subir documentos
           </a>
           <hr class="navbar-divider">
-          <a class="navbar-item" href="logout">
+          <a class="navbar-item" href="/javaweb/logout">
             Salir
           </a>
         </div>

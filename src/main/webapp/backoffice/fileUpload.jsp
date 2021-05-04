@@ -1,5 +1,5 @@
-<jsp:include page="../templates/cabecera.jsp" />
-<jsp:include page="../templates/loggedNavbar.jsp" />
+<jsp:include page="/templates/header.jsp" />
+<jsp:include page="/templates/loggedNavbar.jsp" />
 
 
 <%
@@ -12,7 +12,7 @@
 
 	<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados} registros</p>
 
-	<form action="importar" method="post" enctype="multipart/form-data" onreset="resetName()">
+	<form action="/javaweb/backoffice/importar" method="post" enctype="multipart/form-data" onreset="resetName()">
 		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">
 				<input class="file-input" type="file" name="file" onchange="changeName()">
@@ -25,7 +25,7 @@
 					</span>
 				</span>
 				<span class="file-name">
-					No hay documento <!-- Cambiar esto con javascript -->
+					No hay documento
 				</span>
 			</label>
 		</div>
@@ -41,6 +41,6 @@
 	</form>
 </div>
 
-<script src="../assets/js/fileUpload.js"></script>
+<script src="/javaweb/assets/js/fileUpload.js"></script>
 
-<jsp:include page="../templates/footer.jsp" />
+<jsp:include page="/templates/footer.jsp" />
