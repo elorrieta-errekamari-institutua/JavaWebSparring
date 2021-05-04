@@ -54,10 +54,10 @@
           <a class="navbar-item">
             Perfil
           </a>
-          <a class="navbar-item" href="historial.jsp">
+          <a class="navbar-item" href="backoffice/historial.jsp">
             Historial
           </a>
-          <a class="navbar-item" href="fileUpload.jsp">
+          <a class="navbar-item" href="backoffice/fileUpload.jsp">
             Subir documentos
           </a>
           <hr class="navbar-divider">
