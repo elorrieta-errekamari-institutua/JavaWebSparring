@@ -11,7 +11,8 @@ var columnData = [{
 	format: "DD/MM/YYYY"
 }];
 
-var dataTable = new DataTable("#table", {
+var dataTable = new simpleDatatables.DataTable("#table", {
 	columns: columnData,
-	labels: labelData
+	labels: labelData,
+	footer: true
 });

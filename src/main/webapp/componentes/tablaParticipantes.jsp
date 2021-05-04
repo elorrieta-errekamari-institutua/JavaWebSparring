@@ -19,20 +19,26 @@
 	</thead>
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
-			<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
-				<th>${(element.id > 0) ? element.id : index.count}</th>
-				<td>${element.nombreCompleto}</td>
-				<td>${element.dni}</td>
-				<td>${element.telefono}</td>
-				<td>${element.fechaDeNacimiento}</td>
-				<td>${element.direccion}</td>
-				<td>${element.codigoPostal}</td>
-				<td>${element.municipio}</td>
-				<td>${element.provincia}</td>
-				<td>${element.erte}</td>
-				<td>${element.situacionLaboral}</td>
-				<td>${element.situacionAdministrativa}</td>
-			</tr>
+			<c:if test="${element.id > 0}">
+				<tr class="clickable" onclick="document.location='detalle?id=${element.id}'">
+					<th>${element.id}</th>
+			</c:if>
+			<c:if test="${element.id <= 0}">
+				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
+					<th>${index.count}</th>
+			</c:if>
+					<td>${element.nombreCompleto}</td>
+					<td>${element.dni}</td>
+					<td>${element.telefono}</td>
+					<td>${element.fechaDeNacimiento}</td>
+					<td>${element.direccion}</td>
+					<td>${element.codigoPostal}</td>
+					<td>${element.municipio}</td>
+					<td>${element.provincia}</td>
+					<td>${element.erte}</td>
+					<td>${element.situacionLaboral}</td>
+					<td>${element.situacionAdministrativa}</td>
+				</tr>
 		</c:forEach>
 	</tbody>
 	<tfoot>

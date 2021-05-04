@@ -1,5 +1,5 @@
-<jsp:include page="templates/cabecera.jsp" />
-<jsp:include page="templates/loggedNavbar.jsp" />
+<jsp:include page="../templates/cabecera.jsp" />
+<jsp:include page="../templates/loggedNavbar.jsp" />
 
 
 <%
@@ -41,6 +41,6 @@
 	</form>
 </div>
 
-<script src="assets/js/fileUpload.js"></script>
+<script src="../assets/js/fileUpload.js"></script>
 
-<jsp:include page="templates/footer.jsp" />
+<jsp:include page="../templates/footer.jsp" />
