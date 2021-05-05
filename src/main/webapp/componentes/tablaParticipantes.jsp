@@ -35,7 +35,7 @@
 					<td>${element.codigoPostal}</td>
 					<td>${element.municipio}</td>
 					<td>${element.provincia}</td>
-					<td>${element.erte}</td>
+					<td>${(element.erte)?'Si':'No'}</td>
 					<td>${element.situacionLaboral}</td>
 					<td>${element.situacionAdministrativa}</td>
 				</tr>
