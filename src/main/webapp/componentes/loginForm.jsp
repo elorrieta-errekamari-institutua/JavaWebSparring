@@ -3,7 +3,7 @@
 		<p class="card-header-title has-text-light">Login</p>
     </header>
 	<div class="card-content">
-		<form method="post" action="login">
+		<form method="post" action="/javaweb/login">
 			<div class="field">
 				<label class="label has-text-light" for="name">Nombre de usuario:</label>
 				<div class="control has-icons-left">

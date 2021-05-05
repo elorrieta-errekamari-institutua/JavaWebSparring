@@ -4,7 +4,7 @@
 <div class="container">
 	<jsp:include page="/componentes/tablaParticipantes.jsp" />
 
-	<a class="button is-primary" href="/javaweb/guardar">Confirmar</a>
+	<a class="button is-primary" href="/javaweb/backoffice/guardar">Confirmar</a>
 
 	<button class="button" onclick="emptySession()">Cancelar</button>
 </div>
