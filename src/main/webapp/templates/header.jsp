@@ -22,7 +22,7 @@
 <meta name="msapplication-TileImage" content="/javaweb/assets/img/favicon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <title>JavaWeb</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+<link rel="stylesheet" href="/javaweb/assets/css/bulma.css">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css">
 <link rel="stylesheet" href="/javaweb/assets/css/style.css">
