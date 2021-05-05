@@ -1,6 +1,6 @@
 <div class="card has-background-dark">
 	<header class="card-header">
-		<p class="card-header-title has-text-light">Login</p>
+		<h1 class="card-header-title has-text-light">Inicio de sesion</h1>
     </header>
 	<div class="card-content">
 		<form method="post" action="/javaweb/login">
