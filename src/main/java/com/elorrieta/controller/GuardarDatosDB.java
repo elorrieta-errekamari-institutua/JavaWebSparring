@@ -16,7 +16,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class GuardarDatosDB
  */
-@WebServlet("/guardar")
+@WebServlet("/backoffice/guardar")
 public class GuardarDatosDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

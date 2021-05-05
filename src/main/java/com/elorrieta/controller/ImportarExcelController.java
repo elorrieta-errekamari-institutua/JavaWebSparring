@@ -20,7 +20,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class ImportarExcelController
  */
-@WebServlet("/importar")
+@WebServlet("/backoffice/importar")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
 		maxFileSize = 1024 * 1024 * 10, // 10 MB
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
@@ -83,7 +83,7 @@ public class ImportarExcelController extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("listaParticipantes", listaParticipantes);
-		request.getRequestDispatcher("backoffice/historial.jsp").forward(request, response);
+		request.getRequestDispatcher("historial.jsp").forward(request, response);
 
 	}
 
