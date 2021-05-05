@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="templates/cabecera.jsp" />
-<jsp:include page="templates/navbar.jsp" />
+<jsp:include page="/templates/header.jsp" />
+<jsp:include page="/templates/navbar.jsp" />
 
 	<h1 class="center">Registro</h1>
 	
 	<div class="centralBox">
-		<form method="post" action="registro" enctype="multipart/form-data">
+		<form method="post" action="/javaweb/registro" enctype="multipart/form-data">
 			<ul>
 				<li>
 					<div class="linea">
@@ -42,7 +42,7 @@
 					<br>
 					<div class="linea">
 						<input type="submit" value="Entrar">
-						<a href="login.jsp">Iniciar sesion</a>
+						<a href="/javaweb/login.jsp">Iniciar sesion</a>
 					</div>
 				</li>
 			</ul>
@@ -74,4 +74,4 @@
 	}
 </script>
 
-<jsp:include page="templates/footer.jsp" />
+<jsp:include page="/templates/footer.jsp" />

@@ -24,12 +24,12 @@
 				</div>
 			</div>
 			
-			<div class="field">
+		<!-- 	<div class="field">
 				<div class="control">
 					<input type="checkbox" name="save" id="save">
 					<label class="checkbox has-text-light" for="save">Mantener abierta la sesion</label>
 				</div>
-			</div>
+			</div> -->
 			
 			<div class="field is-grouped is-grouped-centered">
 				<div class="control">
@@ -45,7 +45,7 @@
  	<footer class="card-footer">
 		 <p class="card-footer-item">
 			 <span>
-		 		<a class="has-text-primary" href="registro.jsp">Registrarse</a>
+		 		<a class="has-text-primary" href="/javaweb/registro.jsp">Registrarse</a>
  			</span>
  		</p>
 	</footer>

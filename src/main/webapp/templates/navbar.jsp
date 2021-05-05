@@ -1,7 +1,7 @@
 <nav class="navbar is-dark block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
-      <img src="assets/img/logoapp.svg">
+      <img src="/javaweb/assets/img/logoapp.svg">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">
@@ -13,7 +13,7 @@
 
   <div id="navbar" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="index.jsp">
+      <a class="navbar-item" href="/javaweb/index.jsp">
         Home
       </a>
 
@@ -43,10 +43,10 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href="registro.jsp">
+          <a class="button is-primary" href="/javaweb/registro.jsp">
             <strong>Sign up</strong>
           </a>
-          <a class="button is-light" href="login.jsp">
+          <a class="button is-light" href="/javaweb/login.jsp">
             Log in
           </a>
         </div>

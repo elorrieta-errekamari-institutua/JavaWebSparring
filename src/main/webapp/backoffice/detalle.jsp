@@ -1,13 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<!-- TODO -->
-${participante}
-</body>
-</html>
+<jsp:include page="/templates/header.jsp" />
+<jsp:include page="/templates/loggedNavbar.jsp" />
+
+<div class="container is-max-desktop">
+	<jsp:include page="/componentes/editForm.jsp" />
+</div>
+
+<jsp:include page="/templates/footer.jsp" />
