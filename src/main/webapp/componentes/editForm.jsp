@@ -1,4 +1,4 @@
-<form method="post" action="/javaweb/backoffice/detalle">
+<form method="post" action="/javaweb/backoffice/detalle" class="box has-background-dark">
 
 	<div class="field">
 		<label class="label has-text-light" for="name">Nombre:</label>
@@ -58,12 +58,32 @@
 	
 	<div class="field">
 		<div class="control">
-			<label class="label has-text-light" for="erte">Erte:
-				<input class="input" type="checkbox" name="erte" id="erte"  value="${participante.erte}">
+			<label class="checkbox has-text-light" for="erte">Erte:
+				<input type="checkbox" name="erte" id="erte" ${(participante.erte)? 'checked' : ''}>  <!-- value? -->
 			</label>
 		</div>
 	</div>
 	
+	<div class="field">
+		<label class="label has-text-light" for="labo">Situaci&oacute;n laboral:</label>
+		<div class="control">
+			<input class="input" type="text" name="situacionLaboral" id="labo" placeholder="Situacion laboral" value="${participante.situacionLaboral}">
+		</div>
+	</div>
+	
+	<div class="field">
+		<label class="label has-text-light" for="admin">Situaci&oacute;n administrativa:</label>
+		<div class="control">
+			<input class="input" type="text" name="situacionAdministrativa" id="admin" placeholder="Situacion administrativa" value="${participante.situacionAdministrativa}">
+		</div>
+	</div>
+	
+	<div class="field">
+		<label class="label has-text-light" for="titulacion">Titulaci&oacute;n:</label>
+		<div class="control">
+			<input class="input" type="text" name="titulacion" id="titulacion" placeholder="Titulacion" value="${participante.titulacion}">
+		</div>
+	</div>
 	
 	<div class="field is-grouped is-grouped-centered">
 		<div class="control">
@@ -74,9 +94,3 @@
 		</div>
 	</div>
 </form>
-
-<!--
-	private boolean erte;
-	private String situacionLaboral;
-	private String situacionAdministrativa;
-	private String titulacion; -->

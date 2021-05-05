@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   background-color: unset;
 }
@@ -6,7 +7,7 @@ body {
   background-color: slategrey;
 }
 
-/* esta clase se puede añadir al navbar'menu para que sea gris tambien en movil. */
+/* esta clase se puede añadir al navbar'menu para que sea gris tambien en movil.*/
 .bg-is-inherited {
   background-color: inherit !important;
 }
@@ -20,7 +21,8 @@ body {
   display: inline-block;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   padding: 1em;
   border-radius: 0.25rem;
 }
@@ -28,3 +30,4 @@ body {
 .clickable:hover {
   cursor: pointer;
 }
+/*# sourceMappingURL=style.css.map */

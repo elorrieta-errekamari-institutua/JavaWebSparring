@@ -2,7 +2,7 @@
 <jsp:include page="/templates/loggedNavbar.jsp" />
 
 <div class="container is-max-desktop">
-	<jsp:include page="/componentes/editForm.jsp"></jsp:include>
+	<jsp:include page="/componentes/editForm.jsp" />
 </div>
-${participante}
+
 <jsp:include page="/templates/footer.jsp" />
