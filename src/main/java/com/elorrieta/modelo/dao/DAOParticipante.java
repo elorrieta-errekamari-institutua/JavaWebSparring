@@ -113,8 +113,39 @@ public class DAOParticipante implements IDAOParticipante {
 
 	@Override
 	public Participante update(Participante pojoModificar) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int id = pojoModificar.getId();
+		Participante participante = null;
+
+		String sql = "UPDATE usuarios SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
+				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
+				+ "situacion_laboral = ?, situacion_administrativa = ? WHERE id = ?";
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			participante = getByid(id);
+			if (participante.getId() > 0) {
+				// Actualizar usuario
+				stmt.setString(1, pojoModificar.getNombreCompleto());
+				stmt.setString(2, pojoModificar.getDni());
+				stmt.setString(3, pojoModificar.getTelefono());
+				stmt.setDate(4, pojoModificar.getFechaDeNacimiento());
+				stmt.setString(5, pojoModificar.getDireccion());
+				stmt.setString(6, pojoModificar.getCodigoPostal());
+				stmt.setString(7, pojoModificar.getMunicipio());
+				stmt.setString(8, pojoModificar.getProvincia());
+				stmt.setBoolean(9, pojoModificar.isErte());
+				stmt.setString(10, pojoModificar.getSituacionLaboral());
+				stmt.setString(11, pojoModificar.getSituacionAdministrativa());
+				int columnasAfectadas = stmt.executeUpdate();
+				participante = getByid(id);
+			} else {
+				System.err.println("El participante que se quiere actualizar no existe");
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return participante;
 	}
 
 	@Override
