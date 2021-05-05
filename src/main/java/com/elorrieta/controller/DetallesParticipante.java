@@ -1,6 +1,7 @@
 package com.elorrieta.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +60,51 @@ public class DetallesParticipante extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		doGet(request, response);
+		// Obtener datos formulario
+		Participante participante = new Participante();
+		String nombreCompleto = request.getParameter("nombreCompleto");
+		String dni = request.getParameter("dni");
+		String telefono = request.getParameter("telefono");
+		Date fechaDeNacimiento = Date.valueOf(request.getParameter("fechaDeNacimiento"));
+		String direccion = request.getParameter("direccion");
+		String codigoPostal = request.getParameter("codigoPostal");
+		String municipio = request.getParameter("municipio");
+		String provincia = request.getParameter("provincia");
+		boolean erte = "Si".equalsIgnoreCase(request.getParameter("erte"));
+		String situacionLaboral = request.getParameter("situacionLaboral");
+		String situacionAdministrativa = request.getParameter("situacionAdministrativa");
+		String titulacion = request.getParameter("titulacion");
+
+		// Guardar datos en POJO participante
+		participante.setNombreCompleto(nombreCompleto);
+		participante.setDni(dni);
+		participante.setTelefono(telefono);
+		participante.setFechaDeNacimiento(fechaDeNacimiento);
+		participante.setDireccion(direccion);
+		participante.setCodigoPostal(codigoPostal);
+		participante.setMunicipio(municipio);
+		participante.setProvincia(provincia);
+		participante.setErte(erte);
+		participante.setSituacionLaboral(situacionLaboral);
+		participante.setSituacionAdministrativa(situacionAdministrativa);
+		participante.setTitulacion(titulacion);
+
+		// Actualizar base de datos
+		DAOParticipante dao = new DAOParticipante();
+		try {
+			participante = dao.update(participante);
+			if (participante != null) {
+				request.getRequestDispatcher("historial.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("detalle.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println("Error al actualizar usuario");
+			e.printStackTrace();
+		}
+		// TODO refactor el fuckin historial jsp
+		request.getRequestDispatcher("historial.jsp").forward(request, response);
 	}
 
 }
