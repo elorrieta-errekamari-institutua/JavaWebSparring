@@ -116,7 +116,7 @@ public class DAOParticipante implements IDAOParticipante {
 		int id = pojoModificar.getId();
 		Participante participante = null;
 
-		String sql = "UPDATE usuarios SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
+		String sql = "UPDATE participantes SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
 				+ "situacion_laboral = ?, situacion_administrativa = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
@@ -136,6 +136,7 @@ public class DAOParticipante implements IDAOParticipante {
 				stmt.setBoolean(9, pojoModificar.isErte());
 				stmt.setString(10, pojoModificar.getSituacionLaboral());
 				stmt.setString(11, pojoModificar.getSituacionAdministrativa());
+				stmt.setInt(12, id);
 				int columnasAfectadas = stmt.executeUpdate();
 				participante = getByid(id);
 			} else {

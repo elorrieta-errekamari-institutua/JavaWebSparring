@@ -17,7 +17,7 @@
         Home
       </a>
 
-      <a class="navbar-item" href="/javaweb/participantes">
+      <a class="navbar-item" href="/javaweb/backoffice/participantes">
         Participantes registrados
       </a>
 

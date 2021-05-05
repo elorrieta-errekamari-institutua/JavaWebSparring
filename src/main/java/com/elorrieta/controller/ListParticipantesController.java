@@ -16,7 +16,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class ListParticipantesController
  */
-@WebServlet("/participantes")
+@WebServlet("/backoffice/participantes")
 public class ListParticipantesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class ListParticipantesController extends HttpServlet {
 			session.setAttribute("listaParticipantes", listaParticipantesDB);
 		}
 
-		request.getRequestDispatcher("backoffice/participantes.jsp").forward(request, response);
+		request.getRequestDispatcher("participantes.jsp").forward(request, response);
 	}
 
 }
