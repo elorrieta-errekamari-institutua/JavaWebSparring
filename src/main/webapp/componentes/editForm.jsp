@@ -1,5 +1,7 @@
 <form method="post" action="/javaweb/backoffice/detalle" class="box has-background-dark">
 
+	<input type="text" name="id" value="${participante.id}" hidden>
+
 	<div class="field">
 		<label class="label has-text-light" for="name">Nombre:</label>
 		<div class="control">
