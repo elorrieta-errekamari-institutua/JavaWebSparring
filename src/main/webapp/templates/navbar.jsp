@@ -1,4 +1,4 @@
-<nav class="navbar is-dark block" role="navigation" aria-label="main navigation">
+<nav class="navbar block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
       <img src="/javaweb/assets/img/logoapp.svg">
@@ -14,40 +14,18 @@
   <div id="navbar" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="/javaweb/index.jsp">
-        Home
+        Portada
       </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            About
-          </a>
-          <a class="navbar-item">
-            Jobs
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
           <a class="button is-primary" href="/javaweb/registro.jsp">
-            <strong>Sign up</strong>
+            Registro
           </a>
           <a class="button is-light" href="/javaweb/login.jsp">
-            Log in
+            Inicio sesion
           </a>
         </div>
       </div>

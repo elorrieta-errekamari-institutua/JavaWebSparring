@@ -1,17 +1,19 @@
 $warning: pink
 $primary: #ffa500
+$scheme-main: hsl(0, 0%, 21%)
+$scheme-main-bis: hsl(0, 0%, 29%)
+$scheme-main-ter: hsl(0, 0%, 48%)
+$scheme-invert: hsl(0, 0%, 100%)
+$scheme-invert-bis: hsl(0, 0%, 98%)
+$scheme-invert-ter: hsl(0, 0%, 96%)
+$text: hsl(0, 0%, 96%)
+$text-light: hsl(0, 0%, 93%)
+$text-strong: hsl(0, 0%, 98%)
+$background: $primary
+$body-size: 90%
+$body-background-color: $primary
 
 @import "./bulma/bulma"
-
-html 
-	background-color: unset
-
-body 
-	background-color: slategrey
-
-/* esta clase se puede añadir al navbar'menu para que sea gris tambien en movil.*/
-.bg-is-inherited 
-	background-color: inherit !important
 
 .center 
 	text-align: center
@@ -27,3 +29,6 @@ body
 	
 .clickable:hover
 	cursor: pointer
+
+footer
+	padding: 10px

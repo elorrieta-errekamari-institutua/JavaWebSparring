@@ -20,13 +20,12 @@
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
 			<c:if test="${element.id > 0}">
-				<tr class="clickable" onclick="document.location='/javaweb/backoffice/detalle?id=${element.id}'">
-					<th>${element.id}</th>
+				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertForm?id=${element.id}'">
 			</c:if>
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
-					<th>${index.count}</th>
 			</c:if>
+					<th>${element.id}</th>
 					<td>${element.nombreCompleto}</td>
 					<td>${element.dni}</td>
 					<td>${element.telefono}</td>
