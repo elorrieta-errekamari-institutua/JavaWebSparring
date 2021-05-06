@@ -6,7 +6,7 @@
 
 	<a class="button is-primary" href="/javaweb/backoffice/guardar">Confirmar</a>
 
-	<button class="button" onclick="emptySession()">Cancelar</button>
+	<button class="button" href="/javaweb/fileUpload.jsp">Cancelar</button>
 </div>
 
 <jsp:include page="/templates/footer.jsp" />

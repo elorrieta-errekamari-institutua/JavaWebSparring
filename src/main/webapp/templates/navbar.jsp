@@ -1,4 +1,4 @@
-<nav class="navbar is-dark block" role="navigation" aria-label="main navigation">
+<nav class="navbar block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
       <img src="/javaweb/assets/img/logoapp.svg">

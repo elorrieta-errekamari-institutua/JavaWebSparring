@@ -1,11 +1,11 @@
-<div class="card has-background-dark">
+<div class="card">
 	<header class="card-header">
-		<h1 class="card-header-title has-text-light">Inicio de sesion</h1>
+		<h1 class="card-header-title">Inicio de sesion</h1>
     </header>
 	<div class="card-content">
 		<form method="post" action="/javaweb/login">
 			<div class="field">
-				<label class="label has-text-light" for="name">Nombre de usuario:</label>
+				<label class="label" for="name">Nombre de usuario:</label>
 				<div class="control has-icons-left">
 					<input class="input" type="text" name="nombre" id="name" placeholder="Su nombre de usuario" value="${nombre}" autofocus>
 					<span class="icon is-small is-left">
@@ -15,7 +15,7 @@
 			</div>
 			
 			<div class="field">
-				<label class="label has-text-light" for="pass">Contrase&ntilde;a:</label>
+				<label class="label" for="pass">Contrase&ntilde;a:</label>
 				<div class="control has-icons-left">
 					<input class="input" type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a" value="3WiXc6G">
 					<span class="icon is-small is-left">
@@ -23,14 +23,7 @@
 					</span>
 				</div>
 			</div>
-			
-		<!-- 	<div class="field">
-				<div class="control">
-					<input type="checkbox" name="save" id="save">
-					<label class="checkbox has-text-light" for="save">Mantener abierta la sesion</label>
-				</div>
-			</div> -->
-			
+						
 			<div class="field is-grouped is-grouped-centered">
 				<div class="control">
 					<input class="button  is-primary" type="submit" value="Entrar">
