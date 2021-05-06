@@ -18,20 +18,27 @@ $footer-padding: 1rem 1.5rem 1rem
 
 body
 	//  Poner el footer fijo abajo
-	min-height: 100vh
-	display: flex
-	flex-direction: column
-	footer
-		margin-top: auto
-		padding: 10px
+	// min-height: 100vh
+	// display: flex
+	// flex-direction: column
+	// footer
+	// 	margin-top: auto
 	//  Ocultar scroll
-	-ms-overflow-style: none  // IE and Edge
-	scrollbar-width: none  // Firefox
+	-ms-overflow-style: none // IE and Edge
+	scrollbar-width: none // Firefox
 	&::-webkit-scrollbar
-		display: none  // Chrome, Safari y Opera
+		display: none // Chrome, Safari y Opera
 
-.center 
+.center
 	text-align: center
-	
+
 .clickable:hover
 	cursor: pointer
+
+.centralBox
+	display: inline-block
+	position: absolute
+	left: 50%
+	transform: translateX(-50%)
+	padding: 1em
+	border-radius: 0.25rem

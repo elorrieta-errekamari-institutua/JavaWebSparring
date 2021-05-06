@@ -1,7 +1,7 @@
 <jsp:include page="/templates/header.jsp" />
 <jsp:include page="/templates/loggedNavbar.jsp" />
 
-<div class="container is-max-desktop">
+<div class="container is-max-desktop block">
 	<jsp:include page="/componentes/editForm.jsp" />
 </div>
 

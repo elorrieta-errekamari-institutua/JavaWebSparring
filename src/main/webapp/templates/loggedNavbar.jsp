@@ -17,8 +17,6 @@
         Home
       </a>
 
-
-
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="/javaweb/backoffice/participantes">
           Gestionar participantes
@@ -28,7 +26,7 @@
           <a class="navbar-item" href="/javaweb/backoffice/participantes">
             Lista de participantes
           </a>
-          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=0">
+          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=-1">
             Insertar participante
           </a>
           <a class="navbar-item" href="/javaweb/backoffice/fileUpload.jsp">

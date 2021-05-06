@@ -2,98 +2,163 @@
 
 	<input type="text" name="id" value="${participante.id}" hidden>
 
-	<div class="field">
-		<label class="label" for="name">Nombre:</label>
-		<div class="control">
-			<input class="input" type="text" name="nombreCompleto" id="name" placeholder="Nombre completo"
-				value="${participante.nombreCompleto}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="name">Nombre:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="nombreCompleto" id="name" placeholder="Nombre completo"
+						value="${participante.nombreCompleto}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="dni">DNI:</label>
-		<div class="control">
-			<input class="input" type="text" name="dni" id="dni" placeholder="DNI" value="${participante.dni}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="dni">DNI:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="dni" id="dni" placeholder="DNI" value="${participante.dni}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="phone">Tel&eacute;fono:</label>
-		<div class="control">
-			<input class="input" type="text" name="telefono" id="phone" placeholder="Telefono"
-				value="${participante.telefono}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="phone">Tel&eacute;fono:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="telefono" id="phone" placeholder="Telefono"
+						value="${participante.telefono}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="date">Fecha de nacimiento:</label>
-		<div class="control">
-			<input class="input" type="date" name="fechaDeNacimiento" id="date" placeholder="Fecha de nacimiento"
-				value="${participante.fechaDeNacimiento}">
+
+	<div class="field is-horizontal">
+		<div class="field-label"><label class="label" for="date">Fecha de nacimiento:</label></div>
+		<div class="field-body">
+			<div class="control">
+				<div class="field">
+					<input class="input" type="date" name="fechaDeNacimiento" id="date"
+						placeholder="Fecha de nacimiento" value="${participante.fechaDeNacimiento}">
+				</div>
+			</div>
+			<div class="field-label">
+				<div class="control">
+					<label class="checkbox" for="erte">Erte:
+						<input type="checkbox" name="erte" id="erte" ${(participante.erte)? 'checked' : '' }>
+					</label>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="address">Direcci&oacute;n:</label>
-		<div class="control">
-			<input class="input" type="text" name="direccion" id="address" placeholder="Direccion"
-				value="${participante.direccion}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="address">Direcci&oacute;n:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="direccion" id="address" placeholder="Direccion"
+						value="${participante.direccion}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="cp">C&oacute;digo postal:</label>
-		<div class="control">
-			<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
-				value="${participante.codigoPostal}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="cp">C&oacute;digo postal:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
+						value="${participante.codigoPostal}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="town">Municipio:</label>
-		<div class="control">
-			<input class="input" type="text" name="municipio" id="town" placeholder="Municipio"
-				value="${participante.municipio}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="town">Municipio:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="municipio" id="town" placeholder="Municipio"
+						value="${participante.municipio}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="district">Provincia:</label>
-		<div class="control">
-			<input class="input" type="text" name="provincia" id="district" placeholder="Provincia"
-				value="${participante.provincia}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="district">Provincia:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="provincia" id="district" placeholder="Provincia"
+						value="${participante.provincia}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<div class="control">
-			<label class="checkbox " for="erte">Erte:
-				<input type="checkbox" name="erte" id="erte" ${(participante.erte)? 'checked' : '' }> <!-- value? -->
-			</label>
+
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="labo">Situaci&oacute;n laboral:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="situacionLaboral" id="labo" placeholder="Situacion laboral"
+						value="${participante.situacionLaboral}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="labo">Situaci&oacute;n laboral:</label>
-		<div class="control">
-			<input class="input" type="text" name="situacionLaboral" id="labo" placeholder="Situacion laboral"
-				value="${participante.situacionLaboral}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="admin">Situaci&oacute;n administrativa:</label>
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="situacionAdministrativa" id="admin"
+						placeholder="Situacion administrativa" value="${participante.situacionAdministrativa}">
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="field">
-		<label class="label" for="admin">Situaci&oacute;n administrativa:</label>
-		<div class="control">
-			<input class="input" type="text" name="situacionAdministrativa" id="admin"
-				placeholder="Situacion administrativa" value="${participante.situacionAdministrativa}">
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<label class="label" for="titulacion">Titulaci&oacute;n:</label>
 		</div>
-	</div>
-
-	<div class="field">
-		<label class="label" for="titulacion">Titulaci&oacute;n:</label>
-		<div class="control">
-			<input class="input" type="text" name="titulacion" id="titulacion" placeholder="Titulacion"
-				value="${participante.titulacion}">
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="titulacion" id="titulacion" placeholder="Titulacion"
+						value="${participante.titulacion}">
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -101,7 +166,8 @@
 		<div class="field-body">
 			<div class="field is-grouped">
 				<div class="control">
-					<input class="button  is-primary" type="submit" value="Modificar">
+					<input class="button  is-primary" type="submit"
+						value="${(participante.id == -1)?'Insertar':'Modificar'}">
 				</div>
 				<div class="control">
 					<input class="button is-light" type="reset" value="Reset">
@@ -109,7 +175,7 @@
 			</div>
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<a class="button" href="/javaweb/backoffice/participantes.jsp">Cancelar</a>
+					<a class="button is-danger" href="/javaweb/backoffice/participantes.jsp">Cancelar</a>
 				</div>
 			</div>
 		</div>
