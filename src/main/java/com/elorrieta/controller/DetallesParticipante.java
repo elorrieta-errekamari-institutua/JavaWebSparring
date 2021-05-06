@@ -63,7 +63,7 @@ public class DetallesParticipante extends HttpServlet {
 			throws ServletException, IOException {
 
 		// Obtener datos formulario
-		Participante participante = new Participante();
+		int id = Integer.parseInt(request.getParameter("id"));
 		String nombreCompleto = request.getParameter("nombreCompleto");
 		String dni = request.getParameter("dni");
 		String telefono = request.getParameter("telefono");
@@ -80,7 +80,9 @@ public class DetallesParticipante extends HttpServlet {
 		String titulacion = request.getParameter("titulacion");
 
 		// Guardar datos en POJO participante
-		participante.setId(Integer.parseInt(request.getParameter("id")));
+		Participante participante = new Participante();
+		if (id > 0)
+			participante.setId(id);
 		participante.setNombreCompleto(nombreCompleto);
 		participante.setDni(dni);
 		participante.setTelefono(telefono);
@@ -97,7 +99,10 @@ public class DetallesParticipante extends HttpServlet {
 		// Actualizar base de datos
 		DAOParticipante dao = new DAOParticipante();
 		try {
-			participante = dao.update(participante);
+			if (id > 0)
+				participante = dao.update(participante);
+			if (id == 0)
+				participante = dao.getByid(dao.insert(participante));
 			if (participante != null) {
 				// TODO refactor el fuckin historial jsp
 				request.getRequestDispatcher("participantes").forward(request, response);

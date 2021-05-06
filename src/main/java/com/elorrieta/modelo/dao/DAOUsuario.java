@@ -271,4 +271,15 @@ public class DAOUsuario implements IDAOUsuario {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param usuario
+	 * @return Devuelve el rol del usuario
+	 */
+	public String getRolUsuario(Usuario usuario) {
+		String role = "";
+		String sql = "SELECT r.role from roles r, usuarios u where r.id = u.role_usuario AND u.nombre = ?";
+		return role;
+	}
+
 }
