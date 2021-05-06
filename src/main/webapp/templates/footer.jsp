@@ -2,8 +2,6 @@
 <script src="/javaweb/assets/js/initializeTable.js"></script>
 <script src="/javaweb/assets/js/functions.js"></script>
 
-
-</body>
 <footer class="footer">
     <div class="content has-text-centered">
       <p>
@@ -13,4 +11,6 @@
       </p>
     </div>
 </footer>
+
+</body>
 </html>

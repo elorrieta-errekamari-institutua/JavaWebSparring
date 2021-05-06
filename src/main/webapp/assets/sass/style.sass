@@ -9,26 +9,29 @@ $scheme-invert-ter: hsl(0, 0%, 96%)
 $text: hsl(0, 0%, 96%)
 $text-light: hsl(0, 0%, 93%)
 $text-strong: hsl(0, 0%, 98%)
-$background: $primary
-$body-size: 90%
+$background: $scheme-main-ter
 $body-background-color: $primary
+$link: $primary
+$footer-padding: 1rem 1.5rem 1rem
 
 @import "./bulma/bulma"
+
+body
+	//  Poner el footer fijo abajo
+	min-height: 100vh
+	display: flex
+	flex-direction: column
+	footer
+		margin-top: auto
+		padding: 10px
+	//  Ocultar scroll
+	-ms-overflow-style: none  // IE and Edge
+	scrollbar-width: none  // Firefox
+	&::-webkit-scrollbar
+		display: none  // Chrome, Safari y Opera
 
 .center 
 	text-align: center
 	
-/* alinear un div al centro */
-.centralBox 
-	display: inline-block
-	position: absolute
-	left: 50%
-	transform: translateX(-50%)
-	padding: 1em
-	border-radius: 0.25rem
-	
 .clickable:hover
 	cursor: pointer
-
-footer
-	padding: 10px

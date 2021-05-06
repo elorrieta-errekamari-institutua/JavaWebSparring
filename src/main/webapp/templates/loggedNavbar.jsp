@@ -28,7 +28,7 @@
           <a class="navbar-item" href="/javaweb/backoffice/participantes">
             Lista de participantes
           </a>
-          <a class="navbar-item" href="/javawe/backoffice/insertForm?id=0">
+          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=0">
             Insertar participante
           </a>
           <a class="navbar-item" href="/javaweb/backoffice/fileUpload.jsp">

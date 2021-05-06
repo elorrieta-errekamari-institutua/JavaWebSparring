@@ -9,9 +9,7 @@
 </c:if>
 <c:if test="${ usuarioLogeado != null }">
 	<jsp:include page="/templates/loggedNavbar.jsp" />
-	<h1 class="center">Portada</h1>
-	<p class="center green">${mensaje}</p>
-	<p class="center">${nombre}</p>
+	<jsp:include page="/componentes/dashboard.jsp" />
 </c:if>
 	
 <jsp:include page="/templates/footer.jsp" />

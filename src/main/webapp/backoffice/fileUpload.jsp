@@ -8,7 +8,7 @@
 
 %>
 
-<div class="centralBox">
+<div class="box">
 
 	<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados} registros</p>
 

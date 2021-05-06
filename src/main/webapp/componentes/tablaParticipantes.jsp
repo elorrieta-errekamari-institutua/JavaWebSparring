@@ -25,7 +25,7 @@
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
 			</c:if>
-					<th>${element.id}</th>
+					<th>${index.count}</th>
 					<td>${element.nombreCompleto}</td>
 					<td>${element.dni}</td>
 					<td>${element.telefono}</td>
