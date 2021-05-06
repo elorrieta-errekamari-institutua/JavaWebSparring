@@ -37,6 +37,8 @@ public class DAOParticipante implements IDAOParticipante {
 					participante.setErte(rs.getBoolean("erte"));
 					participante.setSituacionLaboral(rs.getString("situacion_laboral"));
 					participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
+					participante.setTitulacion(rs.getString("titulacion"));
+
 				}
 
 				else {
@@ -55,10 +57,10 @@ public class DAOParticipante implements IDAOParticipante {
 	}
 
 	/**
-	 * Devuelve un objeto de tipo usuario
+	 * Devuelve un objeto de tipo participante
 	 * 
 	 * @param nombre El nombre del usuario que se quiere recuperar
-	 * @return POJO Usuario
+	 * @return POJO Participante
 	 */
 	@Override
 	public Participante getByDni(String dni) throws Exception {
@@ -88,6 +90,7 @@ public class DAOParticipante implements IDAOParticipante {
 					participante.setErte(rs.getBoolean("erte"));
 					participante.setSituacionLaboral(rs.getString("situacion_laboral"));
 					participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
+					participante.setTitulacion(rs.getString("titulacion"));
 				}
 
 				else {
@@ -118,7 +121,7 @@ public class DAOParticipante implements IDAOParticipante {
 
 		String sql = "UPDATE participantes SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
-				+ "situacion_laboral = ?, situacion_administrativa = ? WHERE id = ?";
+				+ "situacion_laboral = ?, situacion_administrativa = ? titulacion = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -136,7 +139,8 @@ public class DAOParticipante implements IDAOParticipante {
 				stmt.setBoolean(9, pojoModificar.isErte());
 				stmt.setString(10, pojoModificar.getSituacionLaboral());
 				stmt.setString(11, pojoModificar.getSituacionAdministrativa());
-				stmt.setInt(12, id);
+				stmt.setString(12, pojoModificar.getTitulacion());
+				stmt.setInt(13, id);
 				int columnasAfectadas = stmt.executeUpdate();
 				participante = getByid(id);
 			} else {
@@ -154,7 +158,7 @@ public class DAOParticipante implements IDAOParticipante {
 		int columnasAfectadas, ultimaId = -1;
 		String sqlInsert = "INSERT INTO participantes (nombre_completo, dni, telefono, fecha_de_nacimiento,"
 				+ "direccion, codigo_postal, municipio, provincia, erte, situacion_laboral, "
-				+ "situacion_administrativa) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "situacion_administrativa, titulacion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -170,6 +174,7 @@ public class DAOParticipante implements IDAOParticipante {
 			stmtInsert.setBoolean(9, pojoNuevo.isErte());
 			stmtInsert.setString(10, pojoNuevo.getSituacionLaboral());
 			stmtInsert.setString(11, pojoNuevo.getSituacionAdministrativa());
+			stmtInsert.setString(12, pojoNuevo.getTitulacion());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario
@@ -217,6 +222,7 @@ public class DAOParticipante implements IDAOParticipante {
 				participante.setErte(rs.getBoolean("erte"));
 				participante.setSituacionLaboral(rs.getString("situacion_laboral"));
 				participante.setSituacionAdministrativa(rs.getString("situacion_administrativa"));
+				participante.setTitulacion(rs.getString("titulacion"));
 				lista.add(participante);
 			}
 		} catch (Exception e) {

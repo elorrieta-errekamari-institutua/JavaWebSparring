@@ -101,7 +101,7 @@ public class DetallesParticipante extends HttpServlet {
 		try {
 			if (id > 0)
 				participante = dao.update(participante);
-			if (id == 0)
+			if (id == -1)
 				participante = dao.getByid(dao.insert(participante));
 			if (participante != null) {
 				// TODO refactor el fuckin historial jsp
