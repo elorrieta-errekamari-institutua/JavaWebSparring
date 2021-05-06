@@ -113,6 +113,12 @@ public class ParserParticipantes {
 						participante.setSituacionAdministrativa(text);
 
 					}
+					if (cell.getColumnIndex() == 19 && cell.getRowIndex() > 0) {
+						// Guarda titulacion
+						String text = formatter.formatCellValue(cell);
+						participante.setTitulacion(text);
+
+					}
 
 				}
 
