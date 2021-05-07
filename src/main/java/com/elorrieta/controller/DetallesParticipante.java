@@ -52,7 +52,7 @@ public class DetallesParticipante extends HttpServlet {
 			session.setAttribute("participante", participante);
 		}
 
-		request.getRequestDispatcher("detalle.jsp").forward(request, response);
+		request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class DetallesParticipante extends HttpServlet {
 				request.getRequestDispatcher("participantes").forward(request, response);
 				System.out.println("Usuario actualizado");
 			} else {
-				request.getRequestDispatcher("detalle.jsp").forward(request, response);
+				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
 				System.err.println("No se ha podido actualizar usuario");
 			}
 		} catch (Exception e) {
