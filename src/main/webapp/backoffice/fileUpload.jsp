@@ -8,11 +8,11 @@
 
 %>
 
-<div class="box">
+<div class="centralBox">
 
 	<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados} registros</p>
 
-	<form action="/javaweb/backoffice/importar" method="post" enctype="multipart/form-data" onreset="resetName()">
+	<form class="box" action="/javaweb/backoffice/importar" method="post" enctype="multipart/form-data" onreset="resetName()">
 		<div class="field file has-name is-centered is-boxed ">
 			<label class="file-label">
 				<input class="file-input" type="file" name="file" onchange="changeName()">

@@ -3,7 +3,7 @@
 <jsp:include page="/templates/header.jsp" />
 <c:if test="${ usuarioLogeado == null }">
 	<jsp:include page="/templates/navbar.jsp" />
-	<div class="container is-max-desktop">
+	<div class="container is-max-desktop block">
 		<jsp:include page="/componentes/loginForm.jsp" />
 	</div>	
 </c:if>

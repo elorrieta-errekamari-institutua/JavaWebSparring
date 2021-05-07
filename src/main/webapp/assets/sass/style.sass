@@ -35,10 +35,20 @@ body
 .clickable:hover
 	cursor: pointer
 
+//  Centrar una caja con el ancho del contenido y el contenido organizado en vertical
 .centralBox
-	display: inline-block
-	position: absolute
-	left: 50%
-	transform: translateX(-50%)
+	display: flex
+	flex-direction: column
+	align-items: center
 	padding: 1em
 	border-radius: 0.25rem
+
+//  Fijar el footer abajo
+body
+	min-height: 100vh
+	display: flex
+	flex-direction: column
+	main
+		flex: 1 0 auto
+	footer
+		flex-shrink: 0
