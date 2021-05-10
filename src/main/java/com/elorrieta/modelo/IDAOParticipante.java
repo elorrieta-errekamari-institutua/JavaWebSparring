@@ -5,7 +5,7 @@ import com.elorrieta.modelo.pojo.Participante;
 public interface IDAOParticipante extends ICRUD<Participante> {
 
 	/**
-	 * Devuelve un objeto de tipo usuario
+	 * Devuelve un objeto de tipo participante
 	 * 
 	 * @param nombre El nombre del usuario que se quiere recuperar
 	 * @return POJO Usuario

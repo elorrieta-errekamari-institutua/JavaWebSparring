@@ -121,7 +121,7 @@ public class DAOParticipante implements IDAOParticipante {
 
 		String sql = "UPDATE participantes SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
-				+ "situacion_laboral = ?, situacion_administrativa = ? titulacion = ? WHERE id = ?";
+				+ "situacion_laboral = ?, situacion_administrativa = ?, titulacion = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
