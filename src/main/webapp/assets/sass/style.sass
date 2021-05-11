@@ -52,3 +52,10 @@ body
 		flex: 1 0 auto
 	footer
 		flex-shrink: 0
+
+// Colores validacion
+input:valid
+	@extend .is-success
+
+input:not(:placeholder-shown):invalid
+	@extend .is-danger

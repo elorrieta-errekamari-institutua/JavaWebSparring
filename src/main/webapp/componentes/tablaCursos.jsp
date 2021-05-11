@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
+		<c:forEach var="element" items="${listaCursos}" varStatus="index">
 			<c:if test="${element.id > 0}">
 				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertForm?id=${element.id}'">
 			</c:if>
