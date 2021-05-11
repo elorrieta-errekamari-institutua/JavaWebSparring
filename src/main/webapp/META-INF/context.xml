@@ -9,6 +9,6 @@
 		type="javax.sql.DataSource"
 		url="jdbc:mysql://localhost:3306/elorrieta" 
 		username="root"
-		password="" 
+		password="M3talpaco" 
 		/> <!-- Pon tu propia clave -->
 </Context>	
