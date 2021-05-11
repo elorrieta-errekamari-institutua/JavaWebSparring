@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.elorrieta.modelo.IDAOUsuario;
-import com.elorrieta.modelo.pojo.Participante;
 import com.elorrieta.modelo.pojo.Usuario;
 
 public class DAOUsuario implements IDAOUsuario {
@@ -263,12 +262,6 @@ public class DAOUsuario implements IDAOUsuario {
 			e.printStackTrace();
 		}
 		return usuario;
-	}
-
-	@Override
-	public Participante getByDni(String dni) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
