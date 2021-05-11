@@ -21,7 +21,6 @@
         <a class="navbar-link" href="/javaweb/backoffice/participantes">
           Gestionar participantes
         </a>
-
         <div class="navbar-dropdown">
           <a class="navbar-item" href="/javaweb/backoffice/participantes">
             Lista de participantes
@@ -29,11 +28,24 @@
           <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=-1">
             Insertar participante
           </a>
-          <a class="navbar-item" href="/javaweb/backoffice/fileUpload.jsp">
-            Importar fichero
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="/javaweb/backoffice/cursos">
+          Gestionar cursos
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="/javaweb/backoffice/cursos">
+            Lista de cursos
+          </a>
+          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=-1">
+            Insertar curso
           </a>
         </div>
       </div>
+      <a class="navbar-item" href="/javaweb/backoffice/fileUpload.jsp">
+        Importar fichero
+      </a>
     </div>
 
     <div class="navbar-end">
