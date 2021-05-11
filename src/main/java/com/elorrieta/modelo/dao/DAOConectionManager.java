@@ -3,10 +3,12 @@ package com.elorrieta.modelo.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class DAOConectionManager implements AutoCloseable {
 
 	static private Connection conn = null;
-	static private String PATH = "jdbc:sqlite:src/main/resources/db/app.db";
 
 	/**
 	 * Constructor privado, solo accesible desde la clase
@@ -20,13 +22,19 @@ public class DAOConectionManager implements AutoCloseable {
 	 */
 
 	static public Connection getConnection() throws Exception {
-		Class.forName("org.sqlite.JDBC");
-		// Parametros de la base de datos
-
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		// Crear conexion a la base de datos
-		conn = DriverManager.getConnection(PATH);
+		InitialContext ctx = new InitialContext();
+		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/elorrieta");
+		/**
+		 * Request a Connection from the pool of connection threads.
+		 */
+		Connection conn = ds.getConnection();
+		// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
+		if (conn.isValid(0)) {
+			System.out.println("Conectado a la base de datos");
+		}
 
-		System.out.println("Conectado a la base de datos");
 		return conn;
 	}
 

@@ -23,7 +23,7 @@ public class DAOUsuario implements IDAOUsuario {
 	@Override
 	public Usuario getByid(int id) throws Exception {
 		Usuario usuario = new Usuario();
-		String sql = "SELECT * from usuarios WHERE id= ? ;";
+		String sql = "SELECT * from usuario WHERE id= ? ;";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
@@ -63,7 +63,7 @@ public class DAOUsuario implements IDAOUsuario {
 	@Override
 	public Usuario getByName(String nombre) throws Exception {
 		Usuario usuario = new Usuario();
-		String sql = "SELECT * from usuarios WHERE nombre = ? ";
+		String sql = "SELECT * from usuario WHERE nombre = ? ";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
@@ -94,14 +94,14 @@ public class DAOUsuario implements IDAOUsuario {
 	}
 
 	/**
-	 * Devuelve todos los usuarios en la base de datos
+	 * Devuelve todos los usuario en la base de datos
 	 * 
 	 * @return Lista de Usuarios.
 	 */
 	@Override
 	public List<Usuario> getAll() throws Exception {
 		List<Usuario> lista = new ArrayList<>();
-		String sql = "SELECT * from usuarios";
+		String sql = "SELECT * from usuario";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -130,7 +130,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public Usuario delete(int id) {
 		Usuario usuario = null;
 
-		String sql = "DELETE from usuarios WHERE id = ?";
+		String sql = "DELETE from usuario WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -163,7 +163,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String nuevoNombre = pojoModificar.getNombre();
 		String nuevoPassword = pojoModificar.getPass();
 
-		String sql = "UPDATE usuarios SET  nombre = ? , pass = ? WHERE id = ?";
+		String sql = "UPDATE usuario SET  nombre = ? , pass = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
@@ -194,7 +194,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public int insert(Usuario pojoNuevo) {
 
 		int columnasAfectadas, ultimaId = -1;
-		String sqlInsert = "INSERT INTO usuarios (nombre, pass, email) VALUES(?, ?, ?);";
+		String sqlInsert = "INSERT INTO usuario (nombre, pass, email) VALUES(?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -236,7 +236,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public Usuario login(String nombre, String password) {
 
 		Usuario usuario = null;
-		String sql = "SELECT id FROM usuarios WHERE nombre = ? AND pass = ?;";
+		String sql = "SELECT id FROM usuario WHERE nombre = ? AND pass = ?;";
 		int id = 0;
 
 		try ( // Inicializar resultados con autoclosable
@@ -278,7 +278,7 @@ public class DAOUsuario implements IDAOUsuario {
 	 */
 	public String getRolUsuario(Usuario usuario) {
 		String role = "";
-		String sql = "SELECT r.role from roles r, usuarios u where r.id = u.role_usuario AND u.nombre = ?";
+		String sql = "SELECT r.role from roles r, usuario u where r.id = u.role_usuario AND u.nombre = ?";
 		return role;
 	}
 

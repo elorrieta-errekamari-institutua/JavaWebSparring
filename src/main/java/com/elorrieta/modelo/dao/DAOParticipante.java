@@ -15,7 +15,7 @@ public class DAOParticipante implements IDAOParticipante {
 	@Override
 	public Participante getByid(int id) throws Exception {
 		Participante participante = new Participante();
-		String sql = "SELECT * from participantes WHERE id= ? ;";
+		String sql = "SELECT * from participante WHERE id= ? ;";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
@@ -29,7 +29,7 @@ public class DAOParticipante implements IDAOParticipante {
 					participante.setNombreCompleto(rs.getString("nombre_completo"));
 					participante.setDni(rs.getString("dni"));
 					participante.setTelefono(rs.getString("telefono"));
-					participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+					participante.setFechaDeNacimiento(rs.getDate("fecha_nacimiento"));
 					participante.setDireccion(rs.getString("direccion"));
 					participante.setCodigoPostal(rs.getString("codigo_postal"));
 					participante.setMunicipio(rs.getString("municipio"));
@@ -65,7 +65,7 @@ public class DAOParticipante implements IDAOParticipante {
 	@Override
 	public Participante getByDni(String dni) throws Exception {
 		Participante participante = null;
-		String sql = "SELECT * from participantes WHERE dni = ? ";
+		String sql = "SELECT * from participante WHERE dni = ? ";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
@@ -82,7 +82,7 @@ public class DAOParticipante implements IDAOParticipante {
 					participante.setNombreCompleto(rs.getString("nombre_completo"));
 					participante.setDni(rs.getString("dni"));
 					participante.setTelefono(rs.getString("telefono"));
-					participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+					participante.setFechaDeNacimiento(rs.getDate("fecha_nacimiento"));
 					participante.setDireccion(rs.getString("direccion"));
 					participante.setCodigoPostal(rs.getString("codigo_postal"));
 					participante.setMunicipio(rs.getString("municipio"));
@@ -119,7 +119,7 @@ public class DAOParticipante implements IDAOParticipante {
 		int id = pojoModificar.getId();
 		Participante participante = null;
 
-		String sql = "UPDATE participantes SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_de_nacimiento = ?,"
+		String sql = "UPDATE participante SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_nacimiento = ?,"
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
 				+ "situacion_laboral = ?, situacion_administrativa = ?, titulacion = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
@@ -156,13 +156,14 @@ public class DAOParticipante implements IDAOParticipante {
 	@Override
 	public int insert(Participante pojoNuevo) throws Exception {
 		int columnasAfectadas, ultimaId = -1;
-		String sqlInsert = "INSERT INTO participantes (nombre_completo, dni, telefono, fecha_de_nacimiento,"
+		String sqlInsert = "INSERT INTO participante (nombre_completo, dni, telefono, fecha_nacimiento,"
 				+ "direccion, codigo_postal, municipio, provincia, erte, situacion_laboral, "
 				+ "situacion_administrativa, titulacion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
+				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
+						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombreCompleto());
 			stmtInsert.setString(2, pojoNuevo.getDni());
 			stmtInsert.setString(3, pojoNuevo.getTelefono());
@@ -178,9 +179,10 @@ public class DAOParticipante implements IDAOParticipante {
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario
-				if (columnasAfectadas > 0) {
+				if (columnasAfectadas > 0 && rs.next()) {
 					// Obterner linea de la base de datos
 					ultimaId = rs.getInt(1);
+					pojoNuevo.setId(ultimaId);
 
 				} else {
 					System.err.println("No se ha podido insertar el usuario");
@@ -190,10 +192,8 @@ public class DAOParticipante implements IDAOParticipante {
 			}
 
 		} catch (SQLException e) {
-			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-		} catch (
-
-		Exception e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ultimaId;
@@ -202,7 +202,7 @@ public class DAOParticipante implements IDAOParticipante {
 	@Override
 	public ArrayList<Participante> getAll() throws Exception {
 		ArrayList<Participante> lista = new ArrayList<>();
-		String sql = "SELECT * from participantes";
+		String sql = "SELECT * from participante";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -214,7 +214,7 @@ public class DAOParticipante implements IDAOParticipante {
 				participante.setNombreCompleto(rs.getString("nombre_completo"));
 				participante.setDni(rs.getString("dni"));
 				participante.setTelefono(rs.getString("telefono"));
-				participante.setFechaDeNacimiento(rs.getDate("fecha_de_nacimiento"));
+				participante.setFechaDeNacimiento(rs.getDate("fecha_nacimiento"));
 				participante.setDireccion(rs.getString("direccion"));
 				participante.setCodigoPostal(rs.getString("codigo_postal"));
 				participante.setMunicipio(rs.getString("municipio"));
