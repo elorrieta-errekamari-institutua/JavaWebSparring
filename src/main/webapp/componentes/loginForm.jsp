@@ -7,7 +7,7 @@
 			<div class="field">
 				<label class="label" for="name">Nombre de usuario:</label>
 				<div class="control has-icons-left">
-					<input class="input" type="text" name="nombre" id="name" placeholder="Su nombre de usuario" value="${nombre}" autofocus>
+					<input class="input" type="text" name="nombre" id="name" placeholder="Su nombre de usuario" value="${nombre}" autofocus required>
 					<span class="icon is-small is-left">
 						<i class="fas fa-user"></i>
 					</span>
@@ -17,7 +17,7 @@
 			<div class="field">
 				<label class="label" for="pass">Contrase&ntilde;a:</label>
 				<div class="control has-icons-left">
-					<input class="input" type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a" value="3WiXc6G">
+					<input class="input" type="password" name="pass" id="pass" placeholder="Su contrase&ntilde;a" value="3WiXc6G" required>
 					<span class="icon is-small is-left">
 						<i class="fas fa-key"></i>
 					</span>

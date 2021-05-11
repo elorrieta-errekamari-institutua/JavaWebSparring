@@ -10,7 +10,7 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="nombreCompleto" id="name" placeholder="Nombre completo"
-						value="${participante.nombreCompleto}">
+						value="${participante.nombreCompleto}" required>
 				</div>
 			</div>
 		</div>
@@ -23,7 +23,8 @@
 		<div class="field-body">
 			<div class="field">
 				<div class="control">
-					<input class="input" type="text" name="dni" id="dni" placeholder="DNI" value="${participante.dni}">
+					<input class="input" type="text" name="dni" id="dni" placeholder="DNI" value="${participante.dni}"
+						required>
 				</div>
 			</div>
 		</div>
@@ -37,27 +38,18 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="telefono" id="phone" placeholder="Telefono"
-						value="${participante.telefono}">
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="field is-horizontal">
-		<div class="field-label"><label class="label" for="date">Fecha de nacimiento:</label></div>
-		<div class="field-body">
-			<div class="control">
-				<div class="field">
-					<input class="input" type="date" name="fechaDeNacimiento" id="date"
-						placeholder="Fecha de nacimiento" value="${participante.fechaDeNacimiento}">
+						value="${participante.telefono}" required>
 				</div>
 			</div>
 			<div class="field-label">
+				<label class="label" for="date">Fecha de nacimiento:</label>
+			</div>
+			<div class="field-body">
 				<div class="control">
-					<label class="checkbox" for="erte">Erte:
-						<input type="checkbox" name="erte" id="erte" ${(participante.erte)? 'checked' : '' }>
-					</label>
+					<div class="field">
+						<input class="input" type="date" name="fechaDeNacimiento" id="date"
+							placeholder="Fecha de nacimiento" value="${participante.fechaDeNacimiento}" required>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,25 +63,12 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="direccion" id="address" placeholder="Direccion"
-						value="${participante.direccion}">
+						value="${participante.direccion}" required>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="field is-horizontal">
-		<div class="field-label">
-			<label class="label" for="cp">C&oacute;digo postal:</label>
-		</div>
-		<div class="field-body">
-			<div class="field">
-				<div class="control">
-					<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
-						value="${participante.codigoPostal}">
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="field is-horizontal">
 		<div class="field-label">
@@ -99,7 +78,18 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="municipio" id="town" placeholder="Municipio"
-						value="${participante.municipio}">
+						value="${participante.municipio}" required>
+				</div>
+			</div>
+			<div class="field-label">
+				<label class="label" for="cp">C&oacute;digo postal:</label>
+			</div>
+			<div class="field-body">
+				<div class="field">
+					<div class="control">
+						<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
+							value="${participante.codigoPostal}" required>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -113,7 +103,7 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="provincia" id="district" placeholder="Provincia"
-						value="${participante.provincia}">
+						value="${participante.provincia}" required>
 				</div>
 			</div>
 		</div>
@@ -127,22 +117,40 @@
 		<div class="field-body">
 			<div class="field">
 				<div class="control">
-					<input class="input" type="text" name="situacionLaboral" id="labo" placeholder="Situacion laboral"
-						value="${participante.situacionLaboral}">
+					<div class="select">
+						<select name="situacionLaboral" id="labo" required>
+							<option value="">Seleccione una</option>
+							<option value="Desempleado" ${participante.situacionLaboral=='Desempleado' ? 'selected'
+								:''}>Desempleado</option>
+							<option value="En activo" ${participante.situacionLaboral=='En activo' ? 'selected' :''}>En
+								activo</option>
+						</select>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div class="field is-horizontal">
-		<div class="field-label">
-			<label class="label" for="admin">Situaci&oacute;n administrativa:</label>
-		</div>
-		<div class="field-body">
-			<div class="field">
+			<div class="field-label">
+				<label class="label" for="admin">Situaci&oacute;n administrativa:</label>
+			</div>
+			<div class="field-body">
+				<div class="field">
+					<div class="control">
+						<div class="select">
+							<select name="situacionAdministrativa" id="admin" required>
+								<option value="">Seleccione una</option>
+								<option value="Alta" ${participante.situacionAdministrativa=='Alta' ? 'selected' :''}>
+									Alta</option>
+								<option value="Baja" ${participante.situacionAdministrativa=='Baja' ? 'selected' :''}>
+									Baja</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="field-label">
 				<div class="control">
-					<input class="input" type="text" name="situacionAdministrativa" id="admin"
-						placeholder="Situacion administrativa" value="${participante.situacionAdministrativa}">
+					<label class="label" for="erte">Erte:
+						<input type="checkbox" name="erte" id="erte" ${participante.erte? 'checked' : '' }>
+					</label>
 				</div>
 			</div>
 		</div>
@@ -156,7 +164,7 @@
 			<div class="field">
 				<div class="control">
 					<input class="input" type="text" name="titulacion" id="titulacion" placeholder="Titulacion"
-						value="${participante.titulacion}">
+						value="${participante.titulacion}" required>
 				</div>
 			</div>
 		</div>
@@ -180,6 +188,5 @@
 			</div>
 		</div>
 	</div>
-
 
 </form>
