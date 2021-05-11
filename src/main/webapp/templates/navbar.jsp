@@ -1,7 +1,7 @@
 <nav class="navbar block" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="https://elorrieta.hezkuntza.net/es/inicio">
-      <img class="has-background-primary" src="/javaweb/assets/img/logoapp.svg">
+      <img class="has-background-primary" src="/javaweb/assets/img/logoapp.svg" alt="logo">
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar">

@@ -10,9 +10,21 @@
 			onreset="resetName()">
 			<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados}
 				registros</p>
+			<div class="field">
+				<label for="type" class="label">Tipo de documento:</label>
+				<div class="control">
+					<div class="select">
+						<select name="FileType" id="type" required>
+							<option value="" active>Seleccione uno</option>
+							<option value="cursos">Cursos</option>
+							<option value="participantes">Participantes</option>
+						</select>
+					</div>
+				</div>
+			</div>
 			<div class="field file has-name is-centered is-boxed ">
 				<label class="file-label">
-					<input class="file-input" type="file" name="file" onchange="changeName()">
+					<input class="file-input" type="file" name="file" onchange="changeName()" required>
 					<span class="file-cta">
 						<span class="file-icon">
 							<i class="fas fa-upload"></i>
