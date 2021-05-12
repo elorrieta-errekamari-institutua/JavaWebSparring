@@ -18,7 +18,7 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class DetallesParticipante
  */
-@WebServlet("/backoffice/insertForm")
+@WebServlet("/backoffice/insertParticipanteForm")
 public class DetallesParticipante extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
