@@ -36,8 +36,8 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" name="codigoUc" id="codigoUc" placeholder="C&oacute;digo UC"
-                            value="${curso.codigoUc}" required>
+                        <textarea class="textarea" type="text" name="codigoUc" id="codigoUc"
+                            placeholder="C&oacute;digo UC" required>${curso.codigoUc}</textarea>
                     </div>
                 </div>
             </div>
@@ -91,8 +91,8 @@
         <div class="field-body">
             <div class="field">
                 <div class="control">
-                    <textarea name="competencia" id="competencia" class="textarea"
-                        placeholder="Competencia"></textarea>
+                    <textarea name="competencia" id="competencia" class="textarea" placeholder="Competencia"
+                        required>${curso.competencia}</textarea>
                 </div>
             </div>
         </div>
