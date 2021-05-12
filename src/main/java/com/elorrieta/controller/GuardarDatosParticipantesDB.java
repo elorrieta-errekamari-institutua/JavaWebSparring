@@ -16,14 +16,14 @@ import com.elorrieta.modelo.pojo.Participante;
 /**
  * Servlet implementation class GuardarDatosDB
  */
-@WebServlet("/backoffice/guardar")
-public class GuardarDatosDB extends HttpServlet {
+@WebServlet("/backoffice/guardarParticipantes")
+public class GuardarDatosParticipantesDB extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GuardarDatosDB() {
+	public GuardarDatosParticipantesDB() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -54,8 +54,8 @@ public class GuardarDatosDB extends HttpServlet {
 		for (Participante participante : listaParticipantes) {
 			int id = -1;
 			try {
-				if(!participante.isGuardado())
-				id = usuarioDB.insert(participante);
+				if (!participante.isGuardado())
+					id = usuarioDB.insert(participante);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
