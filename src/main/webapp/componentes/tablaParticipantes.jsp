@@ -20,7 +20,7 @@
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
 			<c:if test="${element.id > 0}">
-				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertForm?id=${element.id}'">
+				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertParticipanteForm?id=${element.id}'">
 			</c:if>
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">

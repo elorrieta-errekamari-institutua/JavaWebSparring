@@ -5,18 +5,18 @@
 		<tr>
 			<th>#</th>
 			<th>Nombre</th>
-			<th>Codigo Lanbide</th>
-			<th>Codificacion</th>
-			<th>Codigo UC</th>
+			<th>C&oacute;digo Lanbide</th>
+			<th>Cualificaci&oacute;n</th>
+			<th>C&oacute;digo UC</th>
 			<th>Competencia</th>
-			<th>Codigo AAFF</th>
+			<th>C&oacute;digo AAFF</th>
 			<th>Horas</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="element" items="${listaCursos}" varStatus="index">
 			<c:if test="${element.id > 0}">
-				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertForm?id=${element.id}'">
+				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertCursoForm?id=${element.id}'">
 			</c:if>
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
@@ -36,11 +36,11 @@
 		<tr>
 			<th>#</th>
 			<th>Nombre</th>
-			<th>Codigo Lanbide</th>
-			<th>Codificacion</th>
-			<th>Codigo UC</th>
+			<th>C&oacute;digo Lanbide</th>
+			<th>Cualificaci&oacute;n</th>
+			<th>C&oacute;digo UC</th>
 			<th>Competencia</th>
-			<th>Codigo AAFF</th>
+			<th>C&oacute;digo AAFF</th>
 			<th>Horas</th>
 		</tr>
 	</tfoot>
