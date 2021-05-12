@@ -10,9 +10,13 @@ var columnData = [{
 	type: "date",
 	format: "DD/MM/YYYY"
 }];
-
-var dataTable = new simpleDatatables.DataTable("#table", {
-	columns: columnData,
-	labels: labelData,
-	footer: true
-});
+if ( document.getElementById('table') ) {  // !undefined
+	console.debug('habilitamos plugin datatable');
+	var dataTable = new simpleDatatables.DataTable("#table", {
+		columns: columnData,
+		labels: labelData,
+		footer: true
+	});
+}else {
+	console.debug('No hay #table');
+}	

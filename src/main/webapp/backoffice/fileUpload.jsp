@@ -22,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="field file has-name is-centered is-boxed ">
+			<div class="field file has-name is-boxed ">
 				<label class="file-label">
 					<input class="file-input" type="file" name="file" onchange="changeName()" required>
 					<span class="file-cta">
