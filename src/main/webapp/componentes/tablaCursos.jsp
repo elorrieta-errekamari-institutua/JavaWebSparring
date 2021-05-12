@@ -24,7 +24,7 @@
 					<th>${index.count}</th>
 					<td>${element.nombre}</td>
 					<td>${element.codigoLanbide}</td>
-					<td>${element.codificacion}</td>
+					<td>${element.cualificacion}</td>
 					<td>${element.codigoUc}</td>
 					<td>${element.competencia}</td>
 					<td>${element.codigoAaff}</td>
