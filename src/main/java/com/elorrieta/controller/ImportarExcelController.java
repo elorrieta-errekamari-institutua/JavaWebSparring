@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.elorrieta.file.parser.ParserCursos;
 import com.elorrieta.file.parser.ParserParticipantes;
+import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOParticipante;
+import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Participante;
 
 /**
@@ -55,7 +58,8 @@ public class ImportarExcelController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		DAOParticipante dao = new DAOParticipante();
+		DAOParticipante daoParticipante = new DAOParticipante();
+		DAOCurso daoCurso = new DAOCurso();
 		Part filePart = request.getPart("file");
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = filePart.getSubmittedFileName();
@@ -67,22 +71,46 @@ public class ImportarExcelController extends HttpServlet {
 		for (Part part : request.getParts()) {
 			part.write(uploadPath + fileName);
 		}
-		ParserParticipantes parseador = new ParserParticipantes();
-		ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
+		String tipoFichero = request.getParameter("fileType");
 
-		for (Participante participante : listaParticipantes) {
-			try {
-				Participante participanteTemporal = dao.getByDni(participante.getDni());
-				if (participanteTemporal != null) {
-					participante.setGuardado(true);
+		if ("participantes".equalsIgnoreCase(tipoFichero)) {
+			ParserParticipantes parseador = new ParserParticipantes();
+			ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
+
+			for (Participante participante : listaParticipantes) {
+				try {
+					Participante participanteTemporal = daoParticipante.getByDni(participante.getDni());
+					if (participanteTemporal != null) {
+						participante.setGuardado(true);
+					}
+				} catch (Exception e) {
+					System.out.println("Error SQL");
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				System.out.println("Error SQL");
-				e.printStackTrace();
 			}
+			HttpSession session = request.getSession();
+			session.setAttribute("listaParticipantes", listaParticipantes);
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("listaParticipantes", listaParticipantes);
+
+		if ("cursos".equalsIgnoreCase(tipoFichero)) {
+			// TODO Parsear excel Curso y guardar
+			ParserCursos parseador = new ParserCursos();
+			ArrayList<Curso> listaCursos = parseador.parseFile(uploadPath + fileName);
+
+			for (Curso curso : listaCursos) {
+				try {
+					Curso cursoTemporal = daoCurso.getByCodigoLanbide(curso.getCodigoLanbide());
+					if (cursoTemporal != null) {
+						curso.setGuardado(true);
+					}
+				} catch (Exception e) {
+					System.out.println("Error SQL");
+					e.printStackTrace();
+				}
+			}
+			HttpSession session = request.getSession();
+			session.setAttribute("listaCursos", listaCursos);
+		}
 		request.getRequestDispatcher("previewDocumentData.jsp").forward(request, response);
 
 	}

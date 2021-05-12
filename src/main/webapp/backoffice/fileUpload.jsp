@@ -14,7 +14,7 @@
 				<label for="type" class="label">Tipo de documento:</label>
 				<div class="control">
 					<div class="select">
-						<select name="FileType" id="type" required>
+						<select name="fileType" id="type" required>
 							<option value="" active>Seleccione uno</option>
 							<option value="cursos">Cursos</option>
 							<option value="participantes">Participantes</option>

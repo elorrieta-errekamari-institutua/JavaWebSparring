@@ -10,6 +10,7 @@ public class Curso {
 	private String codigoAaff;
 	private String nombre;
 	private int horasCurso;
+	private boolean guardado;
 
 	public Curso() {
 		super();
@@ -132,6 +133,20 @@ public class Curso {
 	 */
 	public void setHorasCurso(int horasCurso) {
 		this.horasCurso = horasCurso;
+	}
+
+	/**
+	 * @return the guardado
+	 */
+	public boolean isGuardado() {
+		return guardado;
+	}
+
+	/**
+	 * @param guardado the guardado to set
+	 */
+	public void setGuardado(boolean guardado) {
+		this.guardado = guardado;
 	}
 
 	@Override
