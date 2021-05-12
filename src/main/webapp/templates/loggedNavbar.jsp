@@ -25,7 +25,7 @@
           <a class="navbar-item" href="/javaweb/backoffice/participantes">
             Lista de participantes
           </a>
-          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=-1">
+          <a class="navbar-item" href="/javaweb/backoffice/insertParticipanteForm?id=-1">
             Insertar participante
           </a>
         </div>
@@ -38,7 +38,7 @@
           <a class="navbar-item" href="/javaweb/backoffice/cursos">
             Lista de cursos
           </a>
-          <a class="navbar-item" href="/javaweb/backoffice/insertForm?id=-1">
+          <a class="navbar-item" href="/javaweb/backoffice/insertCursoForm?id=-1">
             Insertar curso
           </a>
         </div>
