@@ -1,6 +1,5 @@
 package com.elorrieta.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import com.elorrieta.file.parser.ParserCursos;
 import com.elorrieta.file.parser.ParserParticipantes;
@@ -19,6 +17,7 @@ import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Participante;
+import com.elorrieta.utilities.UploadFile;
 
 /**
  * Servlet implementation class ImportarExcelController
@@ -60,17 +59,10 @@ public class ImportarExcelController extends HttpServlet {
 		// TODO Auto-generated method stub
 		DAOParticipante daoParticipante = new DAOParticipante();
 		DAOCurso daoCurso = new DAOCurso();
-		Part filePart = request.getPart("file");
+		
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
-		String fileName = filePart.getSubmittedFileName();
-		File uploadDir = new File(uploadPath);
-//		Si no existe el directorio lo creamos
-		if (!uploadDir.exists()) {
-			uploadDir.mkdirs();
-		}
-		for (Part part : request.getParts()) {
-			part.write(uploadPath + fileName);
-		}
+		String fileName = UploadFile.upload(request, uploadPath);
+		
 		String tipoFichero = request.getParameter("fileType");
 
 		if ("participantes".equalsIgnoreCase(tipoFichero)) {

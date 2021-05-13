@@ -55,6 +55,5 @@
 		</div>
 	</div>
 
-	<script src="/javaweb/assets/js/fileUpload.js"></script>
 
 	<jsp:include page="/templates/footer.jsp" />

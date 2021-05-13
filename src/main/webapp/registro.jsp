@@ -2,7 +2,11 @@
 <jsp:include page="/templates/header.jsp" />
 <jsp:include page="/templates/navbar.jsp" />
 
-	<h1 class="center">Registro</h1>
+<div class="container is-max-desktop block">
+	<jsp:include page="/componentes/registerForm.jsp" />
+</div>
+
+	<!-- <h1 class="center">Registro</h1>
 	
 	<div class="centralBox">
 		<form method="post" action="/javaweb/registro" enctype="multipart/form-data">
@@ -23,7 +27,7 @@
 					<div class="linea">
 						<label for="pass2">Repita la contrase&ntilde;a:</label>
 						<input type="password" name="pass2" id="pass2" value="<c:out value="${param.pass2}" />" placeholder="Su contrase&ntilde;a">
-						<c:if test="empty param.pass2"><p class="red">Las contraseñas no coinciden</p></c:if>
+						<c:if test="empty param.pass2"><p class="red">Las contraseï¿½as no coinciden</p></c:if>
 					</div>
 				</li>
 				<li>
@@ -72,6 +76,6 @@
 		}
 	    return true;
 	}
-</script>
+</script> -->
 
 <jsp:include page="/templates/footer.jsp" />

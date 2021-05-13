@@ -21,18 +21,9 @@
 
     <div class="field is-horizontal">
         <div class="field-label">
-            <label class="label" for="codigoLanbide">C&oacute;digo Lanbide:</label>
+            <label class="label" for="codigoUc">C&oacute;digo UC:</label>
         </div>
         <div class="field-body">
-            <div class="field">
-                <div class="control">
-                    <input class="input" type="text" name="codigoLanbide" id="codigoLanbide"
-                        placeholder="C&oacute;digo Lanbide" value="${curso.codigoLanbide}" required>
-                </div>
-            </div>
-            <div class="field-label">
-                <label class="label" for="codigoUc">C&oacute;digo UC:</label>
-            </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">

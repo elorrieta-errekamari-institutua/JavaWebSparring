@@ -5,7 +5,6 @@
 		<tr>
 			<th>#</th>
 			<th>Nombre</th>
-			<th>C&oacute;digo Lanbide</th>
 			<th>Cualificaci&oacute;n</th>
 			<th>C&oacute;digo UC</th>
 			<th>Competencia</th>
@@ -23,7 +22,6 @@
 			</c:if>
 					<th>${index.count}</th>
 					<td>${element.nombre}</td>
-					<td>${element.codigoLanbide}</td>
 					<td>${element.cualificacion}</td>
 					<td>${element.codigoUc}</td>
 					<td>${element.competencia}</td>
@@ -36,7 +34,6 @@
 		<tr>
 			<th>#</th>
 			<th>Nombre</th>
-			<th>C&oacute;digo Lanbide</th>
 			<th>Cualificaci&oacute;n</th>
 			<th>C&oacute;digo UC</th>
 			<th>Competencia</th>

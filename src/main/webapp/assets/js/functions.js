@@ -22,3 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 });
+
+function checkPass(oInput) {
+	var pass = document.getElementById("pass");
+	if (pass.value != oInput.value) {
+		oInput.setCustomValidity("Las contrase\u00f1as no coinciden");
+	} else {
+		oInput.setCustomValidity("");
+	}
+}
