@@ -48,10 +48,10 @@ public class BorrarCurso extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			Curso cursoBorrado = dao.delete(id);
 			if (cursoBorrado != null) {
-				request.getRequestDispatcher("participantes").forward(request, response);
-				System.out.println("Usuario actualizado");
+				request.getRequestDispatcher("cursos").forward(request, response);
+				System.out.println("Curso eliminado");
 			} else {
-				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+				request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
 				System.err.println("No se ha podido actualizar usuario");
 			}
 		}

@@ -50,7 +50,7 @@ public class BorrarParticipante extends HttpServlet {
 			Participante participanteBorrado = dao.delete(id);
 			if (participanteBorrado != null) {
 				request.getRequestDispatcher("participantes").forward(request, response);
-				System.out.println("Usuario actualizado");
+				System.out.println("Participante eliminado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
 				System.err.println("No se ha podido actualizar usuario");
