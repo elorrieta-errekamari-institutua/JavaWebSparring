@@ -14,7 +14,7 @@
   <div id="loggedNavbar" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="/javaweb/index.jsp">
-        Home
+        Inicio
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">

@@ -32,10 +32,14 @@ function checkPass(oInput) {
 	}
 }
 
-function openCtxMenu(event){
+function openCtxMenu(event, id) {
 	event.preventDefault();
 	var ctxMenu = document.getElementById("ctxMenu");
-    ctxMenu.style.display = "block";
-    ctxMenu.style.left = (event.pageX - 10)+"px";
-    ctxMenu.style.top = (event.pageY - 10)+"px";
+	ctxMenu.style.display = "block";
+	ctxMenu.style.left = (event.pageX) + "px";
+	ctxMenu.style.top = (event.pageY) + "px";
+	var edit = document.getElementById("edit");
+	edit.href = "/javaweb/backoffice/insertParticipanteForm?id=" + id;
+	var del = document.getElementById("del");
+	del.href = "/javaweb/backoffice/borrarParticipante?id=" + id;
 }
