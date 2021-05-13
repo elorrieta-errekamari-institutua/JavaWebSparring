@@ -8,6 +8,7 @@ public class Usuario {
 	private String pass;
 	private String email;
 	private Blob image;
+	private String rolUsuario;
 
 	/***
 	 * Constructor Usuario
@@ -19,6 +20,7 @@ public class Usuario {
 		this.pass = "";
 		this.email = "";
 		this.image = null;
+		this.rolUsuario = "";
 	}
 
 	/***
@@ -128,13 +130,27 @@ public class Usuario {
 		this.image = image;
 	}
 
+	/**
+	 * @return the rolUsuario
+	 */
+	public String getRolUsuario() {
+		return rolUsuario;
+	}
+
+	/**
+	 * @param rolUsuario the rolUsuario to set
+	 */
+	public void setRolUsuario(String rolUsuario) {
+		this.rolUsuario = rolUsuario;
+	}
+
 	/***
 	 * Muestra por pantalla los datos del usuario formateado
 	 */
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", pass=" + pass + ", email=" + email + ", image=" + image
-				+ "]";
+				+ ", rol usuario=" + rolUsuario + "]";
 	}
 
 }

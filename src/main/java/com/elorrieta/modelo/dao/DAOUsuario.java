@@ -261,6 +261,7 @@ public class DAOUsuario implements IDAOUsuario {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		getRolUsuario(usuario);
 		return usuario;
 	}
 
@@ -269,10 +270,34 @@ public class DAOUsuario implements IDAOUsuario {
 	 * @param usuario
 	 * @return Devuelve el rol del usuario
 	 */
-	public String getRolUsuario(Usuario usuario) {
-		String role = "";
-		String sql = "SELECT r.role from roles r, usuario u where r.id = u.role_usuario AND u.nombre = ?";
-		return role;
+	public void getRolUsuario(Usuario usuario) {
+		String rol = "";
+		String sql = "SELECT r.nombre from rol r, usuario u where r.id = u.rol_usuario AND u.id = ?";
+
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, usuario.getId());
+			try (ResultSet rs = stmt.executeQuery();) {
+				if (rs.next()) {
+					rol = rs.getString("r.nombre");
+					if (!"".equalsIgnoreCase(rol)) {
+						usuario.setRolUsuario(rol);
+					} else {
+						System.err.println("El Usuario no tiene rol");
+						usuario = null;
+					}
+				}
+
+			} catch (Exception e) {
+				System.err.println("El usuario no tiene rol");
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

@@ -99,7 +99,7 @@ public class ImportarExcelController extends HttpServlet {
 
 			for (Curso curso : listaCursos) {
 				try {
-					Curso cursoTemporal = daoCurso.getByCodigoLanbide(curso.getCodigoLanbide());
+					Curso cursoTemporal = daoCurso.getByid(curso.getId());
 					if (cursoTemporal != null) {
 						curso.setGuardado(true);
 					}

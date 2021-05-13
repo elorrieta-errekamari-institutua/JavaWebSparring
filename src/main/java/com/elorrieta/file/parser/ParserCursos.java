@@ -37,12 +37,6 @@ public class ParserCursos {
 
 				for (Cell cell : row) {
 
-					if (cell.getColumnIndex() == 1 && cell.getRowIndex() > 0) {
-						// Guarda codigo lanbide
-						String text = formatter.formatCellValue(cell);
-						curso.setCodigoLanbide(text);
-
-					}
 					if (cell.getColumnIndex() == 2 && cell.getRowIndex() > 0) {
 						// Guarda cualificacion
 						String text = formatter.formatCellValue(cell);

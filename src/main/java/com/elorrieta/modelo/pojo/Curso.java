@@ -3,7 +3,6 @@ package com.elorrieta.modelo.pojo;
 public class Curso {
 
 	private int id;
-	private String codigoLanbide;
 	private String cualificacion;
 	private String codigoUc;
 	private String competencia;
@@ -14,7 +13,6 @@ public class Curso {
 
 	public Curso() {
 		super();
-		this.codigoLanbide = "";
 		this.cualificacion = "";
 		this.codigoUc = "";
 		this.competencia = "";
@@ -35,20 +33,6 @@ public class Curso {
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the codigoLanbide
-	 */
-	public String getCodigoLanbide() {
-		return codigoLanbide;
-	}
-
-	/**
-	 * @param codigoLanbide the codigoLanbide to set
-	 */
-	public void setCodigoLanbide(String codigoLanbide) {
-		this.codigoLanbide = codigoLanbide;
 	}
 
 	/**
@@ -151,9 +135,9 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return "Curso [id=" + id + ", codigoLanbide=" + codigoLanbide + ", cualificacion=" + cualificacion
-				+ ", codigoUc=" + codigoUc + ", competencia=" + competencia + ", codigoAaff=" + codigoAaff + ", nombre="
-				+ nombre + ", horasCurso=" + horasCurso + "]";
+		return "Curso [id=" + id + ", cualificacion=" + cualificacion + ", codigoUc=" + codigoUc + ", competencia="
+				+ competencia + ", codigoAaff=" + codigoAaff + ", nombre=" + nombre + ", horasCurso=" + horasCurso
+				+ "]";
 	}
 
 }
