@@ -61,8 +61,8 @@ public class ImportarExcelController extends HttpServlet {
 		DAOCurso daoCurso = new DAOCurso();
 		
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
-		String fileName = UploadFile.upload(request, uploadPath);
-		
+		String fileName = UploadFile.upload(request, uploadPath, "file");
+
 		String tipoFichero = request.getParameter("fileType");
 
 		if ("participantes".equalsIgnoreCase(tipoFichero)) {
