@@ -32,7 +32,6 @@ public class DAOCurso implements IDAOCurso {
 				// Fetch data
 				if (rs.next()) {
 					curso.setId(rs.getInt("id"));
-					curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
 					curso.setCompetencia(rs.getString("competencia"));
@@ -79,7 +78,6 @@ public class DAOCurso implements IDAOCurso {
 				if (rs.next()) {
 					curso = new Curso();
 					curso.setId(rs.getInt("id"));
-					curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
 					curso.setCompetencia(rs.getString("competencia"));
@@ -120,7 +118,6 @@ public class DAOCurso implements IDAOCurso {
 			while (rs.next()) {
 				Curso curso = new Curso();
 				curso.setId(rs.getInt("id"));
-				curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 				curso.setCualificacion(rs.getString("cualificacion"));
 				curso.setCodigoUc(rs.getString("codigo_uc"));
 				curso.setCompetencia(rs.getString("competencia"));
@@ -153,7 +150,7 @@ public class DAOCurso implements IDAOCurso {
 		int id = pojoModificar.getId();
 		Curso curso = null;
 
-		String sql = "UPDATE curso SET codigo_lanbide = ? , cualificacion = ? , codigo_uc = ?, competencia = ?,"
+		String sql = "UPDATE curso SET cualificacion = ? , codigo_uc = ?, competencia = ?,"
 				+ "codigo_aaff = ?, nombre = ?, horas_curso = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -161,14 +158,13 @@ public class DAOCurso implements IDAOCurso {
 			curso = getByid(id);
 			if (curso.getId() > 0) {
 				// Actualizar curso
-				stmt.setString(1, pojoModificar.getCodigoLanbide());
-				stmt.setString(2, pojoModificar.getCualificacion());
-				stmt.setString(3, pojoModificar.getCodigoUc());
-				stmt.setString(4, pojoModificar.getCompetencia());
-				stmt.setString(5, pojoModificar.getCodigoAaff());
-				stmt.setString(6, pojoModificar.getNombre());
-				stmt.setInt(7, pojoModificar.getHorasCurso());
-				stmt.setInt(8, id);
+				stmt.setString(1, pojoModificar.getCualificacion());
+				stmt.setString(2, pojoModificar.getCodigoUc());
+				stmt.setString(3, pojoModificar.getCompetencia());
+				stmt.setString(4, pojoModificar.getCodigoAaff());
+				stmt.setString(5, pojoModificar.getNombre());
+				stmt.setInt(6, pojoModificar.getHorasCurso());
+				stmt.setInt(7, id);
 				int columnasAfectadas = stmt.executeUpdate();
 				if (columnasAfectadas > 0)
 					curso = getByid(id);
@@ -191,20 +187,19 @@ public class DAOCurso implements IDAOCurso {
 	@Override
 	public int insert(Curso pojoNuevo) throws Exception {
 		int columnasAfectadas, ultimaId = -1;
-		String sqlInsert = "INSERT INTO curso (codigo_lanbide, cualificacion, codigo_uc, competencia,"
-				+ "codigo_aaff, nombre, horas_curso) VALUES(?, ?, ?, ?, ?, ?, ?);";
+		String sqlInsert = "INSERT INTO curso (cualificacion, codigo_uc, competencia,"
+				+ "codigo_aaff, nombre, horas_curso) VALUES(?, ?, ?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
-			stmtInsert.setString(1, pojoNuevo.getCodigoLanbide());
-			stmtInsert.setString(2, pojoNuevo.getCualificacion());
-			stmtInsert.setString(3, pojoNuevo.getCodigoUc());
-			stmtInsert.setString(4, pojoNuevo.getCompetencia());
-			stmtInsert.setString(5, pojoNuevo.getCodigoAaff());
-			stmtInsert.setString(6, pojoNuevo.getNombre());
-			stmtInsert.setInt(7, pojoNuevo.getHorasCurso());
+			stmtInsert.setString(1, pojoNuevo.getCualificacion());
+			stmtInsert.setString(2, pojoNuevo.getCodigoUc());
+			stmtInsert.setString(3, pojoNuevo.getCompetencia());
+			stmtInsert.setString(4, pojoNuevo.getCodigoAaff());
+			stmtInsert.setString(5, pojoNuevo.getNombre());
+			stmtInsert.setInt(6, pojoNuevo.getHorasCurso());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario
@@ -251,7 +246,6 @@ public class DAOCurso implements IDAOCurso {
 				if (rs.next()) {
 					curso = new Curso();
 					curso.setId(rs.getInt("id"));
-					curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
 					curso.setCompetencia(rs.getString("competencia"));
@@ -298,7 +292,6 @@ public class DAOCurso implements IDAOCurso {
 				if (rs.next()) {
 					curso = new Curso();
 					curso.setId(rs.getInt("id"));
-					curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
 					curso.setCompetencia(rs.getString("competencia"));
@@ -345,7 +338,6 @@ public class DAOCurso implements IDAOCurso {
 				if (rs.next()) {
 					curso = new Curso();
 					curso.setId(rs.getInt("id"));
-					curso.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
 					curso.setCompetencia(rs.getString("competencia"));

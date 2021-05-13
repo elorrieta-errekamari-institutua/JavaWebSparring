@@ -79,7 +79,6 @@ public class DetallesCurso extends HttpServlet {
 		Curso curso = new Curso();
 		if (id > 0)
 			curso.setId(id);
-		curso.setCodigoLanbide(codigoLanbide);
 		curso.setCualificacion(cualificacion);
 		curso.setCodigoUc(codigoUc);
 		curso.setCompetencia(competencia);
