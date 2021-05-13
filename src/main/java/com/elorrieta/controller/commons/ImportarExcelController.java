@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.commons;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class ImportarExcelController extends HttpServlet {
 		// TODO Auto-generated method stub
 		DAOParticipante daoParticipante = new DAOParticipante();
 		DAOCurso daoCurso = new DAOCurso();
-		
+
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = UploadFile.upload(request, uploadPath, "file");
 

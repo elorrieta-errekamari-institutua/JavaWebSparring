@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.curso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
 
 /**
- * Servlet implementation class GuardarDatosCursosDB
+ * Servlet implementation class ListCursosController
  */
-@WebServlet("/backoffice/guardarCursos")
-public class GuardarDatosCursosDB extends HttpServlet {
+@WebServlet("/backoffice/cursos")
+public class ListCursosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GuardarDatosCursosDB() {
+	public ListCursosController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +34,7 @@ public class GuardarDatosCursosDB extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Bypass a metodo post
 		doPost(request, response);
 	}
 
@@ -44,28 +44,22 @@ public class GuardarDatosCursosDB extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		HttpSession sesion = request.getSession();
-		ArrayList<Curso> listaCursos = (ArrayList<Curso>) sesion.getAttribute("listaCursos");
-		// Insertar datos en la BD
-		DAOCurso usuarioDB = new DAOCurso();
-		int numeroInsertados = listaCursos.size();
-		for (Curso curso : listaCursos) {
-			int id = -1;
-			try {
-				if (!curso.isGuardado())
-					id = usuarioDB.insert(curso);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (id < 0) {
-				System.out.println("El usuario ya existe");
-				numeroInsertados--;
-			}
+		// Obtener lista con usuarios de la DB
+		DAOCurso dao = new DAOCurso();
+		ArrayList<Curso> listaCursosDB = null;
+		try {
+			listaCursosDB = dao.getAll();
+		} catch (Exception e) {
+			System.err.println("Problemas recuperando cursos");
+			e.printStackTrace();
 		}
-		request.setAttribute("insertados", numeroInsertados);
-		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		if (listaCursosDB != null) {
+			session.removeAttribute("listaCursos");
+			session.setAttribute("listaCursos", listaCursosDB);
+		}
+
+		request.getRequestDispatcher("cursos.jsp").forward(request, response);
 	}
 
 }

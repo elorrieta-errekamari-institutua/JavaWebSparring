@@ -1,4 +1,4 @@
-package com.elorrieta.modelo;
+package com.elorrieta.modelo.interfaces;
 
 import com.elorrieta.modelo.pojo.Curso;
 

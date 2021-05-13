@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.participante;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.elorrieta.modelo.dao.DAOCurso;
-import com.elorrieta.modelo.pojo.Curso;
+import com.elorrieta.modelo.dao.DAOParticipante;
+import com.elorrieta.modelo.pojo.Participante;
 
 /**
- * Servlet implementation class ListCursosController
+ * Servlet implementation class ListParticipantesController
  */
-@WebServlet("/backoffice/cursos")
-public class ListCursosController extends HttpServlet {
+@WebServlet("/backoffice/participantes")
+public class ListParticipantesController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListCursosController() {
+	public ListParticipantesController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,21 +45,21 @@ public class ListCursosController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Obtener lista con usuarios de la DB
-		DAOCurso dao = new DAOCurso();
-		ArrayList<Curso> listaCursosDB = null;
+		DAOParticipante dao = new DAOParticipante();
+		ArrayList<Participante> listaParticipantesDB = null;
 		try {
-			listaCursosDB = dao.getAll();
+			listaParticipantesDB = dao.getAll();
 		} catch (Exception e) {
-			System.err.println("Problemas recuperando cursos");
+			System.err.println("Problemas recuperando usuarios");
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		if (listaCursosDB != null) {
-			session.removeAttribute("listaCursos");
-			session.setAttribute("listaCursos", listaCursosDB);
+		if (listaParticipantesDB != null) {
+			session.removeAttribute("listaParticipantes");
+			session.setAttribute("listaParticipantes", listaParticipantesDB);
 		}
 
-		request.getRequestDispatcher("cursos.jsp").forward(request, response);
+		request.getRequestDispatcher("participantes.jsp").forward(request, response);
 	}
 
 }

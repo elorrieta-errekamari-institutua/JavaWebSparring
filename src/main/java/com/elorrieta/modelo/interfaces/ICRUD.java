@@ -1,4 +1,4 @@
-package com.elorrieta.modelo;
+package com.elorrieta.modelo.interfaces;
 
 import java.util.List;
 

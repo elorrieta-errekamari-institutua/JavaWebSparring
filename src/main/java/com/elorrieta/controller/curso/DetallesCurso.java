@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.curso;
 
 import java.io.IOException;
 
