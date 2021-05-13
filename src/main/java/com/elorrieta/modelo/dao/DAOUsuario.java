@@ -193,7 +193,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public int insert(Usuario pojoNuevo) {
 
 		int columnasAfectadas, ultimaId = -1;
-		String sqlInsert = "INSERT INTO usuario (nombre, pass, email) VALUES(?, ?, ?);";
+		String sqlInsert = "INSERT INTO usuario (nombre, pass, email, rol_usuario) VALUES(?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -201,6 +201,7 @@ public class DAOUsuario implements IDAOUsuario {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			stmtInsert.setString(2, pojoNuevo.getPass());
 			stmtInsert.setString(3, pojoNuevo.getEmail());
+			stmtInsert.setInt(4, 2);
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario

@@ -63,13 +63,14 @@ public class RegistroController extends HttpServlet {
 		if (violations.isEmpty()) {
 			System.out.println("Todo OK");
 		} else {
-			System.out.println("Tenemos violaciones");
+			System.out.println("Errores en los datos enviados");
 			String errores = "<ul>";
 			for (ConstraintViolation<Usuario> violation : violations) {
 				errores += "<li><b>" + violation.getPropertyPath() + ":</b> " + violation.getMessage() + "</li>";
 			}
 			errores += "</ul>";
-
+			request.setAttribute("errores", errores);
+			request.setAttribute("registrado", false);
 		}
 
 		int id = usuarioDB.insert(usuario);
