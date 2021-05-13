@@ -3,7 +3,7 @@
         <h1 class="card-header-title">Registro</h1>
     </header>
     <div class="card-content">
-        <form method="post" action="/javaweb/registro">
+        <form method="post" action="/javaweb/registro" onreset="resetName()">
             <div class="field">
                 <label class="label" for="name">Nombre de usuario:</label>
                 <div class="control has-icons-left">
@@ -40,7 +40,7 @@
             <div class="field">
                 <label class="label" for="mail">Email:</label>
                 <div class="control has-icons-left">
-                    <input class="input" type="email" name="pass" id="mail" placeholder="Su email" required>
+                    <input class="input" type="email" name="email" id="mail" placeholder="Su email" required>
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
@@ -49,9 +49,9 @@
 
             <div class="field">
                 <label for="avatar" class="label">Foto:
-                    <div class="file has-name">
+                    <div class="file has-name is-fullwidth">
                         <label class="file-label">
-                            <input type="file" class="file-input" name="avatar" id="avatar" onchange="changeName()">
+                            <input type="file" class="file-input" name="avatar" id="avatar" accept=".jpg, .jpeg, .bmp, .gif, .png" onchange="changeName()">
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <i class="fas fa-upload"></i>

@@ -21,16 +21,9 @@ var labelData = {
 		info: "Mostrado resultados entre {start} y {end} de {rows} resultados (Pagina {page} de {pages} paginass)"
 	};
 
-var columnData = [{
-	select: 5,
-	type: "date",
-	format: "dd/MM/yyyy"
-}];
-
 if (document.getElementById('table')) {  // !undefined
 	console.debug('habilitamos plugin datatable');
 	var dataTable = new simpleDatatables.DataTable("#table", {
-		columns: columnData,
 		labels: labelData,
 		footer: true
 	});

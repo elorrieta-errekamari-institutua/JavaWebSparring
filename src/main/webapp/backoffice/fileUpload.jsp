@@ -28,7 +28,7 @@
 				</div>
 				<div class="field file has-name is-boxed ">
 					<label class="file-label">
-						<input class="file-input" type="file" name="file" onchange="changeName()" required>
+						<input class="file-input" type="file" name="file" accept=".xls, .xlsx" onchange="changeName()" required>
 						<span class="file-cta">
 							<span class="file-icon">
 								<i class="fas fa-upload"></i>
@@ -38,7 +38,7 @@
 							</span>
 						</span>
 						<span class="file-name">
-							No hay documento
+							No hay archivo
 						</span>
 					</label>
 				</div>

@@ -68,5 +68,35 @@ input::-webkit-inner-spin-button
   margin: 0
 
 /* Firefox */
-input[type=number] 
+input[type=number]
   -moz-appearance: textfield
+
+#ctxMenu
+	display: none
+	z-index: 100
+
+menu
+	position: absolute
+	display: block
+	left: 0px
+	top: 0px
+	height: 20px
+	width: 20px
+	padding: 0
+	margin: 0
+	border: 1px solid
+	background-color: white
+	font-weight: normal
+	white-space: nowrap
+	&:hover
+	    background-color: #eef
+	    font-weight: bold
+	&:hover > menu
+	    display: block
+	& > menu
+	    display: none
+	    position: relative
+	    top: -20px
+	    left: 100%
+	    width: 55px
+

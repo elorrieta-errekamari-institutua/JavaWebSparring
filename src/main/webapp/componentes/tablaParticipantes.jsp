@@ -1,5 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<menu id="ctxMenu">
+	<menu>Editar</menu>
+	<menu>Eliminar</menu>
+</menu>
+
 <table id="table" class="table is-hoverable is-striped">
 	<thead>
 		<tr>
@@ -20,7 +25,7 @@
 	<tbody>
 		<c:forEach var="element" items="${listaParticipantes}" varStatus="index">
 			<c:if test="${element.id > 0}">
-				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertParticipanteForm?id=${element.id}'">
+				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertParticipanteForm?id=${element.id}'" oncontextmenu="openCtxMenu(event)">
 			</c:if>
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">

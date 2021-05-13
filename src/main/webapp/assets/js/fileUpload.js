@@ -3,7 +3,7 @@ function changeName() {
 	var name = document.querySelector('.file-name')
 	var files = input.files
 	if (files.length == 0) {
-		name.innerHTML = 'No hay documento'
+		name.innerHTML = 'No hay archivo'
 	} else {
 		name.innerHTML = files[0].name
 	}
@@ -11,5 +11,5 @@ function changeName() {
 
 function resetName() {
 	var name = document.querySelector('.file-name')
-	name.innerHTML = 'No hay documento'
+	name.innerHTML = 'No hay archivo'
 }
