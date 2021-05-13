@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.elorrieta.modelo.IDAOParticipante;
+import com.elorrieta.modelo.interfaces.IDAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
 public class DAOParticipante implements IDAOParticipante {

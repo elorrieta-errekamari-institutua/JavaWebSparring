@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.commons;
 
 import java.io.IOException;
 import java.util.ArrayList;

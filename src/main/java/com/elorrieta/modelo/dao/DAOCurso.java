@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.elorrieta.modelo.IDAOCurso;
+import com.elorrieta.modelo.interfaces.IDAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
 
 public class DAOCurso implements IDAOCurso {

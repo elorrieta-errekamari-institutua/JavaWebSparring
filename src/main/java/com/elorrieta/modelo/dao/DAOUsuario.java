@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.elorrieta.modelo.IDAOUsuario;
+import com.elorrieta.modelo.interfaces.IDAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
 
 public class DAOUsuario implements IDAOUsuario {
