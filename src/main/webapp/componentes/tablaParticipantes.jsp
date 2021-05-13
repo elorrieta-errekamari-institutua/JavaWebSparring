@@ -37,6 +37,8 @@
 					<td>${(element.erte)?'Si':'No'}</td>
 					<td>${element.situacionLaboral}</td>
 					<td>${element.situacionAdministrativa}</td>
+					<td><a href="/javaweb/backoffice/borrarParticipante?id=${element.id}" class="button">Borrar participante</a></td>
+					
 				</tr>
 		</c:forEach>
 	</tbody>

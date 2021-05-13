@@ -27,6 +27,7 @@
 					<td>${element.competencia}</td>
 					<td>${element.codigoAaff}</td>
 					<td>${element.horasCurso}</td>
+					<td><a href="/javaweb/backoffice/borrarCurso?id=${element.id}" class="button">Borrar curso</a></td>
 				</tr>
 		</c:forEach>
 	</tbody>

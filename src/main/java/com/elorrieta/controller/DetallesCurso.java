@@ -61,14 +61,13 @@ public class DetallesCurso extends HttpServlet {
 		int id;
 		int horasCurso;
 
-		String codigoLanbide = request.getParameter("codigoLanbide");
 		String cualificacion = request.getParameter("cualificacion");
 		String codigoUc = request.getParameter("codigoUc");
 		String competencia = request.getParameter("competencia");
 		String codigoAaff = request.getParameter("codigoAaff");
 		String nombre = request.getParameter("nombre");
 		try {
-			horasCurso = Integer.parseInt(request.getParameter("municipio"));
+			horasCurso = Integer.parseInt(request.getParameter("horasCurso"));
 			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
 			horasCurso = 0;

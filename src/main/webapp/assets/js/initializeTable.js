@@ -24,7 +24,7 @@ var labelData = {
 var columnData = [{
 	select: 5,
 	type: "date",
-	format: "DD/MM/YYYY"
+	format: "dd/MM/yyyy"
 }];
 
 if (document.getElementById('table')) {  // !undefined
