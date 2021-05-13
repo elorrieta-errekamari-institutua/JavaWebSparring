@@ -1,29 +1,27 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.participante;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
 /**
- * Servlet implementation class ListParticipantesController
+ * Servlet implementation class BorrarParticipante
  */
-@WebServlet("/backoffice/participantes")
-public class ListParticipantesController extends HttpServlet {
+@WebServlet("/backoffice/borrarParticipante")
+public class BorrarParticipante extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListParticipantesController() {
+	public BorrarParticipante() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +32,6 @@ public class ListParticipantesController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Bypass a metodo post
 		doPost(request, response);
 	}
 
@@ -44,22 +41,26 @@ public class ListParticipantesController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener lista con usuarios de la DB
+
+		int id;
 		DAOParticipante dao = new DAOParticipante();
-		ArrayList<Participante> listaParticipantesDB = null;
+
 		try {
-			listaParticipantesDB = dao.getAll();
-		} catch (Exception e) {
-			System.err.println("Problemas recuperando usuarios");
-			e.printStackTrace();
-		}
-		HttpSession session = request.getSession();
-		if (listaParticipantesDB != null) {
-			session.removeAttribute("listaParticipantes");
-			session.setAttribute("listaParticipantes", listaParticipantesDB);
+			id = Integer.parseInt(request.getParameter("id"));
+			Participante participanteBorrado = dao.delete(id);
+			if (participanteBorrado != null) {
+				request.getRequestDispatcher("participantes").forward(request, response);
+				System.out.println("Usuario actualizado");
+			} else {
+				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+				System.err.println("No se ha podido actualizar usuario");
+			}
 		}
 
-		request.getRequestDispatcher("participantes.jsp").forward(request, response);
+		catch (Exception e) {
+			System.err.println("Id vacio");
+		}
+
 	}
 
 }

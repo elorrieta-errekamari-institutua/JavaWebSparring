@@ -110,8 +110,26 @@ public class DAOParticipante implements IDAOParticipante {
 
 	@Override
 	public Participante delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Participante participante = null;
+
+		String sql = "DELETE from participante WHERE id = ?";
+
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			participante = getByid(id);
+			if (participante.getId() > 0) {
+				// Borrar usuario
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			} else {
+				System.err.println("El participante que se quiere borrar no existe");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return participante;
 	}
 
 	@Override

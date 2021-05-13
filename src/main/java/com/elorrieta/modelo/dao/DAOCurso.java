@@ -135,8 +135,26 @@ public class DAOCurso implements IDAOCurso {
 
 	@Override
 	public Curso delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Curso curso = null;
+
+		String sql = "DELETE from curso WHERE id = ?";
+
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			curso = getByid(id);
+			if (curso.getId() > 0) {
+				// Borrar usuario
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			} else {
+				System.err.println("El curso que se quiere borrar no existe");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return curso;
 	}
 
 	/**

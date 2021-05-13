@@ -1,4 +1,4 @@
-package com.elorrieta.controller;
+package com.elorrieta.controller.participante;
 
 import java.io.IOException;
 import java.sql.Date;
