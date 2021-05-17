@@ -67,3 +67,27 @@ function closeCtxMenu() {
 if (document.getElementById("ctxMenu")) {
 	document.addEventListener("click", closeCtxMenu);
 }
+
+// validar extension de archivos
+var _imgFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+
+function validateImg(input) {
+	if (input.type == "file") {
+		var FileName = input.value;
+		if (FileName.length > 0) {
+			var valid = false;
+			for (var j = 0; j < _imgFileExtensions.length; j++) {
+				var curExtension = _imgFileExtensions[j];
+				if (FileName.substr(FileName.length - curExtension.length, curExtension.length).toLowerCase() == curExtension.toLowerCase()) {
+					valid = true;
+					break;
+				}
+			}
+			if (!valid) {
+				alert("Sorry, " + FileName + " is invalid, allowed extensions are: " + _imgFileExtensions.join(", "));
+				input.value = "";
+			}
+		}
+	}
+	return valid;
+}

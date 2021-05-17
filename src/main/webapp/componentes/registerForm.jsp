@@ -3,7 +3,7 @@
         <h1 class="card-header-title">Registro</h1>
     </header>
     <div class="card-content">
-        <form method="post" action="/javaweb/registro" onreset="resetName()">
+        <form method="post" action="/javaweb/registro" onreset="resetName()" onsubmit="return validateImg(avatar)">
             <div class="field">
                 <label class="label" for="name">Nombre de usuario:</label>
                 <div class="control has-icons-left">
@@ -12,6 +12,7 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
+                    <p class="has-text-danger">${error_nombre}</p>
                 </div>
             </div>
 
@@ -23,6 +24,7 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-key"></i>
                     </span>
+                    <p class="has-text-danger">${error_pass}</p>
                 </div>
             </div>
 
@@ -44,6 +46,7 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
+                    <p class="has-text-danger">${error_mail}</p>
                 </div>
             </div>
 
