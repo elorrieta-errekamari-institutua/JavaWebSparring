@@ -62,25 +62,23 @@ public class RegistroController extends HttpServlet {
 
 		if (violations.isEmpty()) {
 			System.out.println("Todo OK");
+			int id = usuarioDB.insert(usuario);
+			if (id < 0) {
+				request.setAttribute("errores", "Nombre o email de usuario ya registrado");
+
+			} else {
+				request.setAttribute("mensaje", "El " + usuario.getNombre() + " ha sido registrado");
+				request.setAttribute("nombre", usuario.getNombre());
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
 		} else {
 			System.out.println("Errores en los datos enviados");
 			for (ConstraintViolation<Usuario> constraintViolation : violations) {
 				request.setAttribute("error_" + constraintViolation.getPropertyPath().toString(),
 						constraintViolation.getMessage());
 			}
-			request.setAttribute("registrado", false);
 		}
 
-		int id = usuarioDB.insert(usuario);
-		if (id < 0) {
-			request.setAttribute("mensaje", "Nombre de usuario o email repetido");
-			request.setAttribute("registrado", false);
-
-		} else {
-			request.setAttribute("mensaje", "El " + usuario.getNombre() + " ha sido registrado");
-			request.setAttribute("nombre", usuario.getNombre());
-			request.setAttribute("registrado", true);
-		}
 		request.getRequestDispatcher("registro.jsp").forward(request, response);
 	}
 

@@ -4,6 +4,7 @@
     </header>
     <div class="card-content">
         <form method="post" action="/javaweb/registro" onreset="resetName()" onsubmit="return validateImg(avatar)">
+			<p class="center has-text-danger">${errores}</p>
             <div class="field">
                 <label class="label" for="name">Nombre de usuario:</label>
                 <div class="control has-icons-left">
@@ -46,7 +47,7 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <p class="has-text-danger">${error_mail}</p>
+                    <p class="has-text-danger">${error_email}</p>
                 </div>
             </div>
 
