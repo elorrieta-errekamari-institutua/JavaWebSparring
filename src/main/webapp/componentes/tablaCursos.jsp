@@ -15,7 +15,7 @@
 	<tbody>
 		<c:forEach var="element" items="${listaCursos}" varStatus="index">
 			<c:if test="${element.id > 0}">
-				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertCursoForm?id=${element.id}'">
+				<tr class="clickable" onclick="document.location='/javaweb/backoffice/insertCursoForm?id=${element.id}'" oncontextmenu="openCtxMenu(event, ${element.id})">
 			</c:if>
 			<c:if test="${element.id <= 0}">
 				<tr class="${ (element.guardado) ? 'has-background-warning' : ''  }">
@@ -27,7 +27,6 @@
 					<td>${element.competencia}</td>
 					<td>${element.codigoAaff}</td>
 					<td>${element.horasCurso}</td>
-					<td><a href="/javaweb/backoffice/borrarCurso?id=${element.id}" class="button">Borrar curso</a></td>
 				</tr>
 		</c:forEach>
 	</tbody>

@@ -1,16 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-	<div class="tabs is-toggle" id="ctxMenu">
-		<ul>
-			<li>
-				<a id="edit">Editar</a>
-			</li>
-			<li>
-				<a id="del">Eliminar</a>
-			</li>
-		</ul>
-	</div>
-
 	<table id="table" class="table is-hoverable is-striped">
 		<thead>
 			<tr>
@@ -50,9 +39,6 @@
 				<td>${(element.erte)?'Si':'No'}</td>
 				<td>${element.situacionLaboral}</td>
 				<td>${element.situacionAdministrativa}</td>
-				<td><a href="/javaweb/backoffice/borrarParticipante?id=${element.id}" class="button">Borrar
-						participante</a></td>
-
 				</tr>
 			</c:forEach>
 		</tbody>

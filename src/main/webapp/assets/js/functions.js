@@ -33,13 +33,37 @@ function checkPass(oInput) {
 }
 
 function openCtxMenu(event, id) {
+	// evitamos lanzar el menu original
 	event.preventDefault();
+
+	// pintamos y colocamos el menu en la posicion del puntero
 	var ctxMenu = document.getElementById("ctxMenu");
 	ctxMenu.style.display = "block";
 	ctxMenu.style.left = (event.pageX) + "px";
 	ctxMenu.style.top = (event.pageY) + "px";
+
 	var edit = document.getElementById("edit");
-	edit.href = "/javaweb/backoffice/insertParticipanteForm?id=" + id;
 	var del = document.getElementById("del");
-	del.href = "/javaweb/backoffice/borrarParticipante?id=" + id;
+
+	// tomamos el valor tras la ultima / en la url
+	var page = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
+
+	// asignamos los valores href a los botones
+	if (page == "participantes") {
+		edit.href = "/javaweb/backoffice/insertParticipanteForm?id=" + id;
+		del.href = "/javaweb/backoffice/borrarParticipante?id=" + id;
+	} else if (page == "cursos") {
+		edit.href = "/javaweb/backoffice/insertCursoForm?id=" + id;
+		del.href = "/javaweb/backoffice/Curso?id=" + id;
+	}
+}
+
+function closeCtxMenu() {
+	var ctxMenu = document.getElementById("ctxMenu");
+	ctxMenu.style.display = "none";
+}
+
+// listener en el body que solo funcionara cuando exista un menu contextual
+if (document.getElementById("ctxMenu")) {
+	document.addEventListener("click", closeCtxMenu);
 }

@@ -4,6 +4,7 @@
 <c:if test="${ usuarioLogeado == null }">
 	<jsp:include page="/templates/navbar.jsp" />
 	<div class="container is-max-desktop block">
+		${errores}
 		<jsp:include page="/componentes/loginForm.jsp" />
 	</div>	
 </c:if>
