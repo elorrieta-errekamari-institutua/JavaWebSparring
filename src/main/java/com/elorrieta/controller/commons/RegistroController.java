@@ -64,12 +64,7 @@ public class RegistroController extends HttpServlet {
 			System.out.println("Todo OK");
 		} else {
 			System.out.println("Errores en los datos enviados");
-			String errores = "<ul>";
-			for (ConstraintViolation<Usuario> violation : violations) {
-				errores += "<li><b>" + violation.getPropertyPath() + ":</b> " + violation.getMessage() + "</li>";
-			}
-			errores += "</ul>";
-			request.setAttribute("errores", errores);
+			request.setAttribute("errores", violations);
 			request.setAttribute("registrado", false);
 		}
 
@@ -83,7 +78,7 @@ public class RegistroController extends HttpServlet {
 			request.setAttribute("nombre", usuario.getNombre());
 			request.setAttribute("registrado", true);
 		}
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.elorrieta.modelo.pojo;
 
 import java.sql.Blob;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -10,15 +11,15 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Usuario {
 	private int id;
 
-	@NotBlank
-	@Size(min = 2, max = 45, message = "debe contener entre 2 y 45 caracteres")
+	@NotBlank(message = "[nombre] El nombre no puede estar vacio")
+	@Size(min = 2, max = 45, message = "[nombre] El nombre debe contener entre 2 y 45 caracteres")
 	private String nombre;
 
 	@NotBlank
-	// @ Pattern
+	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "[pass] Minimo 8 caracteres incluyendo un caracter especial, un numero y mayusculas y minusculas")
 	private String pass;
 
-	@Email
+	@Email(message = "[email] El formato del email es incorrecto")
 	private String email;
 	private Blob image;
 	private String rolUsuario;
