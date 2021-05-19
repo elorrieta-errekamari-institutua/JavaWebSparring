@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function checkPass(oInput) {
-	var pass = document.getElementById("pass");
+	let pass = document.getElementById("pass");
 	if (pass.value != oInput.value) {
 		oInput.setCustomValidity("Las contrase\u00f1as no coinciden");
 	} else {
@@ -37,16 +37,16 @@ function openCtxMenu(event, id) {
 	event.preventDefault();
 
 	// pintamos y colocamos el menu en la posicion del puntero
-	var ctxMenu = document.getElementById("ctxMenu");
+	let ctxMenu = document.getElementById("ctxMenu");
 	ctxMenu.style.display = "block";
 	ctxMenu.style.left = (event.pageX) + "px";
 	ctxMenu.style.top = (event.pageY) + "px";
 
-	var edit = document.getElementById("edit");
-	var del = document.getElementById("del");
+	let edit = document.getElementById("edit");
+	let del = document.getElementById("del");
 
 	// tomamos el valor tras la ultima / en la url
-	var page = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
+	let page = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
 	// asignamos los valores href a los botones
 	// la comprobacion es compatible con borrarParticipante y con participante.jsp
 	// TODO arreglar para que funcione con action
@@ -60,7 +60,7 @@ function openCtxMenu(event, id) {
 }
 
 function closeCtxMenu() {
-	var ctxMenu = document.getElementById("ctxMenu");
+	let ctxMenu = document.getElementById("ctxMenu");
 	ctxMenu.style.display = "none";
 }
 
@@ -70,15 +70,15 @@ if (document.getElementById("ctxMenu")) {
 }
 
 // validar extension de archivos
-var _imgFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+const _imgFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
 
 function validateImg(input) {
 	if (input.type == "file") {
-		var FileName = input.value;
+		let FileName = input.value;
 		if (FileName.length > 0) {
-			var valid = false;
-			for (var j = 0; j < _imgFileExtensions.length; j++) {
-				var curExtension = _imgFileExtensions[j];
+			let valid = false;
+			for (let j = 0; j < _imgFileExtensions.length; j++) {
+				let curExtension = _imgFileExtensions[j];
 				if (FileName.substr(FileName.length - curExtension.length, curExtension.length).toLowerCase() == curExtension.toLowerCase()) {
 					valid = true;
 					break;
@@ -91,4 +91,23 @@ function validateImg(input) {
 		}
 	}
 	return valid;
+}
+
+// abrir ventana modal
+function abrirModal() {
+	let modal = document.querySelector(".modal");
+	modal.classList.add("is-active");
+}
+
+// cerrar ventanas modales
+if (document.querySelector(".modal")) {
+	let modales = document.querySelectorAll(".modal");
+	modales.forEach(function (modal) {
+		let children = modal.querySelectorAll(".modal-background, .modal-close, a.is-danger");
+		children.forEach(function (child) {
+			child.addEventListener("click", function () {
+				modal.classList.remove("is-active");
+			});
+		});
+	});
 }
