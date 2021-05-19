@@ -1,29 +1,27 @@
-package com.elorrieta.controller.curso;
+package com.elorrieta.aula;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.elorrieta.modelo.dao.DAOCurso;
-import com.elorrieta.modelo.pojo.Curso;
+import com.elorrieta.modelo.dao.DAOAula;
+import com.elorrieta.modelo.pojo.Aula;
 
 /**
- * Servlet implementation class ListCursosController
+ * Servlet implementation class BorrarCurso
  */
-@WebServlet("/backoffice/cursos")
-public class ListCursosController extends HttpServlet {
+@WebServlet("/backoffice/borrarAula")
+public class BorrarAula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ListCursosController() {
+	public BorrarAula() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +32,6 @@ public class ListCursosController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Bypass a metodo post
 		doPost(request, response);
 	}
 
@@ -44,22 +41,24 @@ public class ListCursosController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener lista con usuarios de la DB
-		DAOCurso dao = new DAOCurso();
-		ArrayList<Curso> listaCursosDB = null;
+		int id;
+		DAOAula dao = new DAOAula();
+
 		try {
-			listaCursosDB = dao.getAll();
-		} catch (Exception e) {
-			System.err.println("Problemas recuperando cursos");
-			e.printStackTrace();
-		}
-		HttpSession session = request.getSession();
-		if (listaCursosDB != null) {
-			session.removeAttribute("listaCursos");
-			session.setAttribute("listaCursos", listaCursosDB);
+			id = Integer.parseInt(request.getParameter("id"));
+			Aula aulaBorrada = dao.delete(id);
+			if (aulaBorrada != null) {
+				request.getRequestDispatcher("aulas").forward(request, response);
+				System.out.println("Aula eliminado");
+			} else {
+				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
+				System.err.println("No se ha podido actualizar aula");
+			}
 		}
 
-		request.getRequestDispatcher("cursos.jsp").forward(request, response);
+		catch (Exception e) {
+			System.err.println("Id vacio");
+		}
 	}
 
 }

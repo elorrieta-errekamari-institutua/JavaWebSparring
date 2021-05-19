@@ -1,4 +1,4 @@
-package com.elorrieta.controller.curso;
+package com.elorrieta.aula;
 
 import java.io.IOException;
 
@@ -7,21 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.elorrieta.modelo.dao.DAOCurso;
-import com.elorrieta.modelo.pojo.Curso;
+import com.elorrieta.modelo.dao.DAOAula;
+import com.elorrieta.modelo.pojo.Aula;
 
 /**
- * Servlet implementation class BorrarCurso
+ * Servlet implementation class DetallesCurso
  */
-@WebServlet("/backoffice/borrarCurso")
-public class BorrarCurso extends HttpServlet {
+@WebServlet("/backoffice/insertAulaForm")
+public class DetallesAula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public BorrarCurso() {
+	public DetallesAula() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,7 +33,22 @@ public class BorrarCurso extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+		// Obtener datos de un participante a partir de la id enviada en el request
+		int id = Integer.parseInt(request.getParameter("id"));
+		DAOAula dao = new DAOAula();
+		Aula aula = null;
+		try {
+			aula = dao.getByid(id);
+		} catch (Exception e) {
+			System.err.println("Error recuperando aula");
+			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		if (aula != null) {
+			session.setAttribute("aula", aula);
+		}
+
+		request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 	}
 
 	/**
@@ -41,24 +57,7 @@ public class BorrarCurso extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id;
-		DAOCurso dao = new DAOCurso();
 
-		try {
-			id = Integer.parseInt(request.getParameter("id"));
-			Curso cursoBorrado = dao.delete(id);
-			if (cursoBorrado != null) {
-				request.getRequestDispatcher("cursos").forward(request, response);
-				System.out.println("Curso eliminado");
-			} else {
-				request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
-				System.err.println("No se ha podido actualizar usuario");
-			}
-		}
-
-		catch (Exception e) {
-			System.err.println("Id vacio");
-		}
 	}
 
 }
