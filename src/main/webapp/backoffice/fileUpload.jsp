@@ -12,7 +12,7 @@
 
 			<form class="box" action="/javaweb/backoffice/importar" method="post" enctype="multipart/form-data"
 				onreset="resetName()">
-				<p class="has-text-success block" ${(insertados>0)? '' : 'hidden'}>Se han introducido ${insertados}
+				<p class="has-text-success block" ${ insertados gt 0 ? '' : 'hidden'}>Se han introducido ${insertados}
 					registros</p>
 				<div class="field">
 					<label for="type" class="label">Tipo de documento:</label>

@@ -1,4 +1,6 @@
-<form method="post" action="/javaweb/backoffice/insertParticipanteForm" class="box">
+<form method="post" action="/javaweb/backoffice/action?operacion=1&clase=3&id=${ participante.id gt 0 ? participante.id : '-1'}" class="box">
+
+	<a href="/javaweb/backoffice/participantes" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
 
 	<input type="text" name="id" value="${participante.id}" hidden>
 
@@ -120,9 +122,9 @@
 					<div class="select">
 						<select name="situacionLaboral" id="labo" required>
 							<option value="">Seleccione una</option>
-							<option value="Desempleado" ${participante.situacionLaboral=='Desempleado' ? 'selected'
-								:''}>Desempleado</option>
-							<option value="En activo" ${participante.situacionLaboral=='En activo' ? 'selected' :''}>En
+							<option value="Desempleado" ${participante.situacionLaboral eq 'Desempleado' ? 'selected'
+								: '' }>Desempleado</option>
+							<option value="En activo" ${participante.situacionLaboral eq 'En activo' ? 'selected' :''}>En
 								activo</option>
 						</select>
 					</div>
@@ -137,9 +139,9 @@
 						<div class="select">
 							<select name="situacionAdministrativa" id="admin" required>
 								<option value="">Seleccione una</option>
-								<option value="Alta" ${participante.situacionAdministrativa=='Alta' ? 'selected' :''}>
+								<option value="Alta" ${ participante.situacionAdministrativa eq 'Alta' ? 'selected' : '' }>
 									Alta</option>
-								<option value="Baja" ${participante.situacionAdministrativa=='Baja' ? 'selected' :''}>
+								<option value="Baja" ${ participante.situacionAdministrativa eq 'Baja' ? 'selected' : '' }>
 									Baja</option>
 							</select>
 						</div>
@@ -149,7 +151,7 @@
 			<div class="field-label">
 				<div class="control">
 					<label class="label" for="erte">Erte:
-						<input type="checkbox" name="erte" id="erte" ${participante.erte? 'checked' : '' }>
+						<input type="checkbox" name="erte" id="erte" ${ participante.erte ? 'checked' : '' }>
 					</label>
 				</div>
 			</div>
@@ -175,7 +177,7 @@
 			<div class="field is-grouped">
 				<div class="control">
 					<input class="button  is-primary" type="submit"
-						value="${(participante.id == -1)?'Insertar':'Modificar'}">
+						value="${ participante.id gt 0 ? 'Modificar' : 'Insertar'}">
 				</div>
 				<div class="control">
 					<input class="button is-light" type="reset" value="Reset">
@@ -183,7 +185,7 @@
 			</div>
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<a class="button is-danger" href="/javaweb/backoffice/participantes.jsp">Cancelar</a>
+					<a class="button is-danger" href="/javaweb/backoffice/action?operacion=3&clase=3&id=${participante.id}">Borrar</a>
 				</div>
 			</div>
 		</div>

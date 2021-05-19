@@ -17,15 +17,17 @@ $footer-padding: 1rem 1.5rem 1rem
 @import "./bulma/bulma"
 
 body
-	//  Poner el footer fijo abajo
-	// min-height: 100vh
-	// display: flex
-	// flex-direction: column
-	// footer
-	// 	margin-top: auto
 	//  Ocultar scroll
 	-ms-overflow-style: none // IE and Edge
 	scrollbar-width: none // Firefox
+	//  Poner el footer fijo abajo
+	min-height: 100vh
+	display: flex
+	flex-direction: column
+	main
+		flex: 1 0 auto
+	footer
+		flex-shrink: 0
 	&::-webkit-scrollbar
 		display: none // Chrome, Safari y Opera
 
@@ -42,16 +44,6 @@ body
 	align-items: center
 	padding: 1em
 	border-radius: 0.25rem
-
-//  Fijar el footer abajo
-body
-	min-height: 100vh
-	display: flex
-	flex-direction: column
-	main
-		flex: 1 0 auto
-	footer
-		flex-shrink: 0
 
 // Colores validacion
 input:valid
@@ -76,4 +68,3 @@ input[type=number]
 	display: none
 	z-index: 100
 	position: absolute
-	background-color: $scheme-main

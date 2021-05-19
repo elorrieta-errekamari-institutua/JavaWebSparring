@@ -77,6 +77,8 @@ public class RegistroController extends HttpServlet {
 				request.setAttribute("error_" + constraintViolation.getPropertyPath().toString(),
 						constraintViolation.getMessage());
 			}
+			request.setAttribute("nombre", usuario.getNombre());
+			request.setAttribute("email", usuario.getEmail());
 		}
 
 		request.getRequestDispatcher("registro.jsp").forward(request, response);

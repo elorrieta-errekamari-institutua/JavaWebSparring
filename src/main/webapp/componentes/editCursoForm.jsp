@@ -1,4 +1,6 @@
-<form method="post" action="/javaweb/backoffice/insertCursoForm" class="box">
+<form method="post" action="/javaweb/backoffice/action?operacion=1&clase=1&id=${ curso.id gt 0 ? curso.id : '-1'}" class="box">
+
+	<a href="/javaweb/backoffice/cursos" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
 
     <input type="text" name="id" value="${curso.id}" hidden>
 
@@ -93,7 +95,7 @@
         <div class="field-body">
             <div class="field is-grouped">
                 <div class="control">
-                    <input class="button  is-primary" type="submit" value="${(curso.id == -1)?'Insertar':'Modificar'}">
+                    <input class="button  is-primary" type="submit" value="${ curso.id gt 0 ? 'Modificar' : 'Insertar' }">
                 </div>
                 <div class="control">
                     <input class="button is-light" type="reset" value="Reset">
@@ -101,7 +103,10 @@
             </div>
             <div class="field is-grouped is-grouped-right">
                 <div class="control">
-                    <a class="button is-danger" href="/javaweb/backoffice/cursos.jsp">Cancelar</a>
+
+                    <!-- TODO pedir confirmacion -->
+                    <a class="button is-danger" href="/javaweb/backoffice/action?operacion=3&clase=1&id=${curso.id}">Borrar</a>
+                    
                 </div>
             </div>
         </div>

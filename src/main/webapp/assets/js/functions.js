@@ -47,14 +47,15 @@ function openCtxMenu(event, id) {
 
 	// tomamos el valor tras la ultima / en la url
 	var page = window.location.pathname.slice(window.location.pathname.lastIndexOf('/')+1);
-
 	// asignamos los valores href a los botones
-	if (page == "participantes") {
-		edit.href = "/javaweb/backoffice/insertParticipanteForm?id=" + id;
-		del.href = "/javaweb/backoffice/borrarParticipante?id=" + id;
-	} else if (page == "cursos") {
-		edit.href = "/javaweb/backoffice/insertCursoForm?id=" + id;
-		del.href = "/javaweb/backoffice/Curso?id=" + id;
+	// la comprobacion es compatible con borrarParticipante y con participante.jsp
+	// TODO arreglar para que funcione con action
+	if (page.toLowerCase().includes("participante")) {
+		edit.href = "/javaweb/backoffice/action?operacion=2&clase=3&id=" + id;
+		del.href = "/javaweb/backoffice/action?operacion=3&clase=3&id=" + id;
+	} else if (page.toLowerCase().includes("curso")) {
+		edit.href = "/javaweb/backoffice/action?operacion=2&clase=1&id=" + id;
+		del.href = "/javaweb/backoffice/action?operacion=3&clase=1&id=" + id;
 	}
 }
 

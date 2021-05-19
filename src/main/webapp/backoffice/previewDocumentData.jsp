@@ -6,7 +6,7 @@
 <div class="container">
 
 
-	<c:if test="${listaParticipantes != null}">
+	<c:if test="${listaParticipantes ne null}">
 	<div class="container">
 		<a class="button is-success" href="/javaweb/backoffice/guardarParticipantes">Confirmar</a>
 
@@ -14,7 +14,7 @@
 	</div>
 		<jsp:include page="/componentes/tablaParticipantes.jsp" />
 	</c:if>
-	<c:if test="${listaCursos != null}">
+	<c:if test="${listaCursos eq null}">
 	<div class="container">
 		<a class="button is-success" href="/javaweb/backoffice/guardarCursos">Confirmar</a>
 

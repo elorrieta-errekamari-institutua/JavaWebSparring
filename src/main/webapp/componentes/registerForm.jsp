@@ -43,7 +43,8 @@
             <div class="field">
                 <label class="label" for="mail">Email:</label>
                 <div class="control has-icons-left">
-                    <input class="input" type="email" name="email" id="mail" placeholder="Su email" required>
+                    <input class="input" type="email" name="email" id="mail" placeholder="Su email"
+                    value="${email}" required>
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
