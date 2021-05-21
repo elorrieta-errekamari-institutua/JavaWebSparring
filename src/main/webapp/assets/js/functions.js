@@ -94,16 +94,18 @@ function validateImg(input) {
 }
 
 // abrir ventana modal
-function abrirModal() {
-	let modal = document.querySelector(".modal");
+function abrirModal(id) {
+	let modal = document.getElementById(id);
 	modal.classList.add("is-active");
 }
 
 // cerrar ventanas modales
 if (document.querySelector(".modal")) {
+	//seleccionamos las ventanas modales
 	let modales = document.querySelectorAll(".modal");
 	modales.forEach(function (modal) {
-		let children = modal.querySelectorAll(".modal-background, .modal-close, a.is-danger");
+		// seleccionamos los hijos que queremos utilizar para cerrar la modal
+		let children = modal.querySelectorAll(".modal-background, .modal-close, .is-danger");
 		children.forEach(function (child) {
 			child.addEventListener("click", function () {
 				modal.classList.remove("is-active");

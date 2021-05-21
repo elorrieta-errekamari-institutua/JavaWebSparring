@@ -185,8 +185,7 @@
 			</div>
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<!-- <a class="button is-danger" href="/javaweb/backoffice/action?operacion=3&clase=3&id=${participante.id}">Borrar</a> -->
-					<a onclick="abrirModal()" class="button is-danger">Borrar</a>
+					<a onclick="abrirModal('modalDelete')" class="button is-danger">Borrar</a>
 				</div>
 			</div>
 		</div>

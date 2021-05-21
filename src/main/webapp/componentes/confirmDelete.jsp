@@ -1,4 +1,4 @@
-<div class="modal">
+<div id="modalDelete" class="modal">
     <div class="modal-background"></div>
     <div class="modal-content">
         <div class="box">
