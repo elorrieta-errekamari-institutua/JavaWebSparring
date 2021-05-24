@@ -21,11 +21,11 @@
 
         <c:if test="${ usuarioLogeado.rolUsuario eq 'Admin' }">
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="/javaweb/backoffice/participantes">
+            <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=3">
               Gestionar participantes
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="/javaweb/backoffice/participantes">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=3">
                 Lista de participantes
               </a>
               <a class="navbar-item" href="/javaweb/backoffice//javaweb/backoffice/action?operacion=1&clase=3&id=-1">
@@ -35,11 +35,11 @@
           </div>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="/javaweb/backoffice/cursos">
+            <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=1">
               Gestionar cursos
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="/javaweb/backoffice/cursos">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=1">
                 Lista de cursos
               </a>
               <a class="navbar-item" href="/javaweb/backoffice//javaweb/backoffice/action?operacion=1&clase=1&id=-1">

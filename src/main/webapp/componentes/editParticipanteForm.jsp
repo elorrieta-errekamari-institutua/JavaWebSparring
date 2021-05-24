@@ -1,6 +1,6 @@
 <form method="post" action="/javaweb/backoffice/action?operacion=1&clase=3&id=${ participante.id gt 0 ? participante.id : '-1'}" class="box">
 
-	<a href="/javaweb/backoffice/participantes" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
+	<a href="/javaweb/backoffice/action?operacion=4&clase=3" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
 
 	<input type="text" name="id" value="${participante.id}" hidden>
 
@@ -185,7 +185,7 @@
 			</div>
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<a class="button is-danger" href="/javaweb/backoffice/action?operacion=3&clase=3&id=${participante.id}">Borrar</a>
+					<a onclick="abrirModal('modalDelete')" class="button is-danger">Borrar</a>
 				</div>
 			</div>
 		</div>
