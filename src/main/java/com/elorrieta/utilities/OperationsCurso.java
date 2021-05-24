@@ -22,7 +22,7 @@ public class OperationsCurso {
 
 	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOCurso daoCurso)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		ArrayList<Curso> listaCursosDB = null;
 		try {
 			listaCursosDB = daoCurso.getAll();
