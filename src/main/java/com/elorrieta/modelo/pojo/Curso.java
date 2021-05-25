@@ -19,6 +19,7 @@ public class Curso {
 		this.codigoAaff = "";
 		this.nombre = "";
 		this.horasCurso = 0;
+		this.guardado = false;
 	}
 
 	/**

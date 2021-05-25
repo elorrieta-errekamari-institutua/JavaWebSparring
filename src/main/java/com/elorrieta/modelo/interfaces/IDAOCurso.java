@@ -5,26 +5,14 @@ import com.elorrieta.modelo.pojo.Curso;
 public interface IDAOCurso extends ICRUD<Curso> {
 
 	/**
-	 * Devuelve un objeto de tipo Curso
+	 * Devuelve un curso con los parametros indicados
 	 * 
-	 * @param nombre El codigo lanbide del curso que se quiere recuperar
-	 * @return POJO Curso
+	 * @param nombre
+	 * @param codigoUc
+	 * @param codigoAaff
+	 * @return
+	 * @throws Exception
 	 */
-	Curso getByCodigoLanbide(String codigoLanbide) throws Exception;
+	Curso getByCodigos(String nombre, String codigoUc, String codigoAaff) throws Exception;
 
-	/**
-	 * Devuelve un objeto de tipo Curso
-	 * 
-	 * @param nombre El codigo UC del curso que se quiere recuperar
-	 * @return POJO Curso
-	 */
-	Curso getByCodigoUc(String codigoUc) throws Exception;
-
-	/**
-	 * Devuelve un objeto de tipo Curso
-	 * 
-	 * @param nombre El codigo AAFF del curso que se quiere recuperar
-	 * @return POJO Curso
-	 */
-	Curso getByCodigoAaff(String codigoAaff) throws Exception;
 }

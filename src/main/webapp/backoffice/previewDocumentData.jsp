@@ -8,15 +8,15 @@
 
 	<c:if test="${listaParticipantes ne null}">
 	<div class="container">
-		<a class="button is-success" href="/javaweb/backoffice/guardarParticipantes">Confirmar</a>
+		<a class="button is-success" href="/javaweb/backoffice/action?operacion=5&clase=3">Confirmar</a>
 
 		<a class="button is-danger" href="/javaweb/backoffice/fileUpload.jsp">Cancelar</a>
 	</div>
 		<jsp:include page="/componentes/tablaParticipantes.jsp" />
 	</c:if>
-	<c:if test="${listaCursos eq null}">
+	<c:if test="${listaCursos ne null}">
 	<div class="container">
-		<a class="button is-success" href="/javaweb/backoffice/guardarCursos">Confirmar</a>
+		<a class="button is-success" href="/javaweb/backoffice/action?operacion=5&clase=1">Confirmar</a>
 
 		<a class="button is-danger" href="/javaweb/backoffice/fileUpload.jsp">Cancelar</a>
 	</div>

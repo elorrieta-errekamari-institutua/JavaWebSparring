@@ -113,7 +113,7 @@ public class OperationsParticipante {
 
 			Participante participanteBorrado = daoParticipante.delete(id);
 			if (participanteBorrado != null) {
-				request.getRequestDispatcher("participante").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=3").forward(request, response);
 				System.out.println("Participante eliminado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
@@ -162,7 +162,7 @@ public class OperationsParticipante {
 			session.setAttribute("listaParticipantes", listaParticipantesDB);
 		}
 
-		request.getRequestDispatcher("cursos.jsp").forward(request, response);
+		request.getRequestDispatcher("participantes.jsp").forward(request, response);
 
 	}
 

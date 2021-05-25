@@ -19,8 +19,8 @@
 						onclick="document.location='/javaweb/backoffice/action?operacion=2&clase=1&id=${element.id}'"
 						oncontextmenu="openCtxMenu(event, ${element.id})">
 				</c:if>
-				<c:if test="${element.id lt 0}">
-					<tr class="${ element.guardado ? 'has-background-warning' : ''  }">
+				<c:if test="${element.id le 0}">
+					<tr class="${ element.guardado eq true ? 'has-background-warning' : ''  }">
 				</c:if>
 				<th>${index.count}</th>
 				<td>${element.nombre}</td>
