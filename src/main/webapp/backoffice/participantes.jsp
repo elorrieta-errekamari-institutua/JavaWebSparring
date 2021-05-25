@@ -7,6 +7,8 @@ session.removeAttribute("listaCursos");
 
 <jsp:include page="/componentes/contextMenu.jsp" />
 
+<jsp:include page="/componentes/confirmDelete.jsp" />
+
 <div class="content">
 
 	<h1 class="center">Participantes</h1>

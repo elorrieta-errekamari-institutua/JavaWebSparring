@@ -46,16 +46,15 @@ function openCtxMenu(event, id) {
 	let del = document.getElementById("del");
 
 	// tomamos el valor tras la ultima / en la url
-	let page = window.location.pathname.slice(window.location.pathname.lastIndexOf('/') + 1);
+	let page = window.location.search;
+
 	// asignamos los valores href a los botones
-	// la comprobacion es compatible con borrarParticipante y con participante.jsp
-	// TODO arreglar para que funcione con action
-	if (page.toLowerCase().includes("participante")) {
+	if (page.toLowerCase().includes("clase=3")) {
 		edit.href = "/javaweb/backoffice/action?operacion=2&clase=3&id=" + id;
-		del.href = "/javaweb/backoffice/action?operacion=3&clase=3&id=" + id;
-	} else if (page.toLowerCase().includes("curso")) {
+		del.addEventListener("click", function(){abrirModal("modalDelete", 3, id)});
+	} else if (page.toLowerCase().includes("clase=1")) {
 		edit.href = "/javaweb/backoffice/action?operacion=2&clase=1&id=" + id;
-		del.href = "/javaweb/backoffice/action?operacion=3&clase=1&id=" + id;
+		del.addEventListener("click", function(){abrirModal("modalDelete", 1, id)});
 	}
 }
 
@@ -97,6 +96,14 @@ function validateImg(input) {
 function abrirModal(id) {
 	let modal = document.getElementById(id);
 	modal.classList.add("is-active");
+}
+
+// abrir ventana modal
+function abrirModal(idModal, clase , idElemento) {
+	let modal = document.getElementById(idModal);
+	modal.classList.add("is-active");
+	let button = modal.querySelector(".is-success")
+	button.href = "/javaweb/backoffice/action?operacion=3&clase=" + clase + "&id=" + idElemento;
 }
 
 // cerrar ventanas modales
