@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.elorrieta.modelo.interfaces.IDAOAula;
 import com.elorrieta.modelo.pojo.Aula;
@@ -95,8 +94,8 @@ public class DAOAula implements IDAOAula {
 	 * @return Lista de Aulas.
 	 */
 	@Override
-	public List<Aula> getAll() throws Exception {
-		List<Aula> lista = new ArrayList<>();
+	public ArrayList<Aula> getAll() throws Exception {
+		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT * from aula";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();

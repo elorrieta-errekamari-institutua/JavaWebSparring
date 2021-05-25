@@ -109,6 +109,7 @@ public class OperationsParticipante {
 
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOParticipante daoParticipante) {
+
 		try {
 
 			Participante participanteBorrado = daoParticipante.delete(id);
