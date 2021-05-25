@@ -22,13 +22,13 @@
         <c:if test="${ usuarioLogeado.rolUsuario eq 'Admin' }">
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=3">
-              Gestionar participantes
+              Participantes
             </a>
             <div class="navbar-dropdown">
               <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=3">
                 Lista de participantes
               </a>
-              <a class="navbar-item" href="/javaweb/backoffice//javaweb/backoffice/action?operacion=1&clase=3&id=-1">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=2&clase=3&id=-1">
                 Insertar participante
               </a>
             </div>
@@ -36,14 +36,28 @@
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=1">
-              Gestionar cursos
+              Cursos
             </a>
             <div class="navbar-dropdown">
               <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=1">
                 Lista de cursos
               </a>
-              <a class="navbar-item" href="/javaweb/backoffice//javaweb/backoffice/action?operacion=1&clase=1&id=-1">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=2&clase=1&id=-1">
                 Insertar curso
+              </a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=4">
+              Aulas
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=4">
+                Lista de aulas
+              </a>
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=2&clase=4&id=-1">
+                Insertar aula
               </a>
             </div>
           </div>

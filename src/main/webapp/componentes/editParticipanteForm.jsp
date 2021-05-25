@@ -185,7 +185,7 @@
 			</div>
 			<div class="field is-grouped is-grouped-right">
 				<div class="control">
-					<a onclick="abrirModal('modalDelete')" class="button is-danger">Borrar</a>
+					<a onclick="abrirModalDelete(3, ${participante.id})" class="button is-danger">Borrar</a>
 				</div>
 			</div>
 		</div>

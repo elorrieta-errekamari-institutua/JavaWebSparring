@@ -39,12 +39,17 @@ public class LoginController extends HttpServlet {
 
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
+		String check = request.getParameter("keep");
 		pojoUsuario = usuarioDB.login(nombre, pass);
 		if (pojoUsuario != null) {
 			request.setAttribute("mensaje", pojoUsuario.getNombre() + " esta logeado");
 
 			// guardar en session
 			HttpSession session = request.getSession();
+
+			if ("on".equalsIgnoreCase(check)) {
+				session.setMaxInactiveInterval(0);
+			}
 			session.setAttribute("usuarioLogeado", pojoUsuario);
 
 			request.getRequestDispatcher("index.jsp").forward(request, response);

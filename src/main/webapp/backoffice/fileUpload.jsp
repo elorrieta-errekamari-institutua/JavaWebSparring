@@ -2,7 +2,7 @@
 <jsp:include page="/templates/loggedNavbar.jsp" />
 
 
-<% // limpiar atributo de session ccon la lista de participantes 
+<% // limpiar las listas de la sesion
 session.removeAttribute("listaParticipantes");
 session.removeAttribute("listaCursos");
  %>

@@ -22,7 +22,7 @@
 				<c:if test="${element.id gt 0}">
 					<tr class="clickable"
 						onclick="document.location='/javaweb/backoffice/action?operacion=2&clase=3&id=${element.id}'"
-						oncontextmenu="openCtxMenu(event, ${element.id})">
+						oncontextmenu="openCtxMenu(event, 3, ${element.id})">
 				</c:if>
 				<c:if test="${element.id le 0}">
 					<tr class="${ element.guardado eq true ? 'has-background-warning' : ''  }">

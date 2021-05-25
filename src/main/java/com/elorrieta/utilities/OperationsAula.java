@@ -35,10 +35,10 @@ public class OperationsAula {
 			if (id == -1)
 				aula = daoAula.getByid(daoAula.insert(aula));
 			if (aula != null) {
-				request.getRequestDispatcher("aulas").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
 				System.out.println("Aula actualizada");
 			} else {
-				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 				System.err.println("No se ha podido actualizar aula");
 			}
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ public class OperationsAula {
 
 			Aula aulaBorrada = daoAula.delete(id);
 			if (aulaBorrada != null) {
-				request.getRequestDispatcher("aula").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
 				System.out.println("Aula eliminado");
 			} else {
 				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
