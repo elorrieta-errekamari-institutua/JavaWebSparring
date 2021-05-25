@@ -1,8 +1,11 @@
 <jsp:include page="/templates/header.jsp" />
 <jsp:include page="/templates/loggedNavbar.jsp" />
 
-<jsp:include page="/componentes/contextMenu.jsp" />
+<% // limpiar atributo de session con la lista de cursos
+session.removeAttribute("listaCursos");
+ %>
 
+<jsp:include page="/componentes/contextMenu.jsp" />
 
 <div class="content">
 

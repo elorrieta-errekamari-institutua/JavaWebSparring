@@ -103,10 +103,7 @@
             </div>
             <div class="field is-grouped is-grouped-right">
                 <div class="control">
-
-                    <!-- TODO pedir confirmacion -->
-                    <a class="button is-danger" href="/javaweb/backoffice/action?operacion=3&clase=1&id=${curso.id}">Borrar</a>
-                    
+					<a onclick="abrirModal('modalDelete')" class="button is-danger">Borrar</a>
                 </div>
             </div>
         </div>
