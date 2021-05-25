@@ -45,7 +45,7 @@ public class OperationsCurso {
 
 			Curso cursoBorrado = daoCurso.delete(id);
 			if (cursoBorrado != null) {
-				request.getRequestDispatcher("cursos").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=1").forward(request, response);
 				System.out.println("Curso eliminado");
 			} else {
 				request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);

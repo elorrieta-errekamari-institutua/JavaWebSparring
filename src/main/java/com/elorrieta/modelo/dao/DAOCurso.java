@@ -20,7 +20,7 @@ public class DAOCurso implements IDAOCurso {
 	 */
 	@Override
 	public Curso getByid(int id) throws Exception {
-		Curso curso = new Curso();
+		Curso curso = null;
 		String sql = "SELECT * from curso WHERE id= ? ;";
 
 		// Obtener resultado
@@ -31,6 +31,7 @@ public class DAOCurso implements IDAOCurso {
 			try (ResultSet rs = stmt.executeQuery();) {
 				// Fetch data
 				if (rs.next()) {
+					curso = new Curso();
 					curso.setId(rs.getInt("id"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
@@ -241,108 +242,11 @@ public class DAOCurso implements IDAOCurso {
 		return ultimaId;
 	}
 
-	/**
-	 * Devueve un objeto Curso
-	 * 
-	 * @param nombre El codigo lanbide del curso a recuperar
-	 * @return POJO Curso
-	 */
+
 	@Override
-	public Curso getByCodigoLanbide(String codigoLanbide) throws Exception {
+	public Curso getByCodigos(String nombre, String codigoUc, String codigoAaff) throws Exception {
 		Curso curso = null;
-		String sql = "SELECT * from curso WHERE codigo_lanbide = ? ";
-
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
-			stmt.setString(1, codigoLanbide);
-			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
-
-				if (rs.next()) {
-					curso = new Curso();
-					curso.setId(rs.getInt("id"));
-					curso.setCualificacion(rs.getString("cualificacion"));
-					curso.setCodigoUc(rs.getString("codigo_uc"));
-					curso.setCompetencia(rs.getString("competencia"));
-					curso.setCodigoAaff(rs.getString("codigo_aaff"));
-					curso.setNombre(rs.getString("nombre"));
-					curso.setHorasCurso(rs.getInt("horas_curso"));
-				}
-
-				else {
-					System.out.println("No hay ningun curso con ese nombre");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return curso;
-	}
-
-	/**
-	 * Devueve un objeto Curso
-	 * 
-	 * @param nombre El codigo uc del curso a recuperar
-	 * @return POJO Curso
-	 */
-	@Override
-	public Curso getByCodigoUc(String codigoUc) throws Exception {
-		Curso curso = null;
-		String sql = "SELECT * from curso WHERE codigo_uc = ? ";
-
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
-			stmt.setString(1, codigoUc);
-			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
-
-				if (rs.next()) {
-					curso = new Curso();
-					curso.setId(rs.getInt("id"));
-					curso.setCualificacion(rs.getString("cualificacion"));
-					curso.setCodigoUc(rs.getString("codigo_uc"));
-					curso.setCompetencia(rs.getString("competencia"));
-					curso.setCodigoAaff(rs.getString("codigo_aaff"));
-					curso.setNombre(rs.getString("nombre"));
-					curso.setHorasCurso(rs.getInt("horas_curso"));
-				}
-
-				else {
-					System.out.println("No hay ningun curso con ese nombre");
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return curso;
-	}
-
-	/**
-	 * Devueve un objeto Curso
-	 * 
-	 * @param nombre El codigo aa ff del curso a recuperar
-	 * @return POJO Curso
-	 */
-	@Override
-	public Curso getByCodigoAaff(String codigoAaff) throws Exception {
-		Curso curso = null;
-		String sql = "SELECT * from curso WHERE codigo_aaff = ? ";
+		String sql = "SELECT * from curso WHERE codigo_aaff = ? AND codigo_uc = ? AND nombre = ? ";
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
@@ -350,6 +254,8 @@ public class DAOCurso implements IDAOCurso {
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, codigoAaff);
+			stmt.setString(2, codigoUc);
+			stmt.setString(3, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
 				// Fetch data
 
