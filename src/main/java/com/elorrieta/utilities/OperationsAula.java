@@ -36,10 +36,10 @@ public class OperationsAula {
 				aula = daoAula.getByid(daoAula.insert(aula));
 			if (aula != null) {
 				// TODO refactor el fuckin historial jsp
-				request.getRequestDispatcher("aulas").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
 				System.out.println("Aula actualizada");
 			} else {
-				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 				System.err.println("No se ha podido actualizar aula");
 			}
 		} catch (Exception e) {
@@ -61,7 +61,7 @@ public class OperationsAula {
 
 			Aula aulaBorrada = daoAula.delete(id);
 			if (aulaBorrada != null) {
-				request.getRequestDispatcher("aula").forward(request, response);
+				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
 				System.out.println("Aula eliminado");
 			} else {
 				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
@@ -87,10 +87,10 @@ public class OperationsAula {
 		}
 		HttpSession session = request.getSession();
 		if (aula != null) {
-			session.setAttribute("participante", aula);
+			session.setAttribute("aula", aula);
 		}
 
-		request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+		request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 
 	}
 
@@ -110,7 +110,7 @@ public class OperationsAula {
 			session.setAttribute("listaAulas", listaAulasDB);
 		}
 
-		request.getRequestDispatcher("cursos.jsp").forward(request, response);
+		request.getRequestDispatcher("aulas.jsp").forward(request, response);
 
 	}
 
