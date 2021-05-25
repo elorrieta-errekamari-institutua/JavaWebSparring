@@ -12,10 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.elorrieta.file.parser.ParserCursos;
+import com.elorrieta.file.parser.ParserEdiciones;
+import com.elorrieta.file.parser.ParserHorarios;
 import com.elorrieta.file.parser.ParserParticipantes;
 import com.elorrieta.modelo.dao.DAOCurso;
+import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Curso;
+import com.elorrieta.modelo.pojo.Edicion;
+import com.elorrieta.modelo.pojo.Horario;
 import com.elorrieta.modelo.pojo.Participante;
 import com.elorrieta.utilities.UploadFile;
 
@@ -29,6 +34,14 @@ import com.elorrieta.utilities.UploadFile;
 )
 public class ImportarExcelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private DAOParticipante daoParticipante;
+	private DAOCurso daoCurso;
+	private DAOEdicion daoEdicion;
+	private ParserParticipantes parseadorParticipantes;
+	private ParserCursos parseadorCursos;
+	private ParserHorarios parseadorHorarios;
+	private ParserEdiciones parseadorEdiciones;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,15 +63,25 @@ public class ImportarExcelController extends HttpServlet {
 
 	}
 
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		daoParticipante = new DAOParticipante();
+		daoCurso = new DAOCurso();
+		daoEdicion = new DAOEdicion();
+		parseadorParticipantes = new ParserParticipantes();
+		parseadorCursos = new ParserCursos();
+		parseadorHorarios = new ParserHorarios();
+		parseadorEdiciones = new ParserEdiciones();
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		DAOParticipante daoParticipante = new DAOParticipante();
-		DAOCurso daoCurso = new DAOCurso();
 
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = UploadFile.upload(request, uploadPath, "file");
@@ -66,8 +89,8 @@ public class ImportarExcelController extends HttpServlet {
 		String tipoFichero = request.getParameter("fileType");
 
 		if ("participantes".equalsIgnoreCase(tipoFichero)) {
-			ParserParticipantes parseador = new ParserParticipantes();
-			ArrayList<Participante> listaParticipantes = parseador.parseFile(uploadPath + fileName);
+
+			ArrayList<Participante> listaParticipantes = parseadorParticipantes.parseFile(uploadPath + fileName);
 
 			for (Participante participante : listaParticipantes) {
 				try {
@@ -84,24 +107,30 @@ public class ImportarExcelController extends HttpServlet {
 			session.setAttribute("listaParticipantes", listaParticipantes);
 		}
 
-		if ("cursos".equalsIgnoreCase(tipoFichero)) {
+		if ("ediciones".equalsIgnoreCase(tipoFichero)) {
 			// TODO Parsear excel Curso y guardar
-			ParserCursos parseador = new ParserCursos();
-			ArrayList<Curso> listaCursos = parseador.parseFile(uploadPath + fileName);
 
-			for (Curso curso : listaCursos) {
+			ArrayList<Curso> listaCursos = parseadorCursos.parseFile(uploadPath + fileName);
+			ArrayList<Horario> listaHorarios = parseadorHorarios.parseFile(uploadPath + fileName);
+			ArrayList<Edicion> listaEdiciones = parseadorEdiciones.parseFile(uploadPath + fileName);
+
+			for (int i = 0; i < listaEdiciones.size(); i++) {
 				try {
-					Curso cursoTemporal = daoCurso.getByCodigos(curso.getNombre(), curso.getCodigoUc(), curso.getCodigoAaff());
-					if (cursoTemporal != null) {
-						curso.setGuardado(true);
+					Edicion edicionTemporal = listaEdiciones.get(i);
+					Curso cursoTemporal = listaCursos.get(i);
+					Horario horarioTemporal = listaHorarios.get(i);
+
+					if (daoEdicion.getByName(edicionTemporal.getCodigoLanbide()) != null) {
+						listaCursos.get(i).setGuardado(true);
 					}
+
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
 				}
 			}
 			HttpSession session = request.getSession();
-			session.setAttribute("listaCursos", listaCursos);
+			session.setAttribute("listaEdiciones", listaCursos);
 		}
 		request.getRequestDispatcher("previewDocumentData.jsp").forward(request, response);
 

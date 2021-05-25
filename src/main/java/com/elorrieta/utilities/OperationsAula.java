@@ -35,7 +35,6 @@ public class OperationsAula {
 			if (id == -1)
 				aula = daoAula.getByid(daoAula.insert(aula));
 			if (aula != null) {
-				// TODO refactor el fuckin historial jsp
 				request.getRequestDispatcher("aulas").forward(request, response);
 				System.out.println("Aula actualizada");
 			} else {
