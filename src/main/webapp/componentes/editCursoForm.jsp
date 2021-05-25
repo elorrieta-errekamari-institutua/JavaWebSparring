@@ -19,9 +19,6 @@
     </div>
 
     <div class="field is-horizontal">
-    </div>
-
-    <div class="field is-horizontal">
         <div class="field-label">
             <label class="label" for="codigoUc">C&oacute;digo UC:</label>
         </div>
@@ -103,7 +100,7 @@
             </div>
             <div class="field is-grouped is-grouped-right">
                 <div class="control">
-					<a onclick="abrirModal('modalDelete')" class="button is-danger">Borrar</a>
+					<a onclick="abrirModalDelete(1, ${curso.id})" class="button is-danger">Borrar</a>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+// Burger menu
 document.addEventListener('DOMContentLoaded', () => {
 	// Get all "navbar-burger" elements
 	const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// Comprobar que las contraseñas son iguales
 function checkPass(oInput) {
 	let pass = document.getElementById("pass");
 	if (pass.value != oInput.value) {
@@ -32,7 +34,8 @@ function checkPass(oInput) {
 	}
 }
 
-function openCtxMenu(event, id) {
+// Menu contextual
+function openCtxMenu(event, clase, id) {
 	// evitamos lanzar el menu original
 	event.preventDefault();
 
@@ -45,17 +48,10 @@ function openCtxMenu(event, id) {
 	let edit = document.getElementById("edit");
 	let del = document.getElementById("del");
 
-	// tomamos el valor tras la ultima / en la url
-	let page = window.location.search;
-
 	// asignamos los valores href a los botones
-	if (page.toLowerCase().includes("clase=3")) {
-		edit.href = "/javaweb/backoffice/action?operacion=2&clase=3&id=" + id;
-		del.addEventListener("click", function(){abrirModal("modalDelete", 3, id)});
-	} else if (page.toLowerCase().includes("clase=1")) {
-		edit.href = "/javaweb/backoffice/action?operacion=2&clase=1&id=" + id;
-		del.addEventListener("click", function(){abrirModal("modalDelete", 1, id)});
-	}
+	edit.href = "/javaweb/backoffice/action?operacion=2&clase=" + clase + "&id=" + id;
+	del.addEventListener("click", function () { abrirModalDelete(clase, id) });
+
 }
 
 function closeCtxMenu() {
@@ -92,18 +88,12 @@ function validateImg(input) {
 	return valid;
 }
 
-// abrir ventana modal
-function abrirModal(id) {
-	let modal = document.getElementById(id);
-	modal.classList.add("is-active");
-}
-
-// abrir ventana modal
-function abrirModal(idModal, clase , idElemento) {
-	let modal = document.getElementById(idModal);
+// abrir ventana modal para confirmacion de eliminar
+function abrirModalDelete(clase, id) {
+	let modal = document.getElementById("modalDelete");
 	modal.classList.add("is-active");
 	let button = modal.querySelector(".is-success")
-	button.href = "/javaweb/backoffice/action?operacion=3&clase=" + clase + "&id=" + idElemento;
+	button.href = "/javaweb/backoffice/action?operacion=3&clase=" + clase + "&id=" + id;
 }
 
 // cerrar ventanas modales
