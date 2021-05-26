@@ -208,7 +208,6 @@ public class DAOCurso implements IDAOCurso {
 		int columnasAfectadas, ultimaId = -1;
 		String sqlInsert = "INSERT INTO curso (cualificacion, codigo_uc, competencia,"
 				+ "codigo_aaff, nombre, horas_curso) VALUES(?, ?, ?, ?, ?, ?);";
-
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
@@ -221,7 +220,7 @@ public class DAOCurso implements IDAOCurso {
 			stmtInsert.setInt(6, pojoNuevo.getHorasCurso());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
-				// Si se ha insertado el usuario
+				// Si se ha insertado el curso
 				if (columnasAfectadas > 0 && rs.next()) {
 					// Obterner linea de la base de datos
 					ultimaId = rs.getInt(1);
@@ -241,7 +240,6 @@ public class DAOCurso implements IDAOCurso {
 		}
 		return ultimaId;
 	}
-
 
 	@Override
 	public Curso getByCodigos(String nombre, String codigoUc, String codigoAaff) throws Exception {

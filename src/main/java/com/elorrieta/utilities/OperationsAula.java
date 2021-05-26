@@ -35,7 +35,6 @@ public class OperationsAula {
 			if (id == -1)
 				aula = daoAula.getByid(daoAula.insert(aula));
 			if (aula != null) {
-				// TODO refactor el fuckin historial jsp
 				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
 				System.out.println("Aula actualizada");
 			} else {
@@ -87,10 +86,10 @@ public class OperationsAula {
 		}
 		HttpSession session = request.getSession();
 		if (aula != null) {
-			session.setAttribute("aula", aula);
+			session.setAttribute("participante", aula);
 		}
 
-		request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
+		request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
 
 	}
 
