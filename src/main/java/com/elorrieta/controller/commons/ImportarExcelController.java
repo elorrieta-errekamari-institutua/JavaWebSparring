@@ -15,7 +15,6 @@ import com.elorrieta.file.parser.ParserCursos;
 import com.elorrieta.file.parser.ParserEdiciones;
 import com.elorrieta.file.parser.ParserHorarios;
 import com.elorrieta.file.parser.ParserParticipantes;
-import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Curso;
@@ -36,7 +35,6 @@ public class ImportarExcelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DAOParticipante daoParticipante;
-	private DAOCurso daoCurso;
 	private DAOEdicion daoEdicion;
 	private ParserParticipantes parseadorParticipantes;
 	private ParserCursos parseadorCursos;
@@ -68,7 +66,6 @@ public class ImportarExcelController extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init();
 		daoParticipante = new DAOParticipante();
-		daoCurso = new DAOCurso();
 		daoEdicion = new DAOEdicion();
 		parseadorParticipantes = new ParserParticipantes();
 		parseadorCursos = new ParserCursos();

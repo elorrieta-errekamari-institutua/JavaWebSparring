@@ -38,26 +38,32 @@ public class ParserEdiciones {
 
 				for (Cell cell : row) {
 
-					if (cell.getColumnIndex() == 1 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 1 && cell.getRowIndex() > 1) {
 						// Guarda cualificacion
 						String text = formatter.formatCellValue(cell);
-						edicion.setCodigoLanbide(text);
+						if (!text.isBlank()) {
+							edicion.setCodigoLanbide(text);
+						}
 
 					}
-					if (cell.getColumnIndex() == 8 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 8 && cell.getRowIndex() > 1) {
 						// Guarda codigo UC
 						String text = formatter.formatCellValue(cell);
-						String[] date = text.split("/");
-						text = date[2] + "-" + date[1] + "-" + date[0];
-						edicion.setFechaInicio(Date.valueOf(text));
+						if (!text.isBlank()) {
+							String[] date = text.split("/");
+							text = date[2] + "-" + date[1] + "-" + date[0];
+							edicion.setFechaInicio(Date.valueOf(text));
+						}
 
 					}
-					if (cell.getColumnIndex() == 9 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 9 && cell.getRowIndex() > 1) {
 						// Guarda competencia
 						String text = formatter.formatCellValue(cell);
-						String[] date = text.split("/");
-						text = date[2] + "-" + date[1] + "-" + date[0];
-						edicion.setFechaFin(Date.valueOf(text));
+						if (!text.isBlank()) {
+							String[] date = text.split("/");
+							text = date[2] + "-" + date[1] + "-" + date[0];
+							edicion.setFechaFin(Date.valueOf(text));
+						}
 					}
 				}
 				if (!"".equalsIgnoreCase(edicion.getCodigoLanbide()))

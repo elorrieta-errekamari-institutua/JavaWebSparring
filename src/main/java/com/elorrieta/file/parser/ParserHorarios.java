@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.elorrieta.modelo.pojo.Horario;
+import com.elorrieta.utilities.TimeFormatter;
 
 public class ParserHorarios {
 
@@ -41,41 +42,51 @@ public class ParserHorarios {
 					if (cell.getColumnIndex() == 11 && cell.getRowIndex() > 1) {
 						// Guarda cualificacion
 						String text = formatter.formatCellValue(cell);
-						String[] horas = text.split("-");
-						horario.setLunesInicio(LocalTime.parse(horas[0].trim()));
-						horario.setLunesFin(LocalTime.parse(horas[1].trim()));
+						if (!text.isBlank()) {
+							String[] horas = text.split("-");
+							horario.setLunesInicio(TimeFormatter.normalizar(horas[0]));
+							horario.setLunesFin(TimeFormatter.normalizar(horas[1]));
+						}
 
 					}
 					if (cell.getColumnIndex() == 12 && cell.getRowIndex() > 1) {
 						// Guarda codigo UC
 						String text = formatter.formatCellValue(cell);
-						String[] horas = text.split("-");
-						horario.setMartesInicio(LocalTime.parse(horas[0].trim()));
-						horario.setMartesFin(LocalTime.parse(horas[1].trim()));
+						if (!text.isBlank()) {
+							String[] horas = text.split("-");
+							horario.setMartesInicio(TimeFormatter.normalizar(horas[0]));
+							horario.setMartesFin(TimeFormatter.normalizar(horas[1]));
+						}
 
 					}
 					if (cell.getColumnIndex() == 13 && cell.getRowIndex() > 1) {
 						// Guarda competencia
 						String text = formatter.formatCellValue(cell);
-						String[] horas = text.split("-");
-						horario.setMiercolesInicio(LocalTime.parse(horas[0].trim()));
-						horario.setMiercolesFin(LocalTime.parse(horas[1].trim()));
+						if (!text.isBlank()) {
+							String[] horas = text.split("-");
+							horario.setMiercolesInicio(TimeFormatter.normalizar(horas[0]));
+							horario.setMiercolesFin(TimeFormatter.normalizar(horas[1]));
+						}
 
 					}
 					if (cell.getColumnIndex() == 14 && cell.getRowIndex() > 1) {
 						// Guarda codigo AAFF
 						String text = formatter.formatCellValue(cell);
-						String[] horas = text.split("-");
-						horario.setJuevesInicio(LocalTime.parse(horas[0].trim()));
-						horario.setJuevesFin(LocalTime.parse(horas[1].trim()));
+						if (!text.isBlank()) {
+							String[] horas = text.split("-");
+							horario.setJuevesInicio(TimeFormatter.normalizar(horas[0]));
+							horario.setJuevesFin(TimeFormatter.normalizar(horas[1]));
+						}
 
 					}
 					if (cell.getColumnIndex() == 15 && cell.getRowIndex() > 1) {
 						// Guarda nombre
 						String text = formatter.formatCellValue(cell);
-						String[] horas = text.split("-");
-						horario.setViernesInicio(LocalTime.parse(horas[0].trim()));
-						horario.setViernesFin(LocalTime.parse(horas[1].trim()));
+						if (!text.isBlank()) {
+							String[] horas = text.split("-");
+							horario.setViernesInicio(TimeFormatter.normalizar(horas[0]));
+							horario.setViernesFin(TimeFormatter.normalizar(horas[1]));
+						}
 
 					}
 

@@ -35,6 +35,11 @@ public class OperationsEdicion {
 			try {
 				if (!edicion.isGuardado()) {
 					idCurso = daoCurso.insert(edicion.getCurso());
+					if (idCurso < 0) {
+						System.out.println("El curso ya existe");
+						cursosInsertados--;
+						idCurso = daoCurso.getByCodigos(edicion.getCurso().getNombre(), edicion.getCurso().getCodigoUc(), edicion.getCurso().getCodigoAaff()).getId();
+					}
 					idHorario = daoHorario.insert(edicion.getHorario());
 					idEdicion = daoEdicion.insert(edicion, idCurso, idHorario);
 				}
@@ -45,10 +50,6 @@ public class OperationsEdicion {
 			if (idEdicion < 0){
 				System.out.println("La edicion ya existe");
 				edicionesInsertadas --;
-			}
-			if (idCurso < 0) {
-				System.out.println("El curso ya existe");
-				cursosInsertados--;
 			}
 		}
 		request.setAttribute("insertados", edicionesInsertadas);
