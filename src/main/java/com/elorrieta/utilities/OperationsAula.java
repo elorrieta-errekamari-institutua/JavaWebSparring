@@ -106,11 +106,24 @@ public class OperationsAula {
 		}
 		HttpSession session = request.getSession();
 		if (listaAulasDB != null) {
-			session.removeAttribute("listaAulas");
-			session.setAttribute("listaAulas", listaAulasDB);
+			ArrayList<String> listaHead = new ArrayList<String>();
+			listaHead.add("#");
+			listaHead.add("Nombre");
+
+			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+			for (Aula aula : listaAulasDB) {
+				ArrayList<String> listaTemporal = new ArrayList<String>();
+				listaTemporal.add(String.valueOf(aula.getId()));
+				listaTemporal.add(aula.getNombre());
+				listaBody.add(listaTemporal);
+			}
+			session.setAttribute("title", "Aulas");
+			session.setAttribute("clase", 4);
+			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("tableBody", listaBody);
 		}
 
-		request.getRequestDispatcher("aulas.jsp").forward(request, response);
+		request.getRequestDispatcher("listado.jsp").forward(request, response);
 
 	}
 

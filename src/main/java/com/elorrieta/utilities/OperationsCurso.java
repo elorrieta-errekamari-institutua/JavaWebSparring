@@ -32,11 +32,34 @@ public class OperationsCurso {
 		}
 		HttpSession session = request.getSession();
 		if (listaCursosDB != null) {
-			session.removeAttribute("listaCursos");
-			session.setAttribute("listaCursos", listaCursosDB);
+			ArrayList<String> listaHead = new ArrayList<String>();
+			listaHead.add("#");
+			listaHead.add("Nombre");
+			listaHead.add("Horas");
+			listaHead.add("Codigo AAFF");
+			listaHead.add("Codigo UC");
+			listaHead.add("Competencia");
+			listaHead.add("Cualificacion");
+
+			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+			for (Curso curso : listaCursosDB) {
+				ArrayList<String> listaTemporal = new ArrayList<String>();
+				listaTemporal.add(String.valueOf(curso.getId()));
+				listaTemporal.add(curso.getNombre());
+				listaTemporal.add(String.valueOf(curso.getHorasCurso()));
+				listaTemporal.add(curso.getCodigoAaff());
+				listaTemporal.add(curso.getCodigoUc());
+				listaTemporal.add(curso.getCompetencia());
+				listaTemporal.add(curso.getCualificacion());
+				listaBody.add(listaTemporal);
+			}
+			session.setAttribute("title", "Cursos");
+			session.setAttribute("clase", 1);
+			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("tableBody", listaBody);
 		}
 
-		request.getRequestDispatcher("cursos.jsp").forward(request, response);
+		request.getRequestDispatcher("listado.jsp").forward(request, response);
 	}
 
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso) {

@@ -159,11 +159,48 @@ public class OperationsParticipante {
 		}
 		HttpSession session = request.getSession();
 		if (listaParticipantesDB != null) {
-			session.removeAttribute("listaParticipantes");
-			session.setAttribute("listaParticipantes", listaParticipantesDB);
+			ArrayList<String> listaHead = new ArrayList<String>();
+			listaHead.add("#");
+			listaHead.add("Nombre");
+			listaHead.add("DNI");
+			listaHead.add("Telefono");
+			listaHead.add("<abbr title='Fecha de nacimiento'>Fecha</abbr>");
+			listaHead.add("Direccion");
+			listaHead.add("<abbr title='Codigo postal'>CP</abbr>");
+			listaHead.add("Municipio");
+			listaHead.add("Provincia");
+			listaHead.add("ERTE");
+			listaHead.add("<abbr title='Situacion laboral'>Laboral</abbr>");
+			listaHead.add("<abbr title='Situacion administrativa'>Administrativa</abbr>");
+
+			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+			for (Participante participante : listaParticipantesDB) {
+				ArrayList<String> listaTemporal = new ArrayList<String>();
+				listaTemporal.add(String.valueOf(participante.getId()));
+				listaTemporal.add(participante.getNombreCompleto());
+				listaTemporal.add(participante.getDni());
+				listaTemporal.add(participante.getTelefono());
+				listaTemporal.add(participante.getFechaDeNacimiento().toString());
+				listaTemporal.add(participante.getDireccion());
+				listaTemporal.add(participante.getCodigoPostal());
+				listaTemporal.add(participante.getMunicipio());
+				listaTemporal.add(participante.getProvincia());
+				if (participante.isErte()) {
+					listaTemporal.add("Si");
+				} else {
+					listaTemporal.add("No");
+				}
+				listaTemporal.add(participante.getSituacionLaboral());
+				listaTemporal.add(participante.getSituacionAdministrativa());
+				listaBody.add(listaTemporal);
+			}
+			session.setAttribute("title", "Participantes");
+			session.setAttribute("clase", 3);
+			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("tableBody", listaBody);
 		}
 
-		request.getRequestDispatcher("participantes.jsp").forward(request, response);
+		request.getRequestDispatcher("listado.jsp").forward(request, response);
 
 	}
 
