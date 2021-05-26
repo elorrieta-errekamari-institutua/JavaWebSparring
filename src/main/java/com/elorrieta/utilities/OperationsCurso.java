@@ -152,27 +152,28 @@ public class OperationsCurso {
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOCurso daoCurso)
 			throws ServletException, IOException {
 
-		HttpSession sesion = request.getSession();
-		ArrayList<Curso> listaCursos = (ArrayList<Curso>) sesion.getAttribute("listaCursos");
-		// Insertar datos en la BD
-		DAOCurso usuarioDB = new DAOCurso();
-		int numeroInsertados = listaCursos.size();
-		for (Curso curso : listaCursos) {
-			int id = -1;
-			try {
-				if (!curso.isGuardado())
-					id = usuarioDB.insert(curso);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (id < 0) {
-				System.out.println("El usuario ya existe");
-				numeroInsertados--;
-			}
-		}
-		request.setAttribute("insertados", numeroInsertados);
-		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
+		// TODO Esto correspondera a edicion
+		// HttpSession sesion = request.getSession();
+		// ArrayList<Curso> listaCursos = (ArrayList<Curso>) sesion.getAttribute("lista");
+		// // Insertar datos en la BD
+		// DAOCurso cursoDB = new DAOCurso();
+		// int numeroInsertados = listaCursos.size();
+		// for (Curso curso : listaCursos) {
+		// 	int id = -1;
+		// 	try {
+		// 		if (!curso.isGuardado())
+		// 		id = cursoDB.insert(curso);
+		// 	} catch (Exception e) {
+		// 		// TODO Auto-generated catch block
+		// 		e.printStackTrace();
+		// 	}
+		// 	if (id < 0) {
+		// 		System.out.println("El curso ya existe");
+		// 		numeroInsertados--;
+		// 	}
+		// }
+		// request.setAttribute("insertados", numeroInsertados);
+		// request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 
 	}
 

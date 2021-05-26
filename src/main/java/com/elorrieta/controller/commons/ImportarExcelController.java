@@ -82,6 +82,10 @@ public class ImportarExcelController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Recoger la sesion e incializar las tablas que se rellenaran mas adelante
+		HttpSession session = request.getSession();
+		ArrayList<String> listaHead = new ArrayList<String>();
+		ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
 
 		String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 		String fileName = UploadFile.upload(request, uploadPath, "file");
@@ -92,46 +96,122 @@ public class ImportarExcelController extends HttpServlet {
 
 			ArrayList<Participante> listaParticipantes = parseadorParticipantes.parseFile(uploadPath + fileName);
 
+			listaHead.add("#");
+			listaHead.add("Nombre");
+			listaHead.add("DNI");
+			listaHead.add("Telefono");
+			listaHead.add("<abbr title='Fecha de nacimiento'>Fecha</abbr>");
+			listaHead.add("Direccion");
+			listaHead.add("<abbr title='Codigo postal'>CP</abbr>");
+			listaHead.add("Municipio");
+			listaHead.add("Provincia");
+			listaHead.add("ERTE");
+			listaHead.add("<abbr title='Situacion laboral'>Laboral</abbr>");
+			listaHead.add("<abbr title='Situacion administrativa'>Administrativa</abbr>");
+
 			for (Participante participante : listaParticipantes) {
 				try {
 					Participante participanteTemporal = daoParticipante.getByDni(participante.getDni());
+					ArrayList<String> listaTemporal = new ArrayList<String>();
 					if (participanteTemporal != null) {
 						participante.setGuardado(true);
+						listaTemporal.add("0");
+					} else {
+						listaTemporal.add("-1");
 					}
+					listaTemporal.add(participante.getNombreCompleto());
+					listaTemporal.add(participante.getDni());
+					listaTemporal.add(participante.getTelefono());
+					listaTemporal.add(participante.getFechaDeNacimiento().toString());
+					listaTemporal.add(participante.getDireccion());
+					listaTemporal.add(participante.getCodigoPostal());
+					listaTemporal.add(participante.getMunicipio());
+					listaTemporal.add(participante.getProvincia());
+					if (participante.isErte()) {
+						listaTemporal.add("Si");
+					} else {
+						listaTemporal.add("No");
+					}
+					listaTemporal.add(participante.getSituacionLaboral());
+					listaTemporal.add(participante.getSituacionAdministrativa());
+					listaBody.add(listaTemporal);
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
 				}
 			}
-			HttpSession session = request.getSession();
-			session.setAttribute("listaParticipantes", listaParticipantes);
+
+			session.setAttribute("lista", listaParticipantes);
 		}
 
-		if ("ediciones".equalsIgnoreCase(tipoFichero)) {
+		if ("cursos".equalsIgnoreCase(tipoFichero)) {
 			// TODO Parsear excel Curso y guardar
 
 			ArrayList<Curso> listaCursos = parseadorCursos.parseFile(uploadPath + fileName);
 			ArrayList<Horario> listaHorarios = parseadorHorarios.parseFile(uploadPath + fileName);
 			ArrayList<Edicion> listaEdiciones = parseadorEdiciones.parseFile(uploadPath + fileName);
 
+			listaHead.add("#");
+			listaHead.add("Codigo Lanbide");
+			listaHead.add("Nombre");
+			listaHead.add("Horas");
+			listaHead.add("Codigo AAFF");
+			listaHead.add("Codigo UC");
+			listaHead.add("Competencia");
+			listaHead.add("Cualificacion");
+			listaHead.add("Fecha inicio");
+			listaHead.add("Fecha fin");
+			listaHead.add("Lunes");
+			listaHead.add("Martes");
+			listaHead.add("Miercoles");
+			listaHead.add("Jueves");
+			listaHead.add("Viernes");
+
 			for (int i = 0; i < listaEdiciones.size(); i++) {
 				try {
 					Edicion edicionTemporal = listaEdiciones.get(i);
+					Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicionTemporal.getCodigoLanbide());
 					Curso cursoTemporal = listaCursos.get(i);
 					Horario horarioTemporal = listaHorarios.get(i);
-
-					if (daoEdicion.getByName(edicionTemporal.getCodigoLanbide()) != null) {
-						listaCursos.get(i).setGuardado(true);
+					ArrayList<String> listaTemporal = new ArrayList<String>();
+					if (edicionDB != null) {
+						edicionTemporal.setGuardado(true);
+						listaTemporal.add("0");
+					} else {
+						listaTemporal.add("-1");
 					}
+					listaTemporal.add(edicionTemporal.getCodigoLanbide());
+					listaTemporal.add(cursoTemporal.getNombre());
+					listaTemporal.add(String.valueOf(cursoTemporal.getHorasCurso()));
+					listaTemporal.add(cursoTemporal.getCodigoAaff());
+					listaTemporal.add(cursoTemporal.getCodigoUc());
+					listaTemporal.add(cursoTemporal.getCompetencia());
+					listaTemporal.add(cursoTemporal.getCualificacion());
+					listaTemporal.add(edicionTemporal.getFechaInicio().toString());
+					listaTemporal.add(edicionTemporal.getFechaFin().toString());
+					String horario = horarioTemporal.getLunesInicio().toString().concat(" - ").concat(horarioTemporal.getLunesFin().toString());
+					listaTemporal.add(horario);
+					horario = horarioTemporal.getMartesInicio().toString().concat(" - ").concat(horarioTemporal.getMartesFin().toString());
+					listaTemporal.add(horario);
+					horario = horarioTemporal.getMiercolesInicio().toString().concat(" - ").concat(horarioTemporal.getMiercolesFin().toString());
+					listaTemporal.add(horario);
+					horario = horarioTemporal.getJuevesInicio().toString().concat(" - ").concat(horarioTemporal.getJuevesFin().toString());
+					listaTemporal.add(horario);
+					horario = horarioTemporal.getViernesInicio().toString().concat(" - ").concat(horarioTemporal.getViernesFin().toString());
+					listaTemporal.add(horario);
 
+					listaBody.add(listaTemporal);
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
 				}
 			}
-			HttpSession session = request.getSession();
-			session.setAttribute("listaEdiciones", listaCursos);
+
+			session.setAttribute("lista", listaCursos);
 		}
+		session.setAttribute("title", "Confirme los datos");
+		session.setAttribute("tableHeader", listaHead);
+		session.setAttribute("tableBody", listaBody);
 		request.getRequestDispatcher("previewDocumentData.jsp").forward(request, response);
 
 	}

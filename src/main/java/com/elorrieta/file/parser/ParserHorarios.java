@@ -38,7 +38,7 @@ public class ParserHorarios {
 
 				for (Cell cell : row) {
 
-					if (cell.getColumnIndex() == 11 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 11 && cell.getRowIndex() > 1) {
 						// Guarda cualificacion
 						String text = formatter.formatCellValue(cell);
 						String[] horas = text.split("-");
@@ -46,7 +46,7 @@ public class ParserHorarios {
 						horario.setLunesFin(LocalTime.parse(horas[1].trim()));
 
 					}
-					if (cell.getColumnIndex() == 12 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 12 && cell.getRowIndex() > 1) {
 						// Guarda codigo UC
 						String text = formatter.formatCellValue(cell);
 						String[] horas = text.split("-");
@@ -54,7 +54,7 @@ public class ParserHorarios {
 						horario.setMartesFin(LocalTime.parse(horas[1].trim()));
 
 					}
-					if (cell.getColumnIndex() == 13 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 13 && cell.getRowIndex() > 1) {
 						// Guarda competencia
 						String text = formatter.formatCellValue(cell);
 						String[] horas = text.split("-");
@@ -62,7 +62,7 @@ public class ParserHorarios {
 						horario.setMiercolesFin(LocalTime.parse(horas[1].trim()));
 
 					}
-					if (cell.getColumnIndex() == 14 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 14 && cell.getRowIndex() > 1) {
 						// Guarda codigo AAFF
 						String text = formatter.formatCellValue(cell);
 						String[] horas = text.split("-");
@@ -70,7 +70,7 @@ public class ParserHorarios {
 						horario.setJuevesFin(LocalTime.parse(horas[1].trim()));
 
 					}
-					if (cell.getColumnIndex() == 15 && cell.getRowIndex() > 0) {
+					if (cell.getColumnIndex() == 15 && cell.getRowIndex() > 1) {
 						// Guarda nombre
 						String text = formatter.formatCellValue(cell);
 						String[] horas = text.split("-");
@@ -80,10 +80,10 @@ public class ParserHorarios {
 					}
 
 				}
-				if (!LocalTime.MIN.equals(horario.getLunesInicio()) && !LocalTime.MIN.equals(horario.getMartesInicio())
-						&& !LocalTime.MIN.equals(horario.getMiercolesInicio())
-						&& !LocalTime.MIN.equals(horario.getJuevesInicio())
-						&& !LocalTime.MIN.equals(horario.getViernesInicio())) {
+				if (!LocalTime.MIN.equals(horario.getLunesInicio()) || !LocalTime.MIN.equals(horario.getMartesInicio())
+						|| !LocalTime.MIN.equals(horario.getMiercolesInicio())
+						|| !LocalTime.MIN.equals(horario.getJuevesInicio())
+						|| !LocalTime.MIN.equals(horario.getViernesInicio())) {
 					listaHorarios.add(horario);
 				}
 			}

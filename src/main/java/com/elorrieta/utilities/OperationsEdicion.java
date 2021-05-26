@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOHorario;
-import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
 
 public class OperationsEdicion {
@@ -22,35 +21,38 @@ public class OperationsEdicion {
 
 	}
 
-	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
+	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario)
 			throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		ArrayList<Curso> listaCursos = (ArrayList<Curso>) sesion.getAttribute("listaCursos");
+		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
-		DAOCurso cursoDB = new DAOCurso();
-		DAOHorario horarioDB = new DAOHorario();
-		int numeroInsertados = listaCursos.size();
-		for (Curso curso : listaCursos) {
+		int edicionesInsertadas = listaEdiciones.size();
+		int cursosInsertados = edicionesInsertadas;
+		for (Edicion edicion : listaEdiciones) {
+			int idEdicion = -1;
 			int idCurso = -1;
 			int idHorario = -1;
 			try {
-				if (!curso.isGuardado()) {
-					idCurso = cursoDB.insert(curso);
-					idHorario = horarioDB.insert(curso.getHorario());
-					Edicion edicionNueva = new Edicion(idCurso, idHorario);
-					daoEdicion.insert(edicionNueva);
+				if (!edicion.isGuardado()) {
+					idCurso = daoCurso.insert(edicion.getCurso());
+					idHorario = daoHorario.insert(edicion.getHorario());
+					idEdicion = daoEdicion.insert(edicion, idCurso, idHorario);
 				}
-
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (idEdicion < 0){
+				System.out.println("La edicion ya existe");
+				edicionesInsertadas --;
+			}
 			if (idCurso < 0) {
-				System.out.println("El usuario ya existe");
-				numeroInsertados--;
+				System.out.println("El curso ya existe");
+				cursosInsertados--;
 			}
 		}
-		request.setAttribute("insertados", numeroInsertados);
+		request.setAttribute("insertados", edicionesInsertadas);
+		request.setAttribute("cursos", cursosInsertados);
 		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 
 	}

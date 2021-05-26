@@ -2,9 +2,8 @@
 <jsp:include page="/templates/loggedNavbar.jsp" />
 
 
-<% // limpiar las listas de la sesion
-session.removeAttribute("listaParticipantes");
-session.removeAttribute("listaCursos");
+<% // limpiar las lista de la sesion
+session.removeAttribute("lista");
  %>
 
 	<div class="content">
@@ -17,6 +16,8 @@ session.removeAttribute("listaCursos");
 				onreset="resetName()">
 				<p class="has-text-success block" ${ insertados gt 0 ? '' : 'hidden'}>Se han introducido ${insertados}
 					registros</p>
+				<p class="has-text-success block" ${ cursos gt 0 ? '' : 'hidden'}>Se han introducido ${cursos}
+					nuevos cursos</p>
 				<div class="field">
 					<label for="type" class="label">Tipo de documento:</label>
 					<div class="control">

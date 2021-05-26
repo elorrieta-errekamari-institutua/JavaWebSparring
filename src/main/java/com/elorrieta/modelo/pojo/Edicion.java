@@ -17,6 +17,7 @@ public class Edicion {
 	private Curso curso;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private boolean guardado;
 
 	public Edicion() {
 		this.id = -1;
@@ -25,6 +26,7 @@ public class Edicion {
 		this.horario = null;
 		this.fechaInicio = Date.valueOf("1977-11-14");
 		this.fechaFin = Date.valueOf("1977-11-15");
+		this.guardado = false;
 	}
 
 	public Edicion(Curso curso, Horario horario) {
@@ -34,6 +36,7 @@ public class Edicion {
 		this.horario = horario;
 		this.fechaInicio = Date.valueOf("1977-11-14");
 		this.fechaFin = Date.valueOf("1977-11-15");
+		this.guardado = false;
 	}
 
 	/**
@@ -65,31 +68,31 @@ public class Edicion {
 	}
 
 	/**
-	 * @return the idCurso
+	 * @return the horario
 	 */
-	public int getIdCurso() {
-		return idCurso;
+	public Horario getHorario() {
+		return horario;
 	}
 
 	/**
-	 * @param idCurso the idCurso to set
+	 * @param horario the horario to set
 	 */
-	public void setIdCurso(int idCurso) {
-		this.idCurso = idCurso;
+	public void setHorario(Horario horario) {
+		this.horario = horario;
 	}
 
 	/**
-	 * @return the idHorario
+	 * @return the curso
 	 */
-	public int getIdHorario() {
-		return idHorario;
+	public Curso getCurso() {
+		return curso;
 	}
 
 	/**
-	 * @param idHorario the idHorario to set
+	 * @param curso the curso to set
 	 */
-	public void setIdHorario(int idHorario) {
-		this.idHorario = idHorario;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	/**
@@ -118,6 +121,20 @@ public class Edicion {
 	 */
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	/**
+	 * @return the guardado
+	 */
+	public boolean isGuardado() {
+		return guardado;
+	}
+
+	/**
+	 * @param guardado the guardado to set
+	 */
+	public void setGuardado(boolean guardado) {
+		this.guardado = guardado;
 	}
 
 }

@@ -83,8 +83,7 @@ public class OperationsParticipante {
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 
 		HttpSession sesion = request.getSession();
-		ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) sesion
-				.getAttribute("listaParticipantes");
+		ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
 		DAOParticipante participanteDB = new DAOParticipante();
 		int numeroInsertados = listaParticipantes.size();
@@ -103,6 +102,7 @@ public class OperationsParticipante {
 			}
 		}
 		request.setAttribute("insertados", numeroInsertados);
+		request.removeAttribute("cursos");
 		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 
 	}
