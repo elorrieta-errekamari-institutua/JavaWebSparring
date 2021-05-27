@@ -3,13 +3,14 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOAula;
 import com.elorrieta.modelo.pojo.Aula;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class OperationsAula {
 
@@ -60,7 +61,9 @@ public class OperationsAula {
 
 			Aula aulaBorrada = daoAula.delete(id);
 			if (aulaBorrada != null) {
-				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
+				request.getRequestDispatcher(
+						"action?operacion=" + BackofficeController.DELETE + "&clase=" + BackofficeController.AULA)
+						.forward(request, response);
 				System.out.println("Aula eliminado");
 			} else {
 				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
@@ -86,10 +89,10 @@ public class OperationsAula {
 		}
 		HttpSession session = request.getSession();
 		if (aula != null) {
-			session.setAttribute("participante", aula);
+			session.setAttribute("aula", aula);
 		}
 
-		request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
+		request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 
 	}
 

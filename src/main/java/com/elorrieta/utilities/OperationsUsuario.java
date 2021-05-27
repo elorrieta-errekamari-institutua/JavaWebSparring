@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -15,6 +11,11 @@ import javax.validation.ValidatorFactory;
 
 import com.elorrieta.modelo.dao.DAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class OperationsUsuario {
 	static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

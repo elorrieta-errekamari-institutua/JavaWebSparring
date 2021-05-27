@@ -6,13 +6,13 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * @author cursos_externos
@@ -154,23 +154,24 @@ public class OperationsCurso {
 
 		// TODO Esto correspondera a edicion
 		// HttpSession sesion = request.getSession();
-		// ArrayList<Curso> listaCursos = (ArrayList<Curso>) sesion.getAttribute("lista");
+		// ArrayList<Curso> listaCursos = (ArrayList<Curso>)
+		// sesion.getAttribute("lista");
 		// // Insertar datos en la BD
 		// DAOCurso cursoDB = new DAOCurso();
 		// int numeroInsertados = listaCursos.size();
 		// for (Curso curso : listaCursos) {
-		// 	int id = -1;
-		// 	try {
-		// 		if (!curso.isGuardado())
-		// 		id = cursoDB.insert(curso);
-		// 	} catch (Exception e) {
-		// 		// TODO Auto-generated catch block
-		// 		e.printStackTrace();
-		// 	}
-		// 	if (id < 0) {
-		// 		System.out.println("El curso ya existe");
-		// 		numeroInsertados--;
-		// 	}
+		// int id = -1;
+		// try {
+		// if (!curso.isGuardado())
+		// id = cursoDB.insert(curso);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// if (id < 0) {
+		// System.out.println("El curso ya existe");
+		// numeroInsertados--;
+		// }
 		// }
 		// request.setAttribute("insertados", numeroInsertados);
 		// request.getRequestDispatcher("fileUpload.jsp").forward(request, response);

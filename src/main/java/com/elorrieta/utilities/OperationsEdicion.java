@@ -3,15 +3,15 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOHorario;
 import com.elorrieta.modelo.pojo.Edicion;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class OperationsEdicion {
 
@@ -21,8 +21,8 @@ public class OperationsEdicion {
 
 	}
 
-	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario)
-			throws ServletException, IOException {
+	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
+			DAOCurso daoCurso, DAOHorario daoHorario) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
@@ -38,7 +38,8 @@ public class OperationsEdicion {
 					if (idCurso < 0) {
 						System.out.println("El curso ya existe");
 						cursosInsertados--;
-						idCurso = daoCurso.getByCodigos(edicion.getCurso().getNombre(), edicion.getCurso().getCodigoUc(), edicion.getCurso().getCodigoAaff()).getId();
+						idCurso = daoCurso.getByCodigos(edicion.getCurso().getNombre(),
+								edicion.getCurso().getCodigoUc(), edicion.getCurso().getCodigoAaff()).getId();
 					}
 					idHorario = daoHorario.insert(edicion.getHorario());
 					idEdicion = daoEdicion.insert(edicion, idCurso, idHorario);
@@ -47,9 +48,9 @@ public class OperationsEdicion {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (idEdicion < 0){
+			if (idEdicion < 0) {
 				System.out.println("La edicion ya existe");
-				edicionesInsertadas --;
+				edicionesInsertadas--;
 			}
 		}
 		request.setAttribute("insertados", edicionesInsertadas);

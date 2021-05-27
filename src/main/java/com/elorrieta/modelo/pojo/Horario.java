@@ -1,6 +1,7 @@
 package com.elorrieta.modelo.pojo;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Horario {
 
@@ -248,4 +249,19 @@ public class Horario {
 		this.domingoFin = domingoFin;
 	}
 
+	public ArrayList<String> toStringList() {
+		ArrayList<String> listaTemporal = new ArrayList<>();
+		String horario = lunesInicio.toString() + " - " + lunesFin.toString();
+		listaTemporal.add(horario);
+		horario = martesInicio.toString() + " - " + martesFin.toString();
+		listaTemporal.add(horario);
+		horario = miercolesInicio.toString() + " - " + miercolesFin.toString();
+		listaTemporal.add(horario);
+		horario = juevesInicio.toString() + " - " + juevesFin.toString();
+		listaTemporal.add(horario);
+		horario = viernesInicio.toString() + " - " + viernesFin.toString();
+		listaTemporal.add(horario);
+		return listaTemporal;
+
+	}
 }

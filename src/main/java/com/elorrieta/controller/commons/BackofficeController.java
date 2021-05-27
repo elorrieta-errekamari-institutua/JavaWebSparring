@@ -3,13 +3,6 @@ package com.elorrieta.controller.commons;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.elorrieta.modelo.dao.DAOAula;
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
@@ -27,6 +20,13 @@ import com.elorrieta.utilities.OperationsParticipante;
 import com.elorrieta.utilities.OperationsRol;
 import com.elorrieta.utilities.OperationsUsuario;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class BackofficeController
  */
@@ -38,23 +38,23 @@ public class BackofficeController extends HttpServlet {
 	/**
 	 * Posibles operaciones
 	 */
-	private static final int INSERT_UPDATE = 1;
-	private static final int SELECT = 2;
-	private static final int DELETE = 3;
-	private static final int SELECT_ALL = 4;
-	private static final int INSERT_ALL = 5;
+	public static final int INSERT_UPDATE = 1;
+	public static final int SELECT = 2;
+	public static final int DELETE = 3;
+	public static final int SELECT_ALL = 4;
+	public static final int INSERT_ALL = 5;
 
 	/**
 	 * Posibles clases
 	 */
-	private static final int CURSO = 1;
-	private static final int USUARIO = 2;
-	private static final int PARTICIPANTE = 3;
-	private static final int AULA = 4;
-	private static final int HORARIO = 5;
-	private static final int FORMADOR = 6;
-	private static final int ROL = 7;
-	private static final int EDICION = 8;
+	public static final int CURSO = 1;
+	public static final int USUARIO = 2;
+	public static final int PARTICIPANTE = 3;
+	public static final int AULA = 4;
+	public static final int HORARIO = 5;
+	public static final int FORMADOR = 6;
+	public static final int ROL = 7;
+	public static final int EDICION = 8;
 
 	/**
 	 * DAOs

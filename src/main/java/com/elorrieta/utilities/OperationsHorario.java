@@ -1,9 +1,9 @@
 package com.elorrieta.utilities;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.elorrieta.modelo.dao.DAOHorario;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class OperationsHorario {
 

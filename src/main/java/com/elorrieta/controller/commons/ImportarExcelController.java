@@ -3,14 +3,6 @@ package com.elorrieta.controller.commons;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.elorrieta.file.parser.ParserCursos;
 import com.elorrieta.file.parser.ParserEdiciones;
 import com.elorrieta.file.parser.ParserHorarios;
@@ -22,6 +14,14 @@ import com.elorrieta.modelo.pojo.Edicion;
 import com.elorrieta.modelo.pojo.Horario;
 import com.elorrieta.modelo.pojo.Participante;
 import com.elorrieta.utilities.UploadFile;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ImportarExcelController
@@ -171,6 +171,7 @@ public class ImportarExcelController extends HttpServlet {
 					Curso cursoTemporal = listaCursos.get(i);
 					Horario horarioTemporal = listaHorarios.get(i);
 					ArrayList<String> listaTemporal = new ArrayList<String>();
+					ArrayList<String> listaHorario = horarioTemporal.toStringList();
 					if (edicionDB != null) {
 						edicionTemporal.setGuardado(true);
 						listaTemporal.add("0");
@@ -186,18 +187,11 @@ public class ImportarExcelController extends HttpServlet {
 					listaTemporal.add(cursoTemporal.getCualificacion());
 					listaTemporal.add(edicionTemporal.getFechaInicio().toString());
 					listaTemporal.add(edicionTemporal.getFechaFin().toString());
-					String horario = horarioTemporal.getLunesInicio().toString().concat(" - ").concat(horarioTemporal.getLunesFin().toString());
-					listaTemporal.add(horario);
-					horario = horarioTemporal.getMartesInicio().toString().concat(" - ").concat(horarioTemporal.getMartesFin().toString());
-					listaTemporal.add(horario);
-					horario = horarioTemporal.getMiercolesInicio().toString().concat(" - ").concat(horarioTemporal.getMiercolesFin().toString());
-					listaTemporal.add(horario);
-					horario = horarioTemporal.getJuevesInicio().toString().concat(" - ").concat(horarioTemporal.getJuevesFin().toString());
-					listaTemporal.add(horario);
-					horario = horarioTemporal.getViernesInicio().toString().concat(" - ").concat(horarioTemporal.getViernesFin().toString());
-					listaTemporal.add(horario);
 
-					listaBody.add(listaTemporal);
+					if (listaTemporal.addAll(listaHorario)) {
+						listaBody.add(listaTemporal);
+					}
+
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
