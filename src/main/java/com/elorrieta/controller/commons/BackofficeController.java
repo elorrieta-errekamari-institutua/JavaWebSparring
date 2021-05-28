@@ -378,7 +378,7 @@ public class BackofficeController extends HttpServlet {
 			map.put("id", Integer.parseInt(request.getParameter("id")));
 		} catch (Exception e) {
 			map.put("id", -1);
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 		try {

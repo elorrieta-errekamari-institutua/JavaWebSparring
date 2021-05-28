@@ -30,19 +30,24 @@ public class OperationsEdicion {
 		int cursosInsertados = edicionesInsertadas;
 		for (Edicion edicion : listaEdiciones) {
 			int idEdicion = -1;
-			int idCurso = -1;
-			int idHorario = -1;
+			int idCurso;
+			int idHorario;
 			try {
 				if (!edicion.isGuardado()) {
+
 					idCurso = daoCurso.insert(edicion.getCurso());
-					if (idCurso < 0) {
-						System.out.println("El curso ya existe");
-						cursosInsertados--;
-						idCurso = daoCurso.getByCodigos(edicion.getCurso().getNombre(),
-								edicion.getCurso().getCodigoUc(), edicion.getCurso().getCodigoAaff()).getId();
-					}
 					idHorario = daoHorario.insert(edicion.getHorario());
 					idEdicion = daoEdicion.insert(edicion, idCurso, idHorario);
+
+					if (idEdicion > 0) {
+						System.out.println("Insertada edicion");
+					}
+					if (idHorario > 0) {
+						System.out.println("Insertada horario");
+					}
+					if (idCurso > 0) {
+						System.out.println("Insertada curso");
+					}
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

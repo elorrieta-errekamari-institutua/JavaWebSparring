@@ -139,6 +139,7 @@ public class ImportarExcelController extends HttpServlet {
 			}
 
 			session.setAttribute("lista", listaParticipantes);
+			session.setAttribute("clase", BackofficeController.PARTICIPANTE);
 		}
 
 		if ("cursos".equalsIgnoreCase(tipoFichero)) {
@@ -170,6 +171,11 @@ public class ImportarExcelController extends HttpServlet {
 					Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicionTemporal.getCodigoLanbide());
 					Curso cursoTemporal = listaCursos.get(i);
 					Horario horarioTemporal = listaHorarios.get(i);
+
+					edicionTemporal.setCurso(cursoTemporal);
+					edicionTemporal.setHorario(horarioTemporal);
+					listaEdiciones.set(i, edicionTemporal);
+
 					ArrayList<String> listaTemporal = new ArrayList<String>();
 					ArrayList<String> listaHorario = horarioTemporal.toStringList();
 					if (edicionDB != null) {
@@ -198,7 +204,8 @@ public class ImportarExcelController extends HttpServlet {
 				}
 			}
 
-			session.setAttribute("lista", listaCursos);
+			session.setAttribute("lista", listaEdiciones);
+			session.setAttribute("clase", BackofficeController.EDICION);
 		}
 		session.setAttribute("title", "Confirme los datos");
 		session.setAttribute("tableHeader", listaHead);

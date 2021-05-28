@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.elorrieta.modelo.interfaces.IDAOEdicion;
 import com.elorrieta.modelo.pojo.Edicion;
-import com.elorrieta.modelo.pojo.Participante;
 
 public class DAOEdicion implements IDAOEdicion {
 
@@ -49,8 +48,37 @@ public class DAOEdicion implements IDAOEdicion {
 
 	@Override
 	public int insert(Edicion pojoNuevo, int idCurso, int idHorario) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int columnasAfectadas = -1, ultimaId = -1;
+		String sqlHorario = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
+				+ "fecha_fin) " + "VALUES " + "(?, ?, ?, ?, ?);";
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
+						PreparedStatement.RETURN_GENERATED_KEYS);) {
+			stmtInsert.setString(1, pojoNuevo.getCodigoLanbide());
+			stmtInsert.setInt(2, idCurso);
+			stmtInsert.setInt(3, idHorario);
+			stmtInsert.setDate(4, pojoNuevo.getFechaInicio());
+			stmtInsert.setDate(5, pojoNuevo.getFechaFin());
+			columnasAfectadas = stmtInsert.executeUpdate();
+			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
+				// Si se ha insertado el curso
+				if (columnasAfectadas > 0 && rs.next()) {
+					// Obterner linea de la base de datos
+					ultimaId = rs.getInt(1);
+					pojoNuevo.setId(ultimaId);
+
+				} else {
+					System.err.println("No se ha podido insertar el horario");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ultimaId;
 	}
 
 	public Edicion getByCodigoLanbide(String codigoLanbide) {

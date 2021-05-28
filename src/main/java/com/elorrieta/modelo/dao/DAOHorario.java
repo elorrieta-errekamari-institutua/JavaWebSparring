@@ -44,10 +44,9 @@ public class DAOHorario implements IDAOHorario {
 	@Override
 	public int insert(Horario pojoNuevo) throws Exception {
 		int columnasAfectadas = -1, ultimaId = -1;
-		String sqlHorario = "INSERT INTO horario (`lunes_inicio`,\r\n" + "`lunes_fin`,\r\n" + "`martes_inicio`,\r\n"
-				+ "`martes_fin`,\r\n" + "`miercoles_inicio`,\r\n" + "`miercoles_fin`,\r\n" + "`jueves_inicio`,\r\n"
-				+ "`jueves_fin`,\r\n" + "`viernes_inicio`,\r\n" + "`viernes_fin`,\r\n" + "`sabado_inicio`,\r\n"
-				+ "`sabado_fin`,\r\n" + "`domingo_inicio`,\r\n" + "`domingo_fin`)\r\n" + "VALUES \r\n"
+		String sqlHorario = "INSERT INTO horario (lunes_inicio," + "lunes_fin," + "martes_inicio," + "martes_fin,"
+				+ "miercoles_inicio," + "miercoles_fin," + "jueves_inicio," + "jueves_fin," + "viernes_inicio,"
+				+ "viernes_fin," + "sabado_inicio," + "sabado_fin," + "domingo_inicio," + "domingo_fin) " + "VALUES "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
 				Connection conn = DAOConectionManager.getConnection();
@@ -67,7 +66,7 @@ public class DAOHorario implements IDAOHorario {
 			stmtInsert.setTime(12, Time.valueOf(pojoNuevo.getSabadoFin()));
 			stmtInsert.setTime(13, Time.valueOf(pojoNuevo.getDomingoInicio()));
 			stmtInsert.setTime(14, Time.valueOf(pojoNuevo.getDomingoFin()));
-
+			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el curso
 				if (columnasAfectadas > 0 && rs.next()) {
