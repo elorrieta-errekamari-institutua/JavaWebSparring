@@ -42,13 +42,12 @@ public class DAOEdicion implements IDAOEdicion {
 
 	@Override
 	public int insert(Edicion pojoNuevo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insert(Edicion pojoNuevo, int idCurso, int idHorario) throws Exception {
 		int columnasAfectadas = -1, ultimaId = -1;
+		DAOHorario daoHorario = new DAOHorario();
+		DAOCurso daoCurso = new DAOCurso();
+		int idHorario = daoHorario.insert(pojoNuevo.getHorario());
+		int idCurso = daoCurso.insert(pojoNuevo.getCurso());
+
 		String sqlHorario = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
 				+ "fecha_fin) " + "VALUES " + "(?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
@@ -60,19 +59,26 @@ public class DAOEdicion implements IDAOEdicion {
 			stmtInsert.setInt(3, idHorario);
 			stmtInsert.setDate(4, pojoNuevo.getFechaInicio());
 			stmtInsert.setDate(5, pojoNuevo.getFechaFin());
-			columnasAfectadas = stmtInsert.executeUpdate();
-			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
-				// Si se ha insertado el curso
-				if (columnasAfectadas > 0 && rs.next()) {
-					// Obterner linea de la base de datos
-					ultimaId = rs.getInt(1);
-					pojoNuevo.setId(ultimaId);
 
-				} else {
-					System.err.println("No se ha podido insertar el horario");
+			if (idHorario != -1 && idCurso != -1) {
+				columnasAfectadas = stmtInsert.executeUpdate();
+				try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
+					// Si se ha insertado el curso
+					if (columnasAfectadas > 0 && rs.next()) {
+						// Obterner linea de la base de datos
+						ultimaId = rs.getInt(1);
+						pojoNuevo.setId(ultimaId);
+
+					} else {
+						System.err.println("No se ha podido insertar la edicion");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			}
+
+			else {
+				System.err.printf("ERROR\n idHorario=%d \n idCurso=%d ", idHorario, idCurso);
 			}
 
 		} catch (Exception e) {

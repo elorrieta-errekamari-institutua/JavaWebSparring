@@ -3,9 +3,7 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
-import com.elorrieta.modelo.dao.DAOHorario;
 import com.elorrieta.modelo.pojo.Edicion;
 
 import jakarta.servlet.ServletException;
@@ -21,8 +19,8 @@ public class OperationsEdicion {
 
 	}
 
-	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
-			DAOCurso daoCurso, DAOHorario daoHorario) throws ServletException, IOException {
+	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
+			throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
@@ -30,24 +28,18 @@ public class OperationsEdicion {
 		int cursosInsertados = edicionesInsertadas;
 		for (Edicion edicion : listaEdiciones) {
 			int idEdicion = -1;
-			int idCurso;
-			int idHorario;
+
 			try {
 				if (!edicion.isGuardado()) {
 
-					idCurso = daoCurso.insert(edicion.getCurso());
-					idHorario = daoHorario.insert(edicion.getHorario());
-					idEdicion = daoEdicion.insert(edicion, idCurso, idHorario);
+					idEdicion = daoEdicion.insert(edicion);
 
 					if (idEdicion > 0) {
 						System.out.println("Insertada edicion");
+					} else {
+						System.err.println("No se ha podido insertar la edicion");
 					}
-					if (idHorario > 0) {
-						System.out.println("Insertada horario");
-					}
-					if (idCurso > 0) {
-						System.out.println("Insertada curso");
-					}
+
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

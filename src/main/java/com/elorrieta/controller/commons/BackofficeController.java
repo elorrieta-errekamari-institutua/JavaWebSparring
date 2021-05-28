@@ -344,7 +344,7 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case INSERT_ALL:
 					// Operacion insertar una lista
-					OperationsEdicion.insertAll(request, response, daoEdicion, daoCurso, daoHorario);
+					OperationsEdicion.insertAll(request, response, daoEdicion);
 					break;
 				case DELETE:
 					// Operacion Delete

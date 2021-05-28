@@ -3,7 +3,7 @@ package com.elorrieta.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -233,8 +233,8 @@ public class DAOCurso implements IDAOCurso {
 				e.printStackTrace();
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLIntegrityConstraintViolationException e) {
+			ultimaId = getByCodigos(pojoNuevo.getNombre(), pojoNuevo.getCodigoUc(), pojoNuevo.getCodigoAaff()).getId();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
