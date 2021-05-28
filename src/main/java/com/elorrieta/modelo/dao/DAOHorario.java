@@ -3,6 +3,7 @@ package com.elorrieta.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.List;
 
@@ -31,8 +32,26 @@ public class DAOHorario implements IDAOHorario {
 
 	@Override
 	public Horario delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		throw new Exception("Metodo sin implementar");
+		Horario horario = null;
+
+		String sql = "DELETE from horario WHERE id = ?";
+
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			horario = getByid(id);
+			if (horario.getId() > 0) {
+				// Borrar usuario
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			} else {
+				System.err.println("El horario que se quiere borrar no existe");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return horario;
 	}
 
 	@Override

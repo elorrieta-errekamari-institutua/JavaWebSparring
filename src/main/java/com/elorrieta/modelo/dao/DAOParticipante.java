@@ -160,7 +160,10 @@ public class DAOParticipante implements IDAOParticipante {
 				stmt.setString(12, pojoModificar.getTitulacion());
 				stmt.setInt(13, id);
 				int columnasAfectadas = stmt.executeUpdate();
-				participante = getByid(id);
+				if (columnasAfectadas > 0) {
+					System.out.println("Se ha actualizado el participante");
+					participante = getByid(id);
+				}
 			} else {
 				System.err.println("El participante que se quiere actualizar no existe");
 				return null;

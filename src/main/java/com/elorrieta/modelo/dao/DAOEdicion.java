@@ -78,6 +78,7 @@ public class DAOEdicion implements IDAOEdicion {
 			}
 
 			else {
+				daoHorario.delete(idHorario);
 				System.err.printf("ERROR\n idHorario=%d \n idCurso=%d ", idHorario, idCurso);
 			}
 

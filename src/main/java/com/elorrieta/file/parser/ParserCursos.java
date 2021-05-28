@@ -43,31 +43,31 @@ public class ParserCursos {
 						curso.setCualificacion(text);
 
 					}
-					if (cell.getColumnIndex() == 3 && cell.getRowIndex() > 1) {
+					else if (cell.getColumnIndex() == 3 && cell.getRowIndex() > 1) {
 						// Guarda codigo UC
 						String text = formatter.formatCellValue(cell);
 						curso.setCodigoUc(text);
 
 					}
-					if (cell.getColumnIndex() == 4 && cell.getRowIndex() > 1) {
+					else if (cell.getColumnIndex() == 4 && cell.getRowIndex() > 1) {
 						// Guarda competencia
 						String text = formatter.formatCellValue(cell);
 						curso.setCompetencia(text);
 
 					}
-					if (cell.getColumnIndex() == 5 && cell.getRowIndex() > 1) {
+					else if (cell.getColumnIndex() == 5 && cell.getRowIndex() > 1) {
 						// Guarda codigo AAFF
 						String text = formatter.formatCellValue(cell);
 						curso.setCodigoAaff(text);
 
 					}
-					if (cell.getColumnIndex() == 6 && cell.getRowIndex() > 1) {
+					else if (cell.getColumnIndex() == 6 && cell.getRowIndex() > 1) {
 						// Guarda nombre
 						String text = formatter.formatCellValue(cell);
 						curso.setNombre(text);
 
 					}
-					if (cell.getColumnIndex() == 7 && cell.getRowIndex() > 1) {
+					else if (cell.getColumnIndex() == 7 && cell.getRowIndex() > 1) {
 						// Guarda horas curso
 						String text = formatter.formatCellValue(cell);
 						if (!"".equalsIgnoreCase(text))

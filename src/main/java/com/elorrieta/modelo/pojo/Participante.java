@@ -1,6 +1,7 @@
 package com.elorrieta.modelo.pojo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Participante extends Usuario {
 
@@ -164,6 +165,48 @@ public class Participante extends Usuario {
 				+ codigoPostal + ", municipio=" + municipio + ", provincia=" + provincia + ", erte=" + erte
 				+ ", situacionLaboral=" + situacionLaboral + ", situacionAdministrativa=" + situacionAdministrativa
 				+ ", titulacion=" + titulacion + ", guardado=" + guardado + "]";
+	}
+
+	public static ArrayList<String> setHeadersList() {
+		ArrayList<String> listaHead = new ArrayList<String>();
+		listaHead.add("#");
+		listaHead.add("Nombre");
+		listaHead.add("DNI");
+		listaHead.add("Telefono");
+		listaHead.add("<abbr title='Fecha de nacimiento'>Fecha</abbr>");
+		listaHead.add("Direccion");
+		listaHead.add("<abbr title='Codigo postal'>CP</abbr>");
+		listaHead.add("Municipio");
+		listaHead.add("Provincia");
+		listaHead.add("ERTE");
+		listaHead.add("<abbr title='Situacion laboral'>Laboral</abbr>");
+		listaHead.add("<abbr title='Situacion administrativa'>Administrativa</abbr>");
+		return listaHead;
+	}
+
+	public ArrayList<String> setDataList() {
+		ArrayList<String> listaTemporal = new ArrayList<String>();
+		if (guardado) {
+			listaTemporal.add("0");
+		} else {
+			listaTemporal.add("-1");
+		}
+		listaTemporal.add(nombreCompleto);
+		listaTemporal.add(dni);
+		listaTemporal.add(telefono);
+		listaTemporal.add(fechaDeNacimiento.toString());
+		listaTemporal.add(direccion);
+		listaTemporal.add(codigoPostal);
+		listaTemporal.add(municipio);
+		listaTemporal.add(provincia);
+		if (erte) {
+			listaTemporal.add("Si");
+		} else {
+			listaTemporal.add("No");
+		}
+		listaTemporal.add(situacionLaboral);
+		listaTemporal.add(situacionAdministrativa);
+		return listaTemporal;
 	}
 
 }

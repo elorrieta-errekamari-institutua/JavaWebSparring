@@ -4,6 +4,7 @@
 package com.elorrieta.modelo.pojo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * @author cursos_externos
@@ -135,6 +136,55 @@ public class Edicion {
 	 */
 	public void setGuardado(boolean guardado) {
 		this.guardado = guardado;
+	}
+
+	public static ArrayList<String> setHeadersList() {
+		ArrayList<String> listaHead = new ArrayList<String>();
+		listaHead.add("#");
+		listaHead.add("Codigo Lanbide");
+		listaHead.add("Nombre");
+		listaHead.add("Horas");
+		listaHead.add("Codigo AAFF");
+		listaHead.add("Codigo UC");
+		listaHead.add("Competencia");
+		listaHead.add("Cualificacion");
+		listaHead.add("Fecha inicio");
+		listaHead.add("Fecha fin");
+		listaHead.add("Lunes");
+		listaHead.add("Martes");
+		listaHead.add("Miercoles");
+		listaHead.add("Jueves");
+		listaHead.add("Viernes");
+		return listaHead;
+	}
+
+	public ArrayList<String> setDataList() {
+		ArrayList<String> listaTemporal = new ArrayList<String>();
+		if (guardado){
+			listaTemporal.add("0");
+		} else {
+			listaTemporal.add("-1");
+		}
+		listaTemporal.add(codigoLanbide);
+		listaTemporal.add(curso.getNombre());
+		listaTemporal.add(String.valueOf(curso.getHorasCurso()));
+		listaTemporal.add(curso.getCodigoAaff());
+		listaTemporal.add(curso.getCodigoUc());
+		listaTemporal.add(curso.getCompetencia());
+		listaTemporal.add(curso.getCualificacion());
+		listaTemporal.add(fechaInicio.toString());
+		listaTemporal.add(fechaFin.toString());
+		String horarioDia = horario.getLunesInicio().toString() + " - " + horario.getLunesFin().toString();
+		listaTemporal.add(horarioDia);
+		horarioDia = horario.getMartesInicio().toString() + " - " + horario.getMartesFin().toString();
+		listaTemporal.add(horarioDia);
+		horarioDia = horario.getMiercolesInicio().toString() + " - " + horario.getMiercolesFin().toString();
+		listaTemporal.add(horarioDia);
+		horarioDia = horario.getJuevesInicio().toString() + " - " + horario.getJuevesFin().toString();
+		listaTemporal.add(horarioDia);
+		horarioDia = horario.getViernesInicio().toString() + " - " + horario.getViernesFin().toString();
+		listaTemporal.add(horarioDia);
+		return listaTemporal;
 	}
 
 }

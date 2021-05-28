@@ -249,8 +249,17 @@ public class Horario {
 		this.domingoFin = domingoFin;
 	}
 
-	public ArrayList<String> toStringList() {
-		ArrayList<String> listaTemporal = new ArrayList<>();
+	public static void updateHeadersList(ArrayList<String> listaHead) {
+		listaHead.add("#");
+		listaHead.add("Lunes");
+		listaHead.add("Martes");
+		listaHead.add("Miercoles");
+		listaHead.add("Jueves");
+		listaHead.add("Viernes");
+	}
+
+	public void updateStringList(ArrayList<String> listaTemporal) {
+		listaTemporal.add("-1");
 		String horario = lunesInicio.toString() + " - " + lunesFin.toString();
 		listaTemporal.add(horario);
 		horario = martesInicio.toString() + " - " + martesFin.toString();
@@ -261,7 +270,5 @@ public class Horario {
 		listaTemporal.add(horario);
 		horario = viernesInicio.toString() + " - " + viernesFin.toString();
 		listaTemporal.add(horario);
-		return listaTemporal;
-
 	}
 }

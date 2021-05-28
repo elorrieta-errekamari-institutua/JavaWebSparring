@@ -93,45 +93,15 @@ public class ImportarExcelController extends HttpServlet {
 
 			ArrayList<Participante> listaParticipantes = parseadorParticipantes.parseFile(uploadPath + fileName);
 
-			listaHead.add("#");
-			listaHead.add("Nombre");
-			listaHead.add("DNI");
-			listaHead.add("Telefono");
-			listaHead.add("<abbr title='Fecha de nacimiento'>Fecha</abbr>");
-			listaHead.add("Direccion");
-			listaHead.add("<abbr title='Codigo postal'>CP</abbr>");
-			listaHead.add("Municipio");
-			listaHead.add("Provincia");
-			listaHead.add("ERTE");
-			listaHead.add("<abbr title='Situacion laboral'>Laboral</abbr>");
-			listaHead.add("<abbr title='Situacion administrativa'>Administrativa</abbr>");
+			listaHead = Participante.setHeadersList();
 
 			for (Participante participante : listaParticipantes) {
 				try {
 					Participante participanteTemporal = daoParticipante.getByDni(participante.getDni());
-					ArrayList<String> listaTemporal = new ArrayList<String>();
 					if (participanteTemporal != null) {
 						participante.setGuardado(true);
-						listaTemporal.add("0");
-					} else {
-						listaTemporal.add("-1");
 					}
-					listaTemporal.add(participante.getNombreCompleto());
-					listaTemporal.add(participante.getDni());
-					listaTemporal.add(participante.getTelefono());
-					listaTemporal.add(participante.getFechaDeNacimiento().toString());
-					listaTemporal.add(participante.getDireccion());
-					listaTemporal.add(participante.getCodigoPostal());
-					listaTemporal.add(participante.getMunicipio());
-					listaTemporal.add(participante.getProvincia());
-					if (participante.isErte()) {
-						listaTemporal.add("Si");
-					} else {
-						listaTemporal.add("No");
-					}
-					listaTemporal.add(participante.getSituacionLaboral());
-					listaTemporal.add(participante.getSituacionAdministrativa());
-					listaBody.add(listaTemporal);
+					listaBody.add(participanteTemporal.setDataList());
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
@@ -143,30 +113,16 @@ public class ImportarExcelController extends HttpServlet {
 		}
 
 		if ("cursos".equalsIgnoreCase(tipoFichero)) {
-			// TODO Parsear excel Curso y guardar
-
+			
 			ArrayList<Curso> listaCursos = parseadorCursos.parseFile(uploadPath + fileName);
 			ArrayList<Horario> listaHorarios = parseadorHorarios.parseFile(uploadPath + fileName);
 			ArrayList<Edicion> listaEdiciones = parseadorEdiciones.parseFile(uploadPath + fileName);
 
-			listaHead.add("#");
-			listaHead.add("Codigo Lanbide");
-			listaHead.add("Nombre");
-			listaHead.add("Horas");
-			listaHead.add("Codigo AAFF");
-			listaHead.add("Codigo UC");
-			listaHead.add("Competencia");
-			listaHead.add("Cualificacion");
-			listaHead.add("Fecha inicio");
-			listaHead.add("Fecha fin");
-			listaHead.add("Lunes");
-			listaHead.add("Martes");
-			listaHead.add("Miercoles");
-			listaHead.add("Jueves");
-			listaHead.add("Viernes");
+			listaHead = Edicion.setHeadersList();
 
 			for (int i = 0; i < listaEdiciones.size(); i++) {
 				try {
+
 					Edicion edicionTemporal = listaEdiciones.get(i);
 					Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicionTemporal.getCodigoLanbide());
 					Curso cursoTemporal = listaCursos.get(i);
@@ -176,27 +132,10 @@ public class ImportarExcelController extends HttpServlet {
 					edicionTemporal.setHorario(horarioTemporal);
 					listaEdiciones.set(i, edicionTemporal);
 
-					ArrayList<String> listaTemporal = new ArrayList<String>();
-					ArrayList<String> listaHorario = horarioTemporal.toStringList();
 					if (edicionDB != null) {
 						edicionTemporal.setGuardado(true);
-						listaTemporal.add("0");
-					} else {
-						listaTemporal.add("-1");
 					}
-					listaTemporal.add(edicionTemporal.getCodigoLanbide());
-					listaTemporal.add(cursoTemporal.getNombre());
-					listaTemporal.add(String.valueOf(cursoTemporal.getHorasCurso()));
-					listaTemporal.add(cursoTemporal.getCodigoAaff());
-					listaTemporal.add(cursoTemporal.getCodigoUc());
-					listaTemporal.add(cursoTemporal.getCompetencia());
-					listaTemporal.add(cursoTemporal.getCualificacion());
-					listaTemporal.add(edicionTemporal.getFechaInicio().toString());
-					listaTemporal.add(edicionTemporal.getFechaFin().toString());
-
-					if (listaTemporal.addAll(listaHorario)) {
-						listaBody.add(listaTemporal);
-					}
+					listaBody.add(edicionTemporal.setDataList());
 
 				} catch (Exception e) {
 					System.out.println("Error SQL");
