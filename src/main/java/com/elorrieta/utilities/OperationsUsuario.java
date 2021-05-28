@@ -79,7 +79,6 @@ public class OperationsUsuario {
 
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOUsuario daoUsuario) throws ServletException, IOException {
-		int horasUsuario;
 
 		Usuario usuario = new Usuario();
 		usuario.setNombre(request.getParameter("nombre"));

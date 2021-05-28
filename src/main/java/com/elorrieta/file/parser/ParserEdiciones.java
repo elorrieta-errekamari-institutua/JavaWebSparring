@@ -27,7 +27,6 @@ public class ParserEdiciones {
 		try (OPCPackage pkg = OPCPackage.open(new File(path));) {
 			XSSFWorkbook wb = new XSSFWorkbook(pkg);
 			Sheet sheet1 = wb.getSheetAt(0);
-			int ct;
 
 			// Parametros de la base de datos
 

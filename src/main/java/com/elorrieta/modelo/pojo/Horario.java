@@ -249,16 +249,25 @@ public class Horario {
 		this.domingoFin = domingoFin;
 	}
 
-	public static void updateHeadersList(ArrayList<String> listaHead) {
+	/**
+	 * @return ArrayList with all the headers needed to display a list of objects in a table
+	 */
+	public static ArrayList<String> setHeadersList() {
+		ArrayList<String> listaHead = new ArrayList<String>();
 		listaHead.add("#");
 		listaHead.add("Lunes");
 		listaHead.add("Martes");
 		listaHead.add("Miercoles");
 		listaHead.add("Jueves");
 		listaHead.add("Viernes");
+		return listaHead;
 	}
 
-	public void updateStringList(ArrayList<String> listaTemporal) {
+	/**
+	 * @return Arraylist with all the data needed to display the object in a table row
+	 */
+	public ArrayList<String> setDataList() {
+		ArrayList<String> listaTemporal = new ArrayList<String>();
 		listaTemporal.add("-1");
 		String horario = lunesInicio.toString() + " - " + lunesFin.toString();
 		listaTemporal.add(horario);
@@ -270,5 +279,7 @@ public class Horario {
 		listaTemporal.add(horario);
 		horario = viernesInicio.toString() + " - " + viernesFin.toString();
 		listaTemporal.add(horario);
+		return listaTemporal;
 	}
+	
 }
