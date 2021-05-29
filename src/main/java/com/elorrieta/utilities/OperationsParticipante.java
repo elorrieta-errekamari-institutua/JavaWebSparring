@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
@@ -64,8 +65,10 @@ public class OperationsParticipante {
 			if (id == -1)
 				participante = dao.getByid(dao.insert(participante));
 			if (participante != null) {
-				// TODO refactor el fuckin historial jsp
-				request.getRequestDispatcher("participantes").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.PARTICIPANTE)
+						.forward(request, response);
 				System.out.println("Usuario actualizado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
@@ -102,7 +105,6 @@ public class OperationsParticipante {
 			}
 		}
 		request.setAttribute("insertados", numeroInsertados);
-		request.removeAttribute("cursos");
 		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 
 	}
@@ -114,7 +116,10 @@ public class OperationsParticipante {
 
 			Participante participanteBorrado = daoParticipante.delete(id);
 			if (participanteBorrado != null) {
-				request.getRequestDispatcher("action?operacion=4&clase=3").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.PARTICIPANTE)
+						.forward(request, response);
 				System.out.println("Participante eliminado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
@@ -159,44 +164,14 @@ public class OperationsParticipante {
 		}
 		HttpSession session = request.getSession();
 		if (listaParticipantesDB != null) {
-			ArrayList<String> listaHead = new ArrayList<String>();
-			listaHead.add("#");
-			listaHead.add("Nombre");
-			listaHead.add("DNI");
-			listaHead.add("Telefono");
-			listaHead.add("<abbr title='Fecha de nacimiento'>Fecha</abbr>");
-			listaHead.add("Direccion");
-			listaHead.add("<abbr title='Codigo postal'>CP</abbr>");
-			listaHead.add("Municipio");
-			listaHead.add("Provincia");
-			listaHead.add("ERTE");
-			listaHead.add("<abbr title='Situacion laboral'>Laboral</abbr>");
-			listaHead.add("<abbr title='Situacion administrativa'>Administrativa</abbr>");
 
 			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
 			for (Participante participante : listaParticipantesDB) {
-				ArrayList<String> listaTemporal = new ArrayList<String>();
-				listaTemporal.add(String.valueOf(participante.getId()));
-				listaTemporal.add(participante.getNombreCompleto());
-				listaTemporal.add(participante.getDni());
-				listaTemporal.add(participante.getTelefono());
-				listaTemporal.add(participante.getFechaDeNacimiento().toString());
-				listaTemporal.add(participante.getDireccion());
-				listaTemporal.add(participante.getCodigoPostal());
-				listaTemporal.add(participante.getMunicipio());
-				listaTemporal.add(participante.getProvincia());
-				if (participante.isErte()) {
-					listaTemporal.add("Si");
-				} else {
-					listaTemporal.add("No");
-				}
-				listaTemporal.add(participante.getSituacionLaboral());
-				listaTemporal.add(participante.getSituacionAdministrativa());
-				listaBody.add(listaTemporal);
+				listaBody.add(participante.setDataList());
 			}
 			session.setAttribute("title", "Participantes");
-			session.setAttribute("clase", 3);
-			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("clase", BackofficeController.PARTICIPANTE);
+			session.setAttribute("tableHeader", Participante.setHeadersList());
 			session.setAttribute("tableBody", listaBody);
 		}
 

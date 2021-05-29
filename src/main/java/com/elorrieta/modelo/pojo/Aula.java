@@ -55,6 +55,8 @@ public class Aula {
 	public static ArrayList<String> setHeadersList() {
 		//TODO
 		ArrayList<String> listaHead = new ArrayList<String>();
+		listaHead.add("#");
+		listaHead.add("Nombre");
 		return listaHead;
 	}
 	
@@ -64,6 +66,8 @@ public class Aula {
 	public ArrayList<String> setDataList() {
 		//TODO
 		ArrayList<String> listaTemporal = new ArrayList<String>();
+		listaTemporal.add(String.valueOf(id));
+		listaTemporal.add(nombre);
 		return listaTemporal;
 	}
 

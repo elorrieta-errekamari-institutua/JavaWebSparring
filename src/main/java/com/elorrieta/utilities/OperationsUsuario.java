@@ -1,6 +1,7 @@
 package com.elorrieta.utilities;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
 
@@ -33,11 +35,17 @@ public class OperationsUsuario {
 		}
 		HttpSession session = request.getSession();
 		if (listaUsuariosDB != null) {
-			session.removeAttribute("listaUsuarios");
-			session.setAttribute("listaUsuarios", listaUsuariosDB);
+			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+			for (Usuario usuario : listaUsuariosDB) {
+				listaBody.add(usuario.setDataList());
+			}
+			session.setAttribute("title", "Usuarios");
+			session.setAttribute("clase", BackofficeController.USUARIO);
+			session.setAttribute("tableHeader", Usuario.setHeadersList());
+			session.setAttribute("tableBody", listaBody);
 		}
 
-		request.getRequestDispatcher("usuarios.jsp").forward(request, response);
+		request.getRequestDispatcher("listado.jsp").forward(request, response);
 	}
 
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id, DAOUsuario daoUsuario) {
@@ -46,7 +54,10 @@ public class OperationsUsuario {
 
 			Usuario cursoBorrado = daoUsuario.delete(id);
 			if (cursoBorrado != null) {
-				request.getRequestDispatcher("usuarios").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.USUARIO)
+						.forward(request, response);
 				System.out.println("Usuario eliminado");
 			} else {
 				request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);

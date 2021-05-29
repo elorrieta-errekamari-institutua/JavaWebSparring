@@ -6,6 +6,7 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
 
@@ -32,30 +33,16 @@ public class OperationsCurso {
 		}
 		HttpSession session = request.getSession();
 		if (listaCursosDB != null) {
-			ArrayList<String> listaHead = new ArrayList<String>();
-			listaHead.add("#");
-			listaHead.add("Nombre");
-			listaHead.add("Horas");
-			listaHead.add("Codigo AAFF");
-			listaHead.add("Codigo UC");
-			listaHead.add("Competencia");
-			listaHead.add("Cualificacion");
 
 			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+
 			for (Curso curso : listaCursosDB) {
-				ArrayList<String> listaTemporal = new ArrayList<String>();
-				listaTemporal.add(String.valueOf(curso.getId()));
-				listaTemporal.add(curso.getNombre());
-				listaTemporal.add(String.valueOf(curso.getHorasCurso()));
-				listaTemporal.add(curso.getCodigoAaff());
-				listaTemporal.add(curso.getCodigoUc());
-				listaTemporal.add(curso.getCompetencia());
-				listaTemporal.add(curso.getCualificacion());
-				listaBody.add(listaTemporal);
+				listaBody.add(curso.setDataList());
 			}
+
 			session.setAttribute("title", "Cursos");
-			session.setAttribute("clase", 1);
-			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("clase", BackofficeController.CURSO);
+			session.setAttribute("tableHeader", Curso.setHeadersList());
 			session.setAttribute("tableBody", listaBody);
 		}
 
@@ -68,7 +55,10 @@ public class OperationsCurso {
 
 			Curso cursoBorrado = daoCurso.delete(id);
 			if (cursoBorrado != null) {
-				request.getRequestDispatcher("action?operacion=4&clase=1").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
+						.forward(request, response);
 				System.out.println("Curso eliminado");
 			} else {
 				request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
@@ -99,10 +89,9 @@ public class OperationsCurso {
 
 	}
 
-	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
-			DAOCurso daoCurso) {
-		int horasCurso;
+	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso) {
 
+		int horasCurso;
 		String cualificacion = request.getParameter("cualificacion");
 		String codigoUc = request.getParameter("codigoUc");
 		String competencia = request.getParameter("competencia");
@@ -128,14 +117,16 @@ public class OperationsCurso {
 		curso.setHorasCurso(horasCurso);
 
 		// Actualizar base de datos
-		DAOCurso dao = new DAOCurso();
 		try {
 			if (id > 0)
-				curso = dao.update(curso);
+				curso = daoCurso.update(curso);
 			if (id == -1)
-				curso = dao.getByid(dao.insert(curso));
+				curso = daoCurso.getByid(daoCurso.insert(curso));
 			if (curso != null) {
-				request.getRequestDispatcher("cursos").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
+						.forward(request, response);
 				System.out.println("Curso actualizado");
 			} else {
 				request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);

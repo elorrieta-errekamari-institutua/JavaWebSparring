@@ -36,7 +36,10 @@ public class OperationsAula {
 			if (id == -1)
 				aula = daoAula.getByid(daoAula.insert(aula));
 			if (aula != null) {
-				request.getRequestDispatcher("action?operacion=4&clase=4").forward(request, response);
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.AULA)
+						.forward(request, response);
 				System.out.println("Aula actualizada");
 			} else {
 				request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
@@ -61,8 +64,9 @@ public class OperationsAula {
 
 			Aula aulaBorrada = daoAula.delete(id);
 			if (aulaBorrada != null) {
-				request.getRequestDispatcher(
-						"action?operacion=" + BackofficeController.DELETE + "&clase=" + BackofficeController.AULA)
+				request
+						.getRequestDispatcher(
+								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.AULA)
 						.forward(request, response);
 				System.out.println("Aula eliminado");
 			} else {
@@ -108,20 +112,15 @@ public class OperationsAula {
 		}
 		HttpSession session = request.getSession();
 		if (listaAulasDB != null) {
-			ArrayList<String> listaHead = new ArrayList<String>();
-			listaHead.add("#");
-			listaHead.add("Nombre");
 
 			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+
 			for (Aula aula : listaAulasDB) {
-				ArrayList<String> listaTemporal = new ArrayList<String>();
-				listaTemporal.add(String.valueOf(aula.getId()));
-				listaTemporal.add(aula.getNombre());
-				listaBody.add(listaTemporal);
+				listaBody.add(aula.setDataList());
 			}
 			session.setAttribute("title", "Aulas");
-			session.setAttribute("clase", 4);
-			session.setAttribute("tableHeader", listaHead);
+			session.setAttribute("clase", BackofficeController.AULA);
+			session.setAttribute("tableHeader", Aula.setHeadersList());
 			session.setAttribute("tableBody", listaBody);
 		}
 

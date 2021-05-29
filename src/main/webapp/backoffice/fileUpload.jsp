@@ -16,8 +16,6 @@ session.removeAttribute("lista");
 				onreset="resetName()">
 				<p class="has-text-success block" ${ insertados gt 0 ? '' : 'hidden'}>Se han introducido ${insertados}
 					registros</p>
-				<p class="has-text-success block" ${ cursos gt 0 ? '' : 'hidden'}>Se han introducido ${cursos}
-					nuevos cursos</p>
 				<div class="field">
 					<label for="type" class="label">Tipo de documento:</label>
 					<div class="control">

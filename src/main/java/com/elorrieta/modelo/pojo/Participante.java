@@ -189,7 +189,7 @@ public class Participante extends Usuario {
 		if (guardado) {
 			listaTemporal.add("0");
 		} else {
-			listaTemporal.add("-1");
+			listaTemporal.add(String.valueOf(this.getId()));
 		}
 		listaTemporal.add(nombreCompleto);
 		listaTemporal.add(dni);

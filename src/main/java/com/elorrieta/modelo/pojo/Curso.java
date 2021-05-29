@@ -133,6 +133,13 @@ public class Curso {
 	public static ArrayList<String> setHeadersList() {
 		//TODO
 		ArrayList<String> listaHead = new ArrayList<String>();
+		listaHead.add("#");
+		listaHead.add("Nombre");
+		listaHead.add("Horas");
+		listaHead.add("Codigo AAFF");
+		listaHead.add("Codigo UC");
+		listaHead.add("Competencia");
+		listaHead.add("Cualificacion");
 		return listaHead;
 	}
 	
@@ -142,6 +149,13 @@ public class Curso {
 	public ArrayList<String> setDataList() {
 		//TODO
 		ArrayList<String> listaTemporal = new ArrayList<String>();
+		listaTemporal.add(String.valueOf(id));
+		listaTemporal.add(nombre);
+		listaTemporal.add(String.valueOf(horasCurso));
+		listaTemporal.add(codigoAaff);
+		listaTemporal.add(codigoUc);
+		listaTemporal.add(competencia);
+		listaTemporal.add(cualificacion);
 		return listaTemporal;
 	}
 

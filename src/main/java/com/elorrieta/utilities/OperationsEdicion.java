@@ -25,7 +25,6 @@ public class OperationsEdicion {
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
 		int edicionesInsertadas = listaEdiciones.size();
-		int cursosInsertados = edicionesInsertadas;
 		for (Edicion edicion : listaEdiciones) {
 			int idEdicion = -1;
 
@@ -51,7 +50,6 @@ public class OperationsEdicion {
 			}
 		}
 		request.setAttribute("insertados", edicionesInsertadas);
-		request.setAttribute("cursos", cursosInsertados);
 		request.getRequestDispatcher("fileUpload.jsp").forward(request, response);
 
 	}

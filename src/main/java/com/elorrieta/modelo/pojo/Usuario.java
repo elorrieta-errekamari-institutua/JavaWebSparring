@@ -175,6 +175,11 @@ public class Usuario {
 	public static ArrayList<String> setHeadersList() {
     //TODO
 		ArrayList<String> listaHead = new ArrayList<String>();
+		listaHead.add("#");
+		listaHead.add("Avatar");
+		listaHead.add("Nombre");
+		listaHead.add("Email");
+		listaHead.add("Rol");
 		return listaHead;
   }
 	
@@ -184,6 +189,11 @@ public class Usuario {
 	public ArrayList<String> setDataList() {
 		//TODO
 		ArrayList<String> listaTemporal = new ArrayList<String>();
+		listaTemporal.add(String.valueOf(id));
+		listaTemporal.add("<img src='" + image.toString() + "' width='2rem' height='2rem'>"); // TODO modificar esto para poder insertar la imagen
+		listaTemporal.add(nombre);
+		listaTemporal.add(email);
+		listaTemporal.add(rolUsuario);
 		return listaTemporal;
 	}
 

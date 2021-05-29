@@ -169,7 +169,7 @@ public class Edicion {
 		if (guardado){
 			listaTemporal.add("0");
 		} else {
-			listaTemporal.add("-1");
+			listaTemporal.add(String.valueOf(id));
 		}
 		listaTemporal.add(codigoLanbide);
 		listaTemporal.add(curso.getNombre());
