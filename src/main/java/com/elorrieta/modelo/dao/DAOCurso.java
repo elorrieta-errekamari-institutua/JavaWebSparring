@@ -20,7 +20,7 @@ public class DAOCurso implements IDAOCurso {
 	 */
 	@Override
 	public Curso getByid(int id) throws Exception {
-		Curso curso = null;
+		Curso curso = new Curso();
 		String sql = "SELECT * from curso WHERE id= ? ;";
 
 		// Obtener resultado
@@ -31,7 +31,6 @@ public class DAOCurso implements IDAOCurso {
 			try (ResultSet rs = stmt.executeQuery();) {
 				// Fetch data
 				if (rs.next()) {
-					curso = new Curso();
 					curso.setId(rs.getInt("id"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
@@ -64,7 +63,7 @@ public class DAOCurso implements IDAOCurso {
 	 */
 	@Override
 	public Curso getByName(String nombre) throws Exception {
-		Curso curso = null;
+		Curso curso = new Curso();
 		String sql = "SELECT * from curso WHERE nombre = ? ";
 
 		// Obtener resultado
@@ -77,7 +76,6 @@ public class DAOCurso implements IDAOCurso {
 				// Fetch data
 
 				if (rs.next()) {
-					curso = new Curso();
 					curso.setId(rs.getInt("id"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));
@@ -243,7 +241,7 @@ public class DAOCurso implements IDAOCurso {
 
 	@Override
 	public Curso getByCodigos(String nombre, String codigoUc, String codigoAaff) throws Exception {
-		Curso curso = null;
+		Curso curso = new Curso();
 		String sql = "SELECT * from curso WHERE codigo_aaff = ? AND codigo_uc = ? AND nombre = ? ";
 
 		// Obtener resultado
@@ -258,7 +256,6 @@ public class DAOCurso implements IDAOCurso {
 				// Fetch data
 
 				if (rs.next()) {
-					curso = new Curso();
 					curso.setId(rs.getInt("id"));
 					curso.setCualificacion(rs.getString("cualificacion"));
 					curso.setCodigoUc(rs.getString("codigo_uc"));

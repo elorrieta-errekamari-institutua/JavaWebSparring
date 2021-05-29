@@ -16,7 +16,7 @@ public class OperationsAula {
 
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id, DAOAula daoAula) {
 
-		String nombre = request.getParameter("nombreCompleto");
+		String nombre = request.getParameter("nombre");
 
 		try {
 			id = Integer.parseInt(request.getParameter("id"));

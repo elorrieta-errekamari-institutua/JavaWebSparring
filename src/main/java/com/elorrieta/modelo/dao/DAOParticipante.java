@@ -64,7 +64,7 @@ public class DAOParticipante implements IDAOParticipante {
 	 */
 	@Override
 	public Participante getByDni(String dni) throws Exception {
-		Participante participante = null;
+		Participante participante = new Participante();
 		String sql = "SELECT * from participante WHERE dni = ? ";
 
 		// Obtener resultado
@@ -77,7 +77,6 @@ public class DAOParticipante implements IDAOParticipante {
 				// Fetch data
 
 				if (rs.next()) {
-					participante = new Participante();
 					participante.setId(rs.getInt("id"));
 					participante.setNombreCompleto(rs.getString("nombre_completo"));
 					participante.setDni(rs.getString("dni"));

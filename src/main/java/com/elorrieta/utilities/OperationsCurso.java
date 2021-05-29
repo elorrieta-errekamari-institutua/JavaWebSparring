@@ -73,6 +73,7 @@ public class OperationsCurso {
 
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso)
 			throws ServletException, IOException {
+				 
 		Curso curso = null;
 		try {
 			curso = daoCurso.getByid(id);
