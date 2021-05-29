@@ -52,8 +52,8 @@ public class OperationsUsuario {
 
 		try {
 
-			Usuario cursoBorrado = daoUsuario.delete(id);
-			if (cursoBorrado != null) {
+			Usuario usuarioBorrado = daoUsuario.delete(id);
+			if (usuarioBorrado != null) {
 				request
 						.getRequestDispatcher(
 								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.USUARIO)
@@ -72,7 +72,7 @@ public class OperationsUsuario {
 
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOUsuario daoUsuario)
 			throws ServletException, IOException {
-		Usuario usuario = null;
+		Usuario usuario = new Usuario();
 		try {
 			usuario = daoUsuario.getByid(id);
 		} catch (Exception e) {
@@ -80,9 +80,7 @@ public class OperationsUsuario {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		if (usuario != null) {
-			session.setAttribute("usuario", usuario);
-		}
+		session.setAttribute("usuario", usuario);
 
 		request.getRequestDispatcher("detalleUsuario.jsp").forward(request, response);
 

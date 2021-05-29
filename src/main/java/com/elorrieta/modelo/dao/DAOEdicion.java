@@ -89,7 +89,7 @@ public class DAOEdicion implements IDAOEdicion {
 	}
 
 	public Edicion getByCodigoLanbide(String codigoLanbide) {
-		Edicion edicion = null;
+		Edicion edicion = new Edicion();
 		String sql = "SELECT * from edicion WHERE codigo_lanbide = ? ";
 
 		// Obtener resultado
@@ -102,7 +102,6 @@ public class DAOEdicion implements IDAOEdicion {
 				// Fetch data
 
 				if (rs.next()) {
-					edicion = new Edicion();
 					edicion.setId(rs.getInt("id"));
 					edicion.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					edicion.setFechaInicio(rs.getDate("fecha_inicio"));

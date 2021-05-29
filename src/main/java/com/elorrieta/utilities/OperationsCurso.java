@@ -73,8 +73,8 @@ public class OperationsCurso {
 
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso)
 			throws ServletException, IOException {
-				 
-		Curso curso = null;
+
+		Curso curso = new Curso();
 		try {
 			curso = daoCurso.getByid(id);
 		} catch (Exception e) {
@@ -82,9 +82,7 @@ public class OperationsCurso {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		if (curso != null) {
-			session.setAttribute("curso", curso);
-		}
+		session.setAttribute("curso", curso);
 
 		request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
 
@@ -123,7 +121,7 @@ public class OperationsCurso {
 				curso = daoCurso.update(curso);
 			if (id == -1)
 				curso = daoCurso.getByid(daoCurso.insert(curso));
-			if (curso != null) {
+			if (curso.getId() > 0) {
 				request
 						.getRequestDispatcher(
 								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)

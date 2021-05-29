@@ -53,8 +53,7 @@ public class ImportarExcelController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//
 		doPost(request, response);
@@ -77,8 +76,7 @@ public class ImportarExcelController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Recoger la sesion e incializar las tablas que se rellenaran mas adelante
 		HttpSession session = request.getSession();
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -98,10 +96,10 @@ public class ImportarExcelController extends HttpServlet {
 			for (Participante participante : listaParticipantes) {
 				try {
 					Participante participanteTemporal = daoParticipante.getByDni(participante.getDni());
-					if (participanteTemporal != null) {
+					if (participanteTemporal.getId() > 0) {
 						participante.setGuardado(true);
 					}
-					listaBody.add(participanteTemporal.setDataList());
+					listaBody.add(participante.setDataList());
 				} catch (Exception e) {
 					System.out.println("Error SQL");
 					e.printStackTrace();
@@ -113,7 +111,7 @@ public class ImportarExcelController extends HttpServlet {
 		}
 
 		if ("cursos".equalsIgnoreCase(tipoFichero)) {
-			
+
 			ArrayList<Curso> listaCursos = parseadorCursos.parseFile(uploadPath + fileName);
 			ArrayList<Horario> listaHorarios = parseadorHorarios.parseFile(uploadPath + fileName);
 			ArrayList<Edicion> listaEdiciones = parseadorEdiciones.parseFile(uploadPath + fileName);
@@ -132,7 +130,7 @@ public class ImportarExcelController extends HttpServlet {
 					edicionTemporal.setHorario(horarioTemporal);
 					listaEdiciones.set(i, edicionTemporal);
 
-					if (edicionDB != null) {
+					if (edicionDB.getId() > 0) {
 						edicionTemporal.setGuardado(true);
 					}
 					listaBody.add(edicionTemporal.setDataList());

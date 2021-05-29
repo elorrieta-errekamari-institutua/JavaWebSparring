@@ -14,6 +14,7 @@ public class Curso {
 
 	public Curso() {
 		super();
+		this.id = -1;
 		this.cualificacion = "";
 		this.codigoUc = "";
 		this.competencia = "";

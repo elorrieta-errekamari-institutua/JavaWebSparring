@@ -23,6 +23,7 @@ public class Horario {
 
 	public Horario() {
 		super();
+		this.id = -1;
 		this.lunesInicio = LocalTime.MIN;
 		this.lunesFin = LocalTime.MIN;
 		this.martesInicio = LocalTime.MIN;

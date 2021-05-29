@@ -35,7 +35,7 @@ public class OperationsAula {
 				aula = daoAula.update(aula);
 			if (id == -1)
 				aula = daoAula.getByid(daoAula.insert(aula));
-			if (aula != null) {
+			if (aula.getId() > 0) {
 				request
 						.getRequestDispatcher(
 								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.AULA)
@@ -84,7 +84,7 @@ public class OperationsAula {
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOAula daoAula)
 			throws ServletException, IOException {
 
-		Aula aula = null;
+		Aula aula = new Aula();
 		try {
 			aula = daoAula.getByid(id);
 		} catch (Exception e) {
@@ -92,9 +92,7 @@ public class OperationsAula {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		if (aula != null) {
-			session.setAttribute("aula", aula);
-		}
+		session.setAttribute("aula", aula);
 
 		request.getRequestDispatcher("detalleAula.jsp").forward(request, response);
 

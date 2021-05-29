@@ -64,7 +64,7 @@ public class OperationsParticipante {
 				participante = dao.update(participante);
 			if (id == -1)
 				participante = dao.getByid(dao.insert(participante));
-			if (participante != null) {
+			if (participante.getId() > 0) {
 				request
 						.getRequestDispatcher(
 								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.PARTICIPANTE)
@@ -136,7 +136,7 @@ public class OperationsParticipante {
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 
-		Participante participante = null;
+		Participante participante = new Participante();
 		try {
 			participante = daoParticipante.getByid(id);
 		} catch (Exception e) {
@@ -144,9 +144,7 @@ public class OperationsParticipante {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		if (participante != null) {
-			session.setAttribute("participante", participante);
-		}
+		session.setAttribute("participante", participante);
 
 		request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
 
