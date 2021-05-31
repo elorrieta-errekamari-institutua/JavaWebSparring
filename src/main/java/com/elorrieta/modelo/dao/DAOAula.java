@@ -215,4 +215,34 @@ public class DAOAula implements IDAOAula {
 		return ultimaId;
 	}
 
+	/**
+	 * 
+	 * @param id de una edicion
+	 * @return Todas las aulas de la edicion
+	 */
+	public ArrayList<Aula> getAll(int id) {
+		// TODO terminar y probar
+		ArrayList<Aula> lista = new ArrayList<>();
+		String sql = "SELECT id_aula from edicion_aulas WHERE id_edicion = ?;";
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, id);
+			try (ResultSet rs = stmt.executeQuery();) {
+				// Obtener resultado
+				while (rs.next()) {
+					Aula aula = new Aula();
+					int id = rs.getInt("id_aula");
+					aula.setNombre(rs.getString("nombre"));
+					lista.add(aula);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
 }

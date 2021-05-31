@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.elorrieta.modelo.interfaces.IDAOEdicion;
+import com.elorrieta.modelo.pojo.Aula;
 import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
 import com.elorrieta.modelo.pojo.Horario;
@@ -27,7 +28,8 @@ public class DAOEdicion implements IDAOEdicion {
 	@Override
 	public ArrayList<Edicion> getAll() throws Exception {
 		DAOCurso daoCurso = new DAOCurso();
-		DAOHorario daoHorario =new DAOHorario();
+		DAOHorario daoHorario = new DAOHorario();
+		DAOAula daoAula = new DAOAula();
 		ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>();
 		String sql = "SELECT * from edicion";
 		try ( // Inicializar resultados con autoclosable
@@ -45,6 +47,8 @@ public class DAOEdicion implements IDAOEdicion {
 				edicion.setHorario(horario);
 				edicion.setFechaInicio(rs.getDate("fecha_inicio"));
 				edicion.setFechaFin(rs.getDate("fecha_fin"));
+				//TODO agregar aulas
+				ArrayList<Aula> aulas = daoAula.getAll(edicion.getId());
 
 				listaEdiciones.add(edicion);
 			}

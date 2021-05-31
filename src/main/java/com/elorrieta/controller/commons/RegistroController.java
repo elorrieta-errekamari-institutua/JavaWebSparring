@@ -61,7 +61,7 @@ public class RegistroController extends HttpServlet {
 
 		Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
 
-		if (violations.isEmpty() && pass2.equalsIgnoreCase(usuario.getPass())) {
+		if (violations.isEmpty() && pass2.equals(usuario.getPass())) {
 			System.out.println("Todo OK");
 			int id = usuarioDB.insert(usuario);
 			if (id < 0) {

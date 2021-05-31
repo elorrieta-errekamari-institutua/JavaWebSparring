@@ -18,6 +18,7 @@ public class Edicion {
 	private Curso curso;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private ArrayList<Aula> aulas;
 	private boolean guardado;
 
 	public Edicion() {
@@ -27,6 +28,7 @@ public class Edicion {
 		this.horario = null;
 		this.fechaInicio = Date.valueOf("1977-11-14");
 		this.fechaFin = Date.valueOf("1977-11-15");
+		this.aulas = new ArrayList<Aula>();
 		this.guardado = false;
 	}
 
@@ -37,6 +39,7 @@ public class Edicion {
 		this.horario = horario;
 		this.fechaInicio = Date.valueOf("1977-11-14");
 		this.fechaFin = Date.valueOf("1977-11-15");
+		this.aulas = new ArrayList<Aula>();
 		this.guardado = false;
 	}
 
@@ -122,6 +125,20 @@ public class Edicion {
 	 */
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	/**
+	 * @return the aulas
+	 */
+	public ArrayList<Aula> getAulas() {
+		return aulas;
+	}
+
+	/**
+	 * @param aulas the aulas to set
+	 */
+	public void setAulas(ArrayList<Aula> aulas) {
+		this.aulas = aulas;
 	}
 
 	/**
