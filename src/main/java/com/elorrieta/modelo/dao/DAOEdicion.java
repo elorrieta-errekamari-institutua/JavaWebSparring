@@ -47,9 +47,8 @@ public class DAOEdicion implements IDAOEdicion {
 				edicion.setHorario(horario);
 				edicion.setFechaInicio(rs.getDate("fecha_inicio"));
 				edicion.setFechaFin(rs.getDate("fecha_fin"));
-				//TODO agregar aulas
 				ArrayList<Aula> aulas = daoAula.getAll(edicion.getId());
-
+				edicion.setAulas(aulas);
 				listaEdiciones.add(edicion);
 			}
 		} catch (Exception e) {
@@ -73,9 +72,11 @@ public class DAOEdicion implements IDAOEdicion {
 
 	@Override
 	public int insert(Edicion pojoNuevo) throws Exception {
+		//TODO agregar aulas
 		int columnasAfectadas = -1, ultimaId = -1;
 		DAOHorario daoHorario = new DAOHorario();
 		DAOCurso daoCurso = new DAOCurso();
+		DAOAula daoAula = new DAOAula();
 		int idHorario = daoHorario.insert(pojoNuevo.getHorario());
 		int idCurso = daoCurso.insert(pojoNuevo.getCurso());
 
@@ -120,6 +121,7 @@ public class DAOEdicion implements IDAOEdicion {
 	}
 
 	public Edicion getByCodigoLanbide(String codigoLanbide) {
+		//TODO agregar curso, horario y aulas
 		Edicion edicion = new Edicion();
 		String sql = "SELECT * from edicion WHERE codigo_lanbide = ? ";
 

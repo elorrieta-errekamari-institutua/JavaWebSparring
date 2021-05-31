@@ -131,7 +131,7 @@ public class DAOAula implements IDAOAula {
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			aula = getByid(id);
 			if (aula.getId() > 0) {
-				// Borrar usuario
+				// Borrar aula
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			} else {
@@ -221,7 +221,7 @@ public class DAOAula implements IDAOAula {
 	 * @return Todas las aulas de la edicion
 	 */
 	public ArrayList<Aula> getAll(int id) {
-		// TODO terminar y probar
+		// TODO probar
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT id_aula from edicion_aulas WHERE id_edicion = ?;";
 		try ( // Inicializar resultados con autoclosable
@@ -231,9 +231,8 @@ public class DAOAula implements IDAOAula {
 			try (ResultSet rs = stmt.executeQuery();) {
 				// Obtener resultado
 				while (rs.next()) {
-					Aula aula = new Aula();
-					int id = rs.getInt("id_aula");
-					aula.setNombre(rs.getString("nombre"));
+					int idAula = rs.getInt("id_aula");
+					Aula aula = getByid(idAula);
 					lista.add(aula);
 				}
 			} catch (Exception e) {
