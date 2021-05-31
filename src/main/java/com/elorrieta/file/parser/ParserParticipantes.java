@@ -21,7 +21,7 @@ public class ParserParticipantes {
 		super();
 	}
 
-	public ArrayList<Participante> parseFile(String path) {
+	public static ArrayList<Participante> parseFile(String path) {
 
 		ArrayList<Participante> listaParticipantes = new ArrayList<Participante>();
 		try (OPCPackage pkg = OPCPackage.open(new File(path));) {

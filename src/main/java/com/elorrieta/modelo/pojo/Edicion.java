@@ -144,15 +144,15 @@ public class Edicion {
 	public static ArrayList<String> setHeadersList() {
 		ArrayList<String> listaHead = new ArrayList<String>();
 		listaHead.add("#");
-		listaHead.add("Codigo Lanbide");
+		listaHead.add("<abbr title='Codigo Lanbide'>Lanbide</abbr>");
 		listaHead.add("Nombre");
 		listaHead.add("Horas");
 		listaHead.add("Codigo AAFF");
 		listaHead.add("Codigo UC");
 		listaHead.add("Competencia");
 		listaHead.add("Cualificacion");
-		listaHead.add("Fecha inicio");
-		listaHead.add("Fecha fin");
+		listaHead.add("<abbr title='Fecha de inicio'>Inicio</abbr>");
+		listaHead.add("<abbr title='Fecha de fin'>Fin</abbr>");
 		listaHead.add("Lunes");
 		listaHead.add("Martes");
 		listaHead.add("Miercoles");

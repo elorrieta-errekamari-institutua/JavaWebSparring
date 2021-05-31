@@ -132,7 +132,7 @@ public class DAOEdicion implements IDAOEdicion {
 					edicion.setId(rs.getInt("id"));
 					edicion.setCodigoLanbide(rs.getString("codigo_lanbide"));
 					edicion.setFechaInicio(rs.getDate("fecha_inicio"));
-					edicion.setFechaInicio(rs.getDate("fin"));
+					edicion.setFechaFin(rs.getDate("fecha_fin"));
 				}
 
 				else {

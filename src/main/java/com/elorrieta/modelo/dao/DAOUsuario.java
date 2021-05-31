@@ -35,7 +35,8 @@ public class DAOUsuario implements IDAOUsuario {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
 					usuario.setPass(rs.getString("pass"));
-					usuario.setEmail("email");
+					usuario.setEmail(rs.getString("email"));
+					getRolUsuario(usuario);
 				}
 
 				else {
@@ -75,6 +76,8 @@ public class DAOUsuario implements IDAOUsuario {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
 					usuario.setPass(rs.getString("pass"));
+					usuario.setEmail(rs.getString("email"));
+					getRolUsuario(usuario);
 				}
 
 				else {
@@ -111,6 +114,8 @@ public class DAOUsuario implements IDAOUsuario {
 				usuario.setId(rs.getInt("id"));
 				usuario.setNombre(rs.getString("nombre"));
 				usuario.setPass(rs.getString("pass"));
+				usuario.setEmail(rs.getString("email"));
+				getRolUsuario(usuario);
 				lista.add(usuario);
 			}
 		} catch (Exception e) {

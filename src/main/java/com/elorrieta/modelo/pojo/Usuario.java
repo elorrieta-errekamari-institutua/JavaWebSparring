@@ -3,11 +3,10 @@ package com.elorrieta.modelo.pojo;
 import java.sql.Blob;
 import java.util.ArrayList;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class Usuario {
 	private int id;
@@ -173,7 +172,6 @@ public class Usuario {
 	 * @return ArrayList with all the headers needed to display a list of objects in a table
 	 */
 	public static ArrayList<String> setHeadersList() {
-    //TODO
 		ArrayList<String> listaHead = new ArrayList<String>();
 		listaHead.add("#");
 		listaHead.add("Avatar");
@@ -187,7 +185,6 @@ public class Usuario {
 	 * @return Arraylist with all the data needed to display the object in a table row
 	 */
 	public ArrayList<String> setDataList() {
-		//TODO
 		ArrayList<String> listaTemporal = new ArrayList<String>();
 		listaTemporal.add(String.valueOf(id));
 		listaTemporal.add("<img src='" + image.toString() + "' width='2rem' height='2rem'>"); // TODO modificar esto para poder insertar la imagen

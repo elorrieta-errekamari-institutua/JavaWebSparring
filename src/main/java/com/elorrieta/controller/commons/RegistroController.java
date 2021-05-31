@@ -3,11 +3,6 @@ package com.elorrieta.controller.commons;
 import java.io.IOException;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import com.elorrieta.modelo.dao.DAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
 
@@ -16,6 +11,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 
 /**
  * Servlet implementation class RegistroController
@@ -56,12 +55,13 @@ public class RegistroController extends HttpServlet {
 		usuario.setNombre(request.getParameter("nombre"));
 		usuario.setPass(request.getParameter("pass"));
 		usuario.setEmail(request.getParameter("email"));
+		String pass2 = request.getParameter("pass2");
 
 		// validar que los datos sean correctos
 
 		Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
 
-		if (violations.isEmpty()) {
+		if (violations.isEmpty() && pass2.equalsIgnoreCase(usuario.getPass())) {
 			System.out.println("Todo OK");
 			int id = usuarioDB.insert(usuario);
 			if (id < 0) {

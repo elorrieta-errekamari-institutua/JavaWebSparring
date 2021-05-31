@@ -132,7 +132,6 @@ public class Curso {
 	 * @return ArrayList with all the headers needed to display a list of objects in a table
 	 */
 	public static ArrayList<String> setHeadersList() {
-		//TODO
 		ArrayList<String> listaHead = new ArrayList<String>();
 		listaHead.add("#");
 		listaHead.add("Nombre");
@@ -148,7 +147,6 @@ public class Curso {
 	 * @return Arraylist with all the data needed to display the object in a table row
 	 */
 	public ArrayList<String> setDataList() {
-		//TODO
 		ArrayList<String> listaTemporal = new ArrayList<String>();
 		listaTemporal.add(String.valueOf(id));
 		listaTemporal.add(nombre);

@@ -3,15 +3,11 @@ package com.elorrieta.controller.commons;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.elorrieta.file.parser.ParserCursos;
 import com.elorrieta.file.parser.ParserEdiciones;
-import com.elorrieta.file.parser.ParserHorarios;
 import com.elorrieta.file.parser.ParserParticipantes;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOParticipante;
-import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
-import com.elorrieta.modelo.pojo.Horario;
 import com.elorrieta.modelo.pojo.Participante;
 import com.elorrieta.utilities.UploadFile;
 
@@ -36,10 +32,6 @@ public class ImportarExcelController extends HttpServlet {
 
 	private DAOParticipante daoParticipante;
 	private DAOEdicion daoEdicion;
-	private ParserParticipantes parseadorParticipantes;
-	private ParserCursos parseadorCursos;
-	private ParserHorarios parseadorHorarios;
-	private ParserEdiciones parseadorEdiciones;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -52,7 +44,8 @@ public class ImportarExcelController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Todas las funciones se realizaran en Post
 		doPost(request, response);
 
@@ -63,17 +56,14 @@ public class ImportarExcelController extends HttpServlet {
 		super.init();
 		daoParticipante = new DAOParticipante();
 		daoEdicion = new DAOEdicion();
-		parseadorParticipantes = new ParserParticipantes();
-		parseadorCursos = new ParserCursos();
-		parseadorHorarios = new ParserHorarios();
-		parseadorEdiciones = new ParserEdiciones();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Recoger la sesion e incializar las tablas que se rellenaran mas adelante
 		HttpSession session = request.getSession();
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -86,7 +76,7 @@ public class ImportarExcelController extends HttpServlet {
 
 		if ("participantes".equalsIgnoreCase(tipoFichero)) {
 
-			ArrayList<Participante> listaParticipantes = parseadorParticipantes.parseFile(uploadPath + fileName);
+			ArrayList<Participante> listaParticipantes = ParserParticipantes.parseFile(uploadPath + fileName);
 
 			listaHead = Participante.setHeadersList();
 
@@ -109,35 +99,17 @@ public class ImportarExcelController extends HttpServlet {
 
 		if ("cursos".equalsIgnoreCase(tipoFichero)) {
 
-			ArrayList<Curso> listaCursos = parseadorCursos.parseFile(uploadPath + fileName);
-			ArrayList<Horario> listaHorarios = parseadorHorarios.parseFile(uploadPath + fileName);
-			ArrayList<Edicion> listaEdiciones = parseadorEdiciones.parseFile(uploadPath + fileName);
+			ArrayList<Edicion> listaEdiciones = ParserEdiciones.parseFile(uploadPath + fileName);
 
 			listaHead = Edicion.setHeadersList();
 
-			for (int i = 0; i < listaEdiciones.size(); i++) {
-				try {
-
-					Edicion edicionTemporal = listaEdiciones.get(i);
-					Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicionTemporal.getCodigoLanbide());
-					Curso cursoTemporal = listaCursos.get(i);
-					Horario horarioTemporal = listaHorarios.get(i);
-
-					edicionTemporal.setCurso(cursoTemporal);
-					edicionTemporal.setHorario(horarioTemporal);
-					listaEdiciones.set(i, edicionTemporal);
-
-					if (edicionDB.getId() > 0) {
-						edicionTemporal.setGuardado(true);
-					}
-					listaBody.add(edicionTemporal.setDataList());
-
-				} catch (Exception e) {
-					System.out.println("Error SQL");
-					e.printStackTrace();
+			for (Edicion edicion : listaEdiciones) {
+				Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicion.getCodigoLanbide());
+				if (edicionDB.getId() > 0) {
+					edicion.setGuardado(true);
 				}
+				listaBody.add(edicion.setDataList());
 			}
-
 			session.setAttribute("lista", listaEdiciones);
 			session.setAttribute("clase", BackofficeController.EDICION);
 		}
