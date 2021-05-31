@@ -14,8 +14,43 @@ public class DAOHorario implements IDAOHorario {
 
 	@Override
 	public Horario getByid(int id) throws Exception {
-		// TODO Auto-generated method stub
-		throw new Exception("Metodo sin implementar");
+		Horario horario = new Horario();
+		String sql = "SELECT * from horario WHERE id= ? ;";
+
+		// Obtener resultado
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, id);
+			try (ResultSet rs = stmt.executeQuery();) {
+				// Fetch data
+				if (rs.next()) {
+					horario.setId(rs.getInt("id"));
+					horario.setLunesInicio(rs.getTime("lunes_inicio").toLocalTime());
+					horario.setLunesFin(rs.getTime("lunes_fin").toLocalTime());
+					horario.setMartesInicio(rs.getTime("martes_inicio").toLocalTime());
+					horario.setMartesFin(rs.getTime("martes_fin").toLocalTime());
+					horario.setMiercolesInicio(rs.getTime("miercoles_inicio").toLocalTime());
+					horario.setMiercolesFin(rs.getTime("miercoles_fin").toLocalTime());
+					horario.setJuevesInicio(rs.getTime("jueves_inicio").toLocalTime());
+					horario.setJuevesFin(rs.getTime("jueves_fin").toLocalTime());
+					horario.setViernesInicio(rs.getTime("viernes_inicio").toLocalTime());
+					horario.setViernesFin(rs.getTime("viernes_fin").toLocalTime());
+				}
+
+				else {
+					System.out.println("No existe el participante");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return horario;
 	}
 
 	@Override

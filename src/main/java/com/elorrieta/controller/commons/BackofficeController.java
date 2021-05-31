@@ -70,7 +70,6 @@ public class BackofficeController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
 		super.init(config);
 		daoCurso = new DAOCurso();
 		daoUsuario = new DAOUsuario();
@@ -84,7 +83,6 @@ public class BackofficeController extends HttpServlet {
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		super.destroy();
 		daoCurso = null;
 		daoUsuario = null;
@@ -101,7 +99,6 @@ public class BackofficeController extends HttpServlet {
 	 */
 	public BackofficeController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -131,7 +128,7 @@ public class BackofficeController extends HttpServlet {
 
 			switch (map.get("clase")) {
 			case CURSO:
-				// TODO elegir operacion con Curso
+				// Elegir operacion con Curso
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -160,7 +157,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case USUARIO:
-				// TODO elegir operacion con Usuario
+				// Elegir operacion con Usuario
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -190,7 +187,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case PARTICIPANTE:
-				// TODO elegir operacion con Participante
+				// Elegir operacion con Participante
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -219,7 +216,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case AULA:
-				// TODO elegir operacion con Aula
+				// Elegir operacion con Aula
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -248,7 +245,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case HORARIO:
-				// TODO elegir operacion con Horario
+				// Elegir operacion con Horario
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -277,7 +274,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case FORMADOR:
-				// TODO elegir operacion con Formador
+				// Elegir operacion con Formador
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -306,7 +303,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case ROL:
-				// TODO elegir operacion con Rol
+				// Elegir operacion con Rol
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:
@@ -335,7 +332,7 @@ public class BackofficeController extends HttpServlet {
 				}
 				break;
 			case EDICION:
-				// TODO elegir operacion con Edicion
+				// Elegir operacion con Edicion
 				switch (map.get("operacion")) {
 
 				case INSERT_UPDATE:

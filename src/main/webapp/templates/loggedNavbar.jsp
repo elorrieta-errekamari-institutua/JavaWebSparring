@@ -35,6 +35,20 @@
           </div>
 
           <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=8">
+              Ediciones
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=4&clase=8">
+                Lista de ediciones
+              </a>
+              <a class="navbar-item" href="/javaweb/backoffice/action?operacion=2&clase=8&id=-1">
+                Insertar edicion
+              </a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link" href="/javaweb/backoffice/action?operacion=4&clase=1">
               Cursos
             </a>

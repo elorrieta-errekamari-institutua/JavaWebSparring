@@ -3,6 +3,7 @@ package com.elorrieta.utilities;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.pojo.Edicion;
 
@@ -41,7 +42,6 @@ public class OperationsEdicion {
 
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (idEdicion < 0) {
@@ -66,9 +66,31 @@ public class OperationsEdicion {
 
 	}
 
-	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion) {
-		// TODO Auto-generated method stub
+	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
+			throws ServletException, IOException {
+		ArrayList<Edicion> listaEdicionesDB = null;
+		try {
+			listaEdicionesDB = daoEdicion.getAll();
+		} catch (Exception e) {
+			System.err.println("Problemas recuperando ediciones");
+			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		if (listaEdicionesDB != null) {
 
+			ArrayList<ArrayList<String>> listaBody = new ArrayList<ArrayList<String>>();
+
+			for (Edicion edicion : listaEdicionesDB) {
+				listaBody.add(edicion.setDataList());
+			}
+
+			session.setAttribute("title", "Ediciones");
+			session.setAttribute("clase", BackofficeController.EDICION);
+			session.setAttribute("tableHeader", Edicion.setHeadersList());
+			session.setAttribute("tableBody", listaBody);
+		}
+
+		request.getRequestDispatcher("listado.jsp").forward(request, response);
 	}
 
 }

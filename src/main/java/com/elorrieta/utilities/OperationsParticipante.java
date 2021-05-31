@@ -75,7 +75,6 @@ public class OperationsParticipante {
 				System.err.println("No se ha podido actualizar participante");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.err.println("Error al actualizar participante");
 			e.printStackTrace();
 		}
@@ -96,7 +95,6 @@ public class OperationsParticipante {
 				if (!participante.isGuardado())
 					id = participanteDB.insert(participante);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (id < 0) {

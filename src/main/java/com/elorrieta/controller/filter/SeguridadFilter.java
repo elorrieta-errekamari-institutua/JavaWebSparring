@@ -40,8 +40,8 @@ public class SeguridadFilter implements Filter {
 
 		Usuario uLogaeado = (Usuario) request.getSession().getAttribute("usuarioLogeado");
 
-		// TODO preguntar por ROL de Admin
-		if (uLogaeado != null) { // estamos logeados
+		// Preguntar por ROL de Admin
+		if ("Admin".equalsIgnoreCase(uLogaeado.getRolUsuario())) { // estamos logeados
 
 			// continuamos o dejamos pasar
 			chain.doFilter(request, response);

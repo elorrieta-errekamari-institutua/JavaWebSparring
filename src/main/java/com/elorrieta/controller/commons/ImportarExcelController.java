@@ -46,7 +46,6 @@ public class ImportarExcelController extends HttpServlet {
 	 */
 	public ImportarExcelController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -54,15 +53,13 @@ public class ImportarExcelController extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//
+		// Todas las funciones se realizaran en Post
 		doPost(request, response);
 
 	}
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		super.init();
 		daoParticipante = new DAOParticipante();
 		daoEdicion = new DAOEdicion();

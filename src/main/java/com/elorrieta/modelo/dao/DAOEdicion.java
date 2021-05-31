@@ -3,10 +3,12 @@ package com.elorrieta.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
+import java.util.ArrayList;
 
 import com.elorrieta.modelo.interfaces.IDAOEdicion;
+import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
+import com.elorrieta.modelo.pojo.Horario;
 
 public class DAOEdicion implements IDAOEdicion {
 
@@ -23,9 +25,34 @@ public class DAOEdicion implements IDAOEdicion {
 	}
 
 	@Override
-	public List<Edicion> getAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Edicion> getAll() throws Exception {
+		DAOCurso daoCurso = new DAOCurso();
+		DAOHorario daoHorario =new DAOHorario();
+		ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>();
+		String sql = "SELECT * from edicion";
+		try ( // Inicializar resultados con autoclosable
+				Connection conn = DAOConectionManager.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();) {
+			// Obtener resultado
+			while (rs.next()) {
+				Edicion edicion = new Edicion();
+				edicion.setId(rs.getInt("id"));
+				edicion.setCodigoLanbide(rs.getString("codigo_lanbide"));
+				Curso curso = daoCurso.getByid(rs.getInt("id_curso"));
+				edicion.setCurso(curso);
+				Horario horario = daoHorario.getByid(rs.getInt("id_horario"));
+				edicion.setHorario(horario);
+				edicion.setFechaInicio(rs.getDate("fecha_inicio"));
+				edicion.setFechaFin(rs.getDate("fecha_fin"));
+
+				listaEdiciones.add(edicion);
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la consulta");
+			e.printStackTrace();
+		}
+		return listaEdiciones;
 	}
 
 	@Override
