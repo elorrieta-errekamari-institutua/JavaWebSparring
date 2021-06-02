@@ -142,6 +142,14 @@ public class Edicion {
 	}
 
 	/**
+	 * Agrega una aula a la lista de aulas
+	 * @param aula
+	 */
+	public void addAula(Aula aula) {
+		aulas.add(aula);
+	}
+
+	/**
 	 * @return the guardado
 	 */
 	public boolean isGuardado() {

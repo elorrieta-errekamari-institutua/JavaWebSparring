@@ -12,6 +12,24 @@ import com.elorrieta.modelo.pojo.Curso;
 
 public class DAOCurso implements IDAOCurso {
 
+	private boolean autoCommit = true;
+
+	/**
+	 * Constructor vacio
+	 */
+	public DAOCurso(){
+		super();
+	}
+
+	/**
+	 * Crea el dao con la opcion de autocommit
+	 * @param autoCommit
+	 */
+	public DAOCurso(boolean autoCommit) {
+		super();
+		this.autoCommit = autoCommit;
+	}
+
 	/**
 	 * Devueve un objeto Curso
 	 * 
@@ -25,7 +43,7 @@ public class DAOCurso implements IDAOCurso {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -69,7 +87,7 @@ public class DAOCurso implements IDAOCurso {
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
 				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -110,7 +128,7 @@ public class DAOCurso implements IDAOCurso {
 		ArrayList<Curso> listaCurso = new ArrayList<>();
 		String sql = "SELECT * from curso";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -139,7 +157,7 @@ public class DAOCurso implements IDAOCurso {
 		String sql = "DELETE from curso WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			curso = getByid(id);
 			if (curso.getId() > 0) {
@@ -170,7 +188,7 @@ public class DAOCurso implements IDAOCurso {
 		String sql = "UPDATE curso SET cualificacion = ? , codigo_uc = ?, competencia = ?,"
 				+ "codigo_aaff = ?, nombre = ?, horas_curso = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			curso = getByid(id);
 			if (curso.getId() > 0) {
@@ -199,7 +217,7 @@ public class DAOCurso implements IDAOCurso {
 	 * Inserta un curso en la base de datos
 	 * 
 	 * @param pojoModificar El curso con los nuevos datos
-	 * @return El curso insertado
+	 * @return El id del curso insertado, si ya existia devolvera el id del original
 	 */
 	@Override
 	public int insert(Curso pojoNuevo) throws Exception {
@@ -207,7 +225,7 @@ public class DAOCurso implements IDAOCurso {
 		String sqlInsert = "INSERT INTO curso (cualificacion, codigo_uc, competencia,"
 				+ "codigo_aaff, nombre, horas_curso) VALUES(?, ?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getCualificacion());
@@ -227,14 +245,10 @@ public class DAOCurso implements IDAOCurso {
 				} else {
 					System.err.println("No se ha podido insertar el curso");
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 
 		} catch (SQLIntegrityConstraintViolationException e) {
 			ultimaId = getByCodigos(pojoNuevo.getNombre(), pojoNuevo.getCodigoUc(), pojoNuevo.getCodigoAaff()).getId();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		return ultimaId;
 	}
@@ -247,7 +261,7 @@ public class DAOCurso implements IDAOCurso {
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
 				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, codigoAaff);
 			stmt.setString(2, codigoUc);

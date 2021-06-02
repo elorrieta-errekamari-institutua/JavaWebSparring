@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -11,6 +12,24 @@ import com.elorrieta.modelo.interfaces.IDAOAula;
 import com.elorrieta.modelo.pojo.Aula;
 
 public class DAOAula implements IDAOAula {
+
+	private boolean autoCommit = true;
+
+	/**
+	 * Constructor vacio
+	 */
+	public DAOAula(){
+		super();
+	}
+
+	/**
+	 * Crea el dao con la opcion de autocommit
+	 * @param autoCommit
+	 */
+	public DAOAula(boolean autoCommit) {
+		super();
+		this.autoCommit = autoCommit;
+	}
 
 	/**
 	 * Devuelve un objeto de tipo Aula
@@ -25,7 +44,7 @@ public class DAOAula implements IDAOAula {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -63,7 +82,7 @@ public class DAOAula implements IDAOAula {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -98,7 +117,7 @@ public class DAOAula implements IDAOAula {
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT * from aula";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -127,7 +146,7 @@ public class DAOAula implements IDAOAula {
 		String sql = "DELETE from aula WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			aula = getByid(id);
 			if (aula.getId() > 0) {
@@ -158,7 +177,7 @@ public class DAOAula implements IDAOAula {
 
 		String sql = "UPDATE aula SET  nombre = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			aula = getByid(id);
 			if (aula.getId() > 0) {
@@ -184,17 +203,18 @@ public class DAOAula implements IDAOAula {
 	 */
 	@Override
 	public int insert(Aula pojoNuevo) throws Exception {
-		int columnasAfectadas, ultimaId = -1;
+		int columnasAfectadas = -1;
+		int ultimaId = -1;
 		String sqlInsert = "INSERT INTO aula (nombre) VALUES(?);";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el usuario
-				if (columnasAfectadas > 0) {
+				if (columnasAfectadas > 0 && rs.next()) {
 					// Obterner linea de la base de datos
 					ultimaId = rs.getInt(1);
 
@@ -205,17 +225,16 @@ public class DAOAula implements IDAOAula {
 				e.printStackTrace();
 			}
 
+		} catch (SQLIntegrityConstraintViolationException e) {
+			ultimaId = getByName(pojoNuevo.getNombre()).getId();
 		} catch (SQLException e) {
 			System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-		} catch (
-
-		Exception e) {
-			e.printStackTrace();
 		}
 		return ultimaId;
 	}
 
 	/**
+	 * Devuelve todas las aulas de una edicion
 	 * 
 	 * @param id de una edicion
 	 * @return Todas las aulas de la edicion
@@ -225,7 +244,7 @@ public class DAOAula implements IDAOAula {
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT id_aula from edicion_aulas WHERE id_edicion = ?;";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {

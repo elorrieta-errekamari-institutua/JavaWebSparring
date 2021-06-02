@@ -13,6 +13,24 @@ import com.elorrieta.modelo.pojo.Usuario;
 
 public class DAOUsuario implements IDAOUsuario {
 
+	private boolean autoCommit = true;
+
+	/**
+	 * Constructor vacio
+	 */
+	public DAOUsuario(){
+		super();
+	}
+
+	/**
+	 * Crea el dao con la opcion de autocommit
+	 * @param autoCommit
+	 */
+	public DAOUsuario(boolean autoCommit) {
+		super();
+		this.autoCommit = autoCommit;
+	}
+
 	/**
 	 * Devuelve un objeto de tipo usuario
 	 * 
@@ -26,7 +44,7 @@ public class DAOUsuario implements IDAOUsuario {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -67,7 +85,7 @@ public class DAOUsuario implements IDAOUsuario {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -105,7 +123,7 @@ public class DAOUsuario implements IDAOUsuario {
 		List<Usuario> lista = new ArrayList<>();
 		String sql = "SELECT * from usuario";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -137,7 +155,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String sql = "DELETE from usuario WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
@@ -169,7 +187,7 @@ public class DAOUsuario implements IDAOUsuario {
 
 		String sql = "UPDATE usuario SET  nombre = ? , pass = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
@@ -201,7 +219,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String sqlInsert = "INSERT INTO usuario (nombre, pass, email, rol_usuario) VALUES(?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			stmtInsert.setString(2, pojoNuevo.getPass());
@@ -245,7 +263,7 @@ public class DAOUsuario implements IDAOUsuario {
 		int id = 0;
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 
 			stmt.setString(1, nombre);
@@ -281,7 +299,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String sql = "SELECT r.nombre from rol r, usuario u where r.id = u.rol_usuario AND u.id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection();
+				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, usuario.getId());
 			try (ResultSet rs = stmt.executeQuery();) {

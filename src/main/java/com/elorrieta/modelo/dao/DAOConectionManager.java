@@ -29,10 +29,37 @@ public class DAOConectionManager implements AutoCloseable {
 		/**
 		 * Request a Connection from the pool of connection threads.
 		 */
-		Connection conn = ds.getConnection();
+		conn = ds.getConnection();
+		conn.setAutoCommit(true);
 		// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
 		if (conn.isValid(0)) {
 			System.out.println("Conectado a la base de datos");
+		}
+
+		return conn;
+	}
+
+	/**
+	 * 
+	 * @param autoCommit
+	 * @return
+	 * @throws Exception
+	 */
+	static public Connection getConnection(boolean autoCommit) throws Exception {
+		if (conn == null) {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			// Crear conexion a la base de datos
+			InitialContext ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/elorrieta");
+			/**
+			 * Request a Connection from the pool of connection threads.
+			 */
+			conn = ds.getConnection();
+			conn.setAutoCommit(autoCommit);
+			// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
+			if (conn.isValid(0)) {
+				System.out.println("Conectado a la base de datos");
+			}
 		}
 
 		return conn;

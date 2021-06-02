@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.elorrieta.modelo.pojo.Aula;
 import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
 import com.elorrieta.modelo.pojo.Horario;
@@ -39,6 +40,7 @@ public class ParserEdiciones {
                 Edicion edicion = new Edicion();
                 Curso curso = new Curso();
                 Horario horario = new Horario();
+                ArrayList<Aula> aulas = new ArrayList<Aula>();
 
                 for (Cell cell : row) {
 
@@ -139,7 +141,6 @@ public class ParserEdiciones {
                             horario.setLunesInicio(TimeFormatter.normalizar(horas[0]));
                             horario.setLunesFin(TimeFormatter.normalizar(horas[1]));
                         }
-
                     }
 
                     else if (cell.getColumnIndex() == 12 && cell.getRowIndex() > 1) {
@@ -151,7 +152,6 @@ public class ParserEdiciones {
                             horario.setMartesInicio(TimeFormatter.normalizar(horas[0]));
                             horario.setMartesFin(TimeFormatter.normalizar(horas[1]));
                         }
-
                     }
 
                     else if (cell.getColumnIndex() == 13 && cell.getRowIndex() > 1) {
@@ -163,7 +163,6 @@ public class ParserEdiciones {
                             horario.setMiercolesInicio(TimeFormatter.normalizar(horas[0]));
                             horario.setMiercolesFin(TimeFormatter.normalizar(horas[1]));
                         }
-
                     }
 
                     else if (cell.getColumnIndex() == 14 && cell.getRowIndex() > 1) {
@@ -175,7 +174,6 @@ public class ParserEdiciones {
                             horario.setJuevesInicio(TimeFormatter.normalizar(horas[0]));
                             horario.setJuevesFin(TimeFormatter.normalizar(horas[1]));
                         }
-
                     }
 
                     else if (cell.getColumnIndex() == 15 && cell.getRowIndex() > 1) {
@@ -187,12 +185,34 @@ public class ParserEdiciones {
                             horario.setViernesInicio(TimeFormatter.normalizar(horas[0]));
                             horario.setViernesFin(TimeFormatter.normalizar(horas[1]));
                         }
+                    }
 
+                    else if (cell.getColumnIndex() == 19 && cell.getRowIndex() > 1) {
+                        // Guarda aula 1
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        String text = cell.getStringCellValue();
+                        if (!text.isBlank()) {
+                            Aula aula = new Aula();
+                            aula.setNombre(text);
+                            aulas.add(aula);
+                        }
+                    }
+
+                    else if (cell.getColumnIndex() == 20 && cell.getRowIndex() > 1) {
+                        // Guarda aula 2
+                        cell.setCellType(Cell.CELL_TYPE_STRING);
+                        String text = cell.getStringCellValue();
+                        if (!text.isBlank()) {
+                            Aula aula = new Aula();
+                            aula.setNombre(text);
+                            aulas.add(aula);
+                        }
                     }
                 }
                 if (!"".equalsIgnoreCase(edicion.getCodigoLanbide())) {
                     edicion.setCurso(curso);
                     edicion.setHorario(horario);
+                    edicion.setAulas(aulas);
                     listaEdiciones.add(edicion);
                 }
             }
