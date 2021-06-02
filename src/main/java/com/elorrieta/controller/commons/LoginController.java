@@ -34,13 +34,19 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Usuario pojoUsuario = new Usuario();
-		DAOUsuario usuarioDB = new DAOUsuario();
-
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("pass");
 		String check = request.getParameter("keep");
-		pojoUsuario = usuarioDB.login(nombre, pass);
+		Usuario pojoUsuario = new Usuario();
+		DAOUsuario usuarioDB;
+		try {
+			usuarioDB = new DAOUsuario();
+			pojoUsuario = usuarioDB.login(nombre, pass);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		if (pojoUsuario != null) {
 			request.setAttribute("mensaje", pojoUsuario.getNombre() + " esta logeado");
 

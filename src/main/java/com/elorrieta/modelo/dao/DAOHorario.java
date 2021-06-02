@@ -12,22 +12,25 @@ import com.elorrieta.modelo.pojo.Horario;
 
 public class DAOHorario implements IDAOHorario {
 
-	private boolean autoCommit = true;
+	Connection conn;
 
 	/**
 	 * Constructor vacio
+	 * @throws Exception
 	 */
-	public DAOHorario(){
+	public DAOHorario() throws Exception{
 		super();
+		conn = DAOConectionManager.getConnection();
 	}
 
 	/**
 	 * Crea el dao con la opcion de autocommit
 	 * @param autoCommit
+	 * @throws Exception
 	 */
-	public DAOHorario(boolean autoCommit) {
-		super();
-		this.autoCommit = autoCommit;
+	public DAOHorario(boolean autoCommit) throws Exception {
+		this();
+		conn.setAutoCommit(autoCommit);;
 	}
 
 	@Override
@@ -37,7 +40,6 @@ public class DAOHorario implements IDAOHorario {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -90,7 +92,6 @@ public class DAOHorario implements IDAOHorario {
 		String sql = "DELETE from horario WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			horario = getByid(id);
 			if (horario.getId() > 0) {
@@ -121,7 +122,6 @@ public class DAOHorario implements IDAOHorario {
 				+ "viernes_fin," + "sabado_inicio," + "sabado_fin," + "domingo_inicio," + "domingo_fin) " + "VALUES "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setTime(1, Time.valueOf(pojoNuevo.getLunesInicio()));

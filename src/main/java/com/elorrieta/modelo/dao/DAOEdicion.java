@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.elorrieta.modelo.interfaces.IDAOEdicion;
 import com.elorrieta.modelo.pojo.Aula;
@@ -13,23 +14,27 @@ import com.elorrieta.modelo.pojo.Horario;
 
 public class DAOEdicion implements IDAOEdicion {
 
-	private boolean autoCommit = true;
+	Connection conn;
 
 	/**
 	 * Constructor vacio
+	 * 
+	 * @throws Exception
 	 */
-	public DAOEdicion() {
+	public DAOEdicion() throws Exception {
 		super();
+		conn = DAOConectionManager.getConnection();
 	}
 
 	/**
 	 * Crea el dao con la opcion de autocommit
 	 * 
 	 * @param autoCommit
+	 * @throws Exception
 	 */
-	public DAOEdicion(boolean autoCommit) {
-		super();
-		this.autoCommit = autoCommit;
+	public DAOEdicion(boolean autoCommit) throws Exception {
+		this();
+		conn.setAutoCommit(autoCommit);
 	}
 
 	@Override
@@ -44,15 +49,10 @@ public class DAOEdicion implements IDAOEdicion {
 		return null;
 	}
 
-	@Override
-	public ArrayList<Edicion> getAll() throws Exception {
-		DAOCurso daoCurso = new DAOCurso();
-		DAOHorario daoHorario = new DAOHorario();
-		DAOAula daoAula = new DAOAula();
+	public ArrayList<Edicion> getAll(DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws Exception {
 		ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>();
 		String sql = "SELECT * from edicion";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -89,13 +89,10 @@ public class DAOEdicion implements IDAOEdicion {
 		return null;
 	}
 
-	@Override
-	public int insert(Edicion pojoNuevo) throws Exception {
+	public int insert(Edicion pojoNuevo, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws Exception {
 		// TODO agregar aulas
-		int columnasAfectadas = -1, ultimaId = -1;
-		DAOHorario daoHorario = new DAOHorario(false);
-		DAOCurso daoCurso = new DAOCurso(false);
-		DAOAula daoAula = new DAOAula(false);
+		int columnasAfectadas = -1;
+		int ultimaId = -1;
 		int idHorario = daoHorario.insert(pojoNuevo.getHorario());
 		int idCurso = daoCurso.insert(pojoNuevo.getCurso());
 		ArrayList<Integer> idsAulas = new ArrayList<Integer>();
@@ -106,7 +103,6 @@ public class DAOEdicion implements IDAOEdicion {
 		String sqlHorario = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
 				+ "fecha_fin) " + "VALUES " + "(?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(false);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getCodigoLanbide());
@@ -131,8 +127,7 @@ public class DAOEdicion implements IDAOEdicion {
 						System.err.println("No se ha podido insertar la edicion");
 					}
 				}
-			}
-			else {
+			} else {
 				System.err.printf("ERROR\n idHorario=%d \n idCurso=%d ", idHorario, idCurso);
 			}
 
@@ -148,7 +143,6 @@ public class DAOEdicion implements IDAOEdicion {
 	private void insertAulasEdicion(int idAula, int idEdicion) throws Exception {
 		String sqlAulasEdicion = "INSERT INTO edicion_aulas (id_aula," + "id_edicion) " + "VALUES " + "(?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlAulasEdicion);) {
 			stmtInsert.setInt(1, idAula);
 			stmtInsert.setInt(2, idEdicion);
@@ -164,7 +158,6 @@ public class DAOEdicion implements IDAOEdicion {
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
 				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, codigoLanbide);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -190,6 +183,18 @@ public class DAOEdicion implements IDAOEdicion {
 		}
 
 		return edicion;
+	}
+
+	@Override
+	public List<Edicion> getAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int insert(Edicion pojoNuevo) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

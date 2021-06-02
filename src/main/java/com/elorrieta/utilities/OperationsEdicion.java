@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.elorrieta.controller.commons.BackofficeController;
+import com.elorrieta.modelo.dao.DAOAula;
+import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
+import com.elorrieta.modelo.dao.DAOHorario;
 import com.elorrieta.modelo.pojo.Edicion;
 
 import jakarta.servlet.ServletException;
@@ -15,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 public class OperationsEdicion {
 
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion) {
+			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
 		// TODO Auto-generated method stub
 
 	}
@@ -55,22 +58,22 @@ public class OperationsEdicion {
 	}
 
 	public static void delete(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion) {
+			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
 		// TODO Auto-generated method stub
 
 	}
 
 	public static void select(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion) {
+			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
+	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula)
 			throws ServletException, IOException {
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
-			listaEdicionesDB = daoEdicion.getAll();
+			listaEdicionesDB = daoEdicion.getAll(daoCurso, daoHorario, daoAula);
 		} catch (Exception e) {
 			System.err.println("Problemas recuperando ediciones");
 			e.printStackTrace();
