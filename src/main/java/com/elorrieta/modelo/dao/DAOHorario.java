@@ -121,7 +121,6 @@ public class DAOHorario implements IDAOHorario {
 	public int insert(Horario pojoNuevo) throws Exception {
 		int columnasAfectadas = -1;
 		int ultimaId = -1;
-		System.out.println("autocommit= " + conn.getAutoCommit());
 		String sqlHorario = "INSERT INTO horario (lunes_inicio," + "lunes_fin," + "martes_inicio," + "martes_fin,"
 				+ "miercoles_inicio," + "miercoles_fin," + "jueves_inicio," + "jueves_fin," + "viernes_inicio,"
 				+ "viernes_fin," + "sabado_inicio," + "sabado_fin," + "domingo_inicio," + "domingo_fin) " + "VALUES "
@@ -159,7 +158,7 @@ public class DAOHorario implements IDAOHorario {
 			}
 
 		} catch (Exception e) {
-			throw new Exception("Horario mal formatra");
+			throw new Exception("Horario mal formateado");
 		}
 		return ultimaId;
 	}
