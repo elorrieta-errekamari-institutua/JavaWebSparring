@@ -58,12 +58,11 @@ public class OperationsParticipante {
 		participante.setTitulacion(titulacion);
 
 		// Actualizar base de datos
-		DAOParticipante dao = new DAOParticipante();
 		try {
 			if (id > 0)
-				participante = dao.update(participante);
+				participante = daoParticipante.update(participante);
 			if (id == -1)
-				participante = dao.getByid(dao.insert(participante));
+				participante = daoParticipante.getByid(daoParticipante.insert(participante));
 			if (participante.getId() > 0) {
 				request
 						.getRequestDispatcher(
@@ -87,13 +86,12 @@ public class OperationsParticipante {
 		HttpSession sesion = request.getSession();
 		ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
-		DAOParticipante participanteDB = new DAOParticipante();
 		int numeroInsertados = listaParticipantes.size();
 		for (Participante participante : listaParticipantes) {
 			int id = -1;
 			try {
 				if (!participante.isGuardado())
-					id = participanteDB.insert(participante);
+					id = daoParticipante.insert(participante);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

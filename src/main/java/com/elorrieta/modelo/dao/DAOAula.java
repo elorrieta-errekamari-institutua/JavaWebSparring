@@ -13,22 +13,28 @@ import com.elorrieta.modelo.pojo.Aula;
 
 public class DAOAula implements IDAOAula {
 
-	private boolean autoCommit = true;
+	Connection conn;
 
 	/**
 	 * Constructor vacio
+	 * 
+	 * @throws Exception
 	 */
-	public DAOAula(){
+	public DAOAula() throws Exception {
 		super();
+		conn = DAOConectionManager.getConnection();
 	}
 
 	/**
 	 * Crea el dao con la opcion de autocommit
+	 * 
 	 * @param autoCommit
+	 * @throws Exception
 	 */
-	public DAOAula(boolean autoCommit) {
-		super();
-		this.autoCommit = autoCommit;
+	public DAOAula(boolean autoCommit) throws Exception {
+		this();
+		conn.setAutoCommit(autoCommit);
+		;
 	}
 
 	/**
@@ -41,10 +47,8 @@ public class DAOAula implements IDAOAula {
 	public Aula getByid(int id) throws Exception {
 		Aula aula = new Aula();
 		String sql = "SELECT * from aula WHERE id= ? ;";
-
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -82,7 +86,6 @@ public class DAOAula implements IDAOAula {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -117,7 +120,6 @@ public class DAOAula implements IDAOAula {
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT * from aula";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado
@@ -146,7 +148,6 @@ public class DAOAula implements IDAOAula {
 		String sql = "DELETE from aula WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			aula = getByid(id);
 			if (aula.getId() > 0) {
@@ -177,7 +178,6 @@ public class DAOAula implements IDAOAula {
 
 		String sql = "UPDATE aula SET  nombre = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			aula = getByid(id);
 			if (aula.getId() > 0) {
@@ -208,7 +208,6 @@ public class DAOAula implements IDAOAula {
 		String sqlInsert = "INSERT INTO aula (nombre) VALUES(?);";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			columnasAfectadas = stmtInsert.executeUpdate();
@@ -238,13 +237,13 @@ public class DAOAula implements IDAOAula {
 	 * 
 	 * @param id de una edicion
 	 * @return Todas las aulas de la edicion
+	 * @throws Exception
 	 */
-	public ArrayList<Aula> getAll(int id) {
+	public ArrayList<Aula> getAll(int id) throws Exception {
 		// TODO probar
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT id_aula from edicion_aulas WHERE id_edicion = ?;";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {

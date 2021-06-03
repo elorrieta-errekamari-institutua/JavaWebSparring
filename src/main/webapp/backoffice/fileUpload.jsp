@@ -12,7 +12,7 @@ session.removeAttribute("lista");
 
 		<div class="centralBox">
 
-			<form class="box" action="/javaweb/backoffice/importar" method="post" enctype="multipart/form-data"
+			<form class="box" action="/javaweb/backoffice/action?clase=9" method="post" enctype="multipart/form-data"
 				onreset="resetName()">
 				<p class="has-text-success block" ${ insertados gt 0 ? '' : 'hidden'}>Se han introducido ${insertados}
 					registros</p>

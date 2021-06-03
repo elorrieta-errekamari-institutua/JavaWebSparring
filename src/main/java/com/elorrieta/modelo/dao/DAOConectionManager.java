@@ -2,6 +2,7 @@ package com.elorrieta.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -22,18 +23,20 @@ public class DAOConectionManager implements AutoCloseable {
 	 */
 
 	static public Connection getConnection() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		// Crear conexion a la base de datos
-		InitialContext ctx = new InitialContext();
-		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/elorrieta");
-		/**
-		 * Request a Connection from the pool of connection threads.
-		 */
-		conn = ds.getConnection();
-		conn.setAutoCommit(true);
-		// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
-		if (conn.isValid(0)) {
-			System.out.println("Conectado a la base de datos");
+		if (conn == null) {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			// Crear conexion a la base de datos
+			InitialContext ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/elorrieta");
+			/**
+			 * Request a Connection from the pool of connection threads.
+			 */
+			conn = ds.getConnection();
+			conn.setAutoCommit(true);
+			// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
+			if (conn.isValid(0)) {
+				System.out.println("Conectado a la base de datos");
+			}
 		}
 
 		return conn;
@@ -46,23 +49,12 @@ public class DAOConectionManager implements AutoCloseable {
 	 * @throws Exception
 	 */
 	static public Connection getConnection(boolean autoCommit) throws Exception {
-		if (conn == null) {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			// Crear conexion a la base de datos
-			InitialContext ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/elorrieta");
-			/**
-			 * Request a Connection from the pool of connection threads.
-			 */
-			conn = ds.getConnection();
-			conn.setAutoCommit(autoCommit);
-			// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
-			if (conn.isValid(0)) {
-				System.out.println("Conectado a la base de datos");
-			}
-		}
+
+		getConnection();
+		conn.setAutoCommit(autoCommit);
 
 		return conn;
+
 	}
 
 	/**
@@ -78,6 +70,15 @@ public class DAOConectionManager implements AutoCloseable {
 
 		System.out.println("Conectado a la base de datos");
 		return conn;
+	}
+
+	/**
+	 * 
+	 * @param autoCommit
+	 * @throws SQLException
+	 */
+	static public void setAutoCommit(boolean autoCommit) throws SQLException {
+		conn.setAutoCommit(autoCommit);
 	}
 
 	/**

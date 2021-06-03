@@ -7,22 +7,11 @@ import com.elorrieta.modelo.pojo.Formador;
 
 public class DAOFormador implements IDAOFormador {
 
-	private boolean autoCommit = true;
-
 	/**
 	 * Constructor vacio
 	 */
 	public DAOFormador(){
 		super();
-	}
-
-	/**
-	 * Crea el dao con la opcion de autocommit
-	 * @param autoCommit
-	 */
-	public DAOFormador(boolean autoCommit) {
-		super();
-		this.autoCommit = autoCommit;
 	}
 
 	@Override

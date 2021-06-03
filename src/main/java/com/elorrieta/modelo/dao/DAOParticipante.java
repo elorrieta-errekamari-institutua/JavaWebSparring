@@ -12,22 +12,25 @@ import com.elorrieta.modelo.pojo.Participante;
 
 public class DAOParticipante implements IDAOParticipante {
 
-	private boolean autoCommit = true;
+	Connection conn;
 
 	/**
 	 * Constructor vacio
+	 * @throws Exception
 	 */
-	public DAOParticipante(){
+	public DAOParticipante() throws Exception{
 		super();
+		conn = DAOConectionManager.getConnection();
 	}
 
 	/**
 	 * Crea el dao con la opcion de autocommit
 	 * @param autoCommit
+	 * @throws Exception
 	 */
-	public DAOParticipante(boolean autoCommit) {
-		super();
-		this.autoCommit = autoCommit;
+	public DAOParticipante(boolean autoCommit) throws Exception {
+		this();
+		conn.setAutoCommit(autoCommit);;
 	}
 
 	@Override
@@ -37,7 +40,6 @@ public class DAOParticipante implements IDAOParticipante {
 
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -88,7 +90,6 @@ public class DAOParticipante implements IDAOParticipante {
 		// Obtener resultado
 		try ( // Inicializar resultados con autoclosable
 				// Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, dni);
 			try (ResultSet rs = stmt.executeQuery();) {
@@ -132,7 +133,6 @@ public class DAOParticipante implements IDAOParticipante {
 		String sql = "DELETE from participante WHERE id = ?";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			participante = getByid(id);
 			if (participante.getId() > 0) {
@@ -158,7 +158,6 @@ public class DAOParticipante implements IDAOParticipante {
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
 				+ "situacion_laboral = ?, situacion_administrativa = ?, titulacion = ? WHERE id = ?";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			participante = getByid(id);
 			if (participante.getId() > 0) {
@@ -199,7 +198,6 @@ public class DAOParticipante implements IDAOParticipante {
 				+ "situacion_administrativa, titulacion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getNombreCompleto());
@@ -242,7 +240,6 @@ public class DAOParticipante implements IDAOParticipante {
 		ArrayList<Participante> lista = new ArrayList<>();
 		String sql = "SELECT * from participante";
 		try ( // Inicializar resultados con autoclosable
-				Connection conn = DAOConectionManager.getConnection(autoCommit);
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery();) {
 			// Obtener resultado

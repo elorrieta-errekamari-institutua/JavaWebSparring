@@ -50,7 +50,6 @@ public class RegistroController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Registra un usuario en la base de datos
-		DAOUsuario usuarioDB = new DAOUsuario();
 		Usuario usuario = new Usuario();
 		usuario.setNombre(request.getParameter("nombre"));
 		usuario.setPass(request.getParameter("pass"));
@@ -63,7 +62,14 @@ public class RegistroController extends HttpServlet {
 
 		if (violations.isEmpty() && pass2.equals(usuario.getPass())) {
 			System.out.println("Todo OK");
-			int id = usuarioDB.insert(usuario);
+			int id = -1;
+			try {
+				DAOUsuario usuarioDB = new DAOUsuario();
+				id = usuarioDB.insert(usuario);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (id < 0) {
 				request.setAttribute("errores", "Nombre o email de usuario ya registrado");
 

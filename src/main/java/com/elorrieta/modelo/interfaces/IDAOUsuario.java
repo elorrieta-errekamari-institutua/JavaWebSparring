@@ -9,7 +9,8 @@ public interface IDAOUsuario extends ICRUD<Usuario> {
 	 * @param password El password del usuario que se va a logear
 	 * @return Un objeto de tipo Usuario que se corresponda con el nombre y el
 	 *         password
+	 * @throws Exception
 	 */
-	Usuario login(String nombre, String password);
+	Usuario login(String nombre, String password) throws Exception;
 
 }
