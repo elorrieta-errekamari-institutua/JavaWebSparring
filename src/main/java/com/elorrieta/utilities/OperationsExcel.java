@@ -18,7 +18,8 @@ import jakarta.servlet.http.HttpSession;
 
 public class OperationsExcel {
     
-    public static void parseExcel(HttpServletRequest request, HttpServletResponse response, String uploadPath, DAOParticipante daoParticipante, DAOEdicion daoEdicion) throws ServletException, IOException {
+	public static void parseExcel(HttpServletRequest request, HttpServletResponse response, String uploadPath,
+			DAOParticipante daoParticipante, DAOEdicion daoEdicion) throws ServletException, IOException {
         // Recoger la sesion e incializar las tablas que se rellenaran mas adelante
 		HttpSession session = request.getSession();
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -58,11 +59,16 @@ public class OperationsExcel {
 			listaHead = Edicion.setHeadersList();
 
 			for (Edicion edicion : listaEdiciones) {
-				Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicion.getCodigoLanbide());
-				if (edicionDB.getId() > 0) {
-					edicion.setGuardado(true);
+				try {
+					Edicion edicionDB = daoEdicion.getByCodigoLanbide(edicion.getCodigoLanbide());
+					if (edicionDB.getId() > 0) {
+						edicion.setGuardado(true);
+					}
+					listaBody.add(edicion.setDataList());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				listaBody.add(edicion.setDataList());
 			}
 			session.setAttribute("lista", listaEdiciones);
 			session.setAttribute("clase", BackofficeController.EDICION);

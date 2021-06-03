@@ -93,8 +93,12 @@ public class DAOEdicion implements IDAOEdicion {
 		// TODO agregar aulas
 		int columnasAfectadas = -1;
 		int ultimaId = -1;
+		System.out.println("autocommit= " + conn.getAutoCommit());
+		DAOConectionManager.setAutoCommit(false);
+		System.out.println("autocommit= " + conn.getAutoCommit());
 		int idHorario = daoHorario.insert(pojoNuevo.getHorario());
 		int idCurso = daoCurso.insert(pojoNuevo.getCurso());
+
 		ArrayList<Integer> idsAulas = new ArrayList<Integer>();
 		for (Aula aula : pojoNuevo.getAulas()) {
 			idsAulas.add(daoAula.insert(aula));
@@ -135,6 +139,8 @@ public class DAOEdicion implements IDAOEdicion {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DAOConectionManager.setAutoCommit(true);
 		}
 
 		return ultimaId;

@@ -23,8 +23,8 @@ public class OperationsEdicion {
 
 	}
 
-	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
-			throws ServletException, IOException {
+	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
+			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
@@ -35,7 +35,7 @@ public class OperationsEdicion {
 			try {
 				if (!edicion.isGuardado()) {
 
-					idEdicion = daoEdicion.insert(edicion);
+					idEdicion = daoEdicion.insert(edicion, daoCurso, daoHorario, daoAula);
 
 					if (idEdicion > 0) {
 						System.out.println("Insertada edicion");
@@ -69,8 +69,8 @@ public class OperationsEdicion {
 
 	}
 
-	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula)
-			throws ServletException, IOException {
+	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
+			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
 			listaEdicionesDB = daoEdicion.getAll(daoCurso, daoHorario, daoAula);
