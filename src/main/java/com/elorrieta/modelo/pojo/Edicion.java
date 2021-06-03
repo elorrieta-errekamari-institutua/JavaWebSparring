@@ -218,4 +218,8 @@ public class Edicion {
 		return listaTemporal;
 	}
 
+    public void addAulas(ArrayList<Aula> aulasTemporal) {
+		// TODO 
+    }
+
 }

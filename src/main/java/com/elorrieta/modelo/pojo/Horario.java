@@ -16,10 +16,6 @@ public class Horario {
 	private LocalTime juevesFin;
 	private LocalTime viernesInicio;
 	private LocalTime viernesFin;
-	private LocalTime sabadoInicio;
-	private LocalTime sabadoFin;
-	private LocalTime domingoInicio;
-	private LocalTime domingoFin;
 
 	public Horario() {
 		super();
@@ -34,10 +30,6 @@ public class Horario {
 		this.juevesFin = LocalTime.MIN;
 		this.viernesInicio = LocalTime.MIN;
 		this.viernesFin = LocalTime.MIN;
-		this.sabadoInicio = LocalTime.MIN;
-		this.sabadoFin = LocalTime.MIN;
-		this.domingoInicio = LocalTime.MIN;
-		this.domingoFin = LocalTime.MIN;
 	}
 
 	/**
@@ -192,62 +184,6 @@ public class Horario {
 	 */
 	public void setViernesFin(LocalTime viernesFin) {
 		this.viernesFin = viernesFin;
-	}
-
-	/**
-	 * @return the sabadoInicio
-	 */
-	public LocalTime getSabadoInicio() {
-		return sabadoInicio;
-	}
-
-	/**
-	 * @param sabadoInicio the sabadoInicio to set
-	 */
-	public void setSabadoInicio(LocalTime sabadoInicio) {
-		this.sabadoInicio = sabadoInicio;
-	}
-
-	/**
-	 * @return the sabadoFin
-	 */
-	public LocalTime getSabadoFin() {
-		return sabadoFin;
-	}
-
-	/**
-	 * @param sabadoFin the sabadoFin to set
-	 */
-	public void setSabadoFin(LocalTime sabadoFin) {
-		this.sabadoFin = sabadoFin;
-	}
-
-	/**
-	 * @return the domingoInicio
-	 */
-	public LocalTime getDomingoInicio() {
-		return domingoInicio;
-	}
-
-	/**
-	 * @param domingoInicio the domingoInicio to set
-	 */
-	public void setDomingoInicio(LocalTime domingoInicio) {
-		this.domingoInicio = domingoInicio;
-	}
-
-	/**
-	 * @return the domingoFin
-	 */
-	public LocalTime getDomingoFin() {
-		return domingoFin;
-	}
-
-	/**
-	 * @param domingoFin the domingoFin to set
-	 */
-	public void setDomingoFin(LocalTime domingoFin) {
-		this.domingoFin = domingoFin;
 	}
 
 	/**

@@ -123,8 +123,8 @@ public class DAOHorario implements IDAOHorario {
 		int ultimaId = -1;
 		String sqlHorario = "INSERT INTO horario (lunes_inicio," + "lunes_fin," + "martes_inicio," + "martes_fin,"
 				+ "miercoles_inicio," + "miercoles_fin," + "jueves_inicio," + "jueves_fin," + "viernes_inicio,"
-				+ "viernes_fin," + "sabado_inicio," + "sabado_fin," + "domingo_inicio," + "domingo_fin) " + "VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "viernes_fin) " + "VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
@@ -138,10 +138,6 @@ public class DAOHorario implements IDAOHorario {
 			stmtInsert.setTime(8, Time.valueOf(pojoNuevo.getJuevesFin()));
 			stmtInsert.setTime(9, Time.valueOf(pojoNuevo.getViernesInicio()));
 			stmtInsert.setTime(10, Time.valueOf(pojoNuevo.getViernesFin()));
-			stmtInsert.setTime(11, Time.valueOf(pojoNuevo.getSabadoInicio()));
-			stmtInsert.setTime(12, Time.valueOf(pojoNuevo.getSabadoFin()));
-			stmtInsert.setTime(13, Time.valueOf(pojoNuevo.getDomingoInicio()));
-			stmtInsert.setTime(14, Time.valueOf(pojoNuevo.getDomingoFin()));
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 				// Si se ha insertado el curso
@@ -158,6 +154,7 @@ public class DAOHorario implements IDAOHorario {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception("Horario mal formateado");
 		}
 		return ultimaId;

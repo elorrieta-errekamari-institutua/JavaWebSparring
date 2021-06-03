@@ -73,7 +73,7 @@ public class OperationsEdicion {
 			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
-			listaEdicionesDB = daoEdicion.getAll(daoCurso, daoHorario, daoAula);
+			listaEdicionesDB = daoEdicion.getAll();
 		} catch (Exception e) {
 			System.err.println("Problemas recuperando ediciones");
 			e.printStackTrace();
