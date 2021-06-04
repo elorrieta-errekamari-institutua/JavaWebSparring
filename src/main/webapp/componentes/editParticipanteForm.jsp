@@ -1,6 +1,9 @@
-<form method="post" action="/javaweb/backoffice/action?operacion=1&clase=3&id=${ participante.id gt 0 ? participante.id : '-1'}" class="box">
+<form method="post"
+	action="/javaweb/backoffice/action?operacion=1&clase=3&id=${ participante.id gt 0 ? participante.id : '-1'}"
+	class="box">
 
-	<a href="/javaweb/backoffice/action?operacion=4&clase=3" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
+	<a href="/javaweb/backoffice/action?operacion=4&clase=3" class="button is-primary block"><i
+			class="fas fa-arrow-left"></i></a>
 
 	<input type="text" name="id" value="${participante.id}" hidden>
 
@@ -46,12 +49,10 @@
 			<div class="field-label">
 				<label class="label" for="date">Fecha de nacimiento:</label>
 			</div>
-			<div class="field-body">
-				<div class="control">
-					<div class="field">
-						<input class="input" type="date" name="fechaDeNacimiento" id="date"
-							placeholder="Fecha de nacimiento" value="${participante.fechaDeNacimiento}" required>
-					</div>
+			<div class="control">
+				<div class="field">
+					<input class="input" type="date" name="fechaDeNacimiento" id="date"
+						value="${participante.fechaDeNacimiento}" required>
 				</div>
 			</div>
 		</div>
@@ -86,12 +87,10 @@
 			<div class="field-label">
 				<label class="label" for="cp">C&oacute;digo postal:</label>
 			</div>
-			<div class="field-body">
-				<div class="field">
-					<div class="control">
-						<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
-							value="${participante.codigoPostal}" required>
-					</div>
+			<div class="field">
+				<div class="control">
+					<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
+						value="${participante.codigoPostal}" required>
 				</div>
 			</div>
 		</div>
@@ -124,7 +123,8 @@
 							<option value="">Seleccione una</option>
 							<option value="Desempleado" ${participante.situacionLaboral eq 'Desempleado' ? 'selected'
 								: '' }>Desempleado</option>
-							<option value="En activo" ${participante.situacionLaboral eq 'En activo' ? 'selected' :''}>En
+							<option value="En activo" ${participante.situacionLaboral eq 'En activo' ? 'selected' :''}>
+								En
 								activo</option>
 						</select>
 					</div>
@@ -133,18 +133,16 @@
 			<div class="field-label">
 				<label class="label" for="admin">Situaci&oacute;n administrativa:</label>
 			</div>
-			<div class="field-body">
-				<div class="field">
-					<div class="control">
-						<div class="select">
-							<select name="situacionAdministrativa" id="admin" required>
-								<option value="">Seleccione una</option>
-								<option value="Alta" ${ participante.situacionAdministrativa eq 'Alta' ? 'selected' : '' }>
-									Alta</option>
-								<option value="Baja" ${ participante.situacionAdministrativa eq 'Baja' ? 'selected' : '' }>
-									Baja</option>
-							</select>
-						</div>
+			<div class="field">
+				<div class="control">
+					<div class="select">
+						<select name="situacionAdministrativa" id="admin" required>
+							<option value="">Seleccione una</option>
+							<option value="Alta" ${ participante.situacionAdministrativa eq 'Alta' ? 'selected' : '' }>
+								Alta</option>
+							<option value="Baja" ${ participante.situacionAdministrativa eq 'Baja' ? 'selected' : '' }>
+								Baja</option>
+						</select>
 					</div>
 				</div>
 			</div>

@@ -84,6 +84,7 @@ public class OperationsParticipante {
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 
 		HttpSession sesion = request.getSession();
+		@SuppressWarnings("unchecked")
 		ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
 		int numeroInsertados = listaParticipantes.size();

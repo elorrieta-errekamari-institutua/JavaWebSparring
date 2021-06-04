@@ -367,12 +367,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsEdicion.select(request, response, map.get("id"), daoEdicion, daoCurso, daoHorario,
-									daoAula);
+							OperationsEdicion.select(request, response, map.get("id"), daoEdicion, daoAula);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
-							OperationsEdicion.selectAll(request, response, daoEdicion, daoCurso, daoHorario, daoAula);
+							OperationsEdicion.selectAll(request, response, daoEdicion);
 							break;
 
 						default:

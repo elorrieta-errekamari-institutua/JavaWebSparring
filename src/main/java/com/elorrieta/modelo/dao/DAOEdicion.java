@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.elorrieta.modelo.interfaces.IDAOEdicion;
 import com.elorrieta.modelo.pojo.Aula;
@@ -39,6 +38,12 @@ public class DAOEdicion implements IDAOEdicion {
 		conn.setAutoCommit(autoCommit);
 	}
 
+	/**
+	 * Devuelve un objeto Edicion con los valores recogidos del Resultset
+	 * @param rs
+	 * @return
+	 * @throws SQLException
+	 */
 	private Edicion mapper(ResultSet rs) throws SQLException {
 		Edicion edicion = new Edicion();
 		Curso curso = new Curso();
@@ -69,7 +74,7 @@ public class DAOEdicion implements IDAOEdicion {
 		horario.setViernesFin(rs.getTime("viernes_fin").toLocalTime());
 		edicion.setHorario(horario);
 		aula.setId(rs.getInt("id_aula"));
-		aula.setNombre("nombre_aula");
+		aula.setNombre(rs.getString("nombre_aula"));
 		edicion.addAula(aula);
 		return edicion;
 	}
@@ -78,36 +83,24 @@ public class DAOEdicion implements IDAOEdicion {
 	public Edicion getByid(int id) throws Exception {
 		// TODO probar
 		Edicion edicion = new Edicion();
-		String sql = "SELECT * FROM v_edicion WHERE e.id = ?;";
-
-		// // Obtener resultado
-		// try ( // Inicializar resultados con autoclosable
-		// PreparedStatement stmt = conn.prepareStatement(sql);) {
-		// stmt.setInt(1, id);
-		// try (ResultSet rs = stmt.executeQuery();) {
-		// // Fetch data
-		// if (rs.next()) {
-		// edicion.setId(rs.getInt("id"));
-		// edicion.setCualificacion(rs.getString("cualificacion"));
-		// edicion.setCodigoUc(rs.getString("codigo_uc"));
-		// edicion.setCompetencia(rs.getString("competencia"));
-		// edicion.setCodigoAaff(rs.getString("codigo_aaff"));
-		// edicion.setNombre(rs.getString("nombre"));
-		// edicion.setHorasCurso(rs.getInt("horas_curso"));
-		// }
-
-		// else {
-		// System.out.println("No existe el participante");
-		// }
-
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-
+		String sql = "SELECT * FROM v_ediciones WHERE id_edicion = ?;";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, id);
+			try (ResultSet rs = stmt.executeQuery();) {
+				while (rs.next()) {
+					if (edicion.getId() < 0) {
+						edicion = mapper(rs);
+					}else {
+						Edicion edicionTemporal = mapper(rs);
+						ArrayList<Aula> aulasTemporal = edicionTemporal.getAulas();
+						edicion.addAulas(aulasTemporal);
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la consulta");
+			e.printStackTrace();
+		}
 		return edicion;
 	}
 
@@ -122,10 +115,7 @@ public class DAOEdicion implements IDAOEdicion {
 		HashMap<Integer, Edicion> hmEdiciones = new HashMap<Integer, Edicion>();
 		Edicion edicion;
 		String sql = "SELECT * from v_ediciones;";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery();) {
-			// Obtener resultado
+		try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery();) {
 			while (rs.next()) {
 				edicion = mapper(rs);
 				int idEdicion = edicion.getId();
@@ -143,35 +133,6 @@ public class DAOEdicion implements IDAOEdicion {
 		ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>(hmEdiciones.values());
 		return listaEdiciones;
 	}
-
-	// public ArrayList<Edicion> getAll(DAOCurso daoCurso, DAOHorario daoHorario,
-	// DAOAula daoAula) throws Exception {
-	// ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>();
-	// String sql = "SELECT * from edicion";
-	// try ( // Inicializar resultados con autoclosable
-	// PreparedStatement stmt = conn.prepareStatement(sql);
-	// ResultSet rs = stmt.executeQuery();) {
-	// // Obtener resultado
-	// while (rs.next()) {
-	// Edicion edicion = new Edicion();
-	// edicion.setId(rs.getInt("id"));
-	// edicion.setCodigoLanbide(rs.getString("codigo_lanbide"));
-	// Curso curso = daoCurso.getByid(rs.getInt("id_curso"));
-	// edicion.setCurso(curso);
-	// Horario horario = daoHorario.getByid(rs.getInt("id_horario"));
-	// edicion.setHorario(horario);
-	// edicion.setFechaInicio(rs.getDate("fecha_inicio"));
-	// edicion.setFechaFin(rs.getDate("fecha_fin"));
-	// ArrayList<Aula> aulas = daoAula.getAll(edicion.getId());
-	// edicion.setAulas(aulas);
-	// listaEdiciones.add(edicion);
-	// }
-	// } catch (Exception e) {
-	// System.out.println("Error en la consulta");
-	// e.printStackTrace();
-	// }
-	// return listaEdiciones;
-	// }
 
 	@Override
 	public Edicion delete(int id) throws Exception {
@@ -197,10 +158,10 @@ public class DAOEdicion implements IDAOEdicion {
 			idsAulas.add(daoAula.insert(aula));
 		}
 
-		String sqlHorario = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
+		String sql = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
 				+ "fecha_fin) " + "VALUES " + "(?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
+				PreparedStatement stmtInsert = conn.prepareStatement(sql,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getCodigoLanbide());
 			stmtInsert.setInt(2, idCurso);

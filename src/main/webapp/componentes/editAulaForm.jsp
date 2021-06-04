@@ -1,6 +1,6 @@
 <form method="post" action="/javaweb/backoffice/action?operacion=1&clase=4&id=${ aula.id gt 0 ? aula.id : '-1'}" class="box">
 
-	<a href="/javaweb/backoffice/action?operacion=4&clase=4" class="button is-primary"><i class="fas fa-arrow-left"></i></a>
+	<a href="/javaweb/backoffice/action?operacion=4&clase=4" class="button is-primary block"><i class="fas fa-arrow-left"></i></a>
 
     <input type="text" name="id" value="${aula.id}" hidden>
 

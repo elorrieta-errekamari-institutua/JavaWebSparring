@@ -110,3 +110,12 @@ if (document.querySelector(".modal")) {
 		});
 	});
 }
+
+// agregar un input de aula en el formulario de ediciones
+var aulaIndex = 50;
+
+function agregarAula() {
+	let contenedor = document.getElementById("aulasExtra");
+	contenedor.innerHTML += "<div class='field is-horizontal'><div class='field-label'></div><div class='field-body'><div class='field'><div class='control'><input type='text' class='input' name='aula" + aulaIndex + "' placeholder='Aula'></div></div></div></div>";
+	aulaIndex ++;
+}

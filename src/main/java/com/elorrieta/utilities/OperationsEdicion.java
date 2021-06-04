@@ -8,6 +8,7 @@ import com.elorrieta.modelo.dao.DAOAula;
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOHorario;
+import com.elorrieta.modelo.pojo.Aula;
 import com.elorrieta.modelo.pojo.Edicion;
 
 import jakarta.servlet.ServletException;
@@ -26,6 +27,7 @@ public class OperationsEdicion {
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
 			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
+		@SuppressWarnings("unchecked")
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
 		int edicionesInsertadas = listaEdiciones.size();
@@ -63,14 +65,26 @@ public class OperationsEdicion {
 
 	}
 
-	public static void select(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
-		// TODO Auto-generated method stub
+	public static void select(HttpServletRequest request, HttpServletResponse response, int id,
+			DAOEdicion daoEdicion, DAOAula daoAula) throws ServletException, IOException {
+		// TODO probar
+		Edicion edicion = new Edicion();
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		try {
+			edicion = daoEdicion.getByid(id);
+			aulas = daoAula.getAll();
+		} catch (Exception e) {
+			System.err.println("Error recuperando edicion");
+			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("edicion", edicion);
+		session.setAttribute("aulas", aulas);
 
+		request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
 	}
 
-	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
-			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
+	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion) throws ServletException, IOException {
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
 			listaEdicionesDB = daoEdicion.getAll();

@@ -143,10 +143,21 @@ public class Edicion {
 
 	/**
 	 * Agrega una aula a la lista de aulas
+	 * 
 	 * @param aula
 	 */
 	public void addAula(Aula aula) {
 		aulas.add(aula);
+	}
+
+	/**
+	 * Agrega una lista de aulas a la lista de aulas
+	 * 
+	 * @param aulasTemporal
+	 */
+	public void addAulas(ArrayList<Aula> aulasTemporal) {
+		// TODO
+		aulas.addAll(aulasTemporal);
 	}
 
 	/**
@@ -164,7 +175,8 @@ public class Edicion {
 	}
 
 	/**
-	 * @return ArrayList with all the headers needed to display a list of objects in a table
+	 * @return ArrayList with all the headers needed to display a list of objects in
+	 *         a table
 	 */
 	public static ArrayList<String> setHeadersList() {
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -183,15 +195,17 @@ public class Edicion {
 		listaHead.add("Miercoles");
 		listaHead.add("Jueves");
 		listaHead.add("Viernes");
+		listaHead.add("Aulas");
 		return listaHead;
 	}
 
 	/**
-	 * @return Arraylist with all the data needed to display the object in a table row
+	 * @return Arraylist with all the data needed to display the object in a table
+	 *         row
 	 */
 	public ArrayList<String> setDataList() {
 		ArrayList<String> listaTemporal = new ArrayList<String>();
-		if (guardado){
+		if (guardado) {
 			listaTemporal.add("0");
 		} else {
 			listaTemporal.add(String.valueOf(id));
@@ -215,11 +229,20 @@ public class Edicion {
 		listaTemporal.add(horarioDia);
 		horarioDia = horario.getViernesInicio().toString() + " - " + horario.getViernesFin().toString();
 		listaTemporal.add(horarioDia);
+		String stringAulas = "";
+		for (int i = 0; i < aulas.size(); i++) {
+			Aula aula = aulas.get(i);
+			String nombreAula = aula.getNombre();
+			if (nombreAula != null) {
+				stringAulas = stringAulas.concat(nombreAula);
+			}
+			// si no es el ultimo concatenamos tambien la ,
+			if (i < (aulas.size() - 1)) {
+				stringAulas = stringAulas.concat(", ");
+			}
+		}
+		listaTemporal.add(stringAulas);
 		return listaTemporal;
 	}
-
-    public void addAulas(ArrayList<Aula> aulasTemporal) {
-		// TODO 
-    }
 
 }
