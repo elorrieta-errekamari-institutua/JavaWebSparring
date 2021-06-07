@@ -117,5 +117,118 @@ var aulaIndex = 50;
 function agregarAula() {
 	let contenedor = document.getElementById("aulasExtra");
 	contenedor.innerHTML += "<div class='field is-horizontal'><div class='field-label'></div><div class='field-body'><div class='field'><div class='control'><input type='text' class='input' name='aula" + aulaIndex + "' placeholder='Aula'></div></div></div></div>";
-	aulaIndex ++;
+	aulaIndex++;
+}
+
+// Autorrellenar nombres de aulas
+aula0dummy.onkeyup = initializeOptions;
+aula0dummy.addEventListener("change", function (event) {
+	checkAula(event);
+});
+aula1dummy.onkeyup = initializeOptions;
+aula1dummy.addEventListener("change", function (event) {
+	checkAula(event);
+});
+aula2dummy.onkeyup = initializeOptions;
+aula2dummy.addEventListener("change", function (event) {
+	checkAula(event);
+});
+aula3dummy.onkeyup = initializeOptions;
+aula3dummy.addEventListener("change", function (event) {
+	checkAula(event);
+});
+aula4dummy.onkeyup = initializeOptions;
+aula4dummy.addEventListener("change", function (event) {
+	checkAula(event);
+});
+
+function initializeOptions() {
+	// Recogemos los datos
+	let text = this.value;
+	if (text.length > 2) {
+		let url = '//localhost:8080/javaweb/api/aulas?name=' + text;
+		let element = document.getElementById(this.id);
+		fetch(url).then(function (response) {
+			if (response.ok) {
+				return response.json();
+			}
+			throw response;
+		}).then(function (data) {
+			renderDatalist(data, element);
+		}).catch(function (error) {
+			console.warn(error);
+		});
+	}
+}
+
+/**
+ * Create and render the datalist element
+ * @param  {Array} data  The data to use for the list
+ * @param element The element to append to
+ */
+function renderDatalist(data, element) {
+
+	let datosAulas = document.getElementById('datosAulas');
+	// Create the datalist element
+	if (datosAulas == null) {
+		datosAulas = document.createElement('datalist');
+		datosAulas.id = 'datosAulas';
+	}
+	else {
+		datosAulas.innerHTML = '';
+	}
+	element.setAttribute('list', datosAulas.id);
+
+	// Create fragment for option elements
+	let fragment = document.createDocumentFragment();
+
+	// Create list options
+	for (let aula of data) {
+		let option = document.createElement('option');
+		option.textContent = aula.nombre;
+		option.setAttribute("data-value", aula.id);
+		fragment.append(option);
+	}
+
+	// Add options to datalist
+	datosAulas.append(fragment);
+
+	// Inject into the DOM
+	element.after(datosAulas);
+
+}
+
+function checkAula(event) {
+	let element = event.target;
+	let text = element.value;
+	let url = '//localhost:8080/javaweb/api/aulas';
+	fetch(url).then(function (response) {
+		if (response.ok) {
+			return response.json();
+		}
+		throw response;
+	}).then(function (data) {
+		checkDatalist(data, element);
+	}).catch(function (error) {
+		console.warn(error);
+	});
+}
+
+function checkDatalist(data, element) {
+	// booleno, 0 si no es correcto, 1 si lo es
+	let name = element.id.substring(0, 5);
+	let hiddenElement = document.getElementById(name);
+	let correct = 0;
+	for (let aula of data) {
+		if (aula.nombre == element.value) {
+			correct = 1;
+			hiddenElement.value = aula.id;
+		}
+	}
+	if (correct == 1) {
+
+		element.setCustomValidity("");
+	} else {
+		element.setCustomValidity("Debe crear el aula antes de insertarla");
+	}
 }

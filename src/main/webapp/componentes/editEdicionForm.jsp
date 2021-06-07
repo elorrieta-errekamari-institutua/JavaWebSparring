@@ -215,13 +215,63 @@
             </div>
             <div class="field-body">
                 <div class="field">
-                    <div class="control"><a class="button is-primary" onclick="agregarAula()">A&ntilde;adir aula</a>
+                    <div class="control">
+                        <input type="text" class="input" name="aula0dummy" id="aula0dummy" placeholder="Aula">
+                        <input type="number" name="aula0" id="aula0" hidden>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="aulasExtra" class="field">
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" name="aula1dummy" id="aula1dummy" placeholder="Aula">
+                        <input type="number" name="aula1" id="aula1" hidden>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" name="aula2dummy" id="aula2dummy" placeholder="Aula">
+                        <input type="number" name="aula2" id="aula2" hidden>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" name="aula3dummy" id="aula3dummy" placeholder="Aula">
+                        <input type="number" name="aula3" id="aula3" hidden>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" name="aula4dummy" id="aula4dummy" placeholder="Aula">
+                        <input type="number" name="aula4" id="aula4" hidden>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="aulasExtra" class="field">
 
             <c:forEach var="aula" items="${edicion.aulas}" varStatus="index">
                 <div class="field is-horizontal">
@@ -229,14 +279,15 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input type="text" class="input" name="aula${colIndex.count}" value="${aula.nombre}">
+                                <input type="text" class="input" name="aula${index.count}" id="aula${index.count}"
+                                    value="${aula.nombre}" placeholder="Aula">
                             </div>
                         </div>
                     </div>
                 </div>
             </c:forEach>
 
-        </div>
+        </div> -->
 
         <div class="field is-horizontal">
             <div class="field-body">

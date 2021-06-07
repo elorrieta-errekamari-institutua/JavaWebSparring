@@ -20,6 +20,11 @@ public class OperationsEdicion {
 
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, Integer integer,
 			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
+				System.out.println(request.getParameter("aula0"));
+				System.out.println(request.getParameter("aula1"));
+				System.out.println(request.getParameter("aula2"));
+				System.out.println(request.getParameter("aula3"));
+				System.out.println(request.getParameter("aula4"));
 		// TODO Auto-generated method stub
 
 	}

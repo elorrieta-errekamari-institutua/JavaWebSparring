@@ -262,4 +262,28 @@ public class DAOAula implements IDAOAula {
 		return lista;
 	}
 
+	/**
+	 * Devuelve la lista de aulas que contienen name en su nombre
+	 * @param name
+	 * @return
+	 */
+	public ArrayList<Aula> getByPartialName(String name) {
+		ArrayList<Aula> lista = new ArrayList<>();
+		String sql = "SELECT * from aula WHERE nombre LIKE '%" + name + "%'";
+		try ( // Inicializar resultados con autoclosable
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				ResultSet rs = stmt.executeQuery();) {
+			// Obtener resultado
+			while (rs.next()) {
+				Aula aula = new Aula();
+				aula.setId(rs.getInt("id"));
+				aula.setNombre(rs.getString("nombre"));
+				lista.add(aula);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
 }
