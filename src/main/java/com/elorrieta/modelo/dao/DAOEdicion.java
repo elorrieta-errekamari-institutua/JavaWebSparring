@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,6 +41,7 @@ public class DAOEdicion implements IDAOEdicion {
 
 	/**
 	 * Devuelve un objeto Edicion con los valores recogidos del Resultset
+	 * 
 	 * @param rs
 	 * @return
 	 * @throws SQLException
@@ -90,7 +92,7 @@ public class DAOEdicion implements IDAOEdicion {
 				while (rs.next()) {
 					if (edicion.getId() < 0) {
 						edicion = mapper(rs);
-					}else {
+					} else {
 						Edicion edicionTemporal = mapper(rs);
 						ArrayList<Aula> aulasTemporal = edicionTemporal.getAulas();
 						edicion.addAulas(aulasTemporal);
@@ -140,19 +142,63 @@ public class DAOEdicion implements IDAOEdicion {
 		return null;
 	}
 
-	@Override
-	public Edicion update(Edicion pojoModificar) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Edicion update(Edicion pojoModificar, DAOHorario daoHorario) throws Exception {
+		// TODO probar
+		Edicion edicion = null;
+		DAOConectionManager.setAutoCommit(false);
+		int id = pojoModificar.getId();
+		try {
+			daoHorario.update(pojoModificar.getHorario());
+			ArrayList<Integer> idsAulas = new ArrayList<Integer>();
+			for (Aula aula : pojoModificar.getAulas()) {
+				idsAulas.add(aula.getId());
+			}
+			deleteAulasEdicion(id);
+			insertAulasEdicion(id, idsAulas);
+		} catch (Exception e) {
+			conn.rollback();
+			throw e;
+		}
+
+		String sql = "UPDATE edicion SET codigo_lanbide = ? , fecha_inicio = ?, fecha_fin = ?, id_curso = ?, id_horario = ? WHERE id = ?";
+		try ( // Inicializar resultados con autoclosable
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			edicion = getByid(id);
+			if (edicion.getId() > 0) {
+				// Actualizar curso
+				stmt.setString(1, pojoModificar.getCodigoLanbide());
+				stmt.setDate(2, pojoModificar.getFechaInicio());
+				stmt.setDate(3, pojoModificar.getFechaFin());
+				stmt.setInt(4, pojoModificar.getCurso().getId());
+				stmt.setInt(5, pojoModificar.getHorario().getId());
+				stmt.setInt(6, id);
+				int columnasAfectadas = stmt.executeUpdate();
+				if (columnasAfectadas > 0)
+					edicion = getByid(id);
+			} else {
+				System.err.println("La edicion que se quiere actualizar no existe");
+				return null;
+			}
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+			conn.commit();
+		} finally {
+			DAOConectionManager.setAutoCommit(true);
+		}
+		return edicion;
 	}
 
 	public int insert(Edicion pojoNuevo, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws Exception {
-		// TODO agregar aulas
 		int columnasAfectadas = -1;
 		int ultimaId = -1;
 		DAOConectionManager.setAutoCommit(false);
 		int idHorario = daoHorario.insert(pojoNuevo.getHorario());
-		int idCurso = daoCurso.insert(pojoNuevo.getCurso());
+		int idCurso = pojoNuevo.getCurso().getId();
+		// Si el curso que llega no tiene id lo insertamos
+		if (idCurso < 0) {
+			idCurso = daoCurso.insert(pojoNuevo.getCurso());
+		}
 		ArrayList<Integer> idsAulas = new ArrayList<Integer>();
 		for (Aula aula : pojoNuevo.getAulas()) {
 			idsAulas.add(daoAula.insert(aula));
@@ -161,8 +207,7 @@ public class DAOEdicion implements IDAOEdicion {
 		String sql = "INSERT INTO edicion (codigo_lanbide," + "id_curso," + "id_horario," + "fecha_inicio,"
 				+ "fecha_fin) " + "VALUES " + "(?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sql,
-						PreparedStatement.RETURN_GENERATED_KEYS);) {
+				PreparedStatement stmtInsert = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			stmtInsert.setString(1, pojoNuevo.getCodigoLanbide());
 			stmtInsert.setInt(2, idCurso);
 			stmtInsert.setInt(3, idHorario);
@@ -177,9 +222,7 @@ public class DAOEdicion implements IDAOEdicion {
 						// Obterner linea de la base de datos
 						ultimaId = rs.getInt(1);
 						pojoNuevo.setId(ultimaId);
-						for (Integer idAula : idsAulas) {
-							insertAulasEdicion(idAula, ultimaId);
-						}
+						insertAulasEdicion(ultimaId, idsAulas);
 
 					} else {
 						System.err.println("No se ha podido insertar la edicion");
@@ -204,13 +247,23 @@ public class DAOEdicion implements IDAOEdicion {
 		return ultimaId;
 	}
 
-	private void insertAulasEdicion(int idAula, int idEdicion) throws Exception {
-		String sqlAulasEdicion = "INSERT INTO edicion_aulas (id_aula," + "id_edicion) " + "VALUES " + "(?, ?);";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlAulasEdicion);) {
-			stmtInsert.setInt(1, idAula);
-			stmtInsert.setInt(2, idEdicion);
-			stmtInsert.executeUpdate();
+	private void insertAulasEdicion(int idEdicion, ArrayList<Integer> idsAulas) throws Exception {
+		for (Integer idAula : idsAulas) {
+			String sqlAulasEdicion = "INSERT INTO edicion_aulas (id_edicion, id_aula) " + "VALUES " + "(?, ?);";
+			try ( // Inicializar resultados con autoclosable
+					PreparedStatement stmtInsert = conn.prepareStatement(sqlAulasEdicion);) {
+				stmtInsert.setInt(1, idEdicion);
+				stmtInsert.setInt(2, idAula);
+				stmtInsert.executeUpdate();
+			}
+		}
+	}
+
+	private void deleteAulasEdicion(int idEdicion) throws SQLException {
+		String sql = "DELETE FROM edicion_aulas WHERE id_edicion = ?";
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setInt(1, idEdicion);
+			stmt.executeUpdate();
 		}
 	}
 
@@ -253,6 +306,12 @@ public class DAOEdicion implements IDAOEdicion {
 	public int insert(Edicion pojoNuevo) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Edicion update(Edicion pojoModificar) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

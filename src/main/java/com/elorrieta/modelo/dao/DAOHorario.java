@@ -113,8 +113,38 @@ public class DAOHorario implements IDAOHorario {
 
 	@Override
 	public Horario update(Horario pojoModificar) throws Exception {
-		// TODO Auto-generated method stub
-		throw new Exception("Metodo sin implementar");
+		// TODO probar
+		int id = pojoModificar.getId();
+		Horario horario = null;
+
+		String sql = "UPDATE horario SET lunes_inicio = ?, lunes_fin = ?, martes_inicio = ?, martes_fin = ?, miercoles_inicio = ?, miercoles_fin = ?, jueves_inicio = ?, jueves_fin = ?, viernes_inicio = ?, viernes_fin = ? WHERE id = ?";
+		try ( // Inicializar resultados con autoclosable
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			horario = getByid(id);
+			if (horario.getId() > 0) {
+				// Actualizar curso
+				stmt.setTime(1, Time.valueOf(pojoModificar.getLunesInicio()));
+				stmt.setTime(2, Time.valueOf(pojoModificar.getLunesFin()));
+				stmt.setTime(3, Time.valueOf(pojoModificar.getMartesInicio()));
+				stmt.setTime(4, Time.valueOf(pojoModificar.getMartesFin()));
+				stmt.setTime(5, Time.valueOf(pojoModificar.getMiercolesInicio()));
+				stmt.setTime(6, Time.valueOf(pojoModificar.getMiercolesFin()));
+				stmt.setTime(7, Time.valueOf(pojoModificar.getJuevesInicio()));
+				stmt.setTime(8, Time.valueOf(pojoModificar.getJuevesFin()));
+				stmt.setTime(9, Time.valueOf(pojoModificar.getViernesInicio()));
+				stmt.setTime(10, Time.valueOf(pojoModificar.getViernesFin()));
+				stmt.setInt(11, id);
+				int columnasAfectadas = stmt.executeUpdate();
+				if (columnasAfectadas > 0)
+					horario = getByid(id);
+			} else {
+				System.err.println("El horario que se quiere actualizar no existe");
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return horario;
 	}
 
 	@Override
@@ -123,8 +153,7 @@ public class DAOHorario implements IDAOHorario {
 		int ultimaId = -1;
 		String sqlHorario = "INSERT INTO horario (lunes_inicio," + "lunes_fin," + "martes_inicio," + "martes_fin,"
 				+ "miercoles_inicio," + "miercoles_fin," + "jueves_inicio," + "jueves_fin," + "viernes_inicio,"
-				+ "viernes_fin) " + "VALUES "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "viernes_fin) " + "VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try ( // Inicializar resultados con autoclosable
 				PreparedStatement stmtInsert = conn.prepareStatement(sqlHorario,
 						PreparedStatement.RETURN_GENERATED_KEYS);) {

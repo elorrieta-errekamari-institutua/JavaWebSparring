@@ -1,6 +1,8 @@
 package com.elorrieta.utilities;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import com.elorrieta.controller.commons.BackofficeController;
@@ -9,7 +11,9 @@ import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.dao.DAOEdicion;
 import com.elorrieta.modelo.dao.DAOHorario;
 import com.elorrieta.modelo.pojo.Aula;
+import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
+import com.elorrieta.modelo.pojo.Horario;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,14 +22,144 @@ import jakarta.servlet.http.HttpSession;
 
 public class OperationsEdicion {
 
-	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
-				System.out.println(request.getParameter("aula0"));
-				System.out.println(request.getParameter("aula1"));
-				System.out.println(request.getParameter("aula2"));
-				System.out.println(request.getParameter("aula3"));
-				System.out.println(request.getParameter("aula4"));
-		// TODO Auto-generated method stub
+	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
+			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
+		int idEdicion = -1;
+		int idHorario = -1;
+		int idCurso = -1;
+		String codigoLanbide = request.getParameter("codigoLanbide");
+		Date fechaInicio = Date.valueOf(request.getParameter("fechaInicio"));
+		Date fechaFin = Date.valueOf(request.getParameter("fechaFin"));
+		LocalTime lunesInicio = LocalTime.parse(request.getParameter("lunesInicio"));
+		LocalTime lunesFin = LocalTime.parse(request.getParameter("lunesFin"));
+		LocalTime martesInicio = LocalTime.parse(request.getParameter("martesInicio"));
+		LocalTime martesFin = LocalTime.parse(request.getParameter("martesFin"));
+		LocalTime miercolesInicio = LocalTime.parse(request.getParameter("miercolesInicio"));
+		LocalTime miercolesFin = LocalTime.parse(request.getParameter("miercolesFin"));
+		LocalTime juevesInicio = LocalTime.parse(request.getParameter("juevesInicio"));
+		LocalTime juevesFin = LocalTime.parse(request.getParameter("juevesFin"));
+		LocalTime viernesInicio = LocalTime.parse(request.getParameter("viernesInicio"));
+		LocalTime viernesFin = LocalTime.parse(request.getParameter("viernesFin"));
+		int idAula0 = -1;
+		String nombreAula0 = request.getParameter("aula0dummy");
+		int idAula1 = -1;
+		String nombreAula1 = request.getParameter("aula1dummy");
+		int idAula2 = -1;
+		String nombreAula2 = request.getParameter("aula2dummy");
+		int idAula3 = -1;
+		String nombreAula3 = request.getParameter("aula3dummy");
+		int idAula4 = -1;
+		String nombreAula4 = request.getParameter("aula4dummy");
+		try {
+			idEdicion = Integer.parseInt(request.getParameter("idEdicion"));
+			idHorario = Integer.parseInt(request.getParameter("idHorario"));
+		} catch (Exception e) {
+		}
+		try {
+			idCurso = Integer.parseInt(request.getParameter("idCurso"));
+		} catch (Exception e) {
+		}
+		try {
+			if (!nombreAula0.isBlank()) {
+				idAula0 = Integer.parseInt(request.getParameter("aula0"));
+			}
+			if (!nombreAula1.isBlank()) {
+				idAula1 = Integer.parseInt(request.getParameter("aula1"));
+			}
+			if (!nombreAula2.isBlank()) {
+				idAula2 = Integer.parseInt(request.getParameter("aula2"));
+			}
+			if (!nombreAula3.isBlank()) {
+				idAula3 = Integer.parseInt(request.getParameter("aula3"));
+			}
+			if (!nombreAula4.isBlank()) {
+				idAula4 = Integer.parseInt(request.getParameter("aula4"));
+			}
+		} catch (Exception e) {
+		}
+
+		// Guardar datos en POJOs
+		Horario horario = new Horario();
+		horario.setId(idHorario);
+		horario.setLunesInicio(lunesInicio);
+		horario.setLunesFin(lunesFin);
+		horario.setMartesInicio(martesInicio);
+		horario.setMartesFin(martesFin);
+		horario.setMiercolesInicio(miercolesInicio);
+		horario.setMiercolesFin(miercolesFin);
+		horario.setJuevesInicio(juevesInicio);
+		horario.setJuevesFin(juevesFin);
+		horario.setViernesInicio(viernesInicio);
+		horario.setViernesFin(viernesFin);
+
+		ArrayList<Aula> listaAulas = new ArrayList<Aula>();
+		Aula aula0;
+		if (idAula0 > 0) {
+			aula0 = new Aula();
+			aula0.setId(idAula0);
+			aula0.setNombre(nombreAula0);
+			listaAulas.add(aula0);
+		}
+		Aula aula1;
+		if (idAula1 > 0) {
+			aula1 = new Aula();
+			aula1.setId(idAula1);
+			aula1.setNombre(nombreAula1);
+			listaAulas.add(aula1);
+		}
+		Aula aula2;
+		if (idAula2 > 0) {
+			aula2 = new Aula();
+			aula2.setId(idAula2);
+			aula2.setNombre(nombreAula2);
+			listaAulas.add(aula2);
+		}
+		Aula aula3;
+		if (idAula3 > 0) {
+			aula3 = new Aula();
+			aula3.setId(idAula3);
+			aula3.setNombre(nombreAula3);
+			listaAulas.add(aula3);
+		}
+		Aula aula4;
+		if (idAula4 > 0) {
+			aula4 = new Aula();
+			aula4.setId(idAula4);
+			aula4.setNombre(nombreAula4);
+			listaAulas.add(aula4);
+		}
+
+		Curso curso = new Curso();
+		curso.setId(idCurso);
+
+		Edicion edicion = new Edicion();
+		edicion.setId(idEdicion);
+		edicion.setCodigoLanbide(codigoLanbide);
+		edicion.setFechaInicio(fechaInicio);
+		edicion.setFechaFin(fechaFin);
+		edicion.setHorario(horario);
+		edicion.setCurso(curso);
+		edicion.setAulas(listaAulas);
+
+		// Actualizar base de datos
+		try {
+			if (idEdicion > 0) {
+				edicion = daoEdicion.update(edicion, daoHorario);
+			} else {
+				edicion = daoEdicion.getByid(daoEdicion.insert(edicion, daoCurso, daoHorario, daoAula));
+			}
+			if (edicion.getId() > 0) {
+				request.getRequestDispatcher("action?operacion=" + BackofficeController.SELECT_ALL + "&clase="
+						+ BackofficeController.EDICION).forward(request, response);
+				System.out.println("Curso actualizado");
+			} else {
+				request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
+				System.err.println("No se ha podido actualizar el curso");
+			}
+		} catch (Exception e) {
+			System.err.println("Error al actualizar la edicion");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -70,26 +204,29 @@ public class OperationsEdicion {
 
 	}
 
-	public static void select(HttpServletRequest request, HttpServletResponse response, int id,
-			DAOEdicion daoEdicion, DAOAula daoAula) throws ServletException, IOException {
+	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOEdicion daoEdicion)
+			throws ServletException, IOException {
 		// TODO probar
 		Edicion edicion = new Edicion();
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
 		try {
 			edicion = daoEdicion.getByid(id);
-			aulas = daoAula.getAll();
 		} catch (Exception e) {
 			System.err.println("Error recuperando edicion");
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("edicion", edicion);
-		session.setAttribute("aulas", aulas);
+		aulas = edicion.getAulas();
+		for (int i = 0; i < aulas.size(); i++) {
+			request.setAttribute("aula" + i, aulas.get(i));
+		}
 
 		request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
 	}
 
-	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion) throws ServletException, IOException {
+	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
+			throws ServletException, IOException {
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
 			listaEdicionesDB = daoEdicion.getAll();

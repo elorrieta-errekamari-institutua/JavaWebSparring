@@ -353,8 +353,7 @@ public class BackofficeController extends HttpServlet {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsEdicion.insertUpdate(request, response, map.get("id"), daoEdicion, daoCurso,
-									daoHorario, daoAula);
+							OperationsEdicion.insertUpdate(request, response, daoEdicion, daoCurso, daoHorario, daoAula);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -367,7 +366,7 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsEdicion.select(request, response, map.get("id"), daoEdicion, daoAula);
+							OperationsEdicion.select(request, response, map.get("id"), daoEdicion);
 							break;
 						case SELECT_ALL:
 							// Operacion Select

@@ -219,10 +219,14 @@ function checkDatalist(data, element) {
 	let name = element.id.substring(0, 5);
 	let hiddenElement = document.getElementById(name);
 	let correct = 0;
-	for (let aula of data) {
-		if (aula.nombre == element.value) {
-			correct = 1;
-			hiddenElement.value = aula.id;
+	if (element.value.length == 0) {
+		correct = 1;
+	} else {
+		for (let aula of data) {
+			if (aula.nombre == element.value) {
+				correct = 1;
+				hiddenElement.value = aula.id;
+			}
 		}
 	}
 	if (correct == 1) {
