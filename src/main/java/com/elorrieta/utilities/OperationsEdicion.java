@@ -198,9 +198,26 @@ public class OperationsEdicion {
 
 	}
 
-	public static void delete(HttpServletRequest request, HttpServletResponse response, Integer integer,
-			DAOEdicion daoEdicion, DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
-		// TODO Auto-generated method stub
+	public static void delete(HttpServletRequest request, HttpServletResponse response, int id,
+			DAOEdicion daoEdicion, DAOHorario daoHorario) {
+				try {
+
+					Edicion edicionBorrada = daoEdicion.delete(id, daoHorario);
+					if (edicionBorrada != null) {
+						request
+								.getRequestDispatcher(
+										"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.EDICION)
+								.forward(request, response);
+						System.out.println("Edicion eliminada");
+					} else {
+						request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
+						System.err.println("No se ha podido actualizar usuario");
+					}
+				}
+		
+				catch (Exception e) {
+					System.err.println("Id vacio");
+				}
 
 	}
 

@@ -98,7 +98,6 @@ public class DAOHorario implements IDAOHorario {
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			horario = getByid(id);
 			if (horario.getId() > 0) {
-				// Borrar usuario
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			} else {

@@ -136,10 +136,26 @@ public class DAOEdicion implements IDAOEdicion {
 		return listaEdiciones;
 	}
 
-	@Override
-	public Edicion delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Edicion delete(int id, DAOHorario daoHorario) throws Exception {
+		Edicion edicion = null;
+
+		String sql = "DELETE from edicion WHERE id = ?";
+
+		try ( // Inicializar resultados con autoclosable
+				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+			edicion = getByid(id);
+			if (edicion.getId() > 0) {
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+				daoHorario.delete(edicion.getHorario().getId());
+			} else {
+				System.err.println("El curso que se quiere borrar no existe");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return edicion;
 	}
 
 	public Edicion update(Edicion pojoModificar, DAOHorario daoHorario) throws Exception {
@@ -310,6 +326,12 @@ public class DAOEdicion implements IDAOEdicion {
 
 	@Override
 	public Edicion update(Edicion pojoModificar) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Edicion delete(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

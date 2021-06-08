@@ -94,6 +94,12 @@ function abrirModalDelete(clase, id) {
 	modal.classList.add("is-active");
 	let button = modal.querySelector(".is-success")
 	button.href = "/javaweb/backoffice/action?operacion=3&clase=" + clase + "&id=" + id;
+		let mensajeEdicion = document.getElementById("mensajeEdicion");
+	if (clase == 8) {
+		mensajeEdicion.innerHTML = " Eliminar la edicion no eliminara los datos del curso";
+	} else {
+		mensajeEdicion.innerHTML = "";
+	}
 }
 
 // cerrar ventanas modales
@@ -109,15 +115,6 @@ if (document.querySelector(".modal")) {
 			});
 		});
 	});
-}
-
-// agregar un input de aula en el formulario de ediciones
-var aulaIndex = 50;
-
-function agregarAula() {
-	let contenedor = document.getElementById("aulasExtra");
-	contenedor.innerHTML += "<div class='field is-horizontal'><div class='field-label'></div><div class='field-body'><div class='field'><div class='control'><input type='text' class='input' name='aula" + aulaIndex + "' placeholder='Aula'></div></div></div></div>";
-	aulaIndex++;
 }
 
 // Autorrellenar nombres de aulas

@@ -3,7 +3,7 @@
     <div class="modal-background"></div>
     <div class="modal-content">
         <div class="box">
-        <p>&iquest;Esta seguro de que desea eliminarlo?</p>
+        <p>&iquest;Esta seguro de que desea eliminarlo? <span id="mensajeEdicion"></span></p>
         <a class="button is-success">Eliminar</a>
         <a class="button is-danger close">No</a></div>
     </div>

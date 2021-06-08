@@ -361,8 +361,7 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsEdicion.delete(request, response, map.get("id"), daoEdicion, daoCurso, daoHorario,
-									daoAula);
+							OperationsEdicion.delete(request, response, map.get("id"), daoEdicion, daoHorario);
 							break;
 						case SELECT:
 							// Operacion Select
