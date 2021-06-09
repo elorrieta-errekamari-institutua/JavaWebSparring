@@ -7,8 +7,8 @@ public interface IDAOParticipante extends ICRUD<Participante> {
 	/**
 	 * Devuelve un objeto de tipo participante
 	 * 
-	 * @param nombre El nombre del usuario que se quiere recuperar
-	 * @return POJO Usuario
+	 * @param dni El DNI del participante que se quiere recuperar
+	 * @return POJO Participante
 	 */
 	Participante getByDni(String dni) throws Exception;
 

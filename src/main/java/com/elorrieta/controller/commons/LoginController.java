@@ -29,6 +29,8 @@ public class LoginController extends HttpServlet {
 	}
 
 	/**
+	 * Controlador de inicio de sesion
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -43,7 +45,6 @@ public class LoginController extends HttpServlet {
 			usuarioDB = new DAOUsuario();
 			pojoUsuario = usuarioDB.login(nombre, pass);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

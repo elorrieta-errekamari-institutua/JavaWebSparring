@@ -16,21 +16,12 @@ public class DAOParticipante implements IDAOParticipante {
 
 	/**
 	 * Constructor vacio
+	 * 
 	 * @throws Exception
 	 */
-	public DAOParticipante() throws Exception{
+	public DAOParticipante() throws Exception {
 		super();
 		conn = DAOConectionManager.getConnection();
-	}
-
-	/**
-	 * Crea el dao con la opcion de autocommit
-	 * @param autoCommit
-	 * @throws Exception
-	 */
-	public DAOParticipante(boolean autoCommit) throws Exception {
-		this();
-		conn.setAutoCommit(autoCommit);;
 	}
 
 	@Override
@@ -38,12 +29,10 @@ public class DAOParticipante implements IDAOParticipante {
 		Participante participante = new Participante();
 		String sql = "SELECT * from participante WHERE id= ? ;";
 
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
+
 				if (rs.next()) {
 					participante.setId(rs.getInt("id"));
 					participante.setNombreCompleto(rs.getString("nombre_completo"));
@@ -76,24 +65,15 @@ public class DAOParticipante implements IDAOParticipante {
 		return participante;
 	}
 
-	/**
-	 * Devuelve un objeto de tipo participante
-	 * 
-	 * @param nombre El nombre del usuario que se quiere recuperar
-	 * @return POJO Participante
-	 */
 	@Override
 	public Participante getByDni(String dni) throws Exception {
 		Participante participante = new Participante();
 		String sql = "SELECT * from participante WHERE dni = ? ";
 
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				// Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+
 			stmt.setString(1, dni);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
 
 				if (rs.next()) {
 					participante.setId(rs.getInt("id"));
@@ -132,11 +112,10 @@ public class DAOParticipante implements IDAOParticipante {
 
 		String sql = "DELETE from participante WHERE id = ?";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			participante = getByid(id);
 			if (participante.getId() > 0) {
-				// Borrar usuario
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			} else {
@@ -157,11 +136,12 @@ public class DAOParticipante implements IDAOParticipante {
 		String sql = "UPDATE participante SET  nombre_completo = ? , dni = ? , telefono = ?, fecha_nacimiento = ?,"
 				+ "direccion = ?, codigo_postal = ?, municipio = ?, provincia = ?, erte = ?, "
 				+ "situacion_laboral = ?, situacion_administrativa = ?, titulacion = ? WHERE id = ?";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			participante = getByid(id);
+
 			if (participante.getId() > 0) {
-				// Actualizar usuario
 				stmt.setString(1, pojoModificar.getNombreCompleto());
 				stmt.setString(2, pojoModificar.getDni());
 				stmt.setString(3, pojoModificar.getTelefono());
@@ -176,6 +156,7 @@ public class DAOParticipante implements IDAOParticipante {
 				stmt.setString(12, pojoModificar.getTitulacion());
 				stmt.setInt(13, id);
 				int columnasAfectadas = stmt.executeUpdate();
+
 				if (columnasAfectadas > 0) {
 					System.out.println("Se ha actualizado el participante");
 					participante = getByid(id);
@@ -197,9 +178,9 @@ public class DAOParticipante implements IDAOParticipante {
 				+ "direccion, codigo_postal, municipio, provincia, erte, situacion_laboral, "
 				+ "situacion_administrativa, titulacion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
-						PreparedStatement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert,
+				PreparedStatement.RETURN_GENERATED_KEYS);) {
+
 			stmtInsert.setString(1, pojoNuevo.getNombreCompleto());
 			stmtInsert.setString(2, pojoNuevo.getDni());
 			stmtInsert.setString(3, pojoNuevo.getTelefono());
@@ -213,10 +194,10 @@ public class DAOParticipante implements IDAOParticipante {
 			stmtInsert.setString(11, pojoNuevo.getSituacionAdministrativa());
 			stmtInsert.setString(12, pojoNuevo.getTitulacion());
 			columnasAfectadas = stmtInsert.executeUpdate();
+
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
-				// Si se ha insertado el usuario
+
 				if (columnasAfectadas > 0 && rs.next()) {
-					// Obterner linea de la base de datos
 					ultimaId = rs.getInt(1);
 					pojoNuevo.setId(ultimaId);
 
@@ -239,10 +220,8 @@ public class DAOParticipante implements IDAOParticipante {
 	public ArrayList<Participante> getAll() throws Exception {
 		ArrayList<Participante> lista = new ArrayList<>();
 		String sql = "SELECT * from participante";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery();) {
-			// Obtener resultado
+		try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery();) {
+
 			while (rs.next()) {
 				Participante participante = new Participante();
 				participante.setId(rs.getInt("id"));
@@ -267,10 +246,13 @@ public class DAOParticipante implements IDAOParticipante {
 		return lista;
 	}
 
+	/**
+	 * Los participantes no son reconocibles por nombre, utilizar getByDni(String
+	 * dni)
+	 */
 	@Override
 	public Participante getByName(String nombre) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		throw new Exception("Los participantes no son reconocibles por nombre, utilizar getByDni(String dni)");
 	}
 
 }

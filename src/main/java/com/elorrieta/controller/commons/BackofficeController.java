@@ -128,6 +128,8 @@ public class BackofficeController extends HttpServlet {
 	}
 
 	/**
+	 * Controlador unico que gestiona todas las funciones del backoffice
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -353,7 +355,8 @@ public class BackofficeController extends HttpServlet {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsEdicion.insertUpdate(request, response, daoEdicion, daoCurso, daoHorario, daoAula);
+							OperationsEdicion.insertUpdate(request, response, daoEdicion, daoCurso, daoHorario,
+									daoAula);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista

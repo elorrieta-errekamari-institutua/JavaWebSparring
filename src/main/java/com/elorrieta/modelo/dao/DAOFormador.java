@@ -1,6 +1,6 @@
 package com.elorrieta.modelo.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.elorrieta.modelo.interfaces.IDAOFormador;
 import com.elorrieta.modelo.pojo.Formador;
@@ -10,7 +10,7 @@ public class DAOFormador implements IDAOFormador {
 	/**
 	 * Constructor vacio
 	 */
-	public DAOFormador(){
+	public DAOFormador() {
 		super();
 	}
 
@@ -27,7 +27,7 @@ public class DAOFormador implements IDAOFormador {
 	}
 
 	@Override
-	public List<Formador> getAll() throws Exception {
+	public ArrayList<Formador> getAll() throws Exception {
 		// TODO Auto-generated method stub
 		throw new Exception("Metodo sin implementar");
 	}

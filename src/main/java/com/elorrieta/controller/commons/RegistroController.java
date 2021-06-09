@@ -44,6 +44,8 @@ public class RegistroController extends HttpServlet {
 	}
 
 	/**
+	 * Controlador para registro de usuarios en la base de datos
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -67,7 +69,6 @@ public class RegistroController extends HttpServlet {
 				DAOUsuario usuarioDB = new DAOUsuario();
 				id = usuarioDB.insert(usuario);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (id < 0) {

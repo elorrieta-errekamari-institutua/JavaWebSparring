@@ -17,9 +17,20 @@ import jakarta.servlet.http.HttpSession;
 
 public class OperationsParticipante {
 
+	/**
+	 * Actualiza o inserta el participante con los parametros recogidos del request
+	 * y redirige a la lista de participantes
+	 * 
+	 * @param request         HttpServletRequest
+	 * @param response        HttpServletResponse
+	 * @param id              el id del participante que queremos actualizar, si se
+	 *                        omite o es negativo se insertara
+	 * @param daoParticipante DAOParticipante
+	 */
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOParticipante daoParticipante) {
 
+		// Recoger parametros
 		String nombreCompleto = request.getParameter("nombreCompleto");
 		String dni = request.getParameter("dni");
 		String telefono = request.getParameter("telefono");
@@ -40,10 +51,9 @@ public class OperationsParticipante {
 			id = -1;
 		}
 
-		// Guardar datos en POJO curso
+		// Guardar datos en POJO
 		Participante participante = new Participante();
-		if (id > 0)
-			participante.setId(id);
+		participante.setId(id);
 		participante.setNombreCompleto(nombreCompleto);
 		participante.setDni(dni);
 		participante.setTelefono(telefono);
@@ -57,17 +67,18 @@ public class OperationsParticipante {
 		participante.setSituacionAdministrativa(situacionAdministrativa);
 		participante.setTitulacion(titulacion);
 
-		// Actualizar base de datos
 		try {
-			if (id > 0)
+			// Si existe actualizamos
+			if (id > 0) {
 				participante = daoParticipante.update(participante);
-			if (id == -1)
+			} else {
+				// Si no existe lo insertamos y recogemos sus datos completos de la base de
+				// datos
 				participante = daoParticipante.getByid(daoParticipante.insert(participante));
+			}
 			if (participante.getId() > 0) {
-				request
-						.getRequestDispatcher(
-								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.PARTICIPANTE)
-						.forward(request, response);
+				request.getRequestDispatcher("action?operacion=" + BackofficeController.SELECT_ALL + "&clase="
+						+ BackofficeController.PARTICIPANTE).forward(request, response);
 				System.out.println("Usuario actualizado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
@@ -80,12 +91,24 @@ public class OperationsParticipante {
 
 	}
 
+	/**
+	 * Inserta en la base de datos todos los participantes que se encuentren en el
+	 * atributo lista de la sesion, escribe en sesion el numero de participantes que
+	 * se han insertado y redirige a la pagina de subir documentos
+	 * 
+	 * @param request         HttpServletRequest
+	 * @param response        HttpServletResponse
+	 * @param daoParticipante DAOParticipante
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response,
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 
 		HttpSession sesion = request.getSession();
 		@SuppressWarnings("unchecked")
 		ArrayList<Participante> listaParticipantes = (ArrayList<Participante>) sesion.getAttribute("lista");
+
 		// Insertar datos en la BD
 		int numeroInsertados = listaParticipantes.size();
 		for (Participante participante : listaParticipantes) {
@@ -106,6 +129,15 @@ public class OperationsParticipante {
 
 	}
 
+	/**
+	 * Elimina el participante con el id elegido y redirige a la lista de
+	 * participantes
+	 * 
+	 * @param request         HttpServletRequest
+	 * @param response        HttpServletResponse
+	 * @param id              el id del participante que queremos eliminar
+	 * @param daoParticipante DAOParticipante
+	 */
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOParticipante daoParticipante) {
 
@@ -113,10 +145,8 @@ public class OperationsParticipante {
 
 			Participante participanteBorrado = daoParticipante.delete(id);
 			if (participanteBorrado != null) {
-				request
-						.getRequestDispatcher(
-								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.PARTICIPANTE)
-						.forward(request, response);
+				request.getRequestDispatcher("action?operacion=" + BackofficeController.SELECT_ALL + "&clase="
+						+ BackofficeController.PARTICIPANTE).forward(request, response);
 				System.out.println("Participante eliminado");
 			} else {
 				request.getRequestDispatcher("detalleParticipante.jsp").forward(request, response);
@@ -130,6 +160,17 @@ public class OperationsParticipante {
 
 	}
 
+	/**
+	 * Busca el participante con el id elegido, lo mete en sesion y redirige al
+	 * formulario para editarlo
+	 * 
+	 * @param request         HttpServletRequest
+	 * @param response        HttpServletResponse
+	 * @param id              el id del participante que queremos buscar
+	 * @param daoParticipante DAOParticipante
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 
@@ -147,6 +188,16 @@ public class OperationsParticipante {
 
 	}
 
+	/**
+	 * Busca todos los participantes en la base de datos e introduce toda su
+	 * informacion en la sesion para ser mostrada en una tabla. Redirige a la lista
+	 * 
+	 * @param request         HttpServletRequest
+	 * @param response        HttpServletResponse
+	 * @param daoParticipante DAOParticipante
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void selectAll(HttpServletRequest request, HttpServletResponse response,
 			DAOParticipante daoParticipante) throws ServletException, IOException {
 

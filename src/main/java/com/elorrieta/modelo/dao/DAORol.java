@@ -1,6 +1,6 @@
 package com.elorrieta.modelo.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.elorrieta.modelo.interfaces.IDAORol;
 import com.elorrieta.modelo.pojo.Rol;
@@ -20,7 +20,7 @@ public class DAORol implements IDAORol {
 	}
 
 	@Override
-	public List<Rol> getAll() throws Exception {
+	public ArrayList<Rol> getAll() throws Exception {
 		// TODO Auto-generated method stub
 		throw new Exception("Metodo sin implementar");
 	}

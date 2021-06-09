@@ -50,7 +50,8 @@ public class Aula {
 	}
 
 	/**
-	 * @return ArrayList with all the headers needed to display a list of objects in a table
+	 * @return ArrayList with all the headers needed to display a list of objects in
+	 *         a table
 	 */
 	public static ArrayList<String> setHeadersList() {
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -58,9 +59,10 @@ public class Aula {
 		listaHead.add("Nombre");
 		return listaHead;
 	}
-	
+
 	/**
-	 * @return Arraylist with all the data needed to display the object in a table row
+	 * @return Arraylist with all the data needed to display the object in a table
+	 *         row
 	 */
 	public ArrayList<String> setDataList() {
 		ArrayList<String> listaTemporal = new ArrayList<String>();

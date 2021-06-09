@@ -26,6 +26,8 @@ public class LogoutController extends HttpServlet {
 	}
 
 	/**
+	 * Controlador para cerrar sesion
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */

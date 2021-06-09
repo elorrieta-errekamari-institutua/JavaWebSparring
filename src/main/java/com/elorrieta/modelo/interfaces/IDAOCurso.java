@@ -5,12 +5,12 @@ import com.elorrieta.modelo.pojo.Curso;
 public interface IDAOCurso extends ICRUD<Curso> {
 
 	/**
-	 * Devuelve un curso con los parametros indicados
+	 * Busca un curso con los parametros indicados en la base de datos
 	 * 
-	 * @param nombre
-	 * @param codigoUc
-	 * @param codigoAaff
-	 * @return
+	 * @param nombre     el nombre del curso
+	 * @param codigoUc   el codigo UC del curso
+	 * @param codigoAaff el codigo AAFF del curso
+	 * @return Curso el curso encontrado
 	 * @throws Exception
 	 */
 	Curso getByCodigos(String nombre, String codigoUc, String codigoAaff) throws Exception;

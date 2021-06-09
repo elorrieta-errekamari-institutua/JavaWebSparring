@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.elorrieta.modelo.interfaces.IDAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
@@ -17,40 +16,24 @@ public class DAOUsuario implements IDAOUsuario {
 
 	/**
 	 * Constructor vacio
+	 * 
 	 * @throws Exception
 	 */
-	public DAOUsuario() throws Exception{
+	public DAOUsuario() throws Exception {
 		super();
 		conn = DAOConectionManager.getConnection();
 	}
 
-	/**
-	 * Crea el dao con la opcion de autocommit
-	 * @param autoCommit
-	 * @throws Exception
-	 */
-	public DAOUsuario(boolean autoCommit) throws Exception {
-		this();
-		conn.setAutoCommit(autoCommit);;
-	}
-
-	/**
-	 * Devuelve un objeto de tipo usuario
-	 * 
-	 * @param id El id del usuario que se quiere recuperar
-	 * @return POJO Usuario
-	 */
 	@Override
 	public Usuario getByid(int id) throws Exception {
 		Usuario usuario = new Usuario();
 		String sql = "SELECT * from usuario WHERE id= ? ;";
 
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
+
 				if (rs.next()) {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
@@ -74,23 +57,15 @@ public class DAOUsuario implements IDAOUsuario {
 		return usuario;
 	}
 
-	/**
-	 * Devuelve un objeto de tipo usuario
-	 * 
-	 * @param nombre El nombre del usuario que se quiere recuperar
-	 * @return POJO Usuario
-	 */
 	@Override
 	public Usuario getByName(String nombre) throws Exception {
 		Usuario usuario = new Usuario();
 		String sql = "SELECT * from usuario WHERE nombre = ? ";
 
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
+
 				if (rs.next()) {
 					usuario.setId(rs.getInt("id"));
 					usuario.setNombre(rs.getString("nombre"));
@@ -114,19 +89,13 @@ public class DAOUsuario implements IDAOUsuario {
 		return usuario;
 	}
 
-	/**
-	 * Devuelve todos los usuario en la base de datos
-	 * 
-	 * @return Lista de Usuarios.
-	 */
 	@Override
-	public List<Usuario> getAll() throws Exception {
-		List<Usuario> lista = new ArrayList<>();
+	public ArrayList<Usuario> getAll() throws Exception {
+		ArrayList<Usuario> lista = new ArrayList<>();
 		String sql = "SELECT * from usuario";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery();) {
-			// Obtener resultado
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery();) {
+
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
@@ -142,23 +111,16 @@ public class DAOUsuario implements IDAOUsuario {
 		return lista;
 	}
 
-	/**
-	 * Borra un usuario tras buscarlo por id
-	 * 
-	 * @param id La id del usuario que se quiere borrar
-	 * @return El usuario borrado.
-	 */
 	@Override
 	public Usuario delete(int id) {
 		Usuario usuario = null;
 
 		String sql = "DELETE from usuario WHERE id = ?";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
-				// Borrar usuario
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			} else {
@@ -171,12 +133,6 @@ public class DAOUsuario implements IDAOUsuario {
 		return usuario;
 	}
 
-	/**
-	 * Actualiza un usuario con los datos de del POJO que recibe por parametro
-	 * 
-	 * @param Usuario pojoModificar El usuario al que se quiere actualizar
-	 * @return Usuario El usuario actualizado.
-	 */
 	@Override
 	public Usuario update(Usuario pojoModificar) {
 		int id = pojoModificar.getId();
@@ -185,11 +141,10 @@ public class DAOUsuario implements IDAOUsuario {
 		String nuevoPassword = pojoModificar.getPass();
 
 		String sql = "UPDATE usuario SET  nombre = ? , pass = ? WHERE id = ?";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
 			if (usuario.getId() > 0) {
-				// Actualizar usuario
 				stmt.setString(1, nuevoNombre);
 				stmt.setString(2, nuevoPassword);
 				stmt.setInt(3, id);
@@ -204,29 +159,22 @@ public class DAOUsuario implements IDAOUsuario {
 		return usuario;
 	}
 
-	/**
-	 * Inserta un nuevo usuario con los datos de del POJO que recibe por parametro
-	 * 
-	 * @param pojoNuevo El usuario que se quiere insertar
-	 * @return El id del nuevo usuario.
-	 */
-
+	@Override
 	public int insert(Usuario pojoNuevo) {
 
 		int columnasAfectadas, ultimaId = -1;
 		String sqlInsert = "INSERT INTO usuario (nombre, pass, email, rol_usuario) VALUES(?, ?, ?, ?);";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
+
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			stmtInsert.setString(2, pojoNuevo.getPass());
 			stmtInsert.setString(3, pojoNuevo.getEmail());
 			stmtInsert.setInt(4, 2);
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
-				// Si se ha insertado el usuario
+
 				if (columnasAfectadas > 0) {
-					// Obterner linea de la base de datos
 					ultimaId = rs.getInt(1);
 
 				} else {
@@ -246,21 +194,15 @@ public class DAOUsuario implements IDAOUsuario {
 		return ultimaId;
 	}
 
-	/**
-	 * Logea un usuario en el sistema
-	 * 
-	 * @param String nombre El nombre del usuario que se quiere logear
-	 * @param String password El password del usuario que se quiere logear
-	 * @return Usuario el POJO del usuario logeado
-	 */
+	@Override
 	public Usuario login(String nombre, String password) {
 
 		Usuario usuario = null;
 		String sql = "SELECT id FROM usuario WHERE nombre = ? AND pass = ?;";
+
 		int id = 0;
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 
 			stmt.setString(1, nombre);
 			stmt.setString(2, password);
@@ -286,16 +228,16 @@ public class DAOUsuario implements IDAOUsuario {
 	}
 
 	/**
+	 * Actualiza el usuario para asignarle su rol buscandolo en la base de datos
 	 * 
-	 * @param usuario
-	 * @return Devuelve el rol del usuario
+	 * @param usuario Usuario que queremos buscar
 	 */
 	public void getRolUsuario(Usuario usuario) {
 		String rol = "";
 		String sql = "SELECT r.nombre from rol r, usuario u where r.id = u.rol_usuario AND u.id = ?";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+
 			stmt.setInt(1, usuario.getId());
 			try (ResultSet rs = stmt.executeQuery();) {
 				if (rs.next()) {

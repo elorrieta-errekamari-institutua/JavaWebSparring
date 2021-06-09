@@ -4,6 +4,8 @@ import com.elorrieta.modelo.pojo.Usuario;
 
 public interface IDAOUsuario extends ICRUD<Usuario> {
 	/***
+	 * Comprueba que el usuario existe en la base de datos con los parametros
+	 * indicados y le asigna su rol
 	 * 
 	 * @param nombre   El nombre del usuario que se va a logear
 	 * @param password El password del usuario que se va a logear

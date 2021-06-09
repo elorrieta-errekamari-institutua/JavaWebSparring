@@ -22,8 +22,21 @@ import jakarta.servlet.http.HttpSession;
 
 public class OperationsEdicion {
 
+	/**
+	 * Actualiza o inserta la edicion con los parametros recogidos del request y
+	 * redirige a la lista de ediciones
+	 * 
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param daoEdicion DAOEdicion
+	 * @param daoCurso   DAOCurso
+	 * @param daoHorario DAOHorario
+	 * @param daoAula    DAOAula
+	 */
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
 			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) {
+
+		// Recoger parametros
 		int idEdicion = -1;
 		int idHorario = -1;
 		int idCurso = -1;
@@ -129,6 +142,7 @@ public class OperationsEdicion {
 			listaAulas.add(aula4);
 		}
 
+		// El curso solo endra el id para el foreng key pero no modificaremos sus datos
 		Curso curso = new Curso();
 		curso.setId(idCurso);
 
@@ -141,11 +155,13 @@ public class OperationsEdicion {
 		edicion.setCurso(curso);
 		edicion.setAulas(listaAulas);
 
-		// Actualizar base de datos
 		try {
+			// Si existe actualizamos
 			if (idEdicion > 0) {
 				edicion = daoEdicion.update(edicion, daoHorario);
 			} else {
+				// Si no existe la insertamos y recogemos sus datos completos de la base de
+				// datos
 				edicion = daoEdicion.getByid(daoEdicion.insert(edicion, daoCurso, daoHorario, daoAula));
 			}
 			if (edicion.getId() > 0) {
@@ -163,9 +179,25 @@ public class OperationsEdicion {
 
 	}
 
+	/**
+	 * Inserta en la base de datos todas las ediciones que se encuentren en el
+	 * atributo lista de la sesion, escribe en sesion el numero de ediciones que se
+	 * han insertado y redirige a la pagina de subir documentos
+	 * 
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param daoEdicion DAOEdicion
+	 * @param daoCurso   DAOCurso
+	 * @param daoHorario DAOHorario
+	 * @param daoAula    DAOAula
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion,
 			DAOCurso daoCurso, DAOHorario daoHorario, DAOAula daoAula) throws ServletException, IOException {
+
 		HttpSession sesion = request.getSession();
+
 		@SuppressWarnings("unchecked")
 		ArrayList<Edicion> listaEdiciones = (ArrayList<Edicion>) sesion.getAttribute("lista");
 		// Insertar datos en la BD
@@ -198,32 +230,51 @@ public class OperationsEdicion {
 
 	}
 
-	public static void delete(HttpServletRequest request, HttpServletResponse response, int id,
-			DAOEdicion daoEdicion, DAOHorario daoHorario) {
-				try {
+	/**
+	 * Elimina la edicion con el id elegido y redirige a la lista de ediciones
+	 * 
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param id         el id del aula que queremos eliminar
+	 * @param daoEdicion DAOEdicion
+	 * @param daoHorario DAOHorario
+	 */
+	public static void delete(HttpServletRequest request, HttpServletResponse response, int id, DAOEdicion daoEdicion,
+			DAOHorario daoHorario) {
 
-					Edicion edicionBorrada = daoEdicion.delete(id, daoHorario);
-					if (edicionBorrada != null) {
-						request
-								.getRequestDispatcher(
-										"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.EDICION)
-								.forward(request, response);
-						System.out.println("Edicion eliminada");
-					} else {
-						request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
-						System.err.println("No se ha podido actualizar usuario");
-					}
-				}
-		
-				catch (Exception e) {
-					System.err.println("Id vacio");
-				}
+		try {
+
+			Edicion edicionBorrada = daoEdicion.delete(id, daoHorario);
+			if (edicionBorrada != null) {
+				request.getRequestDispatcher("action?operacion=" + BackofficeController.SELECT_ALL + "&clase="
+						+ BackofficeController.EDICION).forward(request, response);
+				System.out.println("Edicion eliminada");
+			} else {
+				request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
+				System.err.println("No se ha podido actualizar usuario");
+			}
+		}
+
+		catch (Exception e) {
+			System.err.println("Id vacio");
+		}
 
 	}
 
+	/**
+	 * Busca la edicion con el id elegido, la mete en sesion y redirige al
+	 * formulario para editarla
+	 * 
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param id         el id del aula que queremos buscar
+	 * @param daoEdicion DAOEdicion
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOEdicion daoEdicion)
 			throws ServletException, IOException {
-		// TODO probar
+
 		Edicion edicion = new Edicion();
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
 		try {
@@ -232,6 +283,7 @@ public class OperationsEdicion {
 			System.err.println("Error recuperando edicion");
 			e.printStackTrace();
 		}
+
 		HttpSession session = request.getSession();
 		session.setAttribute("edicion", edicion);
 		aulas = edicion.getAulas();
@@ -242,8 +294,19 @@ public class OperationsEdicion {
 		request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
 	}
 
+	/**
+	 * Busca todas las ediciones en la base de datos e introduce toda su informacion
+	 * en la sesion para ser mostrada en una tabla. Redirige a la lista
+	 * 
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param daoEdicion DAOEdicion
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOEdicion daoEdicion)
 			throws ServletException, IOException {
+
 		ArrayList<Edicion> listaEdicionesDB = null;
 		try {
 			listaEdicionesDB = daoEdicion.getAll();

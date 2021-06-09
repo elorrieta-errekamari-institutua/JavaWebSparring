@@ -20,8 +20,10 @@ public class DAOConectionManager implements AutoCloseable {
 
 	/**
 	 * Devuelve la conexion a la base de datos
+	 * 
+	 * @return Connection la conexion a la base de datos
+	 * @throws Exception
 	 */
-
 	static public Connection getConnection() throws Exception {
 		if (conn == null) {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,7 +35,6 @@ public class DAOConectionManager implements AutoCloseable {
 			 */
 			conn = ds.getConnection();
 			conn.setAutoCommit(true);
-			// conn = DriverManager.getConnection(PATH, USUARIO, PASSWORD);
 			if (conn.isValid(0)) {
 				System.out.println("Conectado a la base de datos");
 			}
@@ -43,27 +44,14 @@ public class DAOConectionManager implements AutoCloseable {
 	}
 
 	/**
+	 * Devuelve la conexion a la base de datos en el path indicado
 	 * 
-	 * @param autoCommit
-	 * @return
+	 * @param path la ruta a la base de datos
+	 * @return Connection la conexion a la base de datos
 	 * @throws Exception
 	 */
-	static public Connection getConnection(boolean autoCommit) throws Exception {
-
-		getConnection();
-		conn.setAutoCommit(autoCommit);
-
-		return conn;
-
-	}
-
-	/**
-	 * Devuelve la conexion a la base de datos en el path indicado
-	 */
-
 	static public Connection getConnection(String path) throws Exception {
 		Class.forName("org.sqlite.JDBC");
-		// Parametros de la base de datos
 
 		// Crear conexion a la base de datos
 		conn = DriverManager.getConnection(path);
@@ -73,8 +61,9 @@ public class DAOConectionManager implements AutoCloseable {
 	}
 
 	/**
+	 * Establece el autoCommit para la conexion unica de la aplicacion
 	 * 
-	 * @param autoCommit
+	 * @param autoCommit estado al que establecerlo
 	 * @throws SQLException
 	 */
 	static public void setAutoCommit(boolean autoCommit) throws SQLException {
@@ -84,9 +73,7 @@ public class DAOConectionManager implements AutoCloseable {
 	/**
 	 * Cierra la conexion
 	 */
-
 	public void close() throws Exception, InterruptedException {
-		// Cierra la conexion
 		if (conn != null) {
 			conn.close();
 		}

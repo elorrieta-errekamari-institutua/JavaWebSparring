@@ -167,9 +167,10 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", pass=" + pass + ", email=" + email + ", image=" + image
 				+ ", rol usuario=" + rolUsuario + "]";
 	}
-	
+
 	/**
-	 * @return ArrayList with all the headers needed to display a list of objects in a table
+	 * @return ArrayList with all the headers needed to display a list of objects in
+	 *         a table
 	 */
 	public static ArrayList<String> setHeadersList() {
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -179,15 +180,17 @@ public class Usuario {
 		listaHead.add("Email");
 		listaHead.add("Rol");
 		return listaHead;
-  }
-	
+	}
+
 	/**
-	 * @return Arraylist with all the data needed to display the object in a table row
+	 * @return Arraylist with all the data needed to display the object in a table
+	 *         row
 	 */
 	public ArrayList<String> setDataList() {
 		ArrayList<String> listaTemporal = new ArrayList<String>();
 		listaTemporal.add(String.valueOf(id));
-		listaTemporal.add("<img src='" + image.toString() + "' width='2rem' height='2rem'>"); // TODO modificar esto para poder insertar la imagen
+		//TODO modificar esto para poder insertar la imagen
+		listaTemporal.add("<img src='" + image.toString() + "' width='2rem' height='2rem'>");
 		listaTemporal.add(nombre);
 		listaTemporal.add(email);
 		listaTemporal.add(rolUsuario);

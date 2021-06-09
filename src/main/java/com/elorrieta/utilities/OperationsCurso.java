@@ -21,6 +21,16 @@ import jakarta.servlet.http.HttpSession;
  */
 public class OperationsCurso {
 
+	/**
+	 * Busca todos los cursos en la base de datos e introduce toda su informacion en
+	 * la sesion para ser mostrada en una tabla. Redirige a la lista
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param daoCurso DAOCurso
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void selectAll(HttpServletRequest request, HttpServletResponse response, DAOCurso daoCurso)
 			throws ServletException, IOException {
 
@@ -49,15 +59,22 @@ public class OperationsCurso {
 		request.getRequestDispatcher("listado.jsp").forward(request, response);
 	}
 
+	/**
+	 * Elimina el curso con el id elegido y redirige a la lista de cursos
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param id       el id del curso que queremos eliminar
+	 * @param daoCurso DAOCurso
+	 */
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso) {
 
 		try {
 
 			Curso cursoBorrado = daoCurso.delete(id);
 			if (cursoBorrado != null) {
-				request
-						.getRequestDispatcher(
-								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
+				request.getRequestDispatcher(
+						"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
 						.forward(request, response);
 				System.out.println("Curso eliminado");
 			} else {
@@ -71,6 +88,17 @@ public class OperationsCurso {
 		}
 	}
 
+	/**
+	 * Busca el curso con el id elegido, lo mete en sesion y redirige al formulario
+	 * para editarlo
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param id       el id del curso que queremos buscar
+	 * @param daoCurso DAOCurso
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso)
 			throws ServletException, IOException {
 
@@ -88,8 +116,20 @@ public class OperationsCurso {
 
 	}
 
-	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso) {
+	/**
+	 * Actualiza o inserta el curso con los parametros recogidos del request y
+	 * redirige a la lista de cursos
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @param id       el id del curso que queremos actualizar, si se omite o es
+	 *                 negativo se insertara
+	 * @param daoCurso DAOCurso
+	 */
+	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
+			DAOCurso daoCurso) {
 
+		// Recoger parametros
 		int horasCurso;
 		String cualificacion = request.getParameter("cualificacion");
 		String codigoUc = request.getParameter("codigoUc");
@@ -106,8 +146,7 @@ public class OperationsCurso {
 
 		// Guardar datos en POJO curso
 		Curso curso = new Curso();
-		if (id > 0)
-			curso.setId(id);
+		curso.setId(id);
 		curso.setCualificacion(cualificacion);
 		curso.setCodigoUc(codigoUc);
 		curso.setCompetencia(competencia);
@@ -115,16 +154,19 @@ public class OperationsCurso {
 		curso.setNombre(nombre);
 		curso.setHorasCurso(horasCurso);
 
-		// Actualizar base de datos
 		try {
-			if (id > 0)
+			// Si existe actualizamos
+			if (id > 0) {
 				curso = daoCurso.update(curso);
-			if (id == -1)
+			} else {
+				// Si no existe lo insertamos y recogemos sus datos completos de la base de
+				// datos
 				curso = daoCurso.getByid(daoCurso.insert(curso));
+			}
+
 			if (curso.getId() > 0) {
-				request
-						.getRequestDispatcher(
-								"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
+				request.getRequestDispatcher(
+						"action?operacion=" + BackofficeController.SELECT_ALL + "&clase=" + BackofficeController.CURSO)
 						.forward(request, response);
 				System.out.println("Curso actualizado");
 			} else {
@@ -132,18 +174,18 @@ public class OperationsCurso {
 				System.err.println("No se ha podido actualizar el curso");
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.err.println("Error al actualizar curso");
 			e.printStackTrace();
 		}
 
 	}
 
+	/**
+	 * Caracteristica sin implementar
+	 */
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOCurso daoCurso)
 			throws ServletException, IOException {
-
-		// Esto correspondera a edicion
-
+		throw new IOException("Caracteristica sin implementar");
 	}
 
 }

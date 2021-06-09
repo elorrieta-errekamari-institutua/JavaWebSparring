@@ -24,6 +24,12 @@ public class ParserEdiciones {
         super();
     }
 
+    /**
+     * Generamos un ArrayList de ediciones a partir de un documento xlsx
+     * 
+     * @param path la ruta en la que se encuentra el documento
+     * @return ArrayList<Usuario> con todas los ediciones del documento
+     */
     public static ArrayList<Edicion> parseFile(String path) {
 
         ArrayList<Edicion> listaEdiciones = new ArrayList<Edicion>();
@@ -32,20 +38,19 @@ public class ParserEdiciones {
             XSSFWorkbook wb = new XSSFWorkbook(pkg);
             Sheet sheet1 = wb.getSheetAt(0);
 
-            // Parametros de la base de datos
-
-            // Crear conexion a la base de datos
-
+            // Generaremos una edicion completa por fila
             for (Row row : sheet1) {
                 Edicion edicion = new Edicion();
                 Curso curso = new Curso();
                 Horario horario = new Horario();
                 ArrayList<Aula> aulas = new ArrayList<Aula>();
 
+                // Todos los if comparan mayor que 1 porque las dos primeras filas del documento
+                // son titulos
                 for (Cell cell : row) {
 
                     if (cell.getColumnIndex() == 1 && cell.getRowIndex() > 1) {
-                        // Guarda codigo labbide
+                        // Guarda codigo lanbide
                         cell.setCellType(Cell.CELL_TYPE_STRING);
                         String text = cell.getStringCellValue();
                         if (!text.isBlank()) {
@@ -209,6 +214,7 @@ public class ParserEdiciones {
                         }
                     }
                 }
+                // Si se han recogido datos generamos la edicion y la guardamos en la lista
                 if (!"".equalsIgnoreCase(edicion.getCodigoLanbide())) {
                     edicion.setCurso(curso);
                     edicion.setHorario(horario);

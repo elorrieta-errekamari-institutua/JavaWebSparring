@@ -22,6 +22,9 @@ public class ApiAulasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Devuelve un JSON con las aulas que contengan en su nombre el texto
+	 * introducido en el parametro name
+	 * 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -48,7 +51,7 @@ public class ApiAulasController extends HttpServlet {
 			} else {
 
 				aulas = dao.getByPartialName(name);
-			
+
 			}
 
 			// POJO to JSON

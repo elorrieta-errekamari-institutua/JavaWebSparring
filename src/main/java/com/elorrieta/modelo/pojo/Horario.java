@@ -187,7 +187,8 @@ public class Horario {
 	}
 
 	/**
-	 * @return ArrayList with all the headers needed to display a list of objects in a table
+	 * @return ArrayList with all the headers needed to display a list of objects in
+	 *         a table
 	 */
 	public static ArrayList<String> setHeadersList() {
 		ArrayList<String> listaHead = new ArrayList<String>();
@@ -201,7 +202,8 @@ public class Horario {
 	}
 
 	/**
-	 * @return Arraylist with all the data needed to display the object in a table row
+	 * @return Arraylist with all the data needed to display the object in a table
+	 *         row
 	 */
 	public ArrayList<String> setDataList() {
 		ArrayList<String> listaTemporal = new ArrayList<String>();
@@ -218,5 +220,5 @@ public class Horario {
 		listaTemporal.add(horario);
 		return listaTemporal;
 	}
-	
+
 }

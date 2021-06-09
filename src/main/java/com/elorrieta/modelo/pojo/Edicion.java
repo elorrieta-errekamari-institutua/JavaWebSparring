@@ -144,7 +144,7 @@ public class Edicion {
 	/**
 	 * Agrega una aula a la lista de aulas
 	 * 
-	 * @param aula
+	 * @param aula Aula aula a agregar
 	 */
 	public void addAula(Aula aula) {
 		aulas.add(aula);
@@ -153,10 +153,9 @@ public class Edicion {
 	/**
 	 * Agrega una lista de aulas a la lista de aulas
 	 * 
-	 * @param aulasTemporal
+	 * @param aulasTemporal ArrayList<Aula> aulas a agregar
 	 */
 	public void addAulas(ArrayList<Aula> aulasTemporal) {
-		// TODO
 		aulas.addAll(aulasTemporal);
 	}
 

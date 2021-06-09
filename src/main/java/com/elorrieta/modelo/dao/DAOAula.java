@@ -25,34 +25,15 @@ public class DAOAula implements IDAOAula {
 		conn = DAOConectionManager.getConnection();
 	}
 
-	/**
-	 * Crea el dao con la opcion de autocommit
-	 * 
-	 * @param autoCommit
-	 * @throws Exception
-	 */
-	public DAOAula(boolean autoCommit) throws Exception {
-		this();
-		conn.setAutoCommit(autoCommit);
-		;
-	}
-
-	/**
-	 * Devuelve un objeto de tipo Aula
-	 * 
-	 * @param id El id del aula que se quiere recuperar
-	 * @return POJO Aula
-	 */
 	@Override
 	public Aula getByid(int id) throws Exception {
 		Aula aula = new Aula();
 		String sql = "SELECT * from aula WHERE id= ? ;";
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
+
 				if (rs.next()) {
 					aula.setId(rs.getInt("id"));
 					aula.setNombre(rs.getString("nombre"));
@@ -73,23 +54,15 @@ public class DAOAula implements IDAOAula {
 		return aula;
 	}
 
-	/**
-	 * Devuelve un objeto de tipo Aula
-	 * 
-	 * @param nombre El nombre del aula que se quiere recuperar
-	 * @return POJO Aula
-	 */
 	@Override
 	public Aula getByName(String nombre) throws Exception {
 		Aula aula = new Aula();
 		String sql = "SELECT * from aula WHERE nombre = ? ";
 
-		// Obtener resultado
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setString(1, nombre);
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Fetch data
+
 				if (rs.next()) {
 					aula.setId(rs.getInt("id"));
 					aula.setNombre(rs.getString("nombre"));
@@ -110,19 +83,12 @@ public class DAOAula implements IDAOAula {
 		return aula;
 	}
 
-	/**
-	 * Devuelve todos las aulas en la base de datos
-	 * 
-	 * @return Lista de Aulas.
-	 */
 	@Override
 	public ArrayList<Aula> getAll() throws Exception {
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT * from aula";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);
-				ResultSet rs = stmt.executeQuery();) {
-			// Obtener resultado
+		try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery();) {
+
 			while (rs.next()) {
 				Aula aula = new Aula();
 				aula.setId(rs.getInt("id"));
@@ -135,23 +101,16 @@ public class DAOAula implements IDAOAula {
 		return lista;
 	}
 
-	/**
-	 * Borra un aula tras buscarla por id
-	 * 
-	 * @param id La id del aula que se quiere borrar
-	 * @return El aula borrada.
-	 */
 	@Override
 	public Aula delete(int id) throws Exception {
 		Aula aula = null;
 
 		String sql = "DELETE from aula WHERE id = ?";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			aula = getByid(id);
 			if (aula.getId() > 0) {
-				// Borrar aula
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			} else {
@@ -164,12 +123,6 @@ public class DAOAula implements IDAOAula {
 		return aula;
 	}
 
-	/**
-	 * Actualiza un aula con los datos de del POJO que recibe por parametro
-	 * 
-	 * @param Usuario pojoModificar El usuario al que se quiere actualizar
-	 * @return Usuario El usuario actualizado.
-	 */
 	@Override
 	public Aula update(Aula pojoModificar) throws Exception {
 		int id = pojoModificar.getId();
@@ -177,11 +130,11 @@ public class DAOAula implements IDAOAula {
 		String nuevoNombre = pojoModificar.getNombre();
 
 		String sql = "UPDATE aula SET  nombre = ? WHERE id = ?";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			aula = getByid(id);
+
 			if (aula.getId() > 0) {
-				// Actualizar usuario
 				stmt.setString(1, nuevoNombre);
 				stmt.setInt(2, id);
 				stmt.executeUpdate();
@@ -189,32 +142,27 @@ public class DAOAula implements IDAOAula {
 			} else {
 				System.err.println("El aula que se quiere actualizar no existe");
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return aula;
 	}
 
-	/**
-	 * Inserta un nuevo aula con los datos de del POJO que recibe por parametro
-	 * 
-	 * @param pojoNuevo El aula que se quiere insertar
-	 * @return El id del nuevo aula.
-	 */
 	@Override
 	public int insert(Aula pojoNuevo) throws Exception {
 		int columnasAfectadas = -1;
 		int ultimaId = -1;
-		String sqlInsert = "INSERT INTO aula (nombre) VALUES(?);";
+		String sql = "INSERT INTO aula (nombre) VALUES(?);";
 
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
+		try (PreparedStatement stmtInsert = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
 			stmtInsert.setString(1, pojoNuevo.getNombre());
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
-				// Si se ha insertado el usuario
+				// Si se ha insertado el aula
 				if (columnasAfectadas > 0 && rs.next()) {
-					// Obterner linea de la base de datos
+					// Obterner id de la base de datos
 					ultimaId = rs.getInt(1);
 
 				} else {
@@ -236,23 +184,25 @@ public class DAOAula implements IDAOAula {
 	 * Devuelve todas las aulas de una edicion
 	 * 
 	 * @param id de una edicion
-	 * @return Todas las aulas de la edicion
+	 * @return ArrayList<Aula> Todas las aulas de la edicion
 	 * @throws Exception
 	 */
 	public ArrayList<Aula> getAll(int id) throws Exception {
-		// TODO probar
+
 		ArrayList<Aula> lista = new ArrayList<>();
 		String sql = "SELECT id_aula from edicion_aulas WHERE id_edicion = ?;";
-		try ( // Inicializar resultados con autoclosable
-				PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql);) {
 			stmt.setInt(1, id);
+
 			try (ResultSet rs = stmt.executeQuery();) {
-				// Obtener resultado
+
 				while (rs.next()) {
 					int idAula = rs.getInt("id_aula");
 					Aula aula = getByid(idAula);
 					lista.add(aula);
 				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -264,8 +214,9 @@ public class DAOAula implements IDAOAula {
 
 	/**
 	 * Devuelve la lista de aulas que contienen name en su nombre
-	 * @param name
-	 * @return
+	 * 
+	 * @param name Nombre que buscar
+	 * @return ArrayList<Aula> Aulas encontradas
 	 */
 	public ArrayList<Aula> getByPartialName(String name) {
 		ArrayList<Aula> lista = new ArrayList<>();
