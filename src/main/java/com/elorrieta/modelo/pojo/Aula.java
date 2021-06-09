@@ -2,6 +2,12 @@ package com.elorrieta.modelo.pojo;
 
 import java.util.ArrayList;
 
+/**
+ * Clase Aula
+ * 
+ * Contiene los atributos de una aula y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
+ */
 public class Aula {
 
 	private int id;

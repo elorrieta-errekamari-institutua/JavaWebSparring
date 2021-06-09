@@ -7,8 +7,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 /**
- * @author cursos_externos
- *
+ * Clase Edicion
+ * 
+ * Contiene los atributos de una edicion y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
  */
 public class Edicion {
 

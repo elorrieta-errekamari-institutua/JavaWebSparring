@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOHorario;
 import com.elorrieta.modelo.pojo.Horario;
 
+/**
+ * Clase DAOHorario implementa IDAOHorario
+ * 
+ * Contiene los metodos para interactuar con horarios en la base de datos
+ * 
+ * @see IDAOHorario
+ */
 public class DAOHorario implements IDAOHorario {
 
 	Connection conn;

@@ -11,8 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 
 /**
- * @author cursos_externos
+ * Clase UploadFile
  *
+ * Contiene el metodo para recoger un archivo de un formulario html
  */
 public class UploadFile {
 

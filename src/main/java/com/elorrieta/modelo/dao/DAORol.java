@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAORol;
 import com.elorrieta.modelo.pojo.Rol;
 
+/**
+ * Clase DAORol implementa IDAORol
+ * 
+ * Contiene los metodos para interactuar con roles en la base de datos
+ * 
+ * @see IDAORol
+ */
 public class DAORol implements IDAORol {
 
 	@Override

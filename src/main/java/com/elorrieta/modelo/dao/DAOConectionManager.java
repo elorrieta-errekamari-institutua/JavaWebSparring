@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+/**
+ * Clase DAOConectionManager implementa AutoCloseable
+ * 
+ * Contiene los metodos para gestionar la conexion a base de datos
+ * 
+ * @see AutoCloseable
+ */
 public class DAOConectionManager implements AutoCloseable {
 
 	static private Connection conn = null;

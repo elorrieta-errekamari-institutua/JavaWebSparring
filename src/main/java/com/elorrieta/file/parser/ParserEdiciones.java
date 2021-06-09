@@ -18,6 +18,11 @@ import com.elorrieta.modelo.pojo.Edicion;
 import com.elorrieta.modelo.pojo.Horario;
 import com.elorrieta.utilities.TimeFormatter;
 
+/**
+ * Clase ParserEdiciones
+ * 
+ * Contiene metodo para generar ediciones a partir de un documento de excel
+ */
 public class ParserEdiciones {
 
     public ParserEdiciones() {

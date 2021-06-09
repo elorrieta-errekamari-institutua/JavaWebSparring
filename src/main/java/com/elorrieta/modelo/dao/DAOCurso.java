@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
 
+/**
+ * Clase DAOCurso implementa IDAOCurso
+ * 
+ * Contiene los metodos para interactuar con cursos en la base de datos
+ * 
+ * @see IDAOCurso
+ */
 public class DAOCurso implements IDAOCurso {
 
 	Connection conn;

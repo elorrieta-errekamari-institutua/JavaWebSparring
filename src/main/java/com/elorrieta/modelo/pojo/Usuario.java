@@ -8,6 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Clase Usuario
+ * 
+ * Contiene los atributos de un usuario con validadores y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
+ */
 public class Usuario {
 	private int id;
 

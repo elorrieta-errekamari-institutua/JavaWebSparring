@@ -3,6 +3,12 @@ package com.elorrieta.modelo.pojo;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Clase Horario
+ * 
+ * Contiene los atributos de un horario y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
+ */
 public class Horario {
 
 	private int id;

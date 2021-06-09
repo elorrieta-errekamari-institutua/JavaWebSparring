@@ -16,6 +16,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * Clase OperationsExcel
+ * 
+ * Contiene todos los metodos necesarios para que el controlador unico importe archivos de excel
+ */
 public class OperationsExcel {
 
 	/**

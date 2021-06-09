@@ -2,6 +2,13 @@ package com.elorrieta.modelo.interfaces;
 
 import com.elorrieta.modelo.pojo.Usuario;
 
+/**
+ * Interfaz IDAOUsuario extiende ICRUD
+ * 
+ * Contiene el metodo para iniciar sesion
+ * 
+ * @see ICRUD
+ */
 public interface IDAOUsuario extends ICRUD<Usuario> {
 	/***
 	 * Comprueba que el usuario existe en la base de datos con los parametros

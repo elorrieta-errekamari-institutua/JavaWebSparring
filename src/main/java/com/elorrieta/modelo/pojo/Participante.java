@@ -3,6 +3,12 @@ package com.elorrieta.modelo.pojo;
 import java.sql.Date;
 import java.util.ArrayList;
 
+/**
+ * Clase Participante
+ * 
+ * Contiene los atributos de un participante y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
+ */
 public class Participante extends Usuario {
 
 	private String nombreCompleto;

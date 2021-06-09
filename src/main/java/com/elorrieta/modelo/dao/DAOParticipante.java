@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOParticipante;
 import com.elorrieta.modelo.pojo.Participante;
 
+/**
+ * Clase DAOParticipante implementa IDAOParticipante
+ * 
+ * Contiene los metodos para interactuar con participantes en la base de datos
+ * 
+ * @see IDAOParticipante
+ */
 public class DAOParticipante implements IDAOParticipante {
 
 	Connection conn;

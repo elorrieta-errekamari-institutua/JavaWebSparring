@@ -15,6 +15,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.elorrieta.modelo.pojo.Participante;
 
+/**
+ * Clase ParserParticipantes
+ * 
+ * Contiene metodo para generar participantes a partir de un documento de excel
+ */
 public class ParserParticipantes {
 
 	public ParserParticipantes() {

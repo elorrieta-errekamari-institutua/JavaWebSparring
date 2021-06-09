@@ -16,8 +16,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * @author cursos_externos
- *
+ * Clase OperationsCurso
+ * 
+ * Contiene todos los metodos necesarios para que el controlador unico manipule cursos
  */
 public class OperationsCurso {
 

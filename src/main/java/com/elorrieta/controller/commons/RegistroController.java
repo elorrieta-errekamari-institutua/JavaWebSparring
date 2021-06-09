@@ -17,7 +17,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 /**
- * Servlet implementation class RegistroController
+ * Servlet para realizar el registro de usuarios
  */
 @WebServlet("/registro")
 public class RegistroController extends HttpServlet {

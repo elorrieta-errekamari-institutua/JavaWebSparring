@@ -6,8 +6,10 @@ package com.elorrieta.modelo.pojo;
 import java.util.ArrayList;
 
 /**
- * @author cursos_externos
- *
+ * Clase Formador
+ * 
+ * Contiene los atributos de un formador y metodos para acceder a ellos
+ * Contiene metodos para rellenar una tabla
  */
 public class Formador {
 

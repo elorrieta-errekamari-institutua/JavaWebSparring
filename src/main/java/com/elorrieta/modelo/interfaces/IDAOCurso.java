@@ -2,6 +2,13 @@ package com.elorrieta.modelo.interfaces;
 
 import com.elorrieta.modelo.pojo.Curso;
 
+/**
+ * Interfaz IDAOCurso extiende ICRUD
+ * 
+ * Contiene metodo para seleccionar un curso por sus codigos y su nombre
+ * 
+ * @see ICRUD
+ */
 public interface IDAOCurso extends ICRUD<Curso> {
 
 	/**

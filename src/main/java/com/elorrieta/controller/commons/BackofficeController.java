@@ -30,7 +30,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BackofficeController
+ * Servlet unico para el backoffice
  */
 @WebServlet("/backoffice/action")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -387,6 +387,8 @@ public class BackofficeController extends HttpServlet {
 
 	/**
 	 * Obtiene los parametros del request uWu
+	 * 
+	 * @param request HttpServletRequest
 	 */
 	private void getParameters(HttpServletRequest request) {
 

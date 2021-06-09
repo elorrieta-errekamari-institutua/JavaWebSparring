@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOFormador;
 import com.elorrieta.modelo.pojo.Formador;
 
+/**
+ * Clase DAOFormador implementa IDAOFormador
+ * 
+ * Contiene los metodos para interactuar con formadores en la base de datos
+ * 
+ * @see IDAOFormador
+ */
 public class DAOFormador implements IDAOFormador {
 
 	/**

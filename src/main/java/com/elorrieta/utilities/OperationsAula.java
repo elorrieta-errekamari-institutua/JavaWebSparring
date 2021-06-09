@@ -12,6 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * Clase OperationsAula
+ * 
+ * Contiene todos los metodos necesarios para que el controlador unico manipule aulas
+ */
 public class OperationsAula {
 
 	/**

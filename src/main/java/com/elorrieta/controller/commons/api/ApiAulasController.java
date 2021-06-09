@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ApìAulasController
+ * API para consultar las aulas
  */
 @WebServlet("/api/aulas")
 public class ApiAulasController extends HttpServlet {

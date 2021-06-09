@@ -14,6 +14,13 @@ import com.elorrieta.modelo.pojo.Curso;
 import com.elorrieta.modelo.pojo.Edicion;
 import com.elorrieta.modelo.pojo.Horario;
 
+/**
+ * Clase DAOEdicion implementa IDAOEdicion
+ * 
+ * Contiene los metodos para interactuar con ediciones en la base de datos
+ * 
+ * @see IDAOEdicion
+ */
 public class DAOEdicion implements IDAOEdicion {
 
 	Connection conn;

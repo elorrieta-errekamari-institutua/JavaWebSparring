@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet para iniciar sesion
  */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {

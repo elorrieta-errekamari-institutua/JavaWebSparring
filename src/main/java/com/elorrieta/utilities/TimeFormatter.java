@@ -2,6 +2,11 @@ package com.elorrieta.utilities;
 
 import java.time.LocalTime;
 
+/**
+ * Clase TimeFormatter
+ * 
+ * Contiene el metodo para transformar un string en un LocalTime
+ */
 public class TimeFormatter {
 
 	/**

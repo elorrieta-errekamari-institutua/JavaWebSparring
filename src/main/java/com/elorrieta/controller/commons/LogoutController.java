@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet para cerrar sesion
  */
 @WebServlet("/logout")
 public class LogoutController extends HttpServlet {

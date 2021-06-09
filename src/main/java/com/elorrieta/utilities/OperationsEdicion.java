@@ -20,6 +20,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * Clase OperationsEdicion
+ * 
+ * Contiene todos los metodos necesarios para que el controlador unico manipule ediciones
+ */
 public class OperationsEdicion {
 
 	/**

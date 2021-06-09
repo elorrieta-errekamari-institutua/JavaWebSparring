@@ -2,6 +2,11 @@ package com.elorrieta.modelo.interfaces;
 
 import java.util.ArrayList;
 
+/**
+ * Interfaz ICRUD
+ * 
+ * Contiene los metodos CRUD
+ */
 public interface ICRUD<P> {
 	/**
 	 * Busca un objeto en la base de datos por su id

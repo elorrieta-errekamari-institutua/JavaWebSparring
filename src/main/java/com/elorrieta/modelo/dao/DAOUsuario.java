@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOUsuario;
 import com.elorrieta.modelo.pojo.Usuario;
 
+/**
+ * Clase DAOUsuario implementa IDAOUsuario
+ * 
+ * Contiene los metodos para interactuar con usuarios en la base de datos
+ * 
+ * @see IDAOUsuario
+ */
 public class DAOUsuario implements IDAOUsuario {
 
 	Connection conn;

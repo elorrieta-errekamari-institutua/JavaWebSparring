@@ -11,6 +11,13 @@ import java.util.ArrayList;
 import com.elorrieta.modelo.interfaces.IDAOAula;
 import com.elorrieta.modelo.pojo.Aula;
 
+/**
+ * Clase DAOAula implementa IDAOAula
+ * 
+ * Contiene los metodos para interactuar con aulas en la base de datos
+ * 
+ * @see IDAOAula
+ */
 public class DAOAula implements IDAOAula {
 
 	Connection conn;
