@@ -153,7 +153,7 @@ public class Edicion {
 	/**
 	 * Agrega una lista de aulas a la lista de aulas
 	 * 
-	 * @param aulasTemporal ArrayList<Aula> aulas a agregar
+	 * @param aulasTemporal ArrayList aulas a agregar
 	 */
 	public void addAulas(ArrayList<Aula> aulasTemporal) {
 		aulas.addAll(aulasTemporal);

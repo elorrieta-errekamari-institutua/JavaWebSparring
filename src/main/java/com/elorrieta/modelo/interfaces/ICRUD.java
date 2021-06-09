@@ -15,7 +15,7 @@ public interface ICRUD<P> {
 	/**
 	 * Busca un objeto en la base de datos por su nombre
 	 * 
-	 * @param id El nombre del objeto a devolver
+	 * @param nombre El nombre del objeto a devolver
 	 * @return Objeto con el nombre elegido
 	 * @throws Exception
 	 */
@@ -24,7 +24,7 @@ public interface ICRUD<P> {
 	/**
 	 * Busca todos los objetos en la base de datos
 	 * 
-	 * @return ArrayList<Objeto> Lista con todos los registros de la DB como objetos
+	 * @return ArrayList Lista con todos los registros de la DB como objetos
 	 * @throws Exception
 	 */
 	ArrayList<P> getAll() throws Exception;
@@ -41,7 +41,7 @@ public interface ICRUD<P> {
 	/***
 	 * Modifica un objeto en la base de datos
 	 * 
-	 * @param pojoModifciar POJO con los nuevos datos a guardar en la DB
+	 * @param pojoModificar POJO con los nuevos datos a guardar en la DB
 	 * @return El POJO el registro modificado en la DB
 	 * @throws Exception
 	 */

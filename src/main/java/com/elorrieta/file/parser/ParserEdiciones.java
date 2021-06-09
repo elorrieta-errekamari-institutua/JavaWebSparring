@@ -28,7 +28,7 @@ public class ParserEdiciones {
      * Generamos un ArrayList de ediciones a partir de un documento xlsx
      * 
      * @param path la ruta en la que se encuentra el documento
-     * @return ArrayList<Usuario> con todas los ediciones del documento
+     * @return ArrayList con todas los ediciones del documento
      */
     public static ArrayList<Edicion> parseFile(String path) {
 

@@ -161,7 +161,7 @@ public class DAOEdicion implements IDAOEdicion {
 	/***
 	 * Modifica un objeto en la base de datos
 	 * 
-	 * @param pojoModifciar POJO con los nuevos datos a guardar en la DB
+	 * @param pojoModificar POJO con los nuevos datos a guardar en la DB
 	 * @param daoHorario    DAOHorario
 	 * @return El POJO el registro modificado en la DB
 	 * @throws Exception
@@ -339,7 +339,6 @@ public class DAOEdicion implements IDAOEdicion {
 	 * 
 	 * @param codigoLanbide El codigo de Lanbide de la edicion a devolver
 	 * @return Edicion edicion con el codigo de Lanbide
-	 * @throws Exception
 	 */
 	public Edicion getByCodigoLanbide(String codigoLanbide) {
 

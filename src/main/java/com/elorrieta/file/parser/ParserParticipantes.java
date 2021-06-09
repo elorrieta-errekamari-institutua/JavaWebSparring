@@ -25,7 +25,7 @@ public class ParserParticipantes {
 	 * Generamos un ArrayList de participantes a partir de un documento xlsx
 	 * 
 	 * @param path la ruta en la que se encuentra el documento
-	 * @return ArrayList<Participante> con todos los participantes del documento
+	 * @return ArrayList con todos los participantes del documento
 	 */
 	public static ArrayList<Participante> parseFile(String path) {
 

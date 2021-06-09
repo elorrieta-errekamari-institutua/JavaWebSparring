@@ -184,7 +184,7 @@ public class DAOAula implements IDAOAula {
 	 * Devuelve todas las aulas de una edicion
 	 * 
 	 * @param id de una edicion
-	 * @return ArrayList<Aula> Todas las aulas de la edicion
+	 * @return ArrayList Todas las aulas de la edicion
 	 * @throws Exception
 	 */
 	public ArrayList<Aula> getAll(int id) throws Exception {
@@ -216,7 +216,7 @@ public class DAOAula implements IDAOAula {
 	 * Devuelve la lista de aulas que contienen name en su nombre
 	 * 
 	 * @param name Nombre que buscar
-	 * @return ArrayList<Aula> Aulas encontradas
+	 * @return ArrayList Aulas encontradas
 	 */
 	public ArrayList<Aula> getByPartialName(String name) {
 		ArrayList<Aula> lista = new ArrayList<>();
