@@ -1,0 +1,8 @@
+com.elorrieta.controller.commons
+com.elorrieta.controller.commons.api
+com.elorrieta.controller.filter
+com.elorrieta.file.parser
+com.elorrieta.modelo.dao
+com.elorrieta.modelo.interfaces
+com.elorrieta.modelo.pojo
+com.elorrieta.utilities
