@@ -17,7 +17,7 @@ Para ver mas detalles sobre las depencias de este proyecto mirar el [pom.xml](ht
 
 ## Configuracion de la base de datos
 
-Para crear la bbdd disponemos de un script **script-db.sql** en la raiz del proyecto, el cual crear el esquema **supermercado** y las tablas necesarias, ademas de insertar datos de prueba.
+Para crear la bbdd disponemos de un script **script-db.sql** en la raiz del proyecto, el cual crear el esquema **elorrieta** y las tablas necesarias, ademas de insertar datos de prueba.
 
 ![screenshot 2]( /docs/resources/esquemaDB.png?raw=true)
 
@@ -49,7 +49,6 @@ Tenemos dos roles diferentes:
 
 1. Administrador   **[Wanda,3WiXc6G]** : Permisos Totales para crear, ver, modificar o eliminar cualquier objeto de la base de datos
 
-*Las contraseñas **no** estan haseadas dentro de la bbdd.*
 
 
 ## Estructura Clases del proyecto
