@@ -14,7 +14,9 @@ public class Aula {
 	private String nombre;
 
 	/**
-	 * Constructor de Aula nueva
+	 * Constructor Aula
+	 * 
+	 * Inicializa todos los paramentros
 	 */
 	public Aula() {
 		super();

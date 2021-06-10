@@ -33,6 +33,8 @@ public class Usuario {
 
 	/***
 	 * Constructor Usuario
+	 * 
+	 * Inicializa todos los parametros
 	 */
 	public Usuario() {
 		super();

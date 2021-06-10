@@ -9,8 +9,8 @@ import java.util.ArrayList;
 /**
  * Clase Edicion
  * 
- * Contiene los atributos de una edicion y metodos para acceder a ellos
- * Contiene metodos para rellenar una tabla
+ * Contiene los atributos de una edicion y metodos para acceder a ellos Contiene
+ * metodos para rellenar una tabla
  */
 public class Edicion {
 
@@ -23,6 +23,11 @@ public class Edicion {
 	private ArrayList<Aula> aulas;
 	private boolean guardado;
 
+	/**
+	 * Constructor Edicion
+	 * 
+	 * Inicializa todos los parametros
+	 */
 	public Edicion() {
 		this.id = -1;
 		this.codigoLanbide = "";
@@ -34,6 +39,12 @@ public class Edicion {
 		this.guardado = false;
 	}
 
+	/**
+	 * Constructot Edicion con los parametros curso y horario
+	 * 
+	 * @param curso   el objeto curso con sus datos
+	 * @param horario el objeto horario con sus datos
+	 */
 	public Edicion(Curso curso, Horario horario) {
 		this.id = -1;
 		this.codigoLanbide = "";

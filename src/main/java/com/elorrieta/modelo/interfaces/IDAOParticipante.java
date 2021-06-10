@@ -16,6 +16,7 @@ public interface IDAOParticipante extends ICRUD<Participante> {
 	 * 
 	 * @param dni El DNI del participante que se quiere recuperar
 	 * @return POJO Participante
+	 * @throws Exception
 	 */
 	Participante getByDni(String dni) throws Exception;
 

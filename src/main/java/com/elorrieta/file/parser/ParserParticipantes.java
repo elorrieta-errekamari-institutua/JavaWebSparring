@@ -22,6 +22,9 @@ import com.elorrieta.modelo.pojo.Participante;
  */
 public class ParserParticipantes {
 
+	/**
+	 * Constructor vacio
+	 */
 	public ParserParticipantes() {
 		super();
 	}

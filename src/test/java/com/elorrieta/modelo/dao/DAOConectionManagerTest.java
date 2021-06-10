@@ -1,5 +1,8 @@
 package com.elorrieta.modelo.dao;
 
+/**
+ * Clase de pruebas para DAOConnectionManager
+ */
 public class DAOConectionManagerTest {
 
 //	@Test

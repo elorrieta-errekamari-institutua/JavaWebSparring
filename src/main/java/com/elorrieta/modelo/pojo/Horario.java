@@ -23,6 +23,11 @@ public class Horario {
 	private LocalTime viernesInicio;
 	private LocalTime viernesFin;
 
+	/**
+	 * Constructor Horario
+	 * 
+	 * Inicializa todos los parametros
+	 */
 	public Horario() {
 		super();
 		this.id = -1;

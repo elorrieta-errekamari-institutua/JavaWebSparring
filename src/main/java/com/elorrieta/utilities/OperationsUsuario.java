@@ -125,6 +125,8 @@ public class OperationsUsuario {
 	 * @param id         el id del usuario que queremos actualizar, si se omite o es
 	 *                   negativo se insertara
 	 * @param daoUsuario DAOUsusario
+	 * @throws ServletException
+	 * @throws IOException
 	 */
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
 			DAOUsuario daoUsuario) throws ServletException, IOException {

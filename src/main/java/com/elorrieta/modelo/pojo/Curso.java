@@ -18,6 +18,11 @@ public class Curso {
 	private String nombre;
 	private int horasCurso;
 
+	/**
+	 * Constructor Curso
+	 * 
+	 * Inicializa todos los parametros
+	 */
 	public Curso() {
 		super();
 		this.id = -1;

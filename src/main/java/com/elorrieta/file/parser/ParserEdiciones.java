@@ -25,6 +25,9 @@ import com.elorrieta.utilities.TimeFormatter;
  */
 public class ParserEdiciones {
 
+    /**
+     * Constructor vacio
+     */
     public ParserEdiciones() {
         super();
     }
