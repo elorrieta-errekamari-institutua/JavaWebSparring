@@ -121,7 +121,7 @@ public class OperationsCurso {
 			edicionVacia.setCurso(curso);
 			Horario horarioVacio = new Horario();
 			edicionVacia.setHorario(horarioVacio);
-			session.setAttribute("edicion", e);
+			session.setAttribute("edicion", edicionVacia);
 			request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
 		} else {
 			session.setAttribute("curso", curso);
