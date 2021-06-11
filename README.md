@@ -64,9 +64,10 @@ Interesante consultar la documentación [JavaDoc API](https://elorrieta-errekama
 Intersante mirar los siguientes packages de java:
 
 * **com.elorrieta.controller.commons** Paquete con todos los controladores
+* **com.elorrieta.controller.commons.api** Paquete con API para acceder a datos a traves de AJAX
 * **com.elorrieta.controller.filter** Filtros de seguridad
 * **com.elorrieta.file.parser**	Paquete con los parseadores de excel
 * **com.elorrieta.modelo.dao** Clases que implementan el acceso a la base de datos
 * **com.elorrieta.modelo.pojo** Clases que implementan los objetos representados en la aplicacion
-* **com.elorrieta.utilities** Contiene las clases necesarios para el funcionamiento del controlador único
+* **com.elorrieta.utilities** Contiene las clases necesarias para el funcionamiento del controlador único
 
