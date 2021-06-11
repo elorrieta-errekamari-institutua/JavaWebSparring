@@ -73,6 +73,7 @@ public class RegistroController extends HttpServlet {
 			}
 			if (id < 0) {
 				request.setAttribute("errores", "Nombre o email de usuario ya registrado");
+				request.getRequestDispatcher("registro.jsp").forward(request, response);
 
 			} else {
 				request.setAttribute("mensaje", "El " + usuario.getNombre() + " ha sido registrado");
@@ -87,9 +88,9 @@ public class RegistroController extends HttpServlet {
 			}
 			request.setAttribute("nombre", usuario.getNombre());
 			request.setAttribute("email", usuario.getEmail());
+			request.getRequestDispatcher("registro.jsp").forward(request, response);
 		}
 
-		request.getRequestDispatcher("registro.jsp").forward(request, response);
 	}
 
 }

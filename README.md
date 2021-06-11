@@ -1,8 +1,10 @@
 # JavaWebSparring
-Proyecto Web **Java EE** siguiendo el patrón de **MVC** contra una bbdd **Mysql**\
+Proyecto Web **Java EE** siguiendo el patrón de **MVC** contra una base de datos **Mysql**\
 CMS para gestionar los cursos y los participantes de Lanbide
 
-## Tecnologia
+![screenshot 1]( /docs/resources/screenshot.png?raw=true)
+
+## Tecnología
 * [Maven 3.8.1](https://maven.apache.org/index.html)
 * [Java 11](https://openjdk.java.net/projects/jdk/11/)
 * Jakarta Servlet Api 5.0.0
@@ -15,13 +17,13 @@ CMS para gestionar los cursos y los participantes de Lanbide
 
 Para ver mas detalles sobre las depencias de este proyecto mirar el [pom.xml](https://github.com/elorrieta-errekamari-institutua/JavaWebSparring/blob/master/pom.xml)
 
-## Configuracion de la base de datos
+## Configuración de la base de datos
 
-Para crear la bbdd disponemos de un script **script-db.sql** en la raiz del proyecto, el cual crear el esquema **elorrieta** y las tablas necesarias, ademas de insertar datos de prueba.
+Para crear la base de datos disponemos de un script **script-db.sql** en */src/main/resources/db*, el cual crear el esquema **elorrieta** y las tablas necesarias, ademas de insertar datos de prueba.
 
-![screenshot 2]( /docs/resources/esquemaDB.png?raw=true)
+![esquemaDB]( /docs/resources/esquemaDB.png?raw=true)
 
-Para realizar la conexión a la bbdd cambiar el siguiente fichero **src/main/webapp/META-INF/context.xml**
+Para realizar la conexión a la base de datos cambiar el siguiente fichero **src/main/webapp/META-INF/context.xml**
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -40,20 +42,24 @@ Para realizar la conexión a la bbdd cambiar el siguiente fichero **src/main/web
 </Context>	
 ```
 
+Tambien disponemos de dos documentos excel para probar las funcionalidades en */src/main/resources/excel/input*
+
 ## Ejecutar Proyecto
 
 Al ser un proyecto web necesitamos un servidor de aplicaciones, en nuestro caso recomendamos **Apache Tomcat 10.0**.
 
-Al tratarse de una aplcacion de gestion y por falta de tiempo solo el administrador puede navegar por las diferentes funciones aunque la base de datos y el proyecto estan preparados para gestionar diferentes roles.
+Al tratarse de una aplicacion de gestión y por falta de tiempo unicamente el administrador puede navegar por las diferentes funciones aunque la base de datos y el proyecto están preparados para gestionar diferentes roles.
+
 Tenemos dos roles diferentes:
 
-1. Administrador   **[Wanda,3WiXc6G]** : Permisos Totales para crear, ver, modificar o eliminar cualquier objeto de la base de datos
+1. Administrador   **[admin,admin]** : Permisos totales para crear, ver, modificar o eliminar cualquier objeto de la base de datos
+2. Usuario **[user,user]** : No tiene ningun permiso
 
-
+*Las contraseñas estan hasheadas en MD5 dentro de la base de datos.*
 
 ## Estructura Clases del proyecto
 
-Interesante consultar la documentacion [JavaDoc API](https://elorrieta-errekamari-institutua.github.io/JavaWebSparring/).
+Interesante consultar la documentación [JavaDoc API](https://elorrieta-errekamari-institutua.github.io/JavaWebSparring/).
 
 Intersante mirar los siguientes packages de java:
 
@@ -61,6 +67,6 @@ Intersante mirar los siguientes packages de java:
 * **com.elorrieta.controller.filter** Filtros de seguridad
 * **com.elorrieta.file.parser**	Paquete con los parseadores de excel
 * **com.elorrieta.modelo.dao** Clases que implementan el acceso a la base de datos
-* **com.elorrieta.modelo.pojo** Clases que implementan los objetos represntados en la aplicacion
-* **com.elorrieta.utilities** Contiene las clases necesarios para el funcionamiento del controlador unico
+* **com.elorrieta.modelo.pojo** Clases que implementan los objetos representados en la aplicacion
+* **com.elorrieta.utilities** Contiene las clases necesarios para el funcionamiento del controlador único
 

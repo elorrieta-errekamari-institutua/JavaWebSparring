@@ -147,7 +147,7 @@ public class DAOUsuario implements IDAOUsuario {
 		String nuevoNombre = pojoModificar.getNombre();
 		String nuevoPassword = pojoModificar.getPass();
 
-		String sql = "UPDATE usuario SET  nombre = ? , pass = ? WHERE id = ?";
+		String sql = "UPDATE usuario SET  nombre = ? , pass = MD5(?) WHERE id = ?";
 
 		try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			usuario = getByid(id);
@@ -170,7 +170,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public int insert(Usuario pojoNuevo) {
 
 		int columnasAfectadas, ultimaId = -1;
-		String sqlInsert = "INSERT INTO usuario (nombre, pass, email, rol_usuario) VALUES(?, ?, ?, ?);";
+		String sqlInsert = "INSERT INTO usuario (nombre, pass, email, rol_usuario) VALUES(?, MD5(?), ?, ?);";
 
 		try (PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);) {
 
@@ -181,7 +181,7 @@ public class DAOUsuario implements IDAOUsuario {
 			columnasAfectadas = stmtInsert.executeUpdate();
 			try (ResultSet rs = stmtInsert.getGeneratedKeys()) {
 
-				if (columnasAfectadas > 0) {
+				if (columnasAfectadas > 0 && rs.next()) {
 					ultimaId = rs.getInt(1);
 
 				} else {
@@ -205,7 +205,7 @@ public class DAOUsuario implements IDAOUsuario {
 	public Usuario login(String nombre, String password) {
 
 		Usuario usuario = null;
-		String sql = "SELECT id FROM usuario WHERE nombre = ? AND pass = ?;";
+		String sql = "SELECT id FROM usuario WHERE nombre = ? AND pass = MD5(?);";
 
 		int id = 0;
 
