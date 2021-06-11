@@ -1,19 +1,3 @@
-// if (sessionStorage.getItem("listaParticipantes")) {
-// 	var labelData = {
-// 		placeholder: "Buscar participante",
-// 		perPage: "Mostrar {select} participantes por pagina",
-// 		noRows: "No hay participantes que mostrar",
-// 		info: "Mostrado resultados entre {start} y {end} de {rows} participantes (Pagina {page} de {pages} paginass)"
-// 	};
-// } else if (sessionStorage.getItem("listaCursos")) {
-// 	var labelData = {
-// 		placeholder: "Buscar curso",
-// 		perPage: "Mostrar {select} cursos por pagina",
-// 		noRows: "No hay cursos que mostrar",
-// 		info: "Mostrado resultados entre {start} y {end} de {rows} cursos (Pagina {page} de {pages} paginass)"
-// 	};
-// }
-
 var labelData = {
 		placeholder: "Buscar",
 		perPage: "Mostrar {select} resultados por pagina",
