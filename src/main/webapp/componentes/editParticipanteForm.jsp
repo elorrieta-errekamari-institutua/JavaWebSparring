@@ -89,7 +89,7 @@
 			</div>
 			<div class="field">
 				<div class="control">
-					<input class="input" type="text" name="codigoPostal" id="cp" placeholder="Codigo postal"
+					<input class="input" type="number" name="codigoPostal" id="cp" placeholder="Codigo postal"
 						value="${participante.codigoPostal}" required>
 				</div>
 			</div>

@@ -1,8 +1,22 @@
 <form method="post" action="/javaweb/backoffice/action?operacion=1&clase=1&id=${ curso.id gt 0 ? curso.id : '-1'}"
     class="box">
 
-    <a href="/javaweb/backoffice/action?operacion=4&clase=1" class="button is-primary block"><i
-            class="fas fa-arrow-left"></i></a>
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="control">
+                <a href="/javaweb/backoffice/action?operacion=4&clase=1" class="button is-primary block"><i
+                        class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <a href="/javaweb/backoffice/action?operacion=2&clase=1&id=${curso.id}&edicion=true"
+                        class="button is-success">Crear nueva edicion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <input type="text" name="id" value="${curso.id}" hidden>
 

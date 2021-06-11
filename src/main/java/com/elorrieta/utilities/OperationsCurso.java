@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import com.elorrieta.controller.commons.BackofficeController;
 import com.elorrieta.modelo.dao.DAOCurso;
 import com.elorrieta.modelo.pojo.Curso;
+import com.elorrieta.modelo.pojo.Edicion;
+import com.elorrieta.modelo.pojo.Horario;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +20,8 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsCurso
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule cursos
+ * Contiene todos los metodos necesarios para que el controlador unico manipule
+ * cursos
  */
 public class OperationsCurso {
 
@@ -91,17 +94,19 @@ public class OperationsCurso {
 
 	/**
 	 * Busca el curso con el id elegido, lo mete en sesion y redirige al formulario
-	 * para editarlo
+	 * para editarlo o al formulario para crear una nueva edicion
 	 * 
 	 * @param request  HttpServletRequest
 	 * @param response HttpServletResponse
 	 * @param id       el id del curso que queremos buscar
+	 * @param edicion  true si queremos crear una edicion de este curso, false si
+	 *                 queremos editar el curso
 	 * @param daoCurso DAOCurso
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOCurso daoCurso)
-			throws ServletException, IOException {
+	public static void select(HttpServletRequest request, HttpServletResponse response, int id, boolean edicion,
+			DAOCurso daoCurso) throws ServletException, IOException {
 
 		Curso curso = new Curso();
 		try {
@@ -111,9 +116,17 @@ public class OperationsCurso {
 			e.printStackTrace();
 		}
 		HttpSession session = request.getSession();
-		session.setAttribute("curso", curso);
-
-		request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
+		if (edicion) {
+			Edicion edicionVacia = new Edicion();
+			edicionVacia.setCurso(curso);
+			Horario horarioVacio = new Horario();
+			edicionVacia.setHorario(horarioVacio);
+			session.setAttribute("edicion", e);
+			request.getRequestDispatcher("detalleEdicion.jsp").forward(request, response);
+		} else {
+			session.setAttribute("curso", curso);
+			request.getRequestDispatcher("detalleCurso.jsp").forward(request, response);
+		}
 
 	}
 

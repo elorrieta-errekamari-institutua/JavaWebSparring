@@ -1,7 +1,6 @@
 package com.elorrieta.controller.commons;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import com.elorrieta.modelo.dao.DAOAula;
 import com.elorrieta.modelo.dao.DAOCurso;
@@ -39,7 +38,12 @@ import jakarta.servlet.http.HttpServletResponse;
 )
 public class BackofficeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	HashMap<String, Integer> map = new HashMap<String, Integer>();
+	int id;
+	int operacion;
+	int clase;
+	// Se utilizara para hacer un select de curso pero redirigir al formulario de
+	// edicion
+	boolean edicion;
 
 	/**
 	 * Posibles operaciones
@@ -138,20 +142,20 @@ public class BackofficeController extends HttpServlet {
 
 		getParameters(request);
 
-		if (map.get("clase") != -1) {
+		if (clase != -1) {
 
-			switch (map.get("clase")) {
+			switch (clase) {
 				case EXCEL:
 					String uploadPath = getServletContext().getRealPath("") + "/resources/excel/input/";
 					OperationsExcel.parseExcel(request, response, uploadPath, daoParticipante, daoEdicion);
 					break;
 				case CURSO:
 					// Elegir operacion con Curso
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsCurso.insertUpdate(request, response, map.get("id"), daoCurso);
+							OperationsCurso.insertUpdate(request, response, id, daoCurso);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -159,11 +163,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsCurso.delete(request, response, map.get("id"), daoCurso);
+							OperationsCurso.delete(request, response, id, daoCurso);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsCurso.select(request, response, map.get("id"), daoCurso);
+							OperationsCurso.select(request, response, id, edicion, daoCurso);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -176,24 +180,24 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case USUARIO:
 					// Elegir operacion con Usuario
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsUsuario.insertUpdate(request, response, map.get("id"), daoUsuario);
+							OperationsUsuario.insertUpdate(request, response, id, daoUsuario);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
 							throw new IOException(
-									"Operacion no permitida " + map.get("operacion") + " para " + map.get("clase"));
+									"Operacion no permitida " + operacion + " para " + clase);
 
 						case DELETE:
 							// Operacion Delete
-							OperationsUsuario.delete(request, response, map.get("id"), daoUsuario);
+							OperationsUsuario.delete(request, response, id, daoUsuario);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsUsuario.select(request, response, map.get("id"), daoUsuario);
+							OperationsUsuario.select(request, response, id, daoUsuario);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -206,11 +210,11 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case PARTICIPANTE:
 					// Elegir operacion con Participante
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsParticipante.insertUpdate(request, response, map.get("id"), daoParticipante);
+							OperationsParticipante.insertUpdate(request, response, id, daoParticipante);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -218,11 +222,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsParticipante.delete(request, response, map.get("id"), daoParticipante);
+							OperationsParticipante.delete(request, response, id, daoParticipante);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsParticipante.select(request, response, map.get("id"), daoParticipante);
+							OperationsParticipante.select(request, response, id, daoParticipante);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -235,11 +239,11 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case AULA:
 					// Elegir operacion con Aula
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsAula.insertUpdate(request, response, map.get("id"), daoAula);
+							OperationsAula.insertUpdate(request, response, id, daoAula);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -247,11 +251,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsAula.delete(request, response, map.get("id"), daoAula);
+							OperationsAula.delete(request, response, id, daoAula);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsAula.select(request, response, map.get("id"), daoAula);
+							OperationsAula.select(request, response, id, daoAula);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -264,11 +268,11 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case HORARIO:
 					// Elegir operacion con Horario
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsHorario.insertUpdate(request, response, map.get("id"), daoHorario);
+							OperationsHorario.insertUpdate(request, response, id, daoHorario);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -276,11 +280,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsHorario.delete(request, response, map.get("id"), daoHorario);
+							OperationsHorario.delete(request, response, id, daoHorario);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsHorario.select(request, response, map.get("id"), daoHorario);
+							OperationsHorario.select(request, response, id, daoHorario);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -293,11 +297,11 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case FORMADOR:
 					// Elegir operacion con Formador
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsFormador.insertUpdate(request, response, map.get("id"), daoFormador);
+							OperationsFormador.insertUpdate(request, response, id, daoFormador);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -305,11 +309,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsFormador.delete(request, response, map.get("id"), daoFormador);
+							OperationsFormador.delete(request, response, id, daoFormador);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsFormador.select(request, response, map.get("id"), daoFormador);
+							OperationsFormador.select(request, response, id, daoFormador);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -322,11 +326,11 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case ROL:
 					// Elegir operacion con Rol
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
-							OperationsRol.insertUpdate(request, response, map.get("id"), daoRol);
+							OperationsRol.insertUpdate(request, response, id, daoRol);
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
@@ -334,11 +338,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsRol.delete(request, response, map.get("id"), daoRol);
+							OperationsRol.delete(request, response, id, daoRol);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsRol.select(request, response, map.get("id"), daoRol);
+							OperationsRol.select(request, response, id, daoRol);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -351,7 +355,7 @@ public class BackofficeController extends HttpServlet {
 					break;
 				case EDICION:
 					// Elegir operacion con Edicion
-					switch (map.get("operacion")) {
+					switch (operacion) {
 
 						case INSERT_UPDATE:
 							// Operacion Insert (id == -1) / Update (id>0)
@@ -364,11 +368,11 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case DELETE:
 							// Operacion Delete
-							OperationsEdicion.delete(request, response, map.get("id"), daoEdicion, daoHorario);
+							OperationsEdicion.delete(request, response, id, daoEdicion, daoHorario);
 							break;
 						case SELECT:
 							// Operacion Select
-							OperationsEdicion.select(request, response, map.get("id"), daoEdicion);
+							OperationsEdicion.select(request, response, id, daoEdicion);
 							break;
 						case SELECT_ALL:
 							// Operacion Select
@@ -393,23 +397,24 @@ public class BackofficeController extends HttpServlet {
 	private void getParameters(HttpServletRequest request) {
 
 		try {
-			map.put("id", Integer.parseInt(request.getParameter("id")));
+			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
-			map.put("id", -1);
-			// e.printStackTrace();
+			id = -1;
 		}
 
 		try {
-			map.put("operacion", Integer.parseInt(request.getParameter("operacion")));
+			operacion = Integer.parseInt(request.getParameter("operacion"));
 		} catch (Exception e) {
-			map.put("operacion", -1);
+			operacion = -1;
 		}
 
 		try {
-			map.put("clase", Integer.parseInt(request.getParameter("clase")));
+			clase = Integer.parseInt(request.getParameter("clase"));
 		} catch (Exception e) {
-			map.put("clase", -1);
-			e.printStackTrace();
+			clase = -1;
 		}
+		
+		edicion = Boolean.parseBoolean(request.getParameter("edicion"));
+		
 	}
 }

@@ -23,7 +23,8 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsEdicion
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule ediciones
+ * Contiene todos los metodos necesarios para que el controlador unico manipule
+ * ediciones
  */
 public class OperationsEdicion {
 
@@ -48,16 +49,46 @@ public class OperationsEdicion {
 		String codigoLanbide = request.getParameter("codigoLanbide");
 		Date fechaInicio = Date.valueOf(request.getParameter("fechaInicio"));
 		Date fechaFin = Date.valueOf(request.getParameter("fechaFin"));
-		LocalTime lunesInicio = LocalTime.parse(request.getParameter("lunesInicio"));
-		LocalTime lunesFin = LocalTime.parse(request.getParameter("lunesFin"));
-		LocalTime martesInicio = LocalTime.parse(request.getParameter("martesInicio"));
-		LocalTime martesFin = LocalTime.parse(request.getParameter("martesFin"));
-		LocalTime miercolesInicio = LocalTime.parse(request.getParameter("miercolesInicio"));
-		LocalTime miercolesFin = LocalTime.parse(request.getParameter("miercolesFin"));
-		LocalTime juevesInicio = LocalTime.parse(request.getParameter("juevesInicio"));
-		LocalTime juevesFin = LocalTime.parse(request.getParameter("juevesFin"));
-		LocalTime viernesInicio = LocalTime.parse(request.getParameter("viernesInicio"));
-		LocalTime viernesFin = LocalTime.parse(request.getParameter("viernesFin"));
+		LocalTime lunesInicio = LocalTime.MIN;
+		if (!request.getParameter("lunesInicio").isEmpty()) {
+			lunesInicio = LocalTime.parse(request.getParameter("lunesInicio"));
+		}
+		LocalTime lunesFin = LocalTime.MIN;
+		if (!request.getParameter("lunesFin").isEmpty()) {
+			lunesFin = LocalTime.parse(request.getParameter("lunesFin"));
+		}
+		LocalTime martesInicio = LocalTime.MIN;
+		if (!request.getParameter("martesInicio").isEmpty()) {
+			martesInicio = LocalTime.parse(request.getParameter("martesInicio"));
+		}
+		LocalTime martesFin = LocalTime.MIN;
+		if (!request.getParameter("martesFin").isEmpty()) {
+			martesFin = LocalTime.parse(request.getParameter("martesFin"));
+		}
+		LocalTime miercolesInicio = LocalTime.MIN;
+		if (!request.getParameter("miercolesInicio").isEmpty()) {
+			miercolesInicio = LocalTime.parse(request.getParameter("miercolesInicio"));
+		}
+		LocalTime miercolesFin = LocalTime.MIN;
+		if (!request.getParameter("miercolesFin").isEmpty()) {
+			miercolesFin = LocalTime.parse(request.getParameter("miercolesFin"));
+		}
+		LocalTime juevesInicio = LocalTime.MIN;
+		if (!request.getParameter("juevesInicio").isEmpty()) {
+			juevesInicio = LocalTime.parse(request.getParameter("juevesInicio"));
+		}
+		LocalTime juevesFin = LocalTime.MIN;
+		if (!request.getParameter("juevesFin").isEmpty()) {
+			juevesFin = LocalTime.parse(request.getParameter("juevesFin"));
+		}
+		LocalTime viernesInicio = LocalTime.MIN;
+		if (!request.getParameter("viernesInicio").isEmpty()) {
+			viernesInicio = LocalTime.parse(request.getParameter("viernesInicio"));
+		}
+		LocalTime viernesFin = LocalTime.MIN;
+		if (!request.getParameter("viernesFin").isEmpty()) {
+			viernesFin = LocalTime.parse(request.getParameter("viernesFin"));
+		}
 		int idAula0 = -1;
 		String nombreAula0 = request.getParameter("aula0dummy");
 		int idAula1 = -1;
