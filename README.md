@@ -71,3 +71,28 @@ Intersante mirar los siguientes packages de java:
 * **com.elorrieta.modelo.pojo** Clases que implementan los objetos representados en la aplicacion
 * **com.elorrieta.utilities** Contiene las clases necesarias para el funcionamiento del controlador único
 
+## Funcionamiento del controlador BackOffice
+
+Todas las operaciones que se realizan en el backoffice pasan por un solo controlador llamado **BackOfficeController (/action)** que recogera los parametros **clase** **operacion** e **id** en forma de enteros, si cualquiera de ellos no existe se le asignará -1, y **edicion** en forma de booleano, este controlador entonces llamará a las clases almacenadas en el paquete **com.elorrieta.utilities** para realizar las operaciones necesarias, en caso de no existir los parametros de clase u operación volvera a index.
+
+## Estado del proyecto
+
+Por falta de tiempo actualmente únicamente están implementadas las siguientes acciones: 
+
+1. Sin iniciar sesión:
+
+* Iniciar sesión
+* Registrar usuario sin privilegios
+
+2. Para el administrador:
+
+* Crear, editar, borrar o listar participantes.
+* Crear, editar, borrar o listar cursos.
+* Crear, editar, borrar o listar aulas.
+* Crear ediciones a partir de un curso existente, pudiendo agregar hasta cinco aulas previamente creadas.
+* Editar, borrar o listar ediciones.
+* Importar participantes o ediciones a partir de un documento de excel, en caso de las ediciones si estas pertenecen a cursos nuevos o contienen aulas nuevas estos tambien serán creados
+* Cerrar sesión
+
+3. Para el suario sin privilevios:
+* Cerrar sesión

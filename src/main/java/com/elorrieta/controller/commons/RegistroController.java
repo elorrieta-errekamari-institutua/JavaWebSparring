@@ -23,7 +23,13 @@ import jakarta.validation.ValidatorFactory;
 public class RegistroController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Validator factory
+	 */
 	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+	/**
+	 * Validator usado para validar los datos del usuario
+	 */
 	Validator validator = factory.getValidator();
 
 	/**

@@ -18,7 +18,10 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsParticipante
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule participantes
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule participantes
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsParticipante {
 

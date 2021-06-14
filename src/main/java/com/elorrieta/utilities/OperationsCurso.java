@@ -20,8 +20,10 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsCurso
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule
- * cursos
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule cursos
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsCurso {
 

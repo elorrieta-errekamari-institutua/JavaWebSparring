@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Clase OperationsRol
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule
- * roles
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule roles
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsRol {
 

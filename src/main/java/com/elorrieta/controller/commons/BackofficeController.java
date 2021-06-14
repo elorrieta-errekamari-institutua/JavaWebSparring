@@ -29,7 +29,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * Servlet unico para el backoffice
+ * Servlet unico para el backoffice, recogera los parametros clase, operacion,
+ * id y edicion y llamara a las clases del paquete utilities para realizar las
+ * operaciones necesarias, en caso de no existir parametro clase u operacion
+ * redirigira a index
  */
 @WebServlet("/backoffice/action")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -37,46 +40,129 @@ import jakarta.servlet.http.HttpServletResponse;
 		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class BackofficeController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Valor para cuando no se pasa como parametro "clase"
+	 */
+	private static final int NO_CLASE = -1;
+	/**
+	 * Valor para cuando no se pasa como parametro "operacion"
+	 */
+	private static final int NO_OPERACION = -1;
+	/**
+	 * Valor para cuando no se pasa como parametro "id"
+	 */
+	private static final int NO_ID = -1;
+
+	/**
+	 * Contendra el parametro id del request
+	 */
 	int id;
+	/**
+	 * Contendra el parametro operacion del request
+	 */
 	int operacion;
+	/**
+	 * Contendra el parametro clase del request
+	 */
 	int clase;
-	// Se utilizara para hacer un select de curso pero redirigir al formulario de
-	// edicion
+	/**
+	 * Se utilizara para hacer un select de curso pero redirigir al formulario
+	 * de edicion
+	 */
 	boolean edicion;
 
 	/**
-	 * Posibles operaciones
+	 * Codigo de la accion insertUpdate
 	 */
 	public static final int INSERT_UPDATE = 1;
+	/**
+	 * Codigo de la accion select
+	 */
 	public static final int SELECT = 2;
+	/**
+	 * Codigo de la accion delete
+	 */
 	public static final int DELETE = 3;
+	/**
+	 * Codigo de la accion selectAll
+	 */
 	public static final int SELECT_ALL = 4;
+	/**
+	 * Codigo de la accion insertAll
+	 */
 	public static final int INSERT_ALL = 5;
 
 	/**
-	 * Posibles clases
+	 * Codigo de la clase curso
 	 */
 	public static final int CURSO = 1;
+	/**
+	 * Codigo de la clase usuario
+	 */
 	public static final int USUARIO = 2;
+	/**
+	 * Codigo de la clase participante
+	 */
 	public static final int PARTICIPANTE = 3;
+	/**
+	 * Codigo de la clase aula
+	 */
 	public static final int AULA = 4;
+	/**
+	 * Codigo de la clase horario
+	 */
 	public static final int HORARIO = 5;
+	/**
+	 * Codigo de la clase formador
+	 */
 	public static final int FORMADOR = 6;
+	/**
+	 * Codigo de la clase rol
+	 */
 	public static final int ROL = 7;
+	/**
+	 * Codigo de la clase edicion
+	 */
 	public static final int EDICION = 8;
+	/**
+	 * Codigo de la clase excel
+	 */
 	public static final int EXCEL = 9;
 
 	/**
-	 * DAOs
+	 * DAO de curso
 	 */
 	private DAOCurso daoCurso;
+	/**
+	 * DAO de usuario
+	 */
 	private DAOUsuario daoUsuario;
+	/**
+	 * DAO de participante
+	 */
 	private DAOParticipante daoParticipante;
+	/**
+	 * DAO de aula
+	 */
 	private DAOAula daoAula;
+	/**
+	 * DAO de horario
+	 */
 	private DAOHorario daoHorario;
+	/**
+	 * DAO de formador
+	 */
 	private DAOFormador daoFormador;
+	/**
+	 * DAO de rol
+	 */
 	private DAORol daoRol;
+	/**
+	 * DAO de edicion
+	 */
 	private DAOEdicion daoEdicion;
 
 	@Override
@@ -92,7 +178,6 @@ public class BackofficeController extends HttpServlet {
 			daoRol = new DAORol();
 			daoEdicion = new DAOEdicion();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -111,38 +196,52 @@ public class BackofficeController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public BackofficeController() {
-		super();
-	}
-
-	/**
-	 * @throws IOException
+	 * Llama al metodo doAction
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
 	 * @throws ServletException
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @throws IOException
+	 * @see #doAction(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		getParameters(request);
-
-		doPost(request, response);
+		doAction(request, response);
 	}
 
 	/**
-	 * Controlador unico que gestiona todas las funciones del backoffice
+	 * Llama al metodo doAction
 	 * 
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @throws ServletException
+	 * @throws IOException
+	 * @see #doAction(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doAction(request, response);
+	}
+
+	/**
+	 * Recoger los parametros clase, operacion, id y edicion y llama a las clases
+	 * del paquete utilities para realizar las operaciones necesarias, en caso de no
+	 * existir parametro clase u operacion redirigira a index
+	 * 
+	 * @param request  HttpServletRequest
+	 * @param response HttpServletResponse
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	protected void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		getParameters(request);
 
-		if (clase != -1) {
+		if (clase == NO_CLASE || operacion == NO_OPERACION) {
+			// TODO logger
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
 
 			switch (clase) {
 				case EXCEL:
@@ -188,8 +287,7 @@ public class BackofficeController extends HttpServlet {
 							break;
 						case INSERT_ALL:
 							// Operacion insertar una lista
-							throw new IOException(
-									"Operacion no permitida " + operacion + " para " + clase);
+							throw new IOException("Operacion no permitida " + operacion + " para " + clase);
 
 						case DELETE:
 							// Operacion Delete
@@ -399,22 +497,22 @@ public class BackofficeController extends HttpServlet {
 		try {
 			id = Integer.parseInt(request.getParameter("id"));
 		} catch (Exception e) {
-			id = -1;
+			id = NO_ID;
 		}
 
 		try {
 			operacion = Integer.parseInt(request.getParameter("operacion"));
 		} catch (Exception e) {
-			operacion = -1;
+			operacion = NO_OPERACION;
 		}
 
 		try {
 			clase = Integer.parseInt(request.getParameter("clase"));
 		} catch (Exception e) {
-			clase = -1;
+			clase = NO_CLASE;
 		}
-		
+
 		edicion = Boolean.parseBoolean(request.getParameter("edicion"));
-		
+
 	}
 }

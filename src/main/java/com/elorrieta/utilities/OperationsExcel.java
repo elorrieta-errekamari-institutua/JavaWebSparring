@@ -19,7 +19,10 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsExcel
  * 
- * Contiene todos los metodos necesarios para que el controlador unico importe archivos de excel
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) importe archivos de excel
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsExcel {
 

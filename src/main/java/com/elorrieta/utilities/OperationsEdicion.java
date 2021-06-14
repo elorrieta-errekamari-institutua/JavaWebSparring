@@ -23,8 +23,10 @@ import jakarta.servlet.http.HttpSession;
 /**
  * Clase OperationsEdicion
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule
- * ediciones
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule ediciones
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsEdicion {
 

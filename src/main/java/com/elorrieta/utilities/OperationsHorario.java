@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Clase OperationsHorario
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule
- * horarios
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule horarios
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsHorario {
 
@@ -17,10 +19,10 @@ public class OperationsHorario {
 	 * Actualiza o inserta el horario con los parametros recogidos del request y
 	 * redirige a la lista de cursos
 	 * 
-	 * @param request     HttpServletRequest
-	 * @param response    HttpServletResponse
-	 * @param id          el id del horario que queremos actualizar, si se omite o
-	 *                    es negativo se insertara
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param id         el id del horario que queremos actualizar, si se omite o es
+	 *                   negativo se insertara
 	 * @param daoHorario DAOHorario
 	 */
 	public static void insertUpdate(HttpServletRequest request, HttpServletResponse response, int id,
@@ -32,8 +34,8 @@ public class OperationsHorario {
 	/**
 	 * Caracteristica sin implementar
 	 * 
-	 * @param request     HttpServletRequest
-	 * @param response    HttpServletResponse
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
 	 * @param daoHorario DAOHorario
 	 */
 	public static void insertAll(HttpServletRequest request, HttpServletResponse response, DAOHorario daoHorario) {
@@ -44,9 +46,9 @@ public class OperationsHorario {
 	/**
 	 * Elimina el horario con el id elegido y redirige a la lista de horarios
 	 * 
-	 * @param request     HttpServletRequest
-	 * @param response    HttpServletResponse
-	 * @param id          el id del horario que queremos eliminar
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param id         el id del horario que queremos eliminar
 	 * @param daoHorario DAOHorario
 	 */
 	public static void delete(HttpServletRequest request, HttpServletResponse response, int id, DAOHorario daoHorario) {
@@ -58,9 +60,9 @@ public class OperationsHorario {
 	 * Busca el horario con el id elegido, lo mete en sesion y redirige al
 	 * formulario para editarlo
 	 * 
-	 * @param request     HttpServletRequest
-	 * @param response    HttpServletResponse
-	 * @param id          el id del horario que queremos buscar
+	 * @param request    HttpServletRequest
+	 * @param response   HttpServletResponse
+	 * @param id         el id del horario que queremos buscar
 	 * @param daoHorario DAOHorario
 	 */
 	public static void select(HttpServletRequest request, HttpServletResponse response, int id, DAOHorario daoHorario) {

@@ -20,7 +20,10 @@ import jakarta.validation.ValidatorFactory;
 /**
  * Clase OperationsUsuario
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule usuarios
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule usuarios
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsUsuario {
 	static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

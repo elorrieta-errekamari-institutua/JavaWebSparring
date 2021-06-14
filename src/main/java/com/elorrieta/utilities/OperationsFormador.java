@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Clase OperationsFormador
  * 
- * Contiene todos los metodos necesarios para que el controlador unico manipule
- * formadores
+ * Contiene todos los metodos necesarios para que el controlador unico
+ * (BackofficeController) manipule formadores
+ * 
+ * @see com.elorrieta.controller.commons.BackofficeController
  */
 public class OperationsFormador {
 

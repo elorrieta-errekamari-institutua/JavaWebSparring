@@ -1,3 +1,13 @@
+<%--
+-
+- Descripcion: Formulario para editar ediciones, se podran cambiar los atributos propios de la edicion y el horario pero
+- no los del curso, tambien permitira elegir hasta 5 aulas pero estas deberan estar ya creadas
+- Atributos:
+-           Edicion edicion
+-           Aula aula0, aula1, aula2, aula3, aula4
+-
+--%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <form method="post"
